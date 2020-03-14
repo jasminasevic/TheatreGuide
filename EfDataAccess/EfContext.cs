@@ -25,6 +25,14 @@ namespace EfDataAccess
 
         public DbSet<Theatre> Theatres { get; set; }
 
+        public DbSet<Actor> Actors { get; set; }
+
+        public DbSet<ActorShow>  ActorShows { get; set; }
+
+        public DbSet<ActorImage> ActorImages { get; set; }
+
+        public DbSet<ShowImage> ShowImages { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -42,6 +50,11 @@ namespace EfDataAccess
             modelBuilder.ApplyConfiguration(new DirectorConfiguration());
             modelBuilder.ApplyConfiguration(new ShowConfiguration());
             modelBuilder.ApplyConfiguration(new TheatreConfiguration());
+            modelBuilder.ApplyConfiguration(new ActorConfiguration());
+            modelBuilder.ApplyConfiguration(new ActorShowConfiguration());
+            modelBuilder.ApplyConfiguration(new ShowImageConfiguration());
+            modelBuilder.ApplyConfiguration(new ActorImageConfiguration());
+            
         }
     }
 }

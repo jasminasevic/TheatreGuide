@@ -33,5 +33,9 @@ namespace Domain
         public int TheatreId { get; set; }
 
         public Theatre Theatre { get; set; }
+
+        public ICollection<ActorShow> ActorShows { get; set; }
+
+        public ICollection<ShowImage> ShowImages { get; set; }
     }
 }
