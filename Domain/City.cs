@@ -11,5 +11,7 @@ namespace Domain
         public string CityName { get; set; }
 
         public ICollection<User> Users { get; set; }
+
+        public ICollection<Theatre> Theatres { get; set; }
     }
 }

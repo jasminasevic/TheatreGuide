@@ -15,6 +15,16 @@ namespace EfDataAccess
 
         public DbSet<City> Cities { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Writer> Writers { get; set; }
+
+        public DbSet<Director> Directors { get; set; }
+
+        public DbSet<Show> Shows { get; set; }
+
+        public DbSet<Theatre> Theatres { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -27,6 +37,11 @@ namespace EfDataAccess
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new CityConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new WriterConfiguration());
+            modelBuilder.ApplyConfiguration(new DirectorConfiguration());
+            modelBuilder.ApplyConfiguration(new ShowConfiguration());
+            modelBuilder.ApplyConfiguration(new TheatreConfiguration());
         }
     }
 }
