@@ -39,6 +39,10 @@ namespace EfDataAccess
 
         public DbSet<ShowFollower> ShowFollowers { get; set; }
 
+        public DbSet<Repertoire> Repertoires { get; set; }
+
+        public DbSet<Purchase> Purchases { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -63,6 +67,8 @@ namespace EfDataAccess
             modelBuilder.ApplyConfiguration(new TheatreImageConfiguration());
             modelBuilder.ApplyConfiguration(new SceneConfiguration());
             modelBuilder.ApplyConfiguration(new ShowFollowerConfiguration());
+            modelBuilder.ApplyConfiguration(new RepertoireConfiguration());
+            modelBuilder.ApplyConfiguration(new PurchaseConfiguration());
         }
     }
 }

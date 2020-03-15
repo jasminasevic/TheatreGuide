@@ -28,5 +28,6 @@ namespace Domain
 
         public ICollection<ShowFollower> ShowFollowers { get; set; }
 
+        public ICollection<Purchase> Purchases { get; set; }
     }
 }

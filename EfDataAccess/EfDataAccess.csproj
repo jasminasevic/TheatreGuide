@@ -23,6 +23,18 @@
     <Compile Remove="Migrations\20200315141836_add delete behavior to show_userfollowers many to many relationship.Designer.cs" />
     <Compile Remove="Migrations\20200315144338_improve delete behavior in many to many relationships.cs" />
     <Compile Remove="Migrations\20200315144338_improve delete behavior in many to many relationships.Designer.cs" />
+    <Compile Remove="Migrations\20200315184933_add repertoire, purchase entities, improve show_user_follower delete behavior.cs" />
+    <Compile Remove="Migrations\20200315184933_add repertoire, purchase entities, improve show_user_follower delete behavior.Designer.cs" />
+    <Compile Remove="Migrations\20200315185026_add repertoire, purchase entities.cs" />
+    <Compile Remove="Migrations\20200315185026_add repertoire, purchase entities.Designer.cs" />
+    <Compile Remove="Migrations\20200315200514_add repertoire, purchase entities.cs" />
+    <Compile Remove="Migrations\20200315200514_add repertoire, purchase entities.Designer.cs" />
+    <Compile Remove="Migrations\20200315213154_add repertoire, purchase entities.cs" />
+    <Compile Remove="Migrations\20200315213154_add repertoire, purchase entities.Designer.cs" />
+    <Compile Remove="Migrations\20200315213600_add repertoire, purchase entities.cs" />
+    <Compile Remove="Migrations\20200315213600_add repertoire, purchase entities.Designer.cs" />
+    <Compile Remove="Migrations\20200315214734_add repertoire, purchase entities.cs" />
+    <Compile Remove="Migrations\20200315214734_add repertoire, purchase entities.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -39,5 +39,7 @@ namespace Domain
         public ICollection<ShowImage> ShowImages { get; set; }
 
         public ICollection<ShowFollower> ShowFollowers { get; set; }
+
+        public ICollection<Repertoire> Repertoires { get; set; }
     }
 }
