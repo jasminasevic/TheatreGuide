@@ -37,6 +37,8 @@ namespace EfDataAccess
 
         public DbSet<Scene> Scenes  { get; set; }
 
+        public DbSet<ShowFollower> ShowFollowers { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -60,7 +62,7 @@ namespace EfDataAccess
             modelBuilder.ApplyConfiguration(new ActorImageConfiguration());
             modelBuilder.ApplyConfiguration(new TheatreImageConfiguration());
             modelBuilder.ApplyConfiguration(new SceneConfiguration());
-            
+            modelBuilder.ApplyConfiguration(new ShowFollowerConfiguration());
         }
     }
 }

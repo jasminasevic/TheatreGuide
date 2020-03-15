@@ -60,7 +60,7 @@ C:\Users\jasmina\source\repos\TheatreGuide\WebApp\bin\Debug\netcoreapp3.1\WebApp
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\bin\Debug\netcoreapp3.1\WebApp.Views.dll
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\bin\Debug\netcoreapp3.1\WebApp.Views.pdb
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
-C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.Views.pdb
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.dll
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.pdb
+C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.MvcApplicationPartsAssemblyInfo.cache

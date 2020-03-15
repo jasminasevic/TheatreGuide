@@ -11,16 +11,23 @@ namespace EfDataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<Actor> builder)
         {
-            builder.Property(b => b.ActorFirstName)
+            builder.Property(a => a.ActorFirstName)
                 .IsRequired()
                 .HasMaxLength(30);
 
-            builder.Property(b => b.ActorFirstName)
+            builder.Property(a => a.ActorFirstName)
                 .IsRequired()
                 .HasMaxLength(30);
 
-            builder.Property(b => b.ActorBiography)
+            builder.Property(a => a.ActorBiography)
                 .IsRequired();
+
+            builder.HasMany(a => a.ActorShows)
+                .WithOne(acts => acts.Actor)
+                .HasForeignKey(acts => acts.ActorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+                
         }
     }
 }

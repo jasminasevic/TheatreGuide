@@ -5,6 +5,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200314211319_add actor_follower, show follower entities and configurations.cs" />
+    <Compile Remove="Migrations\20200314211319_add actor_follower, show follower entities and configurations.Designer.cs" />
+    <Compile Remove="Migrations\20200315133548_improve actor, show, user configurations - add many to many relationships.cs" />
+    <Compile Remove="Migrations\20200315133548_improve actor, show, user configurations - add many to many relationships.Designer.cs" />
+    <Compile Remove="Migrations\20200315135710_improve configurations, remove actor_userfollower many to many relationship.cs" />
+    <Compile Remove="Migrations\20200315135710_improve configurations, remove actor_userfollower many to many relationship.Designer.cs" />
+    <Compile Remove="Migrations\20200315140152_add delete behavior to show_userfollower many to many relationship.cs" />
+    <Compile Remove="Migrations\20200315140152_add delete behavior to show_userfollower many to many relationship.Designer.cs" />
+    <Compile Remove="Migrations\20200315140641_add delete behavior to show_userfollowers many to many relationship.cs" />
+    <Compile Remove="Migrations\20200315140641_add delete behavior to show_userfollowers many to many relationship.Designer.cs" />
+    <Compile Remove="Migrations\20200315141028_add delete behavior to show_userfollowers many to many relationship.cs" />
+    <Compile Remove="Migrations\20200315141028_add delete behavior to show_userfollowers many to many relationship.Designer.cs" />
+    <Compile Remove="Migrations\20200315141644_add delete behavior to show_userfollowers many to many relationship.cs" />
+    <Compile Remove="Migrations\20200315141644_add delete behavior to show_userfollowers many to many relationship.Designer.cs" />
+    <Compile Remove="Migrations\20200315141836_add delete behavior to show_userfollowers many to many relationship.cs" />
+    <Compile Remove="Migrations\20200315141836_add delete behavior to show_userfollowers many to many relationship.Designer.cs" />
+    <Compile Remove="Migrations\20200315144338_improve delete behavior in many to many relationships.cs" />
+    <Compile Remove="Migrations\20200315144338_improve delete behavior in many to many relationships.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">

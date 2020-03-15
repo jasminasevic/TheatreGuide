@@ -36,6 +36,12 @@ namespace EfDataAccess.Configurations
             builder.Property(u => u.Address)
                 .HasMaxLength(100);
 
+
+            builder.HasMany(u => u.ShowFollowers)
+                .WithOne(sf => sf.User)
+                .HasForeignKey(sf => sf.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

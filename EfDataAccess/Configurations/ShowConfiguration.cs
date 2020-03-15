@@ -23,6 +23,16 @@ namespace EfDataAccess.Configurations
 
             builder.Property(s => s.Duration)
                 .IsRequired();
+
+            builder.HasMany(s => s.ActorShows)
+                .WithOne(acts => acts.Show)
+                .HasForeignKey(acts => acts.ShowId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(s => s.ShowFollowers)
+                .WithOne(uf => uf.Show)
+                .HasForeignKey(uf => uf.ShowId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

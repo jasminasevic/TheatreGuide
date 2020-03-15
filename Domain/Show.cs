@@ -37,5 +37,7 @@ namespace Domain
         public ICollection<ActorShow> ActorShows { get; set; }
 
         public ICollection<ShowImage> ShowImages { get; set; }
+
+        public ICollection<ShowFollower> ShowFollowers { get; set; }
     }
 }
