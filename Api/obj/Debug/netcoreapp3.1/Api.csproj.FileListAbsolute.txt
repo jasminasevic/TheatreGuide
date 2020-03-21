@@ -121,3 +121,11 @@ C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\runtimes\
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Application.dll
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Domain.dll
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\EfCommands.dll
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\EfDataAccess.dll
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\EfCommands.pdb
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Application.pdb
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Domain.pdb
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\EfDataAccess.pdb

@@ -6,12 +6,7 @@ namespace Domain
 {
     public class BaseEntity
     {
-        public DateTime CreatedAt { 
-            get 
-            { 
-                return DateTime.Now; 
-            } 
-        } 
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime ? ModifiedAt { get; set; }
 
