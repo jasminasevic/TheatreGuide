@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Commands.CategoryCommands;
 using Application.Commands.Role_Commands;
+using EfCommands.EfCategoryCommands;
 using EfCommands.EfRoleCommands;
 using EfDataAccess;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +42,13 @@ namespace Api
             services.AddTransient<IGetRoleCommand, EfGetRoleCommand>();
             services.AddTransient<IEditRoleCommand, EfEditRoleCommand>();
             services.AddTransient<IDeleteRoleCommand, EfDeleteRoleCommand>();
+
+            //Categories
+            services.AddTransient<IAddCategoryCommand, EfAddCategoryCommand>();
+            services.AddTransient<IGetCategoriesCommand, EfGetCategoriesCommand>();
+            services.AddTransient<IGetCategoryCommand, EfGetCategoryCommand>();
+            services.AddTransient<IEditCategoryCommand, EfEditCategoryCommand>();
+            services.AddTransient<IDeleteCategoryCommand, EfDeleteCategoryCommand>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

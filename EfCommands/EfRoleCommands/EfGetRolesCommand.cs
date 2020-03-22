@@ -24,10 +24,11 @@ namespace EfCommands.EfRoleCommands
 
             //search roles
             if (request.RoleName != null)
-                roles = roles.Where(r => r.RoleName.ToLower().Contains(request.RoleName.ToLower()));
+                roles = roles.Where(r => r.RoleName.ToLower()
+                .Contains(request.RoleName.ToLower()));
 
             
-            var Data = roles.Select(r => new ShowRoleDto { 
+            var data = roles.Select(r => new ShowRoleDto { 
                 Id = r.Id,
                 RoleName = r.RoleName
             });
@@ -38,29 +39,29 @@ namespace EfCommands.EfRoleCommands
             switch (sortOrder)
             {
                 case "role_desc":
-                    Data = Data.OrderByDescending(r => r.RoleName);
+                    data = data.OrderByDescending(r => r.RoleName);
                     break;
                 case "role_asc":
-                    Data = Data.OrderBy(r => r.RoleName);
+                    data = data.OrderBy(r => r.RoleName);
                     break;
                 default:
-                    Data = Data.OrderBy(r => r.RoleName);
+                    data = data.OrderBy(r => r.RoleName);
                     break;
             };
 
 
-            var totalCount = Data.Count();
+            var totalCount = data.Count();
 
 
             //filtering login
             if (!string.IsNullOrEmpty(request.SearchString))
             {
-                Data = Data.Where(r => r.RoleName.ToLower().Contains(request.SearchString.ToLower()));
-                totalCount = Data.Count();
+                data = data.Where(r => r.RoleName.ToLower().Contains(request.SearchString.ToLower()));
+                totalCount = data.Count();
             }
 
 
-            Data = Data.Skip((request.PageNumber - 1) * request.PerPage).Take(request.PerPage);
+            data = data.Skip((request.PageNumber - 1) * request.PerPage).Take(request.PerPage);
 
             var pagesCount = (int)Math.Ceiling((double)totalCount / request.PerPage);
 
@@ -70,7 +71,7 @@ namespace EfCommands.EfRoleCommands
                 PageNumber = request.PageNumber,
                 PagesCount = pagesCount,
                 TotalCount = totalCount,
-                Data = Data
+                Data = data
             };
         }
     }
