@@ -33,7 +33,7 @@ namespace EfCommands.EfWriterCommands
                 WriterFirstName = writer.WriterFirstName,
                 WriterLastName = writer.WriterLastName,
                 WriterBiography = writer.WriterBiography,
-                showBaseInfoDto = writer.Shows.Select(s => new ShowBaseInfoDto
+                showBaseInfoDtos = writer.Shows.Select(s => new ShowBaseInfoDto
                 {
                     Id = s.Id,
                     Title = s.Title,

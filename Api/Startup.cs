@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.CategoryCommands;
+using Application.Commands.DirectorCommands;
 using Application.Commands.Role_Commands;
 using Application.Commands.WriterCommands;
 using EfCommands.EfCategoryCommands;
+using EfCommands.EfDirectorCommands;
 using EfCommands.EfRoleCommands;
 using EfCommands.EfWriterCommands;
 using EfDataAccess;
@@ -59,6 +61,12 @@ namespace Api
             services.AddTransient<IEditWriterCommand, EfEditWriterCommand>();
             services.AddTransient<IDeleteWriterCommand, EfDeleteWriterCommand>();
 
+            //Directors
+            services.AddTransient<IAddDirectorCommand, EfAddDirectorCommand>();
+            services.AddTransient<IGetDirectorsCommand, EfGetDirectorsCommand>();
+            services.AddTransient<IGetDirectorCommand, EfGetDirectorCommand>();
+            services.AddTransient<IEditDirectorCommand, EfEditDirectorCommand>();
+            services.AddTransient<IDeleteDirectorCommand, EfDeleteDirectorCommand>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

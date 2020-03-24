@@ -47,7 +47,7 @@ namespace EfCommands.EfWriterCommands
                 WriterFirstName = w.WriterFirstName,
                 WriterLastName = w.WriterLastName,
                 WriterBiography = w.WriterBiography,
-                showBaseInfoDto = w.Shows.Select(s => new ShowBaseInfoDto
+                showBaseInfoDtos = w.Shows.Select(s => new ShowBaseInfoDto
                 {
                     Id = s.Id,
                     Title = s.Title,

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Commands.WriterCommands;
-using Application.DTO.WriterDto;
+using Application.Commands.DirectorCommands;
+using Application.DTO.DirectorDto;
 using Application.Exceptions;
 using Application.Queries;
 using Microsoft.AspNetCore.Http;
@@ -13,35 +13,36 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class WritersController : ControllerBase
+    public class DirectorsController : ControllerBase
     {
-        protected readonly IAddWriterCommand _addWriter;
-        protected readonly IGetWritersCommand _getWriters;
-        protected readonly IGetWriterCommand _getWriter;
-        protected readonly IEditWriterCommand _editWriter;
-        protected readonly IDeleteWriterCommand _deleteWriter;
+        protected readonly IAddDirectorCommand _addDirector;
+        protected readonly IGetDirectorsCommand _getDirectors;
+        protected readonly IGetDirectorCommand _getDirector;
+        protected readonly IEditDirectorCommand _editDirector;
+        protected readonly IDeleteDirectorCommand _deleteDirector;
 
-        public WritersController(IAddWriterCommand addWriter,
-            IGetWritersCommand getWriters,
-            IGetWriterCommand getWriter,
-            IEditWriterCommand editWriter, 
-            IDeleteWriterCommand deleteWriter)
+        public DirectorsController(IAddDirectorCommand addDirector,
+            IGetDirectorsCommand getDirectors,
+            IGetDirectorCommand getDirector,
+            IEditDirectorCommand editDirector, 
+            IDeleteDirectorCommand deleteDirector)
         {
-            _addWriter = addWriter;
-            _getWriters = getWriters;
-            _getWriter = getWriter;
-            _editWriter = editWriter;
-            _deleteWriter = deleteWriter;
+            _addDirector = addDirector;
+            _getDirectors = getDirectors;
+            _getDirector = getDirector;
+            _editDirector = editDirector;
+            _deleteDirector = deleteDirector;
         }
 
-        // GET: api/Writers
+
+        // GET: api/Directors
         [HttpGet]
-        public IActionResult Get([FromQuery] WriterQuery dto)
+        public IActionResult Get([FromQuery] DirectorQuery dto)
         {
             try
             {
-                var writers = _getWriters.Execute(dto);
-                return Ok(writers);
+                var directors = _getDirectors.Execute(dto);
+                return Ok(directors);
             }
             catch(EntityNotFoundException e)
             {
@@ -49,14 +50,14 @@ namespace Api.Controllers
             }
         }
 
-        // GET: api/Writers/5
+        // GET: api/Directors/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             try
             {
-                var writer = _getWriter.Execute(id);
-                return Ok(writer);
+                var director = _getDirector.Execute(id);
+                return Ok(director);
             }
             catch (EntityNotFoundException e)
             {
@@ -64,13 +65,13 @@ namespace Api.Controllers
             }
         }
 
-        // POST: api/Writers
+        // POST: api/Directors
         [HttpPost]
-        public IActionResult Post([FromBody] WriterDto dto)
+        public IActionResult Post([FromBody] DirectorDto dto)
         {
             try
             {
-                _addWriter.Execute(dto);
+                _addDirector.Execute(dto);
                 return Ok();
             }
             catch(EntityAlreadyExistsException e)
@@ -79,14 +80,14 @@ namespace Api.Controllers
             }
         }
 
-        // PUT: api/Writers/5
+        // PUT: api/Directors/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] WriterDto dto)
+        public IActionResult Put(int id, [FromBody] DirectorDto dto)
         {
             try
             {
                 dto.Id = id;
-                _editWriter.Execute(dto);
+                _editDirector.Execute(dto);
                 return Ok();
             }
             catch (EntityNotFoundException e)
@@ -97,7 +98,6 @@ namespace Api.Controllers
             {
                 return StatusCode(422, e.Message);
             }
-            
         }
 
         // DELETE: api/ApiWithActions/5
@@ -106,7 +106,7 @@ namespace Api.Controllers
         {
             try
             {
-                _deleteWriter.Execute(id);
+                _deleteDirector.Execute(id);
                 return StatusCode(204);
             }
             catch (EntityNotFoundException e)
