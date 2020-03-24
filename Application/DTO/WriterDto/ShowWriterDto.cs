@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Application.DTO.ShowDto;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain
+namespace Application.DTO.WriterDto
 {
-    public class Writer : BaseEntity
+    public class ShowWriterDto
     {
         public int Id { get; set; }
 
@@ -14,7 +15,6 @@ namespace Domain
 
         public string WriterBiography { get; set; }
 
-        public ICollection<Show> Shows { get; set; }
-
+        public IEnumerable<ShowBaseInfoDto> showBaseInfoDto { get; set; }
     }
 }

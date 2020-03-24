@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain
+namespace Application.Queries
 {
-    public class Writer : BaseEntity
+    public class WriterQuery : BaseQuery
     {
         public int Id { get; set; }
 
@@ -13,8 +13,5 @@ namespace Domain
         public string WriterLastName { get; set; }
 
         public string WriterBiography { get; set; }
-
-        public ICollection<Show> Shows { get; set; }
-
     }
 }
