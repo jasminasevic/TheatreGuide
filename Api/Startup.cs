@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Commands.ActorCommands;
 using Application.Commands.CategoryCommands;
 using Application.Commands.DirectorCommands;
 using Application.Commands.Role_Commands;
 using Application.Commands.WriterCommands;
+using EfCommands.EfActorCommands;
 using EfCommands.EfCategoryCommands;
 using EfCommands.EfDirectorCommands;
 using EfCommands.EfRoleCommands;
@@ -67,6 +69,13 @@ namespace Api
             services.AddTransient<IGetDirectorCommand, EfGetDirectorCommand>();
             services.AddTransient<IEditDirectorCommand, EfEditDirectorCommand>();
             services.AddTransient<IDeleteDirectorCommand, EfDeleteDirectorCommand>();
+
+            //Actors
+            services.AddTransient<IAddActorCommand, EfAddActorCommand>();
+            services.AddTransient<IGetActorsCommand, EfGetActorsCommand>();
+            services.AddTransient<IGetActorCommand, EfGetActorCommand>();
+            services.AddTransient<IEditActorCommand, EfEditActorCommand>();
+            services.AddTransient<IDeleteActorCommand, EfDeleteActorCommand>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +96,8 @@ namespace Api
             {
                 endpoints.MapControllers();
             });
+
+            app.UseStaticFiles();
         }
     }
 }

@@ -72,7 +72,7 @@ namespace Api.Controllers
             try
             {
                 _addCategory.Execute(dto);
-                return StatusCode(200);
+                return Ok();
             }
             catch (EntityAlreadyExistsException e)
             {
