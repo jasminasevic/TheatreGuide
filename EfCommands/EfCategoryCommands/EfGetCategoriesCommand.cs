@@ -16,7 +16,7 @@ namespace EfCommands.EfCategoryCommands
         {
         }
 
-        public PagedResponses<ShowCategoryDto> Execute(CategoryQuery request)
+        public PagedResponses<GetCategoryDto> Execute(CategoryQuery request)
         {
             var categories = Context.Categories
                 .AsQueryable();
@@ -25,7 +25,7 @@ namespace EfCommands.EfCategoryCommands
                 categories = categories.Where(c => c.CategoryName.ToLower()
                 .Contains(request.CategoryName.ToLower()));
 
-            var data = categories.Select(c => new ShowCategoryDto
+            var data = categories.Select(c => new GetCategoryDto
             {
                 Id = c.Id,
                 CategoryName = c.CategoryName
@@ -50,17 +50,17 @@ namespace EfCommands.EfCategoryCommands
             var totalCount = data.Count();
 
             //Filtering logic
-            if(!string.IsNullOrEmpty(request.SearchString))
+            if(!string.IsNullOrEmpty(request.SearchQuery))
             {
                 data = data.Where(c => c.CategoryName.ToLower()
-                .Contains(request.CategoryName.ToLower()));
+                .Contains(request.SearchQuery.ToLower()));
                 totalCount = data.Count();
             }
 
             data = data.Skip((request.PageNumber - 1) * request.PerPage).Take(request.PerPage);
             var pagesCount = (int)Math.Ceiling((double)totalCount / request.PerPage);
 
-            return new PagedResponses<ShowCategoryDto>
+            return new PagedResponses<GetCategoryDto>
             {
                 PageNumber = request.PageNumber,
                 PagesCount = pagesCount,

@@ -6,11 +6,13 @@ using Application.Commands.ActorCommands;
 using Application.Commands.CategoryCommands;
 using Application.Commands.DirectorCommands;
 using Application.Commands.Role_Commands;
+using Application.Commands.UserCommands;
 using Application.Commands.WriterCommands;
 using EfCommands.EfActorCommands;
 using EfCommands.EfCategoryCommands;
 using EfCommands.EfDirectorCommands;
 using EfCommands.EfRoleCommands;
+using EfCommands.EfUserCommands;
 using EfCommands.EfWriterCommands;
 using EfDataAccess;
 using Microsoft.AspNetCore.Builder;
@@ -76,6 +78,14 @@ namespace Api
             services.AddTransient<IGetActorCommand, EfGetActorCommand>();
             services.AddTransient<IEditActorCommand, EfEditActorCommand>();
             services.AddTransient<IDeleteActorCommand, EfDeleteActorCommand>();
+
+            //Users
+            services.AddTransient<IAddUserCommand, EfAddUserCommand>();
+            services.AddTransient<IGetUsersCommand, EfGetUsersCommand>();
+            services.AddTransient<IGetUserCommand, EfGetUserCommand>();
+            services.AddTransient<IEditUserCommand, EfEditUserCommand>();
+            services.AddTransient<IDeleteUserCommand, EfDeleteUserCommand>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

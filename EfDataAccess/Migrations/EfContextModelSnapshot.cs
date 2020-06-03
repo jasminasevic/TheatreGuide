@@ -129,6 +129,40 @@ namespace EfDataAccess.Migrations
                     b.ToTable("ActorShows");
                 });
 
+            modelBuilder.Entity("Domain.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Latitude")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Longitude")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Addresses");
+                });
+
             modelBuilder.Entity("Domain.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -159,38 +193,6 @@ namespace EfDataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("Domain.City", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CityName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityName")
-                        .IsUnique();
-
-                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("Domain.Director", b =>
@@ -231,12 +233,42 @@ namespace EfDataAccess.Migrations
                     b.ToTable("Directors");
                 });
 
-            modelBuilder.Entity("Domain.Purchase", b =>
+            modelBuilder.Entity("Domain.Entrance", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EntranceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Entrances");
+                });
+
+            modelBuilder.Entity("Domain.Price", b =>
+                {
+                    b.Property<int>("RepertoireId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubsceneId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -250,10 +282,56 @@ namespace EfDataAccess.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("SubsceneCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("TicketPrice")
+                        .HasColumnType("float");
+
+                    b.HasKey("RepertoireId", "SubsceneId");
+
+                    b.HasIndex("SubsceneCategoryId");
+
+                    b.HasIndex("SubsceneId");
+
+                    b.ToTable("Prices");
+                });
+
+            modelBuilder.Entity("Domain.Purchase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EntranceId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("RepertoireId")
                         .HasColumnType("int");
 
+                    b.Property<int>("RowNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SceneId")
+                        .HasColumnType("int");
+
                     b.Property<int>("SeatNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubsceneId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -261,7 +339,13 @@ namespace EfDataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("EntranceId");
+
                     b.HasIndex("RepertoireId");
+
+                    b.HasIndex("SceneId");
+
+                    b.HasIndex("SubsceneId");
 
                     b.HasIndex("UserId");
 
@@ -293,9 +377,6 @@ namespace EfDataAccess.Migrations
                     b.Property<int>("NumberOfSoldTickets")
                         .HasColumnType("int");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
                     b.Property<int>("SceneId")
                         .HasColumnType("int");
 
@@ -303,13 +384,19 @@ namespace EfDataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("StartTime")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TheatreId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SceneId");
 
                     b.HasIndex("ShowId");
+
+                    b.HasIndex("TheatreId");
 
                     b.ToTable("Repertoires");
                 });
@@ -369,9 +456,6 @@ namespace EfDataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(60)")
                         .HasMaxLength(60);
-
-                    b.Property<int>("SeatCapacity")
-                        .HasColumnType("int");
 
                     b.Property<int>("TheatreId")
                         .HasColumnType("int");
@@ -511,6 +595,75 @@ namespace EfDataAccess.Migrations
                     b.ToTable("ShowImages");
                 });
 
+            modelBuilder.Entity("Domain.Subscene", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RowsTotalNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SceneId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SeatCapacity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubsceneCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SceneId");
+
+                    b.HasIndex("SubsceneCategoryId");
+
+                    b.ToTable("Subscenes");
+                });
+
+            modelBuilder.Entity("Domain.SubsceneCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SubsceneCategoryName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SubsceneCategories");
+                });
+
             modelBuilder.Entity("Domain.Theatre", b =>
                 {
                     b.Property<int>("Id")
@@ -518,11 +671,7 @@ namespace EfDataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CityId")
+                    b.Property<int>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("ContactEmail")
@@ -560,7 +709,7 @@ namespace EfDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CityId");
+                    b.HasIndex("AddressId");
 
                     b.ToTable("Theatres");
                 });
@@ -611,13 +760,6 @@ namespace EfDataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -654,8 +796,6 @@ namespace EfDataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("Email")
                         .IsUnique();
@@ -727,12 +867,49 @@ namespace EfDataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Purchase", b =>
+            modelBuilder.Entity("Domain.Price", b =>
                 {
                     b.HasOne("Domain.Repertoire", "Repertoire")
-                        .WithMany()
+                        .WithMany("Prices")
                         .HasForeignKey("RepertoireId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.SubsceneCategory", null)
+                        .WithMany("Prices")
+                        .HasForeignKey("SubsceneCategoryId");
+
+                    b.HasOne("Domain.Subscene", "Subscene")
+                        .WithMany("Prices")
+                        .HasForeignKey("SubsceneId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Purchase", b =>
+                {
+                    b.HasOne("Domain.Entrance", "Entrance")
+                        .WithMany("Purchases")
+                        .HasForeignKey("EntranceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Repertoire", "Repertoire")
+                        .WithMany("Purchases")
+                        .HasForeignKey("RepertoireId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Scene", "Scene")
+                        .WithMany("Purchases")
+                        .HasForeignKey("SceneId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Subscene", "Subscene")
+                        .WithMany("Purchases")
+                        .HasForeignKey("SubsceneId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Domain.User", "User")
@@ -745,14 +922,20 @@ namespace EfDataAccess.Migrations
             modelBuilder.Entity("Domain.Repertoire", b =>
                 {
                     b.HasOne("Domain.Scene", "Scene")
-                        .WithMany()
+                        .WithMany("Repertoires")
                         .HasForeignKey("SceneId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Domain.Show", "Show")
                         .WithMany("Repertoires")
                         .HasForeignKey("ShowId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Theatre", "Theatre")
+                        .WithMany("Repertoires")
+                        .HasForeignKey("TheatreId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -817,11 +1000,26 @@ namespace EfDataAccess.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Subscene", b =>
+                {
+                    b.HasOne("Domain.Scene", "Scene")
+                        .WithMany("Subscenes")
+                        .HasForeignKey("SceneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.SubsceneCategory", "SubsceneCategory")
+                        .WithMany("Subscenes")
+                        .HasForeignKey("SubsceneCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.Theatre", b =>
                 {
-                    b.HasOne("Domain.City", "City")
+                    b.HasOne("Domain.Address", "Address")
                         .WithMany("Theatres")
-                        .HasForeignKey("CityId")
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -837,12 +1035,6 @@ namespace EfDataAccess.Migrations
 
             modelBuilder.Entity("Domain.User", b =>
                 {
-                    b.HasOne("Domain.City", "City")
-                        .WithMany("Users")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")

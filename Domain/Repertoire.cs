@@ -16,12 +16,18 @@ namespace Domain
 
         public string StartTime { get; set; }
 
+        public int TheatreId { get; set; }
+
+        public Theatre Theatre { get; set; }
+
         public int SceneId { get; set; }
 
         public Scene Scene { get; set; }
 
-        public Double Price { get; set; }
-
         public int NumberOfSoldTickets { get; set; } = 0;
+
+        public ICollection<Price> Prices { get; set; }
+
+        public ICollection<Purchase> Purchases { get; set; }
     }
 }

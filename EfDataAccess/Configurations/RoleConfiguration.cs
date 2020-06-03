@@ -18,8 +18,6 @@ namespace EfDataAccess.Configurations
             builder.HasIndex(r => r.RoleName)
                 .IsUnique();
 
-            //builder.Property(r => r.CreatedAt)
-            //    .HasDefaultValueSql("getdate()");
         }
     }
 }

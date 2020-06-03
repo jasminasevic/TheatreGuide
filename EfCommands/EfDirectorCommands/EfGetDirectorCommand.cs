@@ -17,7 +17,7 @@ namespace EfCommands.EfDirectorCommands
         {
         }
 
-        public ShowDirectorDto Execute(int request)
+        public GetDirectorDto Execute(int request)
         {
             var director = Context.Directors
                 .Include(s => s.Shows)
@@ -27,7 +27,7 @@ namespace EfCommands.EfDirectorCommands
             if (director == null)
                 throw new EntityNotFoundException(request.ToString());
 
-            return new ShowDirectorDto
+            return new GetDirectorDto
             {
                 Id = director.Id,
                 DirectorFirstName = director.DirectorFirstName,

@@ -17,7 +17,7 @@ namespace EfCommands.EfWriterCommands
         {
         }
 
-        public ShowWriterDto Execute(int request)
+        public GetWriterDto Execute(int request)
         {
             var writer = Context.Writers
                 .Include(s => s.Shows)
@@ -27,7 +27,7 @@ namespace EfCommands.EfWriterCommands
             if (writer == null)
                 throw new EntityNotFoundException(request.ToString());
 
-            return new ShowWriterDto
+            return new GetWriterDto
             {
                 Id = writer.Id,
                 WriterFirstName = writer.WriterFirstName,

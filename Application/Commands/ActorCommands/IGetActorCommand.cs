@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.ActorCommands
 {
-    public interface IGetActorCommand : ICommand<int, ShowActorDto>
+    public interface IGetActorCommand : ICommand<int, GetActorDto>
     {
     }
 }

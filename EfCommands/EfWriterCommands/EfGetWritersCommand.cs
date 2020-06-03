@@ -18,7 +18,7 @@ namespace EfCommands.EfWriterCommands
         {
         }
 
-        public PagedResponses<ShowWriterDto> Execute(WriterQuery request)
+        public PagedResponses<GetWriterDto> Execute(WriterQuery request)
         {
             var writers = Context.Writers
                 .Include(s => s.Shows)
@@ -34,14 +34,14 @@ namespace EfCommands.EfWriterCommands
                 .Contains(request.WriterLastName));
 
             //Filtering logic
-            if (!string.IsNullOrEmpty(request.SearchString))
+            if (!string.IsNullOrEmpty(request.SearchQuery))
                 writers = writers.Where(w => w.WriterFirstName.ToLower()
-                .Contains(request.SearchString.ToLower())
+                .Contains(request.SearchQuery.ToLower())
                 || w.WriterLastName.ToLower()
-                .Contains(request.WriterLastName.ToLower()));
+                .Contains(request.SearchQuery.ToLower()));
 
 
-            var data = writers.Select(w => new ShowWriterDto
+            var data = writers.Select(w => new GetWriterDto
             {
                 Id = w.Id,
                 WriterFirstName = w.WriterFirstName,
@@ -77,7 +77,7 @@ namespace EfCommands.EfWriterCommands
             data = data.Skip((request.PageNumber - 1)*request.PerPage).Take(request.PerPage);
             var pagesCount = (int)Math.Ceiling((double)totalCount / request.PerPage);
 
-            return new PagedResponses<ShowWriterDto>
+            return new PagedResponses<GetWriterDto>
             {
                 PageNumber = request.PageNumber,
                 PagesCount = pagesCount,

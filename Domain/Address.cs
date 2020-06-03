@@ -4,13 +4,15 @@ using System.Text;
 
 namespace Domain
 {
-    public class City : BaseEntity
+    public class Address : BaseEntity
     {
         public int Id { get; set; }
 
-        public string CityName { get; set; }
+        public string Location { get; set; }
 
-        public ICollection<User> Users { get; set; }
+        public decimal Longitude { get; set; }
+
+        public decimal Latitude { get; set; }
 
         public ICollection<Theatre> Theatres { get; set; }
     }

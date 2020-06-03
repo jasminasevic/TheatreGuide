@@ -8,12 +8,16 @@ namespace Domain
     {
         public int Id { get; set; }
 
-        public int SeatCapacity { get; set; }
-
         public string SceneName { get; set; }
 
         public int TheatreId { get; set; }
 
         public Theatre Theatre { get; set; }
+
+        public ICollection<Purchase> Purchases { get; set; }
+
+        public ICollection<Repertoire> Repertoires { get; set; }
+
+        public ICollection<Subscene> Subscenes { get; set; }
     }
 }

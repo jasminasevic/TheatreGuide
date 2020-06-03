@@ -11,9 +11,7 @@ namespace EfDataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            //builder.Property(u => u.CreatedAt)
-            //    .HasDefaultValueSql("getdate()");
-
+            
             builder.Property(u => u.FirstName)
                 .IsRequired()
                 .HasMaxLength(30);
@@ -32,10 +30,6 @@ namespace EfDataAccess.Configurations
             builder.Property(u => u.Password)
                 .IsRequired()
                 .HasMaxLength(40);
-
-            builder.Property(u => u.Address)
-                .HasMaxLength(100);
-
 
             builder.HasMany(u => u.ShowFollowers)
                 .WithOne(sf => sf.User)

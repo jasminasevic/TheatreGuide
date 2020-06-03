@@ -19,7 +19,7 @@ namespace EfCommands.EfActorCommands
         {
         }
 
-        public PagedResponses<ShowActorDto> Execute(ActorQuery request)
+        public PagedResponses<GetActorDto> Execute(ActorQuery request)
         {
             var actors = Context.Actors
                 .Include(a => a.ActorImages)
@@ -34,19 +34,19 @@ namespace EfCommands.EfActorCommands
                 actors = actors.Where(a => a.ActorLastName.ToLower()
                 .Contains(request.ActorLastName.ToLower()));
 
-            if (request.SearchString != null)
+            if (request.SearchQuery != null)
                 actors = actors.Where(a => a.ActorFirstName.ToLower()
-                .Contains(request.SearchString.ToLower())
+                .Contains(request.SearchQuery.ToLower())
                 || a.ActorLastName.ToLower()
-                .Contains(request.ActorLastName.ToLower()));
+                .Contains(request.SearchQuery.ToLower()));
 
-            var data = actors.Select(a => new ShowActorDto
+            var data = actors.Select(a => new GetActorDto
             {
                 Id = a.Id,
                 ActorFirstName = a.ActorFirstName,
                 ActorLastName = a.ActorLastName,
                 ActorBiography = a.ActorBiography,
-                ShowImageDto = a.ActorImages.Select(i => new ShowImageDto
+                ShowImageDto = a.ActorImages.Select(i => new GetImageDto
                 {
                     Id = i.Id,
                     Alt = i.ActorImageAlt,
@@ -81,7 +81,7 @@ namespace EfCommands.EfActorCommands
             data = data.Skip((request.PageNumber - 1) * request.PerPage).Take(request.PerPage);
             var pagesCount = (int)Math.Ceiling((double)totalCount / request.PerPage);
 
-            return new PagedResponses<ShowActorDto>
+            return new PagedResponses<GetActorDto>
             {
                 PageNumber = request.PageNumber,
                 PagesCount = pagesCount,

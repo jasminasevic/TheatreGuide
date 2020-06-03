@@ -17,7 +17,7 @@ namespace EfCommands.EfActorCommands
         {
         }
 
-        public ShowActorDto Execute(int request)
+        public GetActorDto Execute(int request)
         {
             var actor = Context.Actors
                 .Include(a => a.ActorImages)
@@ -27,13 +27,13 @@ namespace EfCommands.EfActorCommands
             if (actor == null)
                 throw new EntityNotFoundException(request.ToString());
 
-            return new ShowActorDto
+            return new GetActorDto
             {
                 Id = actor.Id,
                 ActorFirstName = actor.ActorFirstName,
                 ActorLastName = actor.ActorLastName,
                 ActorBiography = actor.ActorBiography,
-                ShowImageDto = actor.ActorImages.Select(i => new ShowImageDto
+                ShowImageDto = actor.ActorImages.Select(i => new GetImageDto
                 {
                     Id = i.Id,
                     Alt = i.ActorImageAlt,

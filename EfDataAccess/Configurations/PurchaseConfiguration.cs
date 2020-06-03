@@ -15,6 +15,22 @@ namespace EfDataAccess.Configurations
                 .WithMany(pu => pu.Purchases)
                 .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(p => p.SeatNumber)
+                .IsRequired();
+
+            builder.Property(p => p.RowNumber)
+                .IsRequired();
+
+            builder.HasOne(p => p.Scene)
+                .WithMany(pu => pu.Purchases)
+                .HasForeignKey(p => p.SceneId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(p => p.Subscene)
+                .WithMany(pu => pu.Purchases)
+                .HasForeignKey(p => p.SubsceneId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

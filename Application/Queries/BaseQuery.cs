@@ -12,6 +12,6 @@ namespace Application.Queries
 
         public string SortOrder { get; set; }
 
-        public string SearchString { get; set; }
+        public string SearchQuery { get; set; }
     }
 }

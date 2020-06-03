@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.DirectorCommands
 {
-    public interface IGetDirectorCommand : ICommand<int, ShowDirectorDto>
+    public interface IGetDirectorCommand : ICommand<int, GetDirectorDto>
     {
     }
 }

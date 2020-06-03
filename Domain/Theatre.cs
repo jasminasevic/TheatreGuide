@@ -18,14 +18,14 @@ namespace Domain
 
         public string WorkingHours { get; set; }
 
-        public string Address { get; set; }
+        public int AddressId { get; set; }
 
-        public int CityId { get; set; }
-
-        public City City { get; set; }
+        public Address Address { get; set; }
 
         public ICollection<Scene> Scenes { get; set; }
 
         public ICollection<TheatreImage> TheatreImages { get; set; }
+
+        public ICollection<Repertoire> Repertoires { get; set; }
     }
 }

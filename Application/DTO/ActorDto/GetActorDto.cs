@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.DTO.ActorDto
 {
-    public class ShowActorDto
+    public class GetActorDto
     {
         public int Id { get; set; }
 
@@ -16,6 +16,6 @@ namespace Application.DTO.ActorDto
 
         public string ActorBiography { get; set; }
 
-        public IEnumerable<ShowImageDto> ShowImageDto { get; set; }
+        public IEnumerable<GetImageDto> ShowImageDto { get; set; }
     }
 }

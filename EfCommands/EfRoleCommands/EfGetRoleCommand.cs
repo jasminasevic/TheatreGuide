@@ -15,7 +15,7 @@ namespace EfCommands.EfRoleCommands
         {
         }
 
-        public ShowRoleDto Execute(int request)
+        public GetRoleDto Execute(int request)
         {
             var role = Context.Roles
                 .Where(r => r.Id == request)
@@ -24,7 +24,7 @@ namespace EfCommands.EfRoleCommands
             if (role == null)
                 throw new EntityNotFoundException(request.ToString());
 
-            return new ShowRoleDto
+            return new GetRoleDto
             {
                 Id = role.Id,
                 RoleName = role.RoleName

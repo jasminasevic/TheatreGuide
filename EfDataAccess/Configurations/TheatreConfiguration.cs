@@ -18,9 +18,6 @@ namespace EfDataAccess.Configurations
             builder.Property(t => t.TheatreDescription)
                 .IsRequired();
 
-            builder.Property(t => t.Address)
-                .IsRequired();
-
             builder.Property(t => t.WorkingHours)
                 .IsRequired();
 

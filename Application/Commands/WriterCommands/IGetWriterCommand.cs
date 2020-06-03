@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.WriterCommands
 {
-    public interface IGetWriterCommand : ICommand<int, ShowWriterDto>
+    public interface IGetWriterCommand : ICommand<int, GetWriterDto>
     {
     }
 }

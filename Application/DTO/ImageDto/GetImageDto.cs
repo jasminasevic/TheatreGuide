@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Application.DTO.ImageDto
 {
-    public class ShowImageDto 
+    public class GetImageDto 
     {
         public int Id { get; set; }
 

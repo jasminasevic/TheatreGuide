@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Application.Commands.DirectorCommands
 {
-    public interface IGetDirectorsCommand : ICommand<DirectorQuery, PagedResponses<ShowDirectorDto>>
+    public interface IGetDirectorsCommand : ICommand<DirectorQuery, PagedResponses<GetDirectorDto>>
     {
     }
 }

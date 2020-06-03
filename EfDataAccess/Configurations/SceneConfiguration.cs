@@ -18,9 +18,6 @@ namespace EfDataAccess.Configurations
             builder.HasIndex(s => new { s.TheatreId, s.SceneName })
                 .IsUnique();
 
-            builder.Property(s => s.SeatCapacity)
-                .IsRequired();
-
         }
     }
 }

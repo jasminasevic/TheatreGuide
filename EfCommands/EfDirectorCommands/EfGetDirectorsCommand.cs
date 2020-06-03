@@ -18,7 +18,7 @@ namespace EfCommands.EfDirectorCommands
         {
         }
 
-        public PagedResponses<ShowDirectorDto> Execute(DirectorQuery request)
+        public PagedResponses<GetDirectorDto> Execute(DirectorQuery request)
         {
             var directors = Context.Directors
                 .Include(d => d.Shows)
@@ -34,14 +34,14 @@ namespace EfCommands.EfDirectorCommands
                 .Contains(request.DirectorLastName.ToLower()));
 
             //Filtering logic
-            if (!string.IsNullOrEmpty(request.SearchString))
+            if (!string.IsNullOrEmpty(request.SearchQuery))
                 directors = directors.Where(d => d.DirectorFirstName.ToLower()
-                .Contains(request.DirectorFirstName.ToLower()) ||
+                .Contains(request.SearchQuery.ToLower()) ||
                 d.DirectorLastName.ToLower()
-                .Contains(request.DirectorLastName.ToLower()));
+                .Contains(request.SearchQuery.ToLower()));
 
 
-            var data = directors.Select(d => new ShowDirectorDto
+            var data = directors.Select(d => new GetDirectorDto
             {
                 Id = d.Id,
                 DirectorFirstName = d.DirectorFirstName,
@@ -82,7 +82,7 @@ namespace EfCommands.EfDirectorCommands
             data = data.Skip((request.PageNumber - 1)* request.PerPage).Take(request.PerPage);
             var pagesCount = (int)Math.Ceiling((double)totalCount / request.PerPage);
 
-            return new PagedResponses<ShowDirectorDto>
+            return new PagedResponses<GetDirectorDto>
             {
                 PageNumber = request.PageNumber,
                 PagesCount = pagesCount,

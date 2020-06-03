@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.Role_Commands
 {
-    public interface IGetRoleCommand : ICommand<int, ShowRoleDto>
+    public interface IGetRoleCommand : ICommand<int, GetRoleDto>
     {
     }
 }

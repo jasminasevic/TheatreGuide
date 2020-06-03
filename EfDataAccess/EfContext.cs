@@ -13,7 +13,7 @@ namespace EfDataAccess
 
         public DbSet<Role> Roles { get; set; }
 
-        public DbSet<City> Cities { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         public DbSet<Category> Categories { get; set; }
 
@@ -37,11 +37,19 @@ namespace EfDataAccess
 
         public DbSet<Scene> Scenes  { get; set; }
 
+        public DbSet<Subscene> Subscenes{ get; set; }
+
+        public DbSet<SubsceneCategory> SubsceneCategories { get; set; }
+
+        public DbSet<Entrance> Entrances { get; set; }
+
         public DbSet<ShowFollower> ShowFollowers { get; set; }
 
         public DbSet<Repertoire> Repertoires { get; set; }
 
         public DbSet<Purchase> Purchases { get; set; }
+
+        public DbSet<Price> Prices { get; set; }
 
 
 
@@ -54,7 +62,7 @@ namespace EfDataAccess
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
-            modelBuilder.ApplyConfiguration(new CityConfiguration());
+            modelBuilder.ApplyConfiguration(new AddressConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new WriterConfiguration());
             modelBuilder.ApplyConfiguration(new DirectorConfiguration());
@@ -66,9 +74,15 @@ namespace EfDataAccess
             modelBuilder.ApplyConfiguration(new ActorImageConfiguration());
             modelBuilder.ApplyConfiguration(new TheatreImageConfiguration());
             modelBuilder.ApplyConfiguration(new SceneConfiguration());
+            modelBuilder.ApplyConfiguration(new SubsceneCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new SubsceneConfiguration());
+            modelBuilder.ApplyConfiguration(new EntranceConfiguration());
             modelBuilder.ApplyConfiguration(new ShowFollowerConfiguration());
             modelBuilder.ApplyConfiguration(new RepertoireConfiguration());
             modelBuilder.ApplyConfiguration(new PurchaseConfiguration());
+            modelBuilder.ApplyConfiguration(new EntranceConfiguration());
+            modelBuilder.ApplyConfiguration(new PriceConfiguration());
+     
         }
     }
 }

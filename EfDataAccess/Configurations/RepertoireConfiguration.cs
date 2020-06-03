@@ -15,6 +15,25 @@ namespace EfDataAccess.Configurations
                 .WithMany(rs => rs.Repertoires)
                 .HasForeignKey(r => r.ShowId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Property(r => r.Date)
+                .IsRequired();
+
+            builder.Property(r => r.StartTime)
+                .IsRequired();
+
+            builder.Property(r => r.NumberOfSoldTickets)
+                .IsRequired();
+
+            builder.HasOne(r => r.Theatre)
+                .WithMany(rt => rt.Repertoires)
+                .HasForeignKey(r => r.TheatreId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(r => r.Scene)
+                .WithMany(rt => rt.Repertoires)
+                .HasForeignKey(r => r.SceneId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

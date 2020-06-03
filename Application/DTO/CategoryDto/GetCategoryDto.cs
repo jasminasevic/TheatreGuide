@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.DTO.RoleDto
+namespace Application.DTO.CategoryDto
 {
-    public class ShowRoleDto
+    public class GetCategoryDto
     {
         public int Id { get; set; }
-        public string RoleName { get; set; }
+
+        public string CategoryName { get; set; }
     }
 }

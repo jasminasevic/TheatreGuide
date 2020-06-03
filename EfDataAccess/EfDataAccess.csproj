@@ -35,6 +35,16 @@
     <Compile Remove="Migrations\20200315213600_add repertoire, purchase entities.Designer.cs" />
     <Compile Remove="Migrations\20200315214734_add repertoire, purchase entities.cs" />
     <Compile Remove="Migrations\20200315214734_add repertoire, purchase entities.Designer.cs" />
+    <Compile Remove="Migrations\20200502191258_add subscene and price classes, improve related classes.cs" />
+    <Compile Remove="Migrations\20200502191258_add subscene and price classes, improve related classes.Designer.cs" />
+    <Compile Remove="Migrations\20200502193000_add subscene and price classes, improve related classes.cs" />
+    <Compile Remove="Migrations\20200502193000_add subscene and price classes, improve related classes.Designer.cs" />
+    <Compile Remove="Migrations\20200513205927_add classes related to seat numeration and ticket purchase.cs" />
+    <Compile Remove="Migrations\20200513205927_add classes related to seat numeration and ticket purchase.Designer.cs" />
+    <Compile Remove="Migrations\20200601200242_add classes related to seat numeration and ticket purchase.cs" />
+    <Compile Remove="Migrations\20200601200242_add classes related to seat numeration and ticket purchase.Designer.cs" />
+    <Compile Remove="Migrations\20200601200759_add classes related to seat numeration and ticket purchase.cs" />
+    <Compile Remove="Migrations\20200601200759_add classes related to seat numeration and ticket purchase.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

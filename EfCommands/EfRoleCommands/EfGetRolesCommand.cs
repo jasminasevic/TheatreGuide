@@ -17,7 +17,7 @@ namespace EfCommands.EfRoleCommands
         {
         }
 
-        public PagedResponses<ShowRoleDto> Execute(RoleQuery request)
+        public PagedResponses<GetRoleDto> Execute(RoleQuery request)
         {
             var roles = Context.Roles
                 .AsQueryable();
@@ -28,7 +28,7 @@ namespace EfCommands.EfRoleCommands
                 .Contains(request.RoleName.ToLower()));
 
             
-            var data = roles.Select(r => new ShowRoleDto { 
+            var data = roles.Select(r => new GetRoleDto { 
                 Id = r.Id,
                 RoleName = r.RoleName
             });
@@ -53,10 +53,10 @@ namespace EfCommands.EfRoleCommands
             var totalCount = data.Count();
 
 
-            //filtering login
-            if (!string.IsNullOrEmpty(request.SearchString))
+            //filtering logic
+            if (!string.IsNullOrEmpty(request.SearchQuery))
             {
-                data = data.Where(r => r.RoleName.ToLower().Contains(request.SearchString.ToLower()));
+                data = data.Where(r => r.RoleName.ToLower().Contains(request.SearchQuery.ToLower()));
                 totalCount = data.Count();
             }
 
@@ -66,7 +66,7 @@ namespace EfCommands.EfRoleCommands
             var pagesCount = (int)Math.Ceiling((double)totalCount / request.PerPage);
 
 
-            return new PagedResponses<ShowRoleDto>
+            return new PagedResponses<GetRoleDto>
             {
                 PageNumber = request.PageNumber,
                 PagesCount = pagesCount,
