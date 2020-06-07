@@ -50,7 +50,7 @@ namespace EfCommands.EfActorCommands
                 Context.ActorImages.Add(new Domain.ActorImage
                 {
                     ActorImageAlt = request.ActorFirstName + " " + request.ActorLastName + " image",
-                    ActorImagePath = filePath,
+                    ActorImagePath = newFileName,
                     ActorId = actor.Id,
                 });
             }

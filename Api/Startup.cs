@@ -5,13 +5,15 @@ using System.Threading.Tasks;
 using Application.Commands.ActorCommands;
 using Application.Commands.CategoryCommands;
 using Application.Commands.DirectorCommands;
-using Application.Commands.Role_Commands;
+using Application.Commands.RoleCommands;
+using Application.Commands.TheatreCommands;
 using Application.Commands.UserCommands;
 using Application.Commands.WriterCommands;
 using EfCommands.EfActorCommands;
 using EfCommands.EfCategoryCommands;
 using EfCommands.EfDirectorCommands;
 using EfCommands.EfRoleCommands;
+using EfCommands.EfTheatreCommands;
 using EfCommands.EfUserCommands;
 using EfCommands.EfWriterCommands;
 using EfDataAccess;
@@ -44,12 +46,12 @@ namespace Api
             //EfContext
             services.AddDbContext<EfContext>();
 
-            //Roles
-            services.AddTransient<IAddRoleCommand, EfAddRoleCommand>();
-            services.AddTransient<IGetRolesCommand, EfGetRolesCommand>();
-            services.AddTransient<IGetRoleCommand, EfGetRoleCommand>();
-            services.AddTransient<IEditRoleCommand, EfEditRoleCommand>();
-            services.AddTransient<IDeleteRoleCommand, EfDeleteRoleCommand>();
+            //Actors
+            services.AddTransient<IAddActorCommand, EfAddActorCommand>();
+            services.AddTransient<IGetActorsCommand, EfGetActorsCommand>();
+            services.AddTransient<IGetActorCommand, EfGetActorCommand>();
+            services.AddTransient<IEditActorCommand, EfEditActorCommand>();
+            services.AddTransient<IDeleteActorCommand, EfDeleteActorCommand>();
 
             //Categories
             services.AddTransient<IAddCategoryCommand, EfAddCategoryCommand>();
@@ -58,13 +60,6 @@ namespace Api
             services.AddTransient<IEditCategoryCommand, EfEditCategoryCommand>();
             services.AddTransient<IDeleteCategoryCommand, EfDeleteCategoryCommand>();
 
-            //Writers
-            services.AddTransient<IAddWriterCommand, EfAddWriterCommand>();
-            services.AddTransient<IGetWritersCommand, EfGetWritersCommand>();
-            services.AddTransient<IGetWriterCommand, EfGetWriterCommand>();
-            services.AddTransient<IEditWriterCommand, EfEditWriterCommand>();
-            services.AddTransient<IDeleteWriterCommand, EfDeleteWriterCommand>();
-
             //Directors
             services.AddTransient<IAddDirectorCommand, EfAddDirectorCommand>();
             services.AddTransient<IGetDirectorsCommand, EfGetDirectorsCommand>();
@@ -72,12 +67,19 @@ namespace Api
             services.AddTransient<IEditDirectorCommand, EfEditDirectorCommand>();
             services.AddTransient<IDeleteDirectorCommand, EfDeleteDirectorCommand>();
 
-            //Actors
-            services.AddTransient<IAddActorCommand, EfAddActorCommand>();
-            services.AddTransient<IGetActorsCommand, EfGetActorsCommand>();
-            services.AddTransient<IGetActorCommand, EfGetActorCommand>();
-            services.AddTransient<IEditActorCommand, EfEditActorCommand>();
-            services.AddTransient<IDeleteActorCommand, EfDeleteActorCommand>();
+            //Roles
+            services.AddTransient<IAddRoleCommand, EfAddRoleCommand>();
+            services.AddTransient<IGetRolesCommand, EfGetRolesCommand>();
+            services.AddTransient<IGetRoleCommand, EfGetRoleCommand>();
+            services.AddTransient<IEditRoleCommand, EfEditRoleCommand>();
+            services.AddTransient<IDeleteRoleCommand, EfDeleteRoleCommand>();
+
+            //Theatres
+            services.AddTransient<IAddTheatreCommand, EfAddTheatreCommand>();
+            services.AddTransient<IGetTheatresCommand, EfGetTheatresCommand>();
+            services.AddTransient<IGetTheatreCommand, EfGetTheatreCommand>();
+            services.AddTransient<IDeleteTheatreCommand, EfDeleteTheatreCommand>();
+            services.AddTransient<IEditTheatreCommand, EfEditTheatreCommand>();
 
             //Users
             services.AddTransient<IAddUserCommand, EfAddUserCommand>();
@@ -86,6 +88,14 @@ namespace Api
             services.AddTransient<IEditUserCommand, EfEditUserCommand>();
             services.AddTransient<IDeleteUserCommand, EfDeleteUserCommand>();
 
+            //Writers
+            services.AddTransient<IAddWriterCommand, EfAddWriterCommand>();
+            services.AddTransient<IGetWritersCommand, EfGetWritersCommand>();
+            services.AddTransient<IGetWriterCommand, EfGetWriterCommand>();
+            services.AddTransient<IEditWriterCommand, EfEditWriterCommand>();
+            services.AddTransient<IDeleteWriterCommand, EfDeleteWriterCommand>();
+
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

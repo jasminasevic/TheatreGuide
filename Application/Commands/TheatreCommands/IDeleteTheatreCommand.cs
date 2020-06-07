@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Commands.Role_Commands
+namespace Application.Commands.TheatreCommands
 {
-    public interface IDeleteRoleCommand : ICommand<int>
+    public interface IDeleteTheatreCommand : ICommand<int>
     {
     }
 }
