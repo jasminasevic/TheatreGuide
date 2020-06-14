@@ -499,11 +499,12 @@ namespace EfDataAccess.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PremiereDate")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("PremiereDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("ShowDescription")
-                        .HasColumnType("int");
+                    b.Property<string>("ShowDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TheatreId")
                         .HasColumnType("int");
@@ -964,7 +965,7 @@ namespace EfDataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Theatre", "Theatre")
-                        .WithMany()
+                        .WithMany("Shows")
                         .HasForeignKey("TheatreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

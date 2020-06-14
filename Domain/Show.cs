@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Domain
@@ -10,9 +11,9 @@ namespace Domain
 
         public string Title { get; set; }
 
-        public int ShowDescription { get; set; }
+        public string ShowDescription { get; set; }
 
-        public int PremiereDate { get; set; }
+        public DateTime PremiereDate { get; set; }
 
         public int Duration { get; set; }
 

@@ -45,6 +45,12 @@
     <Compile Remove="Migrations\20200601200242_add classes related to seat numeration and ticket purchase.Designer.cs" />
     <Compile Remove="Migrations\20200601200759_add classes related to seat numeration and ticket purchase.cs" />
     <Compile Remove="Migrations\20200601200759_add classes related to seat numeration and ticket purchase.Designer.cs" />
+    <Compile Remove="Migrations\20200608184047_improve show class attributes.cs" />
+    <Compile Remove="Migrations\20200608184047_improve show class attributes.Designer.cs" />
+    <Compile Remove="Migrations\20200608185818_improve show class attributes.cs" />
+    <Compile Remove="Migrations\20200608185818_improve show class attributes.Designer.cs" />
+    <Compile Remove="Migrations\20200608190839_improve show class attributes.cs" />
+    <Compile Remove="Migrations\20200608190839_improve show class attributes.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
