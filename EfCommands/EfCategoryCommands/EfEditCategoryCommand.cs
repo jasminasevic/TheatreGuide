@@ -24,7 +24,7 @@ namespace EfCommands.EfCategoryCommands
 
             if (request.CategoryName != category.CategoryName
                 && Context.Categories.Any(c => c.CategoryName == request.CategoryName))
-                throw new EntityNotFoundException(request.ToString()); ;
+                throw new EntityAlreadyExistsException(request.ToString());
 
             category.CategoryName = request.CategoryName;
 
