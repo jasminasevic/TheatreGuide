@@ -6,6 +6,7 @@ using Application.Commands.ActorCommands;
 using Application.Commands.CategoryCommands;
 using Application.Commands.DirectorCommands;
 using Application.Commands.RoleCommands;
+using Application.Commands.SceneCommands;
 using Application.Commands.ShowCommands;
 using Application.Commands.SubsceneCategoryCommands;
 using Application.Commands.TheatreCommands;
@@ -15,6 +16,7 @@ using EfCommands.EfActorCommands;
 using EfCommands.EfCategoryCommands;
 using EfCommands.EfDirectorCommands;
 using EfCommands.EfRoleCommands;
+using EfCommands.EfSceneCommands;
 using EfCommands.EfShowCommands;
 using EfCommands.EfSubsceneCategoryCommands;
 using EfCommands.EfTheatreCommands;
@@ -77,6 +79,13 @@ namespace Api
             services.AddTransient<IGetRoleCommand, EfGetRoleCommand>();
             services.AddTransient<IEditRoleCommand, EfEditRoleCommand>();
             services.AddTransient<IDeleteRoleCommand, EfDeleteRoleCommand>();
+
+            //Scenes
+            services.AddTransient<IAddSceneCommand, EfAddSceneCommand>();
+            services.AddTransient<IGetSceneCommand, EfGetSceneCommand>();
+            services.AddTransient<IGetScenesCommand, EfGetScenesCommand>();
+            services.AddTransient<IEditSceneCommand, EfEditSceneCommand>();
+            services.AddTransient<IDeleteSceneCommand, EfDeleteSceneCommand>();
 
             //Shows
             services.AddTransient<IAddShowCommand, EfAddShowCommand>();
