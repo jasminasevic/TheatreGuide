@@ -8,9 +8,13 @@ namespace Application.DTO.SubsceneDto
     {
         public int Id { get; set; }
 
-        public int SeatCapacity { get; set; }
+        public string TheatreName { get; set; }
+
+        public string SceneName { get; set; }
 
         public string SubsceneCategoryName { get; set; }
+
+        public int SeatCapacity { get; set; }
 
         public int RowsTotalNumber { get; set; }
     }
