@@ -18,6 +18,6 @@ namespace Domain
 
         public ICollection<Repertoire> Repertoires { get; set; }
 
-        public ICollection<Subscene> Subscenes { get; set; }
+        public ICollection<Sector> Sectors { get; set; }
     }
 }

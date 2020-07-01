@@ -19,9 +19,6 @@ namespace EfDataAccess.Configurations
             builder.Property(r => r.Date)
                 .IsRequired();
 
-            builder.Property(r => r.StartTime)
-                .IsRequired();
-
             builder.Property(r => r.NumberOfSoldTickets)
                 .IsRequired();
 
@@ -33,6 +30,11 @@ namespace EfDataAccess.Configurations
             builder.HasOne(r => r.Scene)
                 .WithMany(rt => rt.Repertoires)
                 .HasForeignKey(r => r.SceneId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(p => p.Prices)
+                .WithOne(r => r.Repertoire)
+                .HasForeignKey(r => r.RepertoireId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

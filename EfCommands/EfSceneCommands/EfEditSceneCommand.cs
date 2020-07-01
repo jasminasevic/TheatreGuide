@@ -34,19 +34,18 @@ namespace EfCommands.EfSceneCommands
             scene.TheatreId = request.TheatreId;
             scene.ModifiedAt = DateTime.Now;
 
-            foreach (var subscene in Context.Subscenes.Where(s => s.SceneId == request.Id))
+            foreach (var sector in Context.Sectors.Where(s => s.SceneId == request.Id))
             {
-                Context.Subscenes.Remove(subscene);
+                Context.Sectors.Remove(sector);
             }
 
-            foreach(var subscene in request.SubsceneDtos)
+            foreach(var subscene in request.AddSectorDtos)
             {
-                Context.Subscenes.Add(new Domain.Subscene
+                Context.Sectors.Add(new Domain.Sector
                 {
                     ModifiedAt = DateTime.Now,
-                    Scene = scene,
+                    SceneId = scene.Id,
                     SeatCapacity = subscene.SeatCapacity,
-                    SubsceneCategoryId = subscene.SubsceneCategoryId,
                     RowsTotalNumber = subscene.RowsTotalNumber
                 });
             }

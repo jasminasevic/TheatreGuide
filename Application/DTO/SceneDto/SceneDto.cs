@@ -1,4 +1,4 @@
-﻿using Application.DTO.SubsceneDto;
+﻿using Application.DTO.SectorDto;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +14,6 @@ namespace Application.DTO.SceneDto
 
         public int TheatreId { get; set; }
 
-        public IEnumerable<AddSubsceneDto> SubsceneDtos { get; set; }
+        public IEnumerable<AddSectorDto> AddSectorDtos{ get; set; }
     }
 }

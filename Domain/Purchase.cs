@@ -24,13 +24,9 @@ namespace Domain
 
         public Scene Scene { get; set; }
 
-        public int SubsceneId { get; set; }
+        public int SectorId { get; set; }
 
-        public Subscene Subscene { get; set; }
-
-        public int EntranceId { get; set; }
-
-        public Entrance Entrance { get; set; }
+        public Sector Sector { get; set; }
 
     }
 }

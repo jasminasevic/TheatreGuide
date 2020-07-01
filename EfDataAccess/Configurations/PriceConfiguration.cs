@@ -11,12 +11,8 @@ namespace EfDataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<Price> builder)
         {
-            builder.HasKey(p => new { p.RepertoireId, p.SubsceneId });
 
-            builder.HasOne(p => p.Subscene)
-                .WithMany(ss => ss.Prices)
-                .HasForeignKey(ss => ss.SubsceneId)
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.HasKey(price => new { price.RepertoireId, price.SectorId });
 
             builder.Property(p => p.TicketPrice)
                .IsRequired();

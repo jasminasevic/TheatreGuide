@@ -27,9 +27,9 @@ namespace EfDataAccess.Configurations
                 .HasForeignKey(p => p.SceneId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(p => p.Subscene)
+            builder.HasOne(p => p.Sector)
                 .WithMany(pu => pu.Purchases)
-                .HasForeignKey(p => p.SubsceneId)
+                .HasForeignKey(p => p.SectorId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

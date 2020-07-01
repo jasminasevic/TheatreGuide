@@ -1,6 +1,6 @@
 ﻿using Application.Commands.SceneCommands;
 using Application.DTO.SceneDto;
-using Application.DTO.SubsceneDto;
+using Application.DTO.SectorDto;
 using Application.Exceptions;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
@@ -20,8 +20,7 @@ namespace EfCommands.EfSceneCommands
         public GetSceneDto Execute(int request)
         {
             var scene = Context.Scenes
-                .Include(s => s.Subscenes)
-                .ThenInclude(sc => sc.SubsceneCategory)
+                .Include(s => s.Sectors)
                 .Include(t => t.Theatre)
                 .Where(s => s.Id == request)
                 .FirstOrDefault();
@@ -34,10 +33,10 @@ namespace EfCommands.EfSceneCommands
                 Id = scene.Id,
                 TheatreName = scene.Theatre.TheatreName,
                 SceneName = scene.SceneName,
-                GetSubsceneDtos = scene.Subscenes.Select(ss => new GetSubsceneDto
+                GetSectorDtos = scene.Sectors.Select(ss => new GetSectorDto
                 {
                     Id = ss.Id,
-                    SubsceneCategoryName = ss.SubsceneCategory.SubsceneCategoryName,
+                    SectorName = ss.SectorName,
                     RowsTotalNumber = ss.RowsTotalNumber,
                     SeatCapacity = ss.SeatCapacity
                 })

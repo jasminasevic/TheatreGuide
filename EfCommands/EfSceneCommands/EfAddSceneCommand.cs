@@ -35,14 +35,13 @@ namespace EfCommands.EfSceneCommands
 
             Context.Scenes.Add(scene);
 
-            foreach(var subscene in request.SubsceneDtos)
+            foreach(var sector in request.AddSectorDtos)
             {
-                Context.Subscenes.Add(new Domain.Subscene
+                Context.Sectors.Add(new Domain.Sector
                 {
                     Scene = scene,
-                    SeatCapacity = subscene.SeatCapacity,
-                    SubsceneCategoryId = subscene.SubsceneCategoryId,
-                    RowsTotalNumber = subscene.RowsTotalNumber
+                    SeatCapacity = sector.SeatCapacity,
+                    RowsTotalNumber = sector.RowsTotalNumber
                 });
             }
 

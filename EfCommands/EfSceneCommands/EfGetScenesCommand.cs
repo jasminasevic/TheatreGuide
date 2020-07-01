@@ -1,6 +1,6 @@
 ﻿using Application.Commands.SceneCommands;
 using Application.DTO.SceneDto;
-using Application.DTO.SubsceneDto;
+using Application.DTO.SectorDto;
 using Application.Queries;
 using Application.Responses;
 using EfDataAccess;
@@ -23,8 +23,7 @@ namespace EfCommands.EfSceneCommands
 
             var scenes = Context.Scenes
                 .Include(s => s.Theatre)
-                .Include(ss => ss.Subscenes)
-                .ThenInclude(ss => ss.SubsceneCategory)
+                .Include(ss => ss.Sectors)
                 .AsQueryable();
 
 
@@ -48,10 +47,10 @@ namespace EfCommands.EfSceneCommands
                 Id = s.Id,
                 SceneName = s.SceneName,
                 TheatreName = s.Theatre.TheatreName,
-                GetSubsceneDtos = s.Subscenes.Select(ss => new GetSubsceneDto
+                GetSectorDtos = s.Sectors.Select(ss => new GetSectorDto
                 {
                     Id = ss.Id,
-                    SubsceneCategoryName = ss.SubsceneCategory.SubsceneCategoryName,
+                    SectorName = ss.SectorName,
                     RowsTotalNumber = ss.RowsTotalNumber,
                     SeatCapacity = ss.SeatCapacity
                 })

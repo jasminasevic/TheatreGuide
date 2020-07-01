@@ -14,8 +14,6 @@ namespace Domain
 
         public DateTime Date { get; set; }
 
-        public string StartTime { get; set; }
-
         public int TheatreId { get; set; }
 
         public Theatre Theatre { get; set; }

@@ -5,22 +5,20 @@ using System.Threading.Tasks;
 using Application.Commands.ActorCommands;
 using Application.Commands.CategoryCommands;
 using Application.Commands.DirectorCommands;
+using Application.Commands.RepertoireCommands;
 using Application.Commands.RoleCommands;
 using Application.Commands.SceneCommands;
 using Application.Commands.ShowCommands;
-using Application.Commands.SubsceneCategoryCommands;
-using Application.Commands.SubsceneCommands;
 using Application.Commands.TheatreCommands;
 using Application.Commands.UserCommands;
 using Application.Commands.WriterCommands;
 using EfCommands.EfActorCommands;
 using EfCommands.EfCategoryCommands;
 using EfCommands.EfDirectorCommands;
+using EfCommands.EfRepertoireCommands;
 using EfCommands.EfRoleCommands;
 using EfCommands.EfSceneCommands;
 using EfCommands.EfShowCommands;
-using EfCommands.EfSubsceneCategoryCommands;
-using EfCommands.EfSubsceneCommands;
 using EfCommands.EfTheatreCommands;
 using EfCommands.EfUserCommands;
 using EfCommands.EfWriterCommands;
@@ -75,6 +73,13 @@ namespace Api
             services.AddTransient<IGetDirectorsCommand, EfGetDirectorsCommand>();
             services.AddTransient<IGetDirectorCommand, EfGetDirectorCommand>();
 
+            //Repertoires
+            services.AddTransient<IAddRepertoireCommand, EfAddRepertoireCommand>();
+            services.AddTransient<IDeleteRepertoireCommand, EfDeleteRepertoireCommand>();
+            services.AddTransient<IEditRepertoireCommand, EfEditRepertoireCommand>();
+            services.AddTransient<IGetRepertoireCommand, EfGetRepertoireCommand>();
+            services.AddTransient<IGetRepertoiresCommand, EfGetRepertoiresCommand>();
+
             //Roles
             services.AddTransient<IAddRoleCommand, EfAddRoleCommand>();
             services.AddTransient<IDeleteRoleCommand, EfDeleteRoleCommand>();
@@ -95,20 +100,6 @@ namespace Api
             services.AddTransient<IEditShowCommand, EfEditShowCommand>();
             services.AddTransient<IGetShowCommand, EfGetShowCommand>();
             services.AddTransient<IGetShowsCommand, EfGetShowsCommand>();
-
-            //SubsceneCategories
-            services.AddTransient<IAddSubsceneCategoryCommand, EfAddSubsceneCategoryCommand>();
-            services.AddTransient<IDeleteSubsceneCategoryCommand, EfDeleteSubsceneCategoryCommand>();
-            services.AddTransient<IEditSubsceneCategoryCommand, EfEditSubsceneCategoryCommand>();
-            services.AddTransient<IGetSubsceneCategoryCommand, EfGetSubsceneCategoryCommand>();
-            services.AddTransient<IGetSubsceneCategoriesCommand, EfGetSubsceneCategoriesCommand>();
-
-            //Subscenes
-            services.AddTransient<IAddSubsceneCommand, EfAddSubsceneCommand>();
-            services.AddTransient<IDeleteSubsceneCommand, EfDeleteSubsceneCommand>();
-            services.AddTransient<IEditSubsceneCommand, EfEditSubsceneCommand>();
-            services.AddTransient<IGetSubsceneCommand, EfGetSubsceneCommand>();
-            services.AddTransient<IGetSubscenesCommand, EfGetSubscenesCommand>();
 
             //Theatres
             services.AddTransient<IAddTheatreCommand, EfAddTheatreCommand>();
