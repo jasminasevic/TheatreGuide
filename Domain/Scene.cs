@@ -16,7 +16,7 @@ namespace Domain
 
         public ICollection<Purchase> Purchases { get; set; }
 
-        public ICollection<Repertoire> Repertoires { get; set; }
+        public ICollection<Show> Shows { get; set; }
 
         public ICollection<Sector> Sectors { get; set; }
     }

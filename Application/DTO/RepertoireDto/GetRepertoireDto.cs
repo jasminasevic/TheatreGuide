@@ -26,7 +26,7 @@ namespace Application.DTO.RepertoireDto
 
         public int SoldTicketsNumber { get; set; }
 
-        public IEnumerable<GetPriceDto> GetPriceDtos { get; set; }
+        
 
 
     }

@@ -1,4 +1,5 @@
 ﻿using Application.DTO.ActorDto;
+using Application.DTO.PriceDto;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,10 @@ namespace Application.DTO.ShowDto
         public int WriterId { get; set; }
 
         public  int TheatreId { get; set; }
+
+        public int SceneId { get; set; }
+
+        public IEnumerable<AddPriceDto> AddPriceDtos { get; set; }
 
         public IEnumerable<ActorShowDto> ActorShowDtos { get; set; }
 

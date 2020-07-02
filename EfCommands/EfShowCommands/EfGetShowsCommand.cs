@@ -1,6 +1,7 @@
 ﻿using Application.Commands.ShowCommands;
 using Application.DTO.ActorDto;
 using Application.DTO.ImageDto;
+using Application.DTO.PriceDto;
 using Application.DTO.ShowDto;
 using Application.Queries;
 using Application.Responses;
@@ -27,8 +28,12 @@ namespace EfCommands.EfShowCommands
                 .Include(s => s.Writer)
                 .Include(s => s.Director)
                 .Include(s => s.Theatre)
+                .Include(s => s.Scene)
+                .Include(s => s.Prices)
+                .ThenInclude(s => s.Sector)
                 .Include(s => s.ActorShows)
                 .ThenInclude(s => s.Actor)
+                .Include(s => s.ShowFollowers)
                 .AsQueryable();
 
             //Filtering logic
@@ -54,6 +59,8 @@ namespace EfCommands.EfShowCommands
                 ContentAdvisory = s.ContentAdvisory,
                 PremiereDate = s.PremiereDate,
                 Theatre = s.Theatre.TheatreName,
+                Scene = s.Scene.SceneName,
+                FollowersNumber = s.ShowFollowers.Count(),
                 ShowImageDtos = s.ShowImages.Select(i => new GetImageDto
                 {
                     Id = i.Id,
@@ -67,6 +74,14 @@ namespace EfCommands.EfShowCommands
                     ActorLastName = a.Actor.ActorLastName,
                     ActorRoleDescription = a.ActorRoleDescription,
                     ActorRoleName = a.ActorRoleName
+                }),
+                GetPriceDtos = s.Prices.Select(p => new GetPriceDto
+                {
+                    Price = p.TicketPrice,
+                    SectorId = p.Sector.Id,
+                    SectorName = p.Sector.SectorName,
+                    RowsTotalNumber = p.Sector.RowsTotalNumber,
+                    SeatCapacity = p.Sector.SeatCapacity
                 })
             });
 
@@ -134,6 +149,12 @@ namespace EfCommands.EfShowCommands
                     break;
                 case "premiere_asc":
                     data = data.OrderBy(s => s.PremiereDate);
+                    break;
+                case "followers_desc":
+                    data = data.OrderByDescending(s => s.FollowersNumber);
+                    break;
+                case "followers_asc":
+                    data = data.OrderBy(s => s.FollowersNumber);
                     break;
                 default:
                     data = data.OrderBy(s => s.Title);

@@ -34,7 +34,16 @@ namespace EfDataAccess.Configurations
                 .HasForeignKey(uf => uf.ShowId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            
+            builder.HasOne(sc => sc.Scene)
+                .WithMany(s => s.Shows)
+                .HasForeignKey(sc => sc.SceneId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(p => p.Prices)
+                .WithOne(s => s.Show)
+                .HasForeignKey(s => s.ShowId)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

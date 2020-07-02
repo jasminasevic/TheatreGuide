@@ -9,7 +9,7 @@ namespace Application.DTO.PriceDto
     {
         public double Price { get; set; }
 
-        public int RepertoireId { get; set; }
+        public int ShowId { get; set; }
 
         public int SectorId { get; set; }
 

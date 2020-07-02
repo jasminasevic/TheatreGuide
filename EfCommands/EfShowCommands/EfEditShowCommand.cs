@@ -33,6 +33,7 @@ namespace EfCommands.EfShowCommands
             show.CategoryId = request.CategoryId;
             show.DirectorId = request.DirectorId;
             show.WriterId = request.WriterId;
+            show.SceneId = request.SceneId;
             show.ModifiedAt = DateTime.Now;
 
             foreach (var showImage in Context.ShowImages.Where(s => s.ShowId == request.Id))
@@ -79,6 +80,23 @@ namespace EfCommands.EfShowCommands
                     ShowId = request.Id
                 });
             }
+
+
+            foreach(var ticketPrice in Context.Prices.Where(s => s.ShowId == request.Id))
+            {
+                Context.Prices.Remove(ticketPrice);
+            }
+
+            foreach (var price in request.AddPriceDtos)
+            {
+                Context.Prices.Add(new Domain.Price
+                {
+                    Show = show,
+                    SectorId = price.SectorId,
+                    TicketPrice = price.TicketPrice
+                });
+
+            };
 
             Context.SaveChanges();
 

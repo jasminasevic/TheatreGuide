@@ -36,10 +36,22 @@ namespace EfCommands.EfShowCommands
                 CategoryId = request.CategoryId,
                 WriterId = request.WriterId,
                 DirectorId = request.DirectorId,
-                TheatreId = request.TheatreId
+                TheatreId = request.TheatreId,
+                SceneId = request.SceneId
             };
 
             Context.Shows.Add(show);
+
+            foreach (var price in request.AddPriceDtos)
+            {
+                Context.Prices.Add(new Domain.Price
+                {
+                    Show = show,
+                    SectorId = price.SectorId,
+                    TicketPrice = price.TicketPrice
+                });
+
+            };
 
             if (request.ShowImages != null)
             {

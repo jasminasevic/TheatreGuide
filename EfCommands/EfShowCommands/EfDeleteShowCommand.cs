@@ -3,6 +3,7 @@ using Application.Exceptions;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace EfCommands.EfShowCommands
@@ -20,7 +21,9 @@ namespace EfCommands.EfShowCommands
             if (show == null)
                 throw new EntityNotFoundException(show.Id.ToString());
 
-            Context.Shows.Remove(show);
+            show.ModifiedAt = DateTime.Now;
+            show.IsDeleted = true;
+
             Context.SaveChanges();
         }
     }

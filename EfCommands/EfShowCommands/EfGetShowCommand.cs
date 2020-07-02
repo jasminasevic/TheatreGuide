@@ -1,6 +1,7 @@
 ﻿using Application.Commands.ShowCommands;
 using Application.DTO.ActorDto;
 using Application.DTO.ImageDto;
+using Application.DTO.PriceDto;
 using Application.DTO.ShowDto;
 using Application.Exceptions;
 using EfDataAccess;
@@ -28,6 +29,12 @@ namespace EfCommands.EfShowCommands
                 .Include(s => s.Theatre)
                 .Include(s => s.ActorShows)
                 .ThenInclude(s => s.Actor)
+                .Include(s => s.Prices)
+                .ThenInclude(s => s.Sector)
+                .Include(s => s.Scene)
+                .Include(p => p.Prices)
+                .ThenInclude(s => s.Sector)
+                .Include(s => s.ShowFollowers)
                 .Where(s => s.Id == request)
                 .FirstOrDefault();
 
@@ -48,6 +55,8 @@ namespace EfCommands.EfShowCommands
                 ContentAdvisory = show.ContentAdvisory,
                 PremiereDate = show.PremiereDate,
                 Theatre = show.Theatre.TheatreName,
+                Scene = show.Scene.SceneName,
+                FollowersNumber = show.ShowFollowers.Count(),
                 ShowImageDtos = show.ShowImages.Select(i => new GetImageDto
                 {
                     Id = i.Id,
@@ -61,6 +70,15 @@ namespace EfCommands.EfShowCommands
                     ActorLastName = a.Actor.ActorLastName,
                     ActorRoleDescription = a.ActorRoleDescription,
                     ActorRoleName = a.ActorRoleName
+                }),
+                GetPriceDtos = show.Prices.Select(p => new GetPriceDto
+                {
+                    ShowId = p.ShowId,
+                    SectorId = p.SectorId,
+                    SectorName = p.Sector.SectorName,
+                    RowsTotalNumber = p.Sector.RowsTotalNumber,
+                    SeatCapacity = p.Sector.SeatCapacity,
+                    Price = p.TicketPrice
                 })
             };
         }

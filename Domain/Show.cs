@@ -35,6 +35,10 @@ namespace Domain
 
         public Theatre Theatre { get; set; }
 
+        public int SceneId { get; set; }
+
+        public Scene Scene { get; set; }
+
         public ICollection<ActorShow> ActorShows { get; set; }
 
         public ICollection<ShowImage> ShowImages { get; set; }
@@ -42,5 +46,7 @@ namespace Domain
         public ICollection<ShowFollower> ShowFollowers { get; set; }
 
         public ICollection<Repertoire> Repertoires { get; set; }
+
+        public ICollection<Price> Prices { get; set; }
     }
 }

@@ -13,14 +13,11 @@ namespace Application.DTO.RepertoireDto
 
         public int TheatreId { get; set; }
 
-        public int SceneId { get; set; }
-
         public DateTime ShowDate { get; set; }
 
         public int SoldTicketNumber { get; set; }
 
         public string StartTime { get; set; }
 
-        public IEnumerable<AddPriceDto> AddPriceDtos { get; set; }
     }
 }

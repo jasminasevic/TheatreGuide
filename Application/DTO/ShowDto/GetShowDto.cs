@@ -1,5 +1,6 @@
 ﻿using Application.DTO.ActorDto;
 using Application.DTO.ImageDto;
+using Application.DTO.PriceDto;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace Application.DTO.ShowDto
 
         public string DirectorLastName { get; set; }
 
+        public string Scene { get; set; }
+
         public string Theatre { get; set; }
 
         public int Duration { get; set; }
@@ -33,8 +36,12 @@ namespace Application.DTO.ShowDto
 
         public bool ContentAdvisory { get; set; }
 
+        public int FollowersNumber { get; set; }
+
         public IEnumerable<ActorShowDto> ActorShowDtos { get; set; }
 
         public IEnumerable<GetImageDto> ShowImageDtos { get; set; }
+
+        public IEnumerable<GetPriceDto> GetPriceDtos { get; set; }
     }
 }

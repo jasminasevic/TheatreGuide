@@ -12,7 +12,7 @@ namespace EfDataAccess.Configurations
         public void Configure(EntityTypeBuilder<Price> builder)
         {
 
-            builder.HasKey(price => new { price.RepertoireId, price.SectorId });
+            builder.HasKey(price => new { price.ShowId, price.SectorId });
 
             builder.Property(p => p.TicketPrice)
                .IsRequired();

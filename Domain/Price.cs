@@ -7,9 +7,9 @@ namespace Domain
     public class Price : BaseEntity
     {
        
-        public int RepertoireId { get; set; }
+        public int ShowId { get; set; }
 
-        public Repertoire Repertoire { get; set; }
+        public Show Show { get; set; }
 
         public int SectorId { get; set; }
 

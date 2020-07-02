@@ -23,7 +23,6 @@ namespace EfCommands.EfRepertoireCommands
 
             repertoire.ShowId = request.ShowId;
             repertoire.TheatreId = request.TheatreId;
-            repertoire.SceneId = request.SceneId;
             repertoire.Date = request.ShowDate;
         }
     }
