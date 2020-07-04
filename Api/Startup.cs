@@ -9,6 +9,7 @@ using Application.Commands.RepertoireCommands;
 using Application.Commands.RoleCommands;
 using Application.Commands.SceneCommands;
 using Application.Commands.ShowCommands;
+using Application.Commands.ShowFollowerCommands;
 using Application.Commands.TheatreCommands;
 using Application.Commands.UserCommands;
 using Application.Commands.WriterCommands;
@@ -19,6 +20,7 @@ using EfCommands.EfRepertoireCommands;
 using EfCommands.EfRoleCommands;
 using EfCommands.EfSceneCommands;
 using EfCommands.EfShowCommands;
+using EfCommands.EfShowFolloweCommands;
 using EfCommands.EfTheatreCommands;
 using EfCommands.EfUserCommands;
 using EfCommands.EfWriterCommands;
@@ -93,6 +95,10 @@ namespace Api
             services.AddTransient<IEditSceneCommand, EfEditSceneCommand>();
             services.AddTransient<IGetSceneCommand, EfGetSceneCommand>();
             services.AddTransient<IGetScenesCommand, EfGetScenesCommand>();
+
+            //ShowFollowers
+            services.AddTransient<IAddShowFollowerCommand, EfAddShowFollowerCommand>();
+            services.AddTransient<IDeleteShowFollowerCommand, EfDeleteShowFollowerCommand>();
 
             //Shows
             services.AddTransient<IAddShowCommand, EfAddShowCommand>();

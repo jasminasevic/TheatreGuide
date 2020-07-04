@@ -13,4 +13,9 @@ namespace Application.Interfaces
     {
         TResult Execute(TRequest request);
     }
+
+    public interface IComm<TFirstRequest, TSecondRequest> 
+    {
+        void Execute(TFirstRequest requestFirst, TSecondRequest requestSecond);
+    } 
 }
