@@ -20,13 +20,11 @@ namespace Domain
 
         public int RowNumber { get; set; }
 
-        public int SceneId { get; set; }
-
-        public Scene Scene { get; set; }
-
         public int SectorId { get; set; }
 
         public Sector Sector { get; set; }
+
+        public string Entrance { get; set; }
 
     }
 }

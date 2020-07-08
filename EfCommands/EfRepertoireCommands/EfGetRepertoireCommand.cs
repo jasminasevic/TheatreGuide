@@ -20,8 +20,8 @@ namespace EfCommands.EfRepertoireCommands
         public GetRepertoireDto Execute(int request)
         {
             var repertoire = Context.Repertoires
-                .Include(r => r.Theatre)
                 .Include(s => s.Show)
+                .ThenInclude(s => s.Theatre)
                 .Where(r => r.Id == request)
                 .FirstOrDefault();
 
@@ -33,10 +33,9 @@ namespace EfCommands.EfRepertoireCommands
                 Id = repertoire.Id,
                 ShowId = repertoire.ShowId,
                 ShowName = repertoire.Show.Title,
-                TheatreId = repertoire.TheatreId,
-                TheatreName = repertoire.Theatre.TheatreName,
-                ShowDate = repertoire.Date,
-                SoldTicketsNumber = repertoire.NumberOfSoldTickets
+                TheatreId = repertoire.Show.TheatreId,
+                TheatreName = repertoire.Show.Theatre.TheatreName,
+                ShowDate = repertoire.Date
             };
 
         }

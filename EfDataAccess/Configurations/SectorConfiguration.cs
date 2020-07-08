@@ -25,6 +25,11 @@ namespace EfDataAccess.Configurations
                 .WithOne(s => s.Sector)
                 .HasForeignKey(s => s.SectorId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(st => st.SectorSoldTickets)
+                .WithOne(s => s.Sector)
+                .HasForeignKey(s => s.SectorId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

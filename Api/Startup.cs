@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application.Commands.ActorCommands;
 using Application.Commands.CategoryCommands;
 using Application.Commands.DirectorCommands;
+using Application.Commands.PurchaseCommands;
 using Application.Commands.RepertoireCommands;
 using Application.Commands.RoleCommands;
 using Application.Commands.SceneCommands;
@@ -16,6 +17,7 @@ using Application.Commands.WriterCommands;
 using EfCommands.EfActorCommands;
 using EfCommands.EfCategoryCommands;
 using EfCommands.EfDirectorCommands;
+using EfCommands.EfPurchaseCommands;
 using EfCommands.EfRepertoireCommands;
 using EfCommands.EfRoleCommands;
 using EfCommands.EfSceneCommands;
@@ -74,6 +76,13 @@ namespace Api
             services.AddTransient<IEditDirectorCommand, EfEditDirectorCommand>();
             services.AddTransient<IGetDirectorsCommand, EfGetDirectorsCommand>();
             services.AddTransient<IGetDirectorCommand, EfGetDirectorCommand>();
+
+            //Purchases
+            services.AddTransient<IAddPurchaseCommand, EfAddPurchaseCommand>();
+            services.AddTransient<IDeletePurchaseCommand, EfDeletePurchaseCommand>();
+            services.AddTransient<IEditPurchaseCommand, EfEditPurchaseCommand>();
+            services.AddTransient<IGetPurchaseCommand, EfGetPurchaseCommand>();
+            services.AddTransient<IGetPurchasesCommand, EfGetPurchasesCommand>();
 
             //Repertoires
             services.AddTransient<IAddRepertoireCommand, EfAddRepertoireCommand>();

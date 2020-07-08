@@ -22,6 +22,8 @@ namespace Domain
 
         public ICollection<Purchase> Purchases { get; set; }
 
+        public ICollection<SectorSoldTickets> SectorSoldTickets { get; set; }
+
 
     }
 }

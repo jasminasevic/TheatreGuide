@@ -22,11 +22,6 @@ namespace EfDataAccess.Configurations
             builder.Property(p => p.RowNumber)
                 .IsRequired();
 
-            builder.HasOne(p => p.Scene)
-                .WithMany(pu => pu.Purchases)
-                .HasForeignKey(p => p.SceneId)
-                .OnDelete(DeleteBehavior.Restrict);
-
             builder.HasOne(p => p.Sector)
                 .WithMany(pu => pu.Purchases)
                 .HasForeignKey(p => p.SectorId)

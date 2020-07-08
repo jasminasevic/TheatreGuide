@@ -22,13 +22,13 @@ namespace EfCommands.EfRepertoireCommands
         {
             var repertoires = Context.Repertoires
                 .Include(s => s.Show)
-                .Include(t => t.Theatre)
+                .ThenInclude(t => t.Theatre)
                 .AsQueryable();
 
             //Filtering logic
 
             if (request.TheatreName != null)
-                repertoires = repertoires.Where(r => r.Theatre.TheatreName.ToLower()
+                repertoires = repertoires.Where(r => r.Show.Theatre.TheatreName.ToLower()
                 .Contains(request.TheatreName.ToLower()));
 
             if (request.ShowTitle != null)
@@ -36,7 +36,7 @@ namespace EfCommands.EfRepertoireCommands
                 .Contains(request.ShowTitle.ToLower()));
 
             if(request.SearchQuery != null)
-                repertoires = repertoires.Where(r => r.Theatre.TheatreName.ToLower()
+                repertoires = repertoires.Where(r => r.Show.Theatre.TheatreName.ToLower()
                .Contains(request.TheatreName.ToLower())
                || r.Show.Title.ToLower()
                .Contains(request.ShowTitle.ToLower()));
@@ -46,8 +46,8 @@ namespace EfCommands.EfRepertoireCommands
                 Id = r.Id,
                 ShowId = r.ShowId,
                 ShowName = r.Show.Title,
-                TheatreId = r.TheatreId,
-                TheatreName = r.Theatre.TheatreName,
+                TheatreId = r.Show.TheatreId,
+                TheatreName = r.Show.Theatre.TheatreName,
                 ShowDate = r.Date,
             });
 

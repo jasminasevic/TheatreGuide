@@ -33,6 +33,8 @@ namespace EfDataAccess
 
         public DbSet<Sector> Sectors { get; set; }
 
+        public DbSet<SectorSoldTickets> SectorSoldTickets { get; set; }
+
         public DbSet<Show> Shows { get; set; }
 
         public DbSet<ShowFollower> ShowFollowers { get; set; }
@@ -67,6 +69,7 @@ namespace EfDataAccess
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new SceneConfiguration());
             modelBuilder.ApplyConfiguration(new SectorConfiguration());
+            modelBuilder.ApplyConfiguration(new SectorSoldTicketsConfiguration());
             modelBuilder.ApplyConfiguration(new ShowConfiguration());
             modelBuilder.ApplyConfiguration(new ShowFollowerConfiguration());
             modelBuilder.ApplyConfiguration(new ShowImageConfiguration());

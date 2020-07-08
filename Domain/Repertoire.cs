@@ -14,12 +14,8 @@ namespace Domain
 
         public DateTime Date { get; set; }
 
-        public int TheatreId { get; set; }
-
-        public Theatre Theatre { get; set; }
-
-        public int NumberOfSoldTickets { get; set; } = 0;
-
         public ICollection<Purchase> Purchases { get; set; }
+
+        public ICollection<SectorSoldTickets> SectorSoldTickets { get; set; }
     }
 }

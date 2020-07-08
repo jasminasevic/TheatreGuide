@@ -273,6 +273,9 @@ namespace EfDataAccess.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Entrance")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
@@ -288,9 +291,6 @@ namespace EfDataAccess.Migrations
                     b.Property<int>("RowNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("SceneId")
-                        .HasColumnType("int");
-
                     b.Property<int>("SeatNumber")
                         .HasColumnType("int");
 
@@ -303,8 +303,6 @@ namespace EfDataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("RepertoireId");
-
-                    b.HasIndex("SceneId");
 
                     b.HasIndex("SectorId");
 
@@ -335,13 +333,10 @@ namespace EfDataAccess.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("NumberOfSoldTickets")
-                        .HasColumnType("int");
-
                     b.Property<int>("ShowId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TheatreId")
+                    b.Property<int?>("TheatreId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -458,6 +453,24 @@ namespace EfDataAccess.Migrations
                     b.HasIndex("SceneId");
 
                     b.ToTable("Sectors");
+                });
+
+            modelBuilder.Entity("Domain.SectorSoldTickets", b =>
+                {
+                    b.Property<int>("RepertoireId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SectorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfSoldTickets")
+                        .HasColumnType("int");
+
+                    b.HasKey("RepertoireId", "SectorId");
+
+                    b.HasIndex("SectorId");
+
+                    b.ToTable("SectorSoldTickets");
                 });
 
             modelBuilder.Entity("Domain.Show", b =>
@@ -819,12 +832,6 @@ namespace EfDataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Scene", "Scene")
-                        .WithMany("Purchases")
-                        .HasForeignKey("SceneId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Domain.Sector", "Sector")
                         .WithMany("Purchases")
                         .HasForeignKey("SectorId")
@@ -846,11 +853,9 @@ namespace EfDataAccess.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.Theatre", "Theatre")
+                    b.HasOne("Domain.Theatre", null)
                         .WithMany("Repertoires")
-                        .HasForeignKey("TheatreId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("TheatreId");
                 });
 
             modelBuilder.Entity("Domain.Scene", b =>
@@ -868,6 +873,21 @@ namespace EfDataAccess.Migrations
                         .WithMany("Sectors")
                         .HasForeignKey("SceneId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.SectorSoldTickets", b =>
+                {
+                    b.HasOne("Domain.Repertoire", "Repertoire")
+                        .WithMany("SectorSoldTickets")
+                        .HasForeignKey("RepertoireId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Sector", "Sector")
+                        .WithMany("SectorSoldTickets")
+                        .HasForeignKey("SectorId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

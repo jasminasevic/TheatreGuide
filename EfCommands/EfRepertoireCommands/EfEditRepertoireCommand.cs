@@ -22,8 +22,8 @@ namespace EfCommands.EfRepertoireCommands
                 throw new EntityNotFoundException(request.Id.ToString());
 
             repertoire.ShowId = request.ShowId;
-            repertoire.TheatreId = request.TheatreId;
             repertoire.Date = request.ShowDate;
+            repertoire.ModifiedAt = DateTime.Now;
         }
     }
 }
