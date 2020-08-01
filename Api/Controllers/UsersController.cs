@@ -6,11 +6,15 @@ using Application.Commands.UserCommands;
 using Application.DTO.UserDto;
 using Application.Exceptions;
 using Application.Queries;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    
+    [EnableCors]
+    //[EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -65,9 +69,12 @@ namespace Api.Controllers
             }
         }
 
-        // POST: api/Users
+        // POST: api/users
+        [HttpOptions]
         [HttpPost]
-        public IActionResult Post([FromForm] UserDto dto)
+        //[HttpPost, Produces("application/json")]
+        //[HttpOptions]
+        public IActionResult Post([FromBody] UserDto dto)
         {
             try
             {

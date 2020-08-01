@@ -120,7 +120,6 @@ C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\runtimes\
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
-C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Application.dll
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Domain.dll
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\EfCommands.dll
@@ -131,3 +130,4 @@ C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Domain.pd
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\EfDataAccess.pdb
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
+C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.MvcApplicationPartsAssemblyInfo.cache

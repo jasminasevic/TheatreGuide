@@ -36,6 +36,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 
 namespace Api
 {
@@ -49,8 +50,56 @@ namespace Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+
+        //readonly string MyPolicy = "MyPolicy";
         public void ConfigureServices(IServiceCollection services)
         {
+            //Cors
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(name: MyPolicy,
+            //        builder =>
+            //        {
+            //            builder.AllowAnyOrigin()
+            //            .AllowAnyMethod()
+            //            .AllowAnyHeader();
+            //        });
+            //});
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder.WithOrigins("http://localhost:4200/")
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader());
+            //});
+
+
+            services.AddCors(options => {
+                options.AddPolicy("CorsPolicy", 
+                    builder => {
+                    builder.AllowAnyOrigin()
+                    .SetIsOriginAllowedToAllowWildcardSubdomains()
+                     .WithHeaders(HeaderNames.ContentType, "application/json")
+                     .AllowAnyMethod();
+                });
+            });
+
+
+
+            //                services.AddCors();// options =>
+            // {
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder.AllowAnyOrigin()
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader()
+            //        //.AllowCredentials()
+            //        );
+            //});
+
+
+
             services.AddControllers();
 
             //EfContext
@@ -137,7 +186,7 @@ namespace Api
             services.AddTransient<IGetWritersCommand, EfGetWritersCommand>();
             services.AddTransient<IGetWriterCommand, EfGetWriterCommand>();
 
-           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -152,12 +201,25 @@ namespace Api
 
             app.UseRouting();
 
+            //app.UseCors("CorsPolicy");
+
+            app.UseCors(option =>
+              option.WithOrigins("http://localhost:4200")
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials()
+                  );
+
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+//                .RequireCors("CorsPolicy");
             });
+
+
 
             app.UseStaticFiles();
         }
