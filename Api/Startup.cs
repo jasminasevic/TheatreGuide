@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.ActorCommands;
@@ -29,11 +30,13 @@ using EfCommands.EfWriterCommands;
 using EfDataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
@@ -56,17 +59,7 @@ namespace Api
         {
             //Cors
 
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy(name: MyPolicy,
-            //        builder =>
-            //        {
-            //            builder.AllowAnyOrigin()
-            //            .AllowAnyMethod()
-            //            .AllowAnyHeader();
-            //        });
-            //});
-
+            //staro
             //services.AddCors(options =>
             //{
             //    options.AddPolicy("CorsPolicy",
@@ -76,29 +69,26 @@ namespace Api
             //});
 
 
-            services.AddCors(options => {
-                options.AddPolicy("CorsPolicy", 
-                    builder => {
-                    builder.AllowAnyOrigin()
-                    .SetIsOriginAllowedToAllowWildcardSubdomains()
-                     .WithHeaders(HeaderNames.ContentType, "application/json")
-                     .AllowAnyMethod();
-                });
-            });
-
-
-
-            //                services.AddCors();// options =>
-            // {
-            //    options.AddPolicy("CorsPolicy",
-            //        builder => builder.AllowAnyOrigin()
-            //        .AllowAnyMethod()
-            //        .AllowAnyHeader()
-            //        //.AllowCredentials()
-            //        );
+            //services.AddCors(options => {
+            //    options.AddPolicy("CorsPolicy", 
+            //        builder => {
+            //        builder.AllowAnyOrigin()
+            //        .SetIsOriginAllowedToAllowWildcardSubdomains()
+            //         .WithHeaders(HeaderNames.ContentType, "application/json", "multipart/form-data")
+            //         .AllowAnyMethod();
+            //    });
             //});
-
-
+           
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                        .WithHeaders(HeaderNames.ContentType, "x-custom-header")
+                        .WithMethods("PUT", "DELETE", "GET", "OPTIONS");
+                    });
+            });
 
             services.AddControllers();
 
@@ -192,36 +182,55 @@ namespace Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();
+            app.UseFileServer();
+            app.UseStaticFiles();
+
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //        Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
+            //        RequestPath = "/StaticFiles"
+            //});
+
+            //const string cacheMaxAge = "604800";
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    OnPrepareResponse = ctx =>
+            //    {
+            //        // using Microsoft.AspNetCore.Http;
+            //        ctx.Context.Response.Headers.Append(
+            //             "Cache-Control", $"public, max-age={cacheMaxAge}");
+            //    }
+            //});
 
             app.UseRouting();
 
-            //app.UseCors("CorsPolicy");
+            // global policy - assign here or on each controller
+            app.UseCors();
 
-            app.UseCors(option =>
-              option.WithOrigins("http://localhost:4200")
-                  .AllowAnyMethod()
-                  .AllowAnyHeader()
-                  .AllowCredentials()
-                  );
+            //app.UseCors(option =>
+            //  option.WithOrigins("http://localhost:4200")
+            //      .AllowAnyMethod()
+            //      .AllowAnyHeader()
+            //      .AllowCredentials()
+            //      );
 
             app.UseAuthorization();
 
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
-//                .RequireCors("CorsPolicy");
+                endpoints.MapControllers()
+                   .RequireCors("CorsPolicy");
             });
 
-
-
-            app.UseStaticFiles();
         }
     }
 }

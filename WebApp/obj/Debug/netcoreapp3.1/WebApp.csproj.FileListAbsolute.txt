@@ -64,3 +64,5 @@ C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.dll
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.pdb
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.csproj.CoreCompileInputs.cache
+C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.genruntimeconfig.cache

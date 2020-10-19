@@ -11,3 +11,5 @@ C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\bin\Debug\netcoreapp3.1\
 C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\EfDataAccess.csproj.CopyComplete
 C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\EfDataAccess.dll
 C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\EfDataAccess.pdb
+C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\EfDataAccess.csproj.CoreCompileInputs.cache
+C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\EfDataAccess.genruntimeconfig.cache

@@ -8,7 +8,7 @@ namespace Application.Queries
     {
         public int PerPage { get; set; } = 4;
 
-        public int PageNumber { get; set; } = 1;
+        public int PageNumber { get; set; } = 0;
 
         public string SortOrder { get; set; }
 

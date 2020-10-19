@@ -88,7 +88,7 @@ namespace EfCommands.EfTheatreCommands
                     data = data.OrderBy(t => t.Email);
                     break;
                 default:
-                    data = data.OrderBy(t => t.Name);
+                    data = data.OrderBy(t => t.Email);
                     break;
             };
 

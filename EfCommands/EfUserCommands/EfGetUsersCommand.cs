@@ -77,6 +77,12 @@ namespace EfCommands.EfUserCommands
                 case "email_asc":
                     data = data.OrderBy(u => u.Email);
                     break;
+                case "roleName_desc":
+                    data = data.OrderByDescending(u => u.RoleName);
+                    break;
+                case "roleName_asc":
+                    data = data.OrderBy(u => u.RoleName);
+                    break;
                 default:
                     data = data.OrderBy(u => u.FirstName);
                     break;
