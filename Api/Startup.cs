@@ -54,41 +54,8 @@ namespace Api
 
         // This method gets called by the runtime. Use this method to add services to the container.
 
-        //readonly string MyPolicy = "MyPolicy";
         public void ConfigureServices(IServiceCollection services)
         {
-            //Cors
-
-            //staro
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("CorsPolicy",
-            //        builder => builder.WithOrigins("http://localhost:4200/")
-            //        .AllowAnyMethod()
-            //        .AllowAnyHeader());
-            //});
-
-
-            //services.AddCors(options => {
-            //    options.AddPolicy("CorsPolicy", 
-            //        builder => {
-            //        builder.AllowAnyOrigin()
-            //        .SetIsOriginAllowedToAllowWildcardSubdomains()
-            //         .WithHeaders(HeaderNames.ContentType, "application/json", "multipart/form-data")
-            //         .AllowAnyMethod();
-            //    });
-            //});
-           
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder =>
-                    {
-                        builder.WithOrigins("http://localhost:4200")
-                        .WithHeaders(HeaderNames.ContentType, "x-custom-header")
-                        .WithMethods("PUT", "DELETE", "GET", "OPTIONS");
-                    });
-            });
 
             services.AddControllers();
 
@@ -176,12 +143,20 @@ namespace Api
             services.AddTransient<IGetWritersCommand, EfGetWritersCommand>();
             services.AddTransient<IGetWriterCommand, EfGetWriterCommand>();
 
+            services.AddCors();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+            // global policy - assign here or on each controller
+            app.UseCors(x => x.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                );
+
 
             if (env.IsDevelopment())
             {
@@ -192,43 +167,13 @@ namespace Api
             app.UseFileServer();
             app.UseStaticFiles();
 
-            //app.UseStaticFiles(new StaticFileOptions
-            //{
-            //    FileProvider = new PhysicalFileProvider(
-            //        Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
-            //        RequestPath = "/StaticFiles"
-            //});
-
-            //const string cacheMaxAge = "604800";
-            //app.UseStaticFiles(new StaticFileOptions
-            //{
-            //    OnPrepareResponse = ctx =>
-            //    {
-            //        // using Microsoft.AspNetCore.Http;
-            //        ctx.Context.Response.Headers.Append(
-            //             "Cache-Control", $"public, max-age={cacheMaxAge}");
-            //    }
-            //});
-
             app.UseRouting();
-
-            // global policy - assign here or on each controller
-            app.UseCors();
-
-            //app.UseCors(option =>
-            //  option.WithOrigins("http://localhost:4200")
-            //      .AllowAnyMethod()
-            //      .AllowAnyHeader()
-            //      .AllowCredentials()
-            //      );
 
             app.UseAuthorization();
 
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers()
-                   .RequireCors("CorsPolicy");
+                endpoints.MapControllers();
             });
 
         }

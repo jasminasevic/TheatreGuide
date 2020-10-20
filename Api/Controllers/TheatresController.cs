@@ -15,7 +15,6 @@ namespace Api.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
-   // [EnableCors("CorsPolicy")]
     public class TheatresController : ControllerBase
     {
         protected readonly IAddTheatreCommand _addTheatre;
@@ -43,7 +42,6 @@ namespace Api.Controllers
         {
             try
             {
-                // HttpContext.Response.Headers.Add("Access-Control-Allow-Origin", " * ");
                 var theatres = _getTheatres.Execute(query);
                 return Ok(theatres);
             }

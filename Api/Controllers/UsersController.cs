@@ -13,8 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers
 {
     
-    [EnableCors]
-    //[EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -70,10 +68,8 @@ namespace Api.Controllers
         }
 
         // POST: api/users
-        [HttpOptions]
+     
         [HttpPost]
-        //[HttpPost, Produces("application/json")]
-        //[HttpOptions]
         public IActionResult Post([FromBody] UserDto dto)
         {
             try
