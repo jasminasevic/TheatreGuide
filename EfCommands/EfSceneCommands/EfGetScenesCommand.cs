@@ -37,10 +37,10 @@ namespace EfCommands.EfSceneCommands
                     .Contains(request.TheatreName.ToLower()));
                    
             if (request.SearchQuery != null)
-                scenes = Context.Scenes.Where(s => s.SceneName.ToLower()
+                scenes = scenes.Where(s => s.SceneName.ToLower()
                     .Contains(request.SearchQuery.ToLower())
                 || s.Theatre.TheatreName.ToLower()
-                .Contains(request.TheatreName.ToLower()));
+                .Contains(request.SearchQuery.ToLower()));
 
             var data = scenes.Select(s => new GetSceneDto
             {
@@ -65,6 +65,12 @@ namespace EfCommands.EfSceneCommands
                     break;
                 case ("sceneName_asc"):
                     data = data.OrderBy(s => s.SceneName);
+                    break;
+                case ("theatreName_desc"):
+                    data = data.OrderBy(t => t.TheatreName);
+                    break;
+                case ("theatreName_asc"):
+                    data = data.OrderByDescending(t => t.TheatreName);
                     break;
                 default:
                     data = data.OrderBy(s => s.SceneName);

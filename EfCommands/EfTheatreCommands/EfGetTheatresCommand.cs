@@ -43,7 +43,7 @@ namespace EfCommands.EfTheatreCommands
                 || t.ContactEmail.ToLower()
                 .Contains(request.SearchQuery.ToLower())
                 || t.Shows.Any(s => s.Title.ToLower()
-                .Contains(request.SearchQuery)));
+                .Contains(request.SearchQuery.ToLower())));
 
             var data = theatre.Select(t => new GetTheatreDto
             {

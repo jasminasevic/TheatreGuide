@@ -22,18 +22,22 @@ namespace Api.Controllers
         protected readonly IGetTheatreCommand _getTheatre;
         protected readonly IDeleteTheatreCommand _deleteTheatre;
         protected readonly IEditTheatreCommand _editTheatre;
+        protected readonly IGetTheatresListCommand _getTheatresList;
 
         public TheatresController(IAddTheatreCommand addTheatre,
             IGetTheatresCommand getTheatres,
             IGetTheatreCommand getTheatre,
-            IDeleteTheatreCommand deleteTheatre, 
-            IEditTheatreCommand editTheatre)
+            IDeleteTheatreCommand deleteTheatre,
+            IEditTheatreCommand editTheatre,
+            IGetTheatresListCommand getTheatresList
+            )
         {
             _addTheatre = addTheatre;
             _getTheatres = getTheatres;
             _getTheatre = getTheatre;
             _deleteTheatre = deleteTheatre;
             _editTheatre = editTheatre;
+            _getTheatresList = getTheatresList;
         }
 
         // GET: api/Theatres
@@ -42,14 +46,23 @@ namespace Api.Controllers
         {
             try
             {
-                var theatres = _getTheatres.Execute(query);
-                return Ok(theatres);
+                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
+                {
+                    var theatres = _getTheatresList.Execute(new SearchQuery());
+                    return Ok(theatres);
+                }
+                else
+                {
+                    var theatres = _getTheatres.Execute(query);
+                    return Ok(theatres);
+                }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
         }
+
 
         // GET: api/Theatres/5
         [HttpGet("{id}")]

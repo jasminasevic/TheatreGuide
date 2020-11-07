@@ -6,9 +6,9 @@ namespace Application.Queries
 {
     public class BaseQuery
     {
-        public int PerPage { get; set; } = 4;
+        public int PerPage { get; set; }
 
-        public int PageNumber { get; set; } = 0;
+        public int PageNumber { get; set; }
 
         public string SortOrder { get; set; }
 

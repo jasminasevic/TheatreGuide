@@ -37,7 +37,7 @@ namespace EfCommands.EfActorCommands
                 {
                     Id = i.Id,
                     Alt = i.ActorImageAlt,
-                    Path = i.ActorImagePath
+                    Path = "uploads/actor-images/" + i.ActorImagePath
                 })
             };
         }

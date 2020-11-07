@@ -38,7 +38,7 @@ namespace Api.Controllers
         // GET: api/Scenes
         [HttpGet]
         public IActionResult Get([FromQuery] SceneQuery query)
-        {
+       {
             try
             {
                 var scenes = _getScenes.Execute(query);

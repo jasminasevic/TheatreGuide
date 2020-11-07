@@ -46,7 +46,7 @@ namespace EfCommands.EfTheatreCommands
                 {
                     Id = ti.Id,
                     Alt = ti.TheatreImageAlt,
-                    Path = "/uploads/theatre-images/" + ti.TheatreImagePath
+                    Path = "uploads/theatre-images/" + ti.TheatreImagePath
                 }),
                 ShowBaseInfoDtos = theatre.Shows.Select(s => new ShowBaseInfoDto
                 {
