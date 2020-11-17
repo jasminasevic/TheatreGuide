@@ -18,9 +18,7 @@ namespace Application.DTO.ShowDto
 
         public string Description { get; set; }
 
-        public string WriterFirstName { get; set; }
-
-        public string WriterLastName { get; set; }
+        public string Writer { get; set; }
 
         public string DirectorFirstName { get; set; }
 

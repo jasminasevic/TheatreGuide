@@ -40,6 +40,7 @@ namespace EfCommands.EfSceneCommands
                 Context.Sectors.Add(new Domain.Sector
                 {
                     Scene = scene,
+                    SectorName = sector.SectorName,
                     SeatCapacity = sector.SeatCapacity,
                     RowsTotalNumber = sector.RowsTotalNumber
                 });

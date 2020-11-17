@@ -21,7 +21,7 @@ namespace EfCommands.EfWriterCommands
         public PagedResponses<GetWriterDto> Execute(WriterQuery request)
         {
             var writers = Context.Writers
-                .Include(s => s.Shows)
+              //  .Include(s => s.Shows)
                 .AsQueryable();
 
             //Filtering logic
@@ -46,13 +46,14 @@ namespace EfCommands.EfWriterCommands
                 Id = w.Id,
                 WriterFirstName = w.WriterFirstName,
                 WriterLastName = w.WriterLastName,
-                WriterBiography = w.WriterBiography,
-                showBaseInfoDtos = w.Shows.Select(s => new ShowBaseInfoDto
-                {
-                    Id = s.Id,
-                    Title = s.Title,
-                    CategoryName = s.Category.CategoryName
-                })
+                WriterBiography = w.WriterBiography
+                // ,
+                //showBaseInfoDtos = w.Shows.Select(s => new ShowBaseInfoDto
+                //{
+                //    Id = s.Id,
+                //    Title = s.Title,
+                //    CategoryName = s.Category.CategoryName
+                //})
             });
 
 

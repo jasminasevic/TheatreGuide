@@ -44,6 +44,7 @@ namespace EfCommands.EfSceneCommands
                 Context.Sectors.Add(new Domain.Sector
                 {
                     ModifiedAt = DateTime.Now,
+                    SectorName = subscene.SectorName,
                     SceneId = scene.Id,
                     SeatCapacity = subscene.SeatCapacity,
                     RowsTotalNumber = subscene.RowsTotalNumber

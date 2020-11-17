@@ -50,8 +50,7 @@ namespace EfCommands.EfShowCommands
                 Id = s.Id,
                 Title = s.Title,
                 Category = s.Category.CategoryName,
-                WriterFirstName = s.Writer.WriterFirstName,
-                WriterLastName = s.Writer.WriterLastName,
+                Writer = s.Writer,
                 DirectorFirstName = s.Director.DirectorFirstName,
                 DirectorLastName = s.Director.DirectorLastName,
                 Description = s.ShowDescription,
@@ -102,18 +101,18 @@ namespace EfCommands.EfShowCommands
                 case "category_asc":
                     data = data.OrderBy(s => s.Category);
                     break;
-                case "writer_name_desc":
-                    data = data.OrderByDescending(s => s.WriterFirstName);
-                    break;
-                case "writer_name_asc":
-                    data = data.OrderBy(s => s.WriterFirstName);
-                    break;
-                case "writer_last_name_desc":
-                    data = data.OrderByDescending(s => s.WriterLastName);
-                    break;
-                case "writer_last_name_asc":
-                    data = data.OrderBy(s => s.WriterLastName);
-                    break;
+                //case "writer_name_desc":
+                //    data = data.OrderByDescending(s => s.WriterFirstName);
+                //    break;
+                //case "writer_name_asc":
+                //    data = data.OrderBy(s => s.WriterFirstName);
+                //    break;
+                //case "writer_last_name_desc":
+                //    data = data.OrderByDescending(s => s.WriterLastName);
+                //    break;
+                //case "writer_last_name_asc":
+                //    data = data.OrderBy(s => s.WriterLastName);
+                //    break;
                 case "director_name_desc":
                     data = data.OrderByDescending(s => s.DirectorFirstName);
                     break;

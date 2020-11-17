@@ -25,7 +25,7 @@ namespace Application.DTO.ShowDto
 
         public int DirectorId { get; set; }
 
-        public int WriterId { get; set; }
+        public string Writer { get; set; }
 
         public  int TheatreId { get; set; }
 

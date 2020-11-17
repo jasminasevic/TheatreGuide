@@ -24,7 +24,6 @@ namespace EfCommands.EfShowCommands
             var show = Context.Shows
                 .Include(s => s.ShowImages)
                 .Include(s => s.Category)
-                .Include(s => s.Writer)
                 .Include(s => s.Director)
                 .Include(s => s.Theatre)
                 .Include(s => s.ActorShows)
@@ -46,8 +45,7 @@ namespace EfCommands.EfShowCommands
                 Id = show.Id,
                 Title = show.Title,
                 Category = show.Category.CategoryName,
-                WriterFirstName = show.Writer.WriterFirstName,
-                WriterLastName = show.Writer.WriterLastName,
+                Writer = show.Writer,
                 DirectorFirstName = show.Director.DirectorFirstName,
                 DirectorLastName = show.Director.DirectorLastName,
                 Description = show.ShowDescription,

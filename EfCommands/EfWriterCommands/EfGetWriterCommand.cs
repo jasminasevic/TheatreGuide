@@ -20,7 +20,6 @@ namespace EfCommands.EfWriterCommands
         public GetWriterDto Execute(int request)
         {
             var writer = Context.Writers
-                .Include(s => s.Shows)
                 .Where(w => w.Id == request)
                 .FirstOrDefault();
 
@@ -32,13 +31,13 @@ namespace EfCommands.EfWriterCommands
                 Id = writer.Id,
                 WriterFirstName = writer.WriterFirstName,
                 WriterLastName = writer.WriterLastName,
-                WriterBiography = writer.WriterBiography,
-                showBaseInfoDtos = writer.Shows.Select(s => new ShowBaseInfoDto
-                {
-                    Id = s.Id,
-                    Title = s.Title,
-                    CategoryName = s.Category.CategoryName
-                })
+                WriterBiography = writer.WriterBiography
+                //showBaseInfoDtos = writer.Shows.Select(s => new ShowBaseInfoDto
+                //{
+                //    Id = s.Id,
+                //    Title = s.Title,
+                //    CategoryName = s.Category.CategoryName
+                //})
             };
         }
     }

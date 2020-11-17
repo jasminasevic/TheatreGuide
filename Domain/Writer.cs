@@ -14,7 +14,7 @@ namespace Domain
 
         public string WriterBiography { get; set; }
 
-        public ICollection<Show> Shows { get; set; }
+        // public ICollection<Show> Shows { get; set; }
 
     }
 }

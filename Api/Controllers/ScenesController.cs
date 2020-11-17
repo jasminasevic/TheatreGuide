@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.SceneCommands;
@@ -8,6 +9,8 @@ using Application.Exceptions;
 using Application.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Api.Controllers
 {
@@ -67,7 +70,7 @@ namespace Api.Controllers
 
         // POST: api/Scenes
         [HttpPost]
-        public IActionResult Post([FromBody] SceneDto dto)
+        public IActionResult Post([FromForm] SceneDto dto)
         {
             try
             {
@@ -82,7 +85,7 @@ namespace Api.Controllers
 
         // PUT: api/Scenes/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromForm] SceneDto dto)
+        public IActionResult Put(int id, [FromBody] SceneDto dto)
         {
             try
             {

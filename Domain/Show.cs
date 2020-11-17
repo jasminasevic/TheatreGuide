@@ -27,9 +27,7 @@ namespace Domain
 
         public Director Director { get; set; }
 
-        public int WriterId { get; set; }
-
-        public Writer Writer { get; set; }
+        public string Writer { get; set; }
 
         public int TheatreId { get; set; }
 

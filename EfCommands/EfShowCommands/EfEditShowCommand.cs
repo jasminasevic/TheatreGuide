@@ -32,7 +32,7 @@ namespace EfCommands.EfShowCommands
             show.TheatreId = request.TheatreId;
             show.CategoryId = request.CategoryId;
             show.DirectorId = request.DirectorId;
-            show.WriterId = request.WriterId;
+            show.Writer = request.Writer;
             show.SceneId = request.SceneId;
             show.ModifiedAt = DateTime.Now;
 

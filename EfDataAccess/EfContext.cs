@@ -49,7 +49,6 @@ namespace EfDataAccess
 
         public DbSet<Writer> Writers { get; set; }
 
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-5JPRF7N\SQLEXPRESS;Initial Catalog=TheatreGuide;Integrated Security=True");
@@ -77,7 +76,7 @@ namespace EfDataAccess
             modelBuilder.ApplyConfiguration(new TheatreImageConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new WriterConfiguration());
-           
+
         }
     }
 }

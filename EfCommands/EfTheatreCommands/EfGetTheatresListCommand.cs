@@ -27,6 +27,8 @@ namespace EfCommands.EfTheatreCommands
                 TheatreName = t.TheatreName
             });
 
+            data = data.OrderBy(t => t.TheatreName);
+
             return data;
         }
     }

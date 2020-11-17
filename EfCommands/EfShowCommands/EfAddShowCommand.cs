@@ -34,7 +34,7 @@ namespace EfCommands.EfShowCommands
                 ContentAdvisory = request.ContentAdvisory,
                 PremiereDate = request.PremiereDate,
                 CategoryId = request.CategoryId,
-                WriterId = request.WriterId,
+                Writer = request.Writer,
                 DirectorId = request.DirectorId,
                 TheatreId = request.TheatreId,
                 SceneId = request.SceneId
