@@ -24,18 +24,21 @@ namespace Api.Controllers
         protected readonly IGetScenesCommand _getScenes;
         protected readonly IDeleteSceneCommand _deleteScene;
         protected readonly IEditSceneCommand _editScene;
+        protected readonly IGetScenesListCommand _getScenesList;
 
         public ScenesController(IAddSceneCommand addScene,
             IGetSceneCommand getScene,
             IGetScenesCommand getScenes,
-            IDeleteSceneCommand deleteScene, 
-            IEditSceneCommand editScene)
+            IDeleteSceneCommand deleteScene,
+            IEditSceneCommand editScene, 
+            IGetScenesListCommand getScenesList)
         {
             _addScene = addScene;
             _getScene = getScene;
             _getScenes = getScenes;
             _deleteScene = deleteScene;
             _editScene = editScene;
+            _getScenesList = getScenesList;
         }
 
         // GET: api/Scenes
@@ -44,8 +47,16 @@ namespace Api.Controllers
        {
             try
             {
-                var scenes = _getScenes.Execute(query);
-                return Ok(scenes);
+                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
+                {
+                    var scenes = _getScenesList.Execute(new SearchQuery());
+                    return Ok(scenes);
+                }
+                else
+                {
+                    var scenes = _getScenes.Execute(query);
+                    return Ok(scenes);
+                }
             }
             catch(EntityNotFoundException e)
             {

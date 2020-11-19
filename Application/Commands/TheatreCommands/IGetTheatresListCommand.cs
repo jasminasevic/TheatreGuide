@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Commands.TheatreCommands
 {
-    public interface IGetTheatresListCommand : ICommand<SearchQuery, IEnumerable<TheatreBasic>>
+    public interface IGetTheatresListCommand : ICommand<SearchQuery, IEnumerable<TheatreBasicDto>>
     {
     }
 }

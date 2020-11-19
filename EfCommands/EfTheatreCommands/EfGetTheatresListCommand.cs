@@ -16,12 +16,12 @@ namespace EfCommands.EfTheatreCommands
         {
         }
 
-        public IEnumerable<TheatreBasic> Execute(SearchQuery request)
+        public IEnumerable<TheatreBasicDto> Execute(SearchQuery request)
         {
             var theatres = Context.Theatres
                .AsQueryable();
 
-            var data = theatres.Select(t => new TheatreBasic
+            var data = theatres.Select(t => new TheatreBasicDto
             {
                 Id = t.Id,
                 TheatreName = t.TheatreName

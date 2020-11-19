@@ -20,29 +20,40 @@ namespace Api.Controllers
         protected readonly IGetDirectorCommand _getDirector;
         protected readonly IEditDirectorCommand _editDirector;
         protected readonly IDeleteDirectorCommand _deleteDirector;
+        protected readonly IGetDirectorsListCommand _getDirectorsList;
 
         public DirectorsController(IAddDirectorCommand addDirector,
             IGetDirectorsCommand getDirectors,
             IGetDirectorCommand getDirector,
-            IEditDirectorCommand editDirector, 
-            IDeleteDirectorCommand deleteDirector)
+            IEditDirectorCommand editDirector,
+            IDeleteDirectorCommand deleteDirector, 
+            IGetDirectorsListCommand getDirectorsList)
         {
             _addDirector = addDirector;
             _getDirectors = getDirectors;
             _getDirector = getDirector;
             _editDirector = editDirector;
             _deleteDirector = deleteDirector;
+            _getDirectorsList = getDirectorsList;
         }
 
 
         // GET: api/Directors
         [HttpGet]
-        public IActionResult Get([FromQuery] DirectorQuery dto)
+        public IActionResult Get([FromQuery] DirectorQuery query)
         {
             try
             {
-                var directors = _getDirectors.Execute(dto);
-                return Ok(directors);
+                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
+                {
+                    var directors = _getDirectorsList.Execute(new SearchQuery());
+                    return Ok(directors);
+                }
+                else
+                {
+                    var directors = _getDirectors.Execute(query);
+                    return Ok(directors);
+                }
             }
             catch(EntityNotFoundException e)
             {

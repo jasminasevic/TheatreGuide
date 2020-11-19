@@ -44,6 +44,7 @@ namespace EfCommands.EfShowCommands
             {
                 Id = show.Id,
                 Title = show.Title,
+                CategoryId = show.Category.Id,
                 Category = show.Category.CategoryName,
                 Writer = show.Writer,
                 DirectorFirstName = show.Director.DirectorFirstName,
@@ -53,13 +54,14 @@ namespace EfCommands.EfShowCommands
                 ContentAdvisory = show.ContentAdvisory,
                 PremiereDate = show.PremiereDate,
                 Theatre = show.Theatre.TheatreName,
+                TheatreId = show.Theatre.Id,
                 Scene = show.Scene.SceneName,
                 FollowersNumber = show.ShowFollowers.Count(),
                 ShowImageDtos = show.ShowImages.Select(i => new GetImageDto
                 {
                     Id = i.Id,
                     Alt = i.ShowImageAlt,
-                    Path = i.ShowImagePath
+                    Path = "uploads/show-images/" + i.ShowImagePath
                 }),
                 ActorShowDtos = show.ActorShows.Select(a => new ActorShowDto
                 {

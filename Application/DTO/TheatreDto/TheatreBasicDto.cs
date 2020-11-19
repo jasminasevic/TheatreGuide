@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Application.DTO.TheatreDto
 {
-    public class TheatreBasic
+    public class TheatreBasicDto
     {
         public int Id  { get; set; }
 

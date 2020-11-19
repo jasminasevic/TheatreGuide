@@ -25,7 +25,6 @@ namespace EfCommands.EfShowCommands
             var shows = Context.Shows
                 .Include(s => s.ShowImages)
                 .Include(s => s.Category)
-                .Include(s => s.Writer)
                 .Include(s => s.Director)
                 .Include(s => s.Theatre)
                 .Include(s => s.Scene)
@@ -101,29 +100,11 @@ namespace EfCommands.EfShowCommands
                 case "category_asc":
                     data = data.OrderBy(s => s.Category);
                     break;
-                //case "writer_name_desc":
-                //    data = data.OrderByDescending(s => s.WriterFirstName);
-                //    break;
-                //case "writer_name_asc":
-                //    data = data.OrderBy(s => s.WriterFirstName);
-                //    break;
-                //case "writer_last_name_desc":
-                //    data = data.OrderByDescending(s => s.WriterLastName);
-                //    break;
-                //case "writer_last_name_asc":
-                //    data = data.OrderBy(s => s.WriterLastName);
-                //    break;
-                case "director_name_desc":
-                    data = data.OrderByDescending(s => s.DirectorFirstName);
+                case "scene_desc":
+                    data = data.OrderByDescending(s => s.Scene);
                     break;
-                case "director_name_asc":
-                    data = data.OrderBy(s => s.DirectorFirstName);
-                    break;
-                case "director_last_name_desc":
-                    data = data.OrderByDescending(s => s.DirectorFirstName);
-                    break;
-                case "director_last_name_asc":
-                    data = data.OrderBy(s => s.DirectorLastName);
+                case "scene_asc":
+                    data = data.OrderBy(s => s.Scene);
                     break;
                 case "theatre_desc":
                     data = data.OrderByDescending(s => s.Theatre);

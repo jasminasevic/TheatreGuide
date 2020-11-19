@@ -14,6 +14,8 @@ namespace Application.DTO.ShowDto
 
         public string Title { get; set; }
 
+        public int CategoryId { get; set; }
+
         public string Category { get; set; }
 
         public string Description { get; set; }
@@ -24,9 +26,14 @@ namespace Application.DTO.ShowDto
 
         public string DirectorLastName { get; set; }
 
+        public string DirectorId { get; set; }
         public string Scene { get; set; }
 
+        public int SceneId { get; set; }
+
         public string Theatre { get; set; }
+
+        public int TheatreId { get; set; }
 
         public int Duration { get; set; }
 

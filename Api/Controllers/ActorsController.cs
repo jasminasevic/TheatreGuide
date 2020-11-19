@@ -20,28 +20,39 @@ namespace Api.Controllers
         protected readonly IGetActorCommand _getActor;
         protected readonly IEditActorCommand _editCommand;
         protected readonly IDeleteActorCommand _deleteActor;
+        protected readonly IGetActorsListCommand _getActorsList;
 
         public ActorsController(IAddActorCommand addActor,
             IGetActorsCommand getActors,
             IGetActorCommand getActor,
-            IEditActorCommand editCommand, 
-            IDeleteActorCommand deleteActor)
+            IEditActorCommand editCommand,
+            IDeleteActorCommand deleteActor, 
+            IGetActorsListCommand getActorsList)
         {
             _addActor = addActor;
             _getActors = getActors;
             _getActor = getActor;
             _editCommand = editCommand;
             _deleteActor = deleteActor;
+            _getActorsList = getActorsList;
         }
 
         // GET: api/Actors
         [HttpGet]
-        public IActionResult Get([FromQuery] ActorQuery dto)
+        public IActionResult Get([FromQuery] ActorQuery query)
         {
             try
             {
-                var actors = _getActors.Execute(dto);
-                return Ok(actors);
+                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
+                {
+                    var actors = _getActorsList.Execute(new SearchQuery());
+                    return Ok(actors);
+                }
+                else 
+                {
+                    var actors = _getActors.Execute(query);
+                    return Ok(actors);
+                }
             }
             catch (EntityNotFoundException e)
             {

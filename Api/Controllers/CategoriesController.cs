@@ -21,18 +21,21 @@ namespace Api.Controllers
         protected readonly IGetCategoryCommand _getCategory;
         protected readonly IEditCategoryCommand _editCategory;
         protected readonly IDeleteCategoryCommand _deleteCategory;
+        protected readonly IGetCategoriesListCommand _getCategoriesList;
 
         public CategoriesController(IAddCategoryCommand addCategory,
             IGetCategoriesCommand getCategories,
             IGetCategoryCommand getCategory,
-            IEditCategoryCommand editCategory, 
-            IDeleteCategoryCommand deleteCategory)
+            IEditCategoryCommand editCategory,
+            IDeleteCategoryCommand deleteCategory, 
+            IGetCategoriesListCommand getCategoriesList)
         {
             _addCategory = addCategory;
             _getCategories = getCategories;
             _getCategory = getCategory;
             _editCategory = editCategory;
             _deleteCategory = deleteCategory;
+            _getCategoriesList = getCategoriesList;
         }
 
         // GET: api/Categories
@@ -41,8 +44,15 @@ namespace Api.Controllers
         {
             try
             {
-                var categories = _getCategories.Execute(query);
-                return Ok(categories);
+                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
+                {
+                    var categories = _getCategoriesList.Execute(new SearchQuery());
+                    return Ok(categories);
+                }
+                else { 
+                    var categories = _getCategories.Execute(query);
+                    return Ok(categories);
+                }
             }
             catch (EntityNotFoundException e)
             {

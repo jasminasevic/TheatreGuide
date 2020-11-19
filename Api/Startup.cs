@@ -68,6 +68,7 @@ namespace Api
             services.AddTransient<IEditActorCommand, EfEditActorCommand>();
             services.AddTransient<IGetActorsCommand, EfGetActorsCommand>();
             services.AddTransient<IGetActorCommand, EfGetActorCommand>();
+            services.AddTransient<IGetActorsListCommand, EfGetActorsListCommand>();
             
             //Categories
             services.AddTransient<IAddCategoryCommand, EfAddCategoryCommand>();
@@ -75,6 +76,7 @@ namespace Api
             services.AddTransient<IEditCategoryCommand, EfEditCategoryCommand>(); 
             services.AddTransient<IGetCategoriesCommand, EfGetCategoriesCommand>();
             services.AddTransient<IGetCategoryCommand, EfGetCategoryCommand>();
+            services.AddTransient<IGetCategoriesListCommand, EfGetCategoriesListCommand>();
 
             //Directors
             services.AddTransient<IAddDirectorCommand, EfAddDirectorCommand>();
@@ -82,6 +84,7 @@ namespace Api
             services.AddTransient<IEditDirectorCommand, EfEditDirectorCommand>();
             services.AddTransient<IGetDirectorsCommand, EfGetDirectorsCommand>();
             services.AddTransient<IGetDirectorCommand, EfGetDirectorCommand>();
+            services.AddTransient<IGetDirectorsListCommand, EfGetDirectorsListCommand>();
 
             //Purchases
             services.AddTransient<IAddPurchaseCommand, EfAddPurchaseCommand>();
@@ -110,6 +113,7 @@ namespace Api
             services.AddTransient<IEditSceneCommand, EfEditSceneCommand>();
             services.AddTransient<IGetSceneCommand, EfGetSceneCommand>();
             services.AddTransient<IGetScenesCommand, EfGetScenesCommand>();
+            services.AddTransient<IGetScenesListCommand, EfGetSceneListCommand>();
 
             //ShowFollowers
             services.AddTransient<IAddShowFollowerCommand, EfAddShowFollowerCommand>();
