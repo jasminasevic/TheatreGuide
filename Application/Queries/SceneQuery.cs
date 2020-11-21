@@ -9,5 +9,7 @@ namespace Application.Queries
         public string SceneName { get; set; }
 
         public string TheatreName { get; set; }
+
+        public int TheatreId { get; set; }
     }
 }

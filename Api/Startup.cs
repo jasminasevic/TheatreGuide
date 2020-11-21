@@ -114,6 +114,7 @@ namespace Api
             services.AddTransient<IGetSceneCommand, EfGetSceneCommand>();
             services.AddTransient<IGetScenesCommand, EfGetScenesCommand>();
             services.AddTransient<IGetScenesListCommand, EfGetSceneListCommand>();
+            services.AddTransient<IGetScenesTheatreCommand, EfGetScenesTheatreCommand>();
 
             //ShowFollowers
             services.AddTransient<IAddShowFollowerCommand, EfAddShowFollowerCommand>();

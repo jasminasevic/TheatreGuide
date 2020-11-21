@@ -11,6 +11,8 @@ namespace Application.DTO.SceneDto
 
         public string SceneName { get; set; }
 
+        public int TheatreId { get; set; }
+
         public string TheatreName { get; set; }
 
         public IEnumerable<GetSectorDto> GetSectorDtos { get; set; }

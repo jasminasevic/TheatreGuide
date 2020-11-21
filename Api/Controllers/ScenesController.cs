@@ -25,13 +25,15 @@ namespace Api.Controllers
         protected readonly IDeleteSceneCommand _deleteScene;
         protected readonly IEditSceneCommand _editScene;
         protected readonly IGetScenesListCommand _getScenesList;
+        protected readonly IGetScenesTheatreCommand _getScenesTheatre;
 
         public ScenesController(IAddSceneCommand addScene,
             IGetSceneCommand getScene,
             IGetScenesCommand getScenes,
             IDeleteSceneCommand deleteScene,
-            IEditSceneCommand editScene, 
-            IGetScenesListCommand getScenesList)
+            IEditSceneCommand editScene,
+            IGetScenesListCommand getScenesList, 
+            IGetScenesTheatreCommand getScenesTheatre)
         {
             _addScene = addScene;
             _getScene = getScene;
@@ -39,6 +41,7 @@ namespace Api.Controllers
             _deleteScene = deleteScene;
             _editScene = editScene;
             _getScenesList = getScenesList;
+            _getScenesTheatre = getScenesTheatre;
         }
 
         // GET: api/Scenes
@@ -47,16 +50,22 @@ namespace Api.Controllers
        {
             try
             {
-                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
+                if (query.TheatreId != 0)
                 {
-                    var scenes = _getScenesList.Execute(new SearchQuery());
-                    return Ok(scenes);
+                    var scenesInTheatre = _getScenesTheatre.Execute(query);
+                    return Ok(scenesInTheatre);
+                }
+                else if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
+                {
+                    var sceneList = _getScenesList.Execute(new SearchQuery());
+                    return Ok(sceneList);
                 }
                 else
                 {
                     var scenes = _getScenes.Execute(query);
                     return Ok(scenes);
                 }
+                
             }
             catch(EntityNotFoundException e)
             {

@@ -32,6 +32,7 @@ namespace EfCommands.EfSceneCommands
             {
                 Id = scene.Id,
                 TheatreName = scene.Theatre.TheatreName,
+                TheatreId = scene.TheatreId,
                 SceneName = scene.SceneName,
                 GetSectorDtos = scene.Sectors.Select(ss => new GetSectorDto
                 {
