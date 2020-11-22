@@ -13,6 +13,7 @@ namespace Application.DTO.RepertoireDto
 
         public DateTime ShowDate { get; set; }
 
+        public IEnumerable<AddPriceDto> AddPriceDtos { get; set; }
 
     }
 }

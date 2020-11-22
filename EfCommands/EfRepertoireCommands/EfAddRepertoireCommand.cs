@@ -34,6 +34,17 @@ namespace EfCommands.EfRepertoireCommands
                 Date = request.ShowDate,
             };
 
+            foreach (var price in request.AddPriceDtos)
+            {
+                Context.Prices.Add(new Domain.Price
+                {
+                    ShowId = price.ShowId,
+                    SectorId = price.SectorId,
+                    TicketPrice = price.TicketPrice
+                });
+
+            };
+
             Context.Repertoires.Add(repertoire);
 
             Context.SaveChanges();

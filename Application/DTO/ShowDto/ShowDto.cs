@@ -31,8 +31,6 @@ namespace Application.DTO.ShowDto
 
         public int SceneId { get; set; }
 
-        public IEnumerable<AddPriceDto> AddPriceDtos { get; set; }
-
         public IEnumerable<ActorShowDto> ActorShowDtos { get; set; }
 
         public IEnumerable<IFormFile> ShowImages { get; set; }

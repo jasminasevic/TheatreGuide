@@ -82,22 +82,6 @@ namespace EfCommands.EfShowCommands
             }
 
 
-            foreach(var ticketPrice in Context.Prices.Where(s => s.ShowId == request.Id))
-            {
-                Context.Prices.Remove(ticketPrice);
-            }
-
-            foreach (var price in request.AddPriceDtos)
-            {
-                Context.Prices.Add(new Domain.Price
-                {
-                    Show = show,
-                    SectorId = price.SectorId,
-                    TicketPrice = price.TicketPrice
-                });
-
-            };
-
             Context.SaveChanges();
 
         }

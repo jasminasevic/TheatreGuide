@@ -4,6 +4,7 @@ using Application.Exceptions;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace EfCommands.EfRepertoireCommands
@@ -24,6 +25,25 @@ namespace EfCommands.EfRepertoireCommands
             repertoire.ShowId = request.ShowId;
             repertoire.Date = request.ShowDate;
             repertoire.ModifiedAt = DateTime.Now;
+
+
+            foreach (var ticketPrice in Context.Prices.Where(s => s.ShowId == request.Id))
+            {
+                Context.Prices.Remove(ticketPrice);
+            }
+
+            foreach (var price in request.AddPriceDtos)
+            {
+                Context.Prices.Add(new Domain.Price
+                {
+                    ShowId = price.ShowId,
+                    SectorId = price.SectorId,
+                    TicketPrice = price.TicketPrice
+                });
+            };
+
+            Context.SaveChanges();
         }
+
     }
 }

@@ -42,17 +42,6 @@ namespace EfCommands.EfShowCommands
 
             Context.Shows.Add(show);
 
-            foreach (var price in request.AddPriceDtos)
-            {
-                Context.Prices.Add(new Domain.Price
-                {
-                    Show = show,
-                    SectorId = price.SectorId,
-                    TicketPrice = price.TicketPrice
-                });
-
-            };
-
             if (request.ShowImages != null)
             {
                 foreach (var image in request.ShowImages)
