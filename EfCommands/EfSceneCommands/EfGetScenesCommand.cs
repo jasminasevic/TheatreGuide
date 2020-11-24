@@ -73,7 +73,7 @@ namespace EfCommands.EfSceneCommands
                     data = data.OrderByDescending(t => t.TheatreName);
                     break;
                 default:
-                    data = data.OrderBy(s => s.SceneName);
+                    data = data.OrderBy(t => t.TheatreName);
                     break;
             }
 

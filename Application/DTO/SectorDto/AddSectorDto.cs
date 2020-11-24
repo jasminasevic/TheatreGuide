@@ -12,8 +12,8 @@ namespace Application.DTO.SectorDto
 
     //    public int SceneId { get; set; }
 
-        public int SeatCapacity { get; set; }
+        public string SeatCapacity { get; set; }
 
-        public int RowsTotalNumber { get; set; }
+        public string RowsTotalNumber { get; set; }
     }
 }

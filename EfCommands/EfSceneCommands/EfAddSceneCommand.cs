@@ -41,8 +41,8 @@ namespace EfCommands.EfSceneCommands
                 {
                     Scene = scene,
                     SectorName = sector.SectorName,
-                    SeatCapacity = sector.SeatCapacity,
-                    RowsTotalNumber = sector.RowsTotalNumber
+                    SeatCapacity = Convert.ToInt32(sector.SeatCapacity),
+                    RowsTotalNumber = Convert.ToInt32(sector.RowsTotalNumber)
                 });
             }
 

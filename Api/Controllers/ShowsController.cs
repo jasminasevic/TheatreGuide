@@ -85,7 +85,7 @@ namespace Api.Controllers
 
         // PUT: api/Shows/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromForm] ShowDto dto)
+        public IActionResult Put(int id, [FromBody] ShowDto dto)
         {
             try
             {

@@ -47,6 +47,7 @@ namespace EfCommands.EfShowCommands
                 CategoryId = show.Category.Id,
                 Category = show.Category.CategoryName,
                 Writer = show.Writer,
+                DirectorId = show.DirectorId,
                 DirectorFirstName = show.Director.DirectorFirstName,
                 DirectorLastName = show.Director.DirectorLastName,
                 Description = show.ShowDescription,
@@ -56,6 +57,7 @@ namespace EfCommands.EfShowCommands
                 Theatre = show.Theatre.TheatreName,
                 TheatreId = show.Theatre.Id,
                 Scene = show.Scene.SceneName,
+                SceneId = show.SceneId,
                 FollowersNumber = show.ShowFollowers.Count(),
                 ShowImageDtos = show.ShowImages.Select(i => new GetImageDto
                 {

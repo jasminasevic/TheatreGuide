@@ -26,7 +26,8 @@ namespace Application.DTO.ShowDto
 
         public string DirectorLastName { get; set; }
 
-        public string DirectorId { get; set; }
+        public int DirectorId { get; set; }
+
         public string Scene { get; set; }
 
         public int SceneId { get; set; }

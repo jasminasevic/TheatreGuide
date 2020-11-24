@@ -46,8 +46,8 @@ namespace EfCommands.EfSceneCommands
                     ModifiedAt = DateTime.Now,
                     SectorName = subscene.SectorName,
                     SceneId = scene.Id,
-                    SeatCapacity = subscene.SeatCapacity,
-                    RowsTotalNumber = subscene.RowsTotalNumber
+                    SeatCapacity = Convert.ToInt32(subscene.SeatCapacity),
+                    RowsTotalNumber = Convert.ToInt32(subscene.RowsTotalNumber)
                 });
             }
 
