@@ -235,7 +235,7 @@ namespace EfDataAccess.Migrations
 
             modelBuilder.Entity("Domain.Price", b =>
                 {
-                    b.Property<int>("ShowId")
+                    b.Property<int>("RepertoireId")
                         .HasColumnType("int");
 
                     b.Property<int>("SectorId")
@@ -256,7 +256,7 @@ namespace EfDataAccess.Migrations
                     b.Property<double>("TicketPrice")
                         .HasColumnType("float");
 
-                    b.HasKey("ShowId", "SectorId");
+                    b.HasKey("RepertoireId", "SectorId");
 
                     b.HasIndex("SectorId");
 
@@ -336,14 +336,9 @@ namespace EfDataAccess.Migrations
                     b.Property<int>("ShowId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TheatreId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ShowId");
-
-                    b.HasIndex("TheatreId");
 
                     b.ToTable("Repertoires");
                 });
@@ -809,15 +804,15 @@ namespace EfDataAccess.Migrations
 
             modelBuilder.Entity("Domain.Price", b =>
                 {
-                    b.HasOne("Domain.Sector", "Sector")
+                    b.HasOne("Domain.Repertoire", "Repertoire")
                         .WithMany("Prices")
-                        .HasForeignKey("SectorId")
+                        .HasForeignKey("RepertoireId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.Show", "Show")
+                    b.HasOne("Domain.Sector", "Sector")
                         .WithMany("Prices")
-                        .HasForeignKey("ShowId")
+                        .HasForeignKey("SectorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -850,10 +845,6 @@ namespace EfDataAccess.Migrations
                         .HasForeignKey("ShowId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("Domain.Theatre", null)
-                        .WithMany("Repertoires")
-                        .HasForeignKey("TheatreId");
                 });
 
             modelBuilder.Entity("Domain.Scene", b =>

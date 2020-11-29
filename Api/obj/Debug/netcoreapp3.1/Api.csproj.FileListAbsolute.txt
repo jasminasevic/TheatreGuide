@@ -1,6 +1,5 @@
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Api.exe
 C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.csprojAssemblyReference.cache
 C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.AssemblyInfoInputs.cache
@@ -133,3 +132,4 @@ C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\System.IO
 C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.genruntimeconfig.cache
 C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.csproj.CoreCompileInputs.cache
 C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\scopedcss\bundle\Api.styles.css

@@ -31,7 +31,6 @@ namespace EfCommands.EfPurchaseCommands
                 .Include(p => p.User)
                 .Include(p => p.Repertoire)
                 .ThenInclude(p => p.Show)
-                .ThenInclude(p => p.Prices)
                 .AsQueryable();
 
             //Filtering logic
@@ -57,9 +56,7 @@ namespace EfCommands.EfPurchaseCommands
                 RowNumber = p.RowNumber,
                 SeatNumber = p.SeatNumber,
                 Entrance = p.Entrance,
-                UserName = p.User.FirstName + " " + p.User.LastName,
-                Price = Convert.ToDouble(p.Repertoire.Show.Prices.Where(s => s.ShowId == p.Repertoire.ShowId
-                && s.SectorId == p.SectorId).FirstOrDefault().TicketPrice)
+                UserName = p.User.FirstName + " " + p.User.LastName
             });
 
 

@@ -21,9 +21,10 @@ namespace EfCommands.EfShowCommands
             if (show == null)
                 throw new EntityNotFoundException(show.Id.ToString());
 
-            show.ModifiedAt = DateTime.Now;
-            show.IsDeleted = true;
+            //show.ModifiedAt = DateTime.Now;
+            //show.IsDeleted = true;
 
+            Context.Shows.Remove(show);
             Context.SaveChanges();
         }
     }

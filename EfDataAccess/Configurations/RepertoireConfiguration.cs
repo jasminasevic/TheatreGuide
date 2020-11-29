@@ -19,6 +19,11 @@ namespace EfDataAccess.Configurations
             builder.Property(r => r.Date)
                 .IsRequired();
 
+            builder.HasMany(p => p.Prices)
+                .WithOne(r => r.Repertoire)
+                .HasForeignKey(r => r.RepertoireId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.HasMany(st => st.SectorSoldTickets)
                 .WithOne(st => st.Repertoire)
                 .HasForeignKey(st => st.RepertoireId)

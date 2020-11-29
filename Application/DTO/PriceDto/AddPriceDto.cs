@@ -6,8 +6,10 @@ namespace Application.DTO.PriceDto
 {
     public class AddPriceDto
     {
+        public int Id { get; set; }
+        // public int RepertoireId { get; set; }
 
-        public int ShowId { get; set; }
+        // public string SectorName { get; set; }
 
         public int SectorId { get; set; }
 

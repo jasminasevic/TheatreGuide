@@ -27,7 +27,7 @@ namespace EfCommands.EfRepertoireCommands
             repertoire.ModifiedAt = DateTime.Now;
 
 
-            foreach (var ticketPrice in Context.Prices.Where(s => s.ShowId == request.Id))
+            foreach (var ticketPrice in Context.Prices.Where(s => s.RepertoireId == request.Id))
             {
                 Context.Prices.Remove(ticketPrice);
             }
@@ -36,7 +36,6 @@ namespace EfCommands.EfRepertoireCommands
             {
                 Context.Prices.Add(new Domain.Price
                 {
-                    ShowId = price.ShowId,
                     SectorId = price.SectorId,
                     TicketPrice = price.TicketPrice
                 });

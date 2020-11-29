@@ -45,6 +45,5 @@ namespace Domain
 
         public ICollection<Repertoire> Repertoires { get; set; }
 
-        public ICollection<Price> Prices { get; set; }
     }
 }

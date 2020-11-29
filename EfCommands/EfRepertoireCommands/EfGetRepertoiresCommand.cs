@@ -23,6 +23,8 @@ namespace EfCommands.EfRepertoireCommands
             var repertoires = Context.Repertoires
                 .Include(s => s.Show)
                 .ThenInclude(t => t.Theatre)
+                .Include(s => s.Show)
+                .ThenInclude(s => s.Scene)
                 .AsQueryable();
 
             //Filtering logic
@@ -48,6 +50,8 @@ namespace EfCommands.EfRepertoireCommands
                 ShowName = r.Show.Title,
                 TheatreId = r.Show.TheatreId,
                 TheatreName = r.Show.Theatre.TheatreName,
+                SceneId = r.Show.SceneId,
+                SceneName = r.Show.Scene.SceneName,
                 ShowDate = r.Date,
             });
 

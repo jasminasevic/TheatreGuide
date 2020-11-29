@@ -14,6 +14,8 @@ namespace Domain
 
         public DateTime Date { get; set; }
 
+        public ICollection<Price> Prices { get; set; }
+
         public ICollection<Purchase> Purchases { get; set; }
 
         public ICollection<SectorSoldTickets> SectorSoldTickets { get; set; }

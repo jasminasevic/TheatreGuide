@@ -28,8 +28,7 @@ namespace EfCommands.EfShowCommands
                 .Include(s => s.Director)
                 .Include(s => s.Theatre)
                 .Include(s => s.Scene)
-                .Include(s => s.Prices)
-                .ThenInclude(s => s.Sector)
+                .ThenInclude(s => s.Sectors)
                 .Include(s => s.ActorShows)
                 .ThenInclude(s => s.Actor)
                 .Include(s => s.ShowFollowers)
@@ -72,14 +71,6 @@ namespace EfCommands.EfShowCommands
                     ActorLastName = a.Actor.ActorLastName,
                     ActorRoleDescription = a.ActorRoleDescription,
                     ActorRoleName = a.ActorRoleName
-                }),
-                GetPriceDtos = s.Prices.Select(p => new GetPriceDto
-                {
-                    Price = p.TicketPrice,
-                    SectorId = p.Sector.Id,
-                    SectorName = p.Sector.SectorName,
-                    RowsTotalNumber = p.Sector.RowsTotalNumber,
-                    SeatCapacity = p.Sector.SeatCapacity
                 })
             });
 

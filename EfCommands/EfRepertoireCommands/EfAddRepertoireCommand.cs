@@ -27,25 +27,26 @@ namespace EfCommands.EfRepertoireCommands
             if (request.ShowDate == null)
                 throw new Exception("Show Date is required");
 
+            var showDate = Convert.ToDateTime(request.ShowDate);
             
             var repertoire = new Domain.Repertoire
             {
                 ShowId = request.ShowId,
-                Date = request.ShowDate,
+                Date = showDate
             };
+
+            Context.Repertoires.Add(repertoire);
 
             foreach (var price in request.AddPriceDtos)
             {
                 Context.Prices.Add(new Domain.Price
                 {
-                    ShowId = price.ShowId,
+                    Repertoire = repertoire,
                     SectorId = price.SectorId,
                     TicketPrice = price.TicketPrice
                 });
 
             };
-
-            Context.Repertoires.Add(repertoire);
 
             Context.SaveChanges();
 

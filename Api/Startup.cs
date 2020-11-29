@@ -126,6 +126,8 @@ namespace Api
             services.AddTransient<IEditShowCommand, EfEditShowCommand>();
             services.AddTransient<IGetShowCommand, EfGetShowCommand>();
             services.AddTransient<IGetShowsCommand, EfGetShowsCommand>();
+            services.AddTransient<IGetShowsListCommand, EfGetShowsListCommand>();
+            services.AddTransient<IGetShowForRepertoireCommand, EfGetShowForRepertoireCommand>();
 
             //Theatres
             services.AddTransient<IAddTheatreCommand, EfAddTheatreCommand>();

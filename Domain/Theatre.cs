@@ -26,8 +26,6 @@ namespace Domain
 
         public ICollection<TheatreImage> TheatreImages { get; set; }
 
-        public ICollection<Repertoire> Repertoires { get; set; }
-
         public ICollection<Show> Shows { get; set; }
     }
 }

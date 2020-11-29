@@ -30,7 +30,6 @@ namespace EfCommands.EfPurchaseCommands
                 .ThenInclude(p => p.Prices)
                 .Include(p => p.User)
                 .Include(p => p.Repertoire)
-                .ThenInclude(p => p.Show)
                 .ThenInclude(p => p.Prices)
                 .Where(p => p.Id == request)
                 .FirstOrDefault();
@@ -38,7 +37,7 @@ namespace EfCommands.EfPurchaseCommands
             if (purchase == null)
                 throw new EntityNotFoundException(purchase.ToString());
 
-            var priceDetails = Context.Prices.Where(s => s.ShowId == purchase.Repertoire.ShowId
+            var priceDetails = Context.Prices.Where(s => s.RepertoireId == purchase.RepertoireId
                 && s.SectorId == purchase.SectorId)
                 .FirstOrDefault();
 

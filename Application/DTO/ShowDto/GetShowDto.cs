@@ -1,6 +1,7 @@
 ﻿using Application.DTO.ActorDto;
 using Application.DTO.ImageDto;
 using Application.DTO.PriceDto;
+using Application.DTO.SectorDto;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -48,6 +49,6 @@ namespace Application.DTO.ShowDto
 
         public IEnumerable<GetImageDto> ShowImageDtos { get; set; }
 
-        public IEnumerable<GetPriceDto> GetPriceDtos { get; set; }
+        public IEnumerable<GetSectorDto> GetSectorDtos { get; set; }
     }
 }

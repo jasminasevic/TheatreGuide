@@ -20,18 +20,24 @@ namespace Api.Controllers
         protected readonly IGetShowsCommand _getShows;
         protected readonly IDeleteShowCommand _deleteShow;
         protected readonly IEditShowCommand _editShow;
+        protected readonly IGetShowsListCommand _getShowsList;
+        protected readonly IGetShowForRepertoireCommand _getShowForRepertoire;
 
         public ShowsController(IAddShowCommand addShow,
             IGetShowCommand getShow,
             IGetShowsCommand getShows,
-            IDeleteShowCommand deleteShow, 
-            IEditShowCommand editShow)
+            IDeleteShowCommand deleteShow,
+            IEditShowCommand editShow,
+            IGetShowsListCommand getShowsList, 
+            IGetShowForRepertoireCommand getShowForRepertoire)
         {
             _addShow = addShow;
             _getShow = getShow;
             _getShows = getShows;
             _deleteShow = deleteShow;
             _editShow = editShow;
+            _getShowsList = getShowsList;
+            _getShowForRepertoire = getShowForRepertoire;
         }
 
         // GET: api/Shows
@@ -40,8 +46,17 @@ namespace Api.Controllers
         {
             try
             {
-                var shows =_getShows.Execute(query);
-                return Ok(shows);
+                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
+                {
+                    var shows = _getShowsList.Execute(new SearchQuery());
+                    return Ok(shows);
+                }
+                else
+                {
+                    var shows = _getShows.Execute(query);
+                    return Ok(shows);
+                }
+                
             }
             catch(EntityNotFoundException e)
             {
@@ -51,10 +66,16 @@ namespace Api.Controllers
 
         // GET: api/Shows/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(int id, [FromQuery] ShowQuery query)
         {
             try
             {
+                if(query.Type == "repertoire")  
+                {
+                    var showForRepertoire = _getShowForRepertoire.Execute(id);
+                    return Ok(showForRepertoire);
+                }
+
                 var show = _getShow.Execute(id);
                 return Ok(show);
             }
@@ -85,7 +106,7 @@ namespace Api.Controllers
 
         // PUT: api/Shows/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] ShowDto dto)
+        public IActionResult Put(int id, [FromForm] ShowDto dto)
         {
             try
             {
