@@ -39,9 +39,9 @@ namespace EfCommands.EfRepertoireCommands
 
             if(request.SearchQuery != null)
                 repertoires = repertoires.Where(r => r.Show.Theatre.TheatreName.ToLower()
-               .Contains(request.TheatreName.ToLower())
+               .Contains(request.SearchQuery.ToLower())
                || r.Show.Title.ToLower()
-               .Contains(request.ShowTitle.ToLower()));
+               .Contains(request.SearchQuery.ToLower()));
 
             var data = repertoires.Select(r => new GetRepertoireDto
             {
@@ -59,6 +59,12 @@ namespace EfCommands.EfRepertoireCommands
 
             switch (sortOrder)
             {
+                case "title_desc":
+                    data = data.OrderByDescending(r => r.ShowName);
+                    break;
+                case "title_asc":
+                    data = data.OrderBy(r => r.ShowName);
+                    break;
                 case "theatre_desc":
                     data = data.OrderByDescending(r => r.TheatreName);
                     break;
@@ -78,7 +84,7 @@ namespace EfCommands.EfRepertoireCommands
                     data = data.OrderBy(r => r.ShowDate);
                     break;
                 default:
-                    data = data.OrderBy(r => r.ShowDate);
+                    data = data.OrderByDescending(r => r.ShowDate);
                     break;
             }
 

@@ -3,7 +3,6 @@ using Application.DTO.PriceDto;
 using Application.DTO.SectorDto;
 using Application.DTO.ShowDto;
 using Application.Exceptions;
-using Application.Interfaces;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,38 +12,42 @@ using System.Text;
 
 namespace EfCommands.EfShowCommands
 {
-    public class EfGetShowForRepertoireCommand : EfBaseCommand, IGetShowForRepertoireCommand
+    public class EfGetShowWithPricesForRepertoireCommand : EfBaseCommand, IGetShowWithPricesForRepertoireCommand
     {
-        public EfGetShowForRepertoireCommand(EfContext context) : base(context)
+        public EfGetShowWithPricesForRepertoireCommand(EfContext context) : base(context)
         {
         }
 
-        public GetShowForRepertoireDto Execute(int request)
+        public GetShowWithPriceForRepertoireDto Execute(int request)
         {
             var show = Context.Shows
                 .Include(s => s.Theatre)
                 .Include(s => s.Scene)
                 .ThenInclude(s => s.Sectors)
                 .ThenInclude(p => p.Prices)
+                .ThenInclude(r => r.Repertoire)
                 .Where(s => s.Id == request)
                 .FirstOrDefault();
 
             if (show == null)
                 throw new EntityNotFoundException(request.ToString());
 
-            return new GetShowForRepertoireDto
+            return new GetShowWithPriceForRepertoireDto
             {
                 Id = show.Id,
                 Title = show.Title,
                 Theatre = show.Theatre.TheatreName,
                 Scene = show.Scene.SceneName,
-                GetSectorDtos = show.Scene.Sectors.Select(s => new GetSectorDto
+                GetSectorWithPriceDtos = show.Scene.Sectors.Select(s => new GetSectorWithPriceDto
                 {
-                    Id = s.Id,
+                    SectorId = s.Id,
                     SectorName = s.SectorName,
-                    RowsTotalNumber = s.RowsTotalNumber,
-                    SeatCapacity = s.SeatCapacity
+                    GetPriceBasicDtos = s.Prices.Select(p => new GetPriceBasicDto
+                    {
+                        Price = p.TicketPrice
+                    })
                 })
+
             };
         }
     }

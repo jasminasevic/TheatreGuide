@@ -36,6 +36,7 @@ namespace EfCommands.EfRepertoireCommands
             {
                 Context.Prices.Add(new Domain.Price
                 {
+                    RepertoireId = request.Id,
                     SectorId = price.SectorId,
                     TicketPrice = price.TicketPrice
                 });

@@ -22,12 +22,18 @@ namespace Application.DTO.RepertoireDto
 
         public string SceneName { get; set; }
 
+        public int CategoryId { get; set; }
+
+        public string Category { get; set; }
+
         public DateTime ShowDate { get; set; }
 
         public int SoldTicketsNumber { get; set; }
 
-        
+        public string Description { get; set; }
 
+        public DateTime PremiereDate { get; set; }
 
+        public IEnumerable<GetPriceDto> GetPriceDtos { get; set; }
     }
 }

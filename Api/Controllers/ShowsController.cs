@@ -22,14 +22,16 @@ namespace Api.Controllers
         protected readonly IEditShowCommand _editShow;
         protected readonly IGetShowsListCommand _getShowsList;
         protected readonly IGetShowForRepertoireCommand _getShowForRepertoire;
+        protected readonly IGetShowWithPricesForRepertoireCommand _getShowWithPricesForRepertoire;
 
         public ShowsController(IAddShowCommand addShow,
             IGetShowCommand getShow,
             IGetShowsCommand getShows,
             IDeleteShowCommand deleteShow,
             IEditShowCommand editShow,
-            IGetShowsListCommand getShowsList, 
-            IGetShowForRepertoireCommand getShowForRepertoire)
+            IGetShowsListCommand getShowsList,
+            IGetShowForRepertoireCommand getShowForRepertoire, 
+            IGetShowWithPricesForRepertoireCommand getShowWithPricesForRepertoire)
         {
             _addShow = addShow;
             _getShow = getShow;
@@ -38,6 +40,7 @@ namespace Api.Controllers
             _editShow = editShow;
             _getShowsList = getShowsList;
             _getShowForRepertoire = getShowForRepertoire;
+            _getShowWithPricesForRepertoire = getShowWithPricesForRepertoire;
         }
 
         // GET: api/Shows
@@ -73,6 +76,12 @@ namespace Api.Controllers
                 if(query.Type == "repertoire")  
                 {
                     var showForRepertoire = _getShowForRepertoire.Execute(id);
+                    return Ok(showForRepertoire);
+                }
+
+                if(query.Type == "ticketPrices")
+                {
+                    var showForRepertoire = _getShowWithPricesForRepertoire.Execute(id);
                     return Ok(showForRepertoire);
                 }
 

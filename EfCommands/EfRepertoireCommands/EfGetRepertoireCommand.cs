@@ -22,6 +22,12 @@ namespace EfCommands.EfRepertoireCommands
             var repertoire = Context.Repertoires
                 .Include(s => s.Show)
                 .ThenInclude(s => s.Theatre)
+                .Include(s => s.Show)
+                .ThenInclude(c => c.Category)
+                .Include(s => s.Show)
+                .ThenInclude(sc => sc.Scene)
+                .Include(p => p.Prices)
+                .ThenInclude(s => s.Sector)
                 .Where(r => r.Id == request)
                 .FirstOrDefault();
 
@@ -35,9 +41,20 @@ namespace EfCommands.EfRepertoireCommands
                 ShowName = repertoire.Show.Title,
                 TheatreId = repertoire.Show.TheatreId,
                 TheatreName = repertoire.Show.Theatre.TheatreName,
-                ShowDate = repertoire.Date
+                ShowDate = repertoire.Date,
+                Category = repertoire.Show.Category.CategoryName,
+                CategoryId = repertoire.Show.CategoryId,
+                SceneId = repertoire.Show.SceneId,
+                SceneName = repertoire.Show.Scene.SceneName,
+                PremiereDate = repertoire.Show.PremiereDate,
+                Description = repertoire.Show.ShowDescription,
+                GetPriceDtos = repertoire.Prices.Select(p => new GetPriceDto
+                {
+                    SectorId = p.SectorId,
+                    SectorName = p.Sector.SectorName,
+                    Price = p.TicketPrice
+                })
             };
-
         }
     }
 }
