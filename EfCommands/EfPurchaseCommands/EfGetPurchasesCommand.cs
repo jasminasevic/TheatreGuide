@@ -1,4 +1,5 @@
 ﻿using Application.Commands.PurchaseCommands;
+using Application.DTO.PriceDto;
 using Application.DTO.PurchaseDto;
 using Application.Exceptions;
 using Application.Queries;
@@ -25,12 +26,9 @@ namespace EfCommands.EfPurchaseCommands
                 .ThenInclude(p => p.Show)
                 .ThenInclude(p => p.Theatre)
                 .Include(p => p.Sector)
-                .ThenInclude(p => p.Scene)
-                .Include(p => p.Sector)
                 .ThenInclude(p => p.Prices)
+                .ThenInclude(p => p.Repertoire)
                 .Include(p => p.User)
-                .Include(p => p.Repertoire)
-                .ThenInclude(p => p.Show)
                 .AsQueryable();
 
             //Filtering logic
@@ -48,15 +46,16 @@ namespace EfCommands.EfPurchaseCommands
 
             var data = purchase.Select(p => new GetPurchaseDto
             {
+                Id = p.Id,
                 ShowName = p.Repertoire.Show.Title,
                 Date = p.Repertoire.Date,
                 TheatreName = p.Repertoire.Show.Theatre.TheatreName,
-                SceneName = p.Repertoire.Show.Scene.SceneName,
-                SectorName = p.Sector.SectorName,
-                RowNumber = p.RowNumber,
-                SeatNumber = p.SeatNumber,
-                Entrance = p.Entrance,
-                UserName = p.User.FirstName + " " + p.User.LastName
+                UserName = p.User.FirstName + " " + p.User.LastName,
+                CreatedAt = p.CreatedAt,
+                GetPriceBasicDtos = p.Repertoire.Prices.Select(tp => new GetPriceBasicDto
+                {
+                    Price = tp.TicketPrice
+                })
             });
 
 
@@ -77,8 +76,20 @@ namespace EfCommands.EfPurchaseCommands
                 case "date_asc":
                     data = data.OrderBy(p => p.Date);
                     break;
+                case "theatre_desc":
+                    data = data.OrderByDescending(p => p.TheatreName);
+                    break;
+                case "theatre_asc":
+                    data = data.OrderBy(p => p.TheatreName);
+                    break;
+                case "user_desc":
+                    data = data.OrderByDescending(p => p.UserName);
+                    break;
+                case "user_asc":
+                    data = data.OrderBy(p => p.UserName);
+                    break;
                 default:
-                    data = data.OrderByDescending(p => p.Date);
+                    data = data.OrderByDescending(p => p.CreatedAt);
                     break;
             }
 

@@ -7,6 +7,8 @@ namespace Application.DTO.PurchaseDto
 {
     public class GetPurchaseDto
     {
+        public int Id { get; set; }
+
         public string ShowName { get; set; }
 
         public DateTime Date { get; set; }
@@ -15,16 +17,8 @@ namespace Application.DTO.PurchaseDto
 
         public string TheatreName { get; set; }
 
-        public string SceneName { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        public string SectorName { get; set; }
-
-        public int SeatNumber { get; set; }
-
-        public int RowNumber { get; set; }
-
-        public string Entrance { get; set; }
-
-        public double Price { get; set; }
+        public IEnumerable<GetPriceBasicDto> GetPriceBasicDtos { get; set; }
     }
 }
