@@ -114,8 +114,9 @@ namespace Api
             services.AddTransient<IAddRoleCommand, EfAddRoleCommand>();
             services.AddTransient<IDeleteRoleCommand, EfDeleteRoleCommand>();
             services.AddTransient<IEditRoleCommand, EfEditRoleCommand>();
-            services.AddTransient<IGetRolesCommand, EfGetRolesCommand>();
             services.AddTransient<IGetRoleCommand, EfGetRoleCommand>();
+            services.AddTransient<IGetRolesCommand, EfGetRolesCommand>();
+            services.AddTransient<IGetRolesListCommand, EfGetRolesListCommand>();
 
             //Scenes
             services.AddTransient<IAddSceneCommand, EfAddSceneCommand>();
