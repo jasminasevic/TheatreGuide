@@ -22,8 +22,8 @@ namespace EfCommands.EfRoleCommands
             if (role == null)
                 throw new EntityNotFoundException(request.Id.ToString());
 
-            if (request.RoleName != role.RoleName 
-                && Context.Roles.Any(r => r.RoleName == request.RoleName))
+            if (request.RoleName.ToLower() != role.RoleName.ToLower()
+                && Context.Roles.Any(r => r.RoleName.ToLower() == request.RoleName.ToLower()))
                 throw new EntityAlreadyExistsException(request.RoleName);
 
             role.RoleName = request.RoleName;

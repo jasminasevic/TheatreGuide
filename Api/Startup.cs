@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.ActorCommands;
 using Application.Commands.CategoryCommands;
+using Application.Commands.CurrencyCommands;
 using Application.Commands.DirectorCommands;
 using Application.Commands.PurchaseCommands;
 using Application.Commands.RepertoireCommands;
@@ -17,6 +18,7 @@ using Application.Commands.UserCommands;
 using Application.Commands.WriterCommands;
 using EfCommands.EfActorCommands;
 using EfCommands.EfCategoryCommands;
+using EfCommands.EfCurrencyCommands;
 using EfCommands.EfDirectorCommands;
 using EfCommands.EfPurchaseCommands;
 using EfCommands.EfRepertoireCommands;
@@ -77,6 +79,14 @@ namespace Api
             services.AddTransient<IGetCategoriesCommand, EfGetCategoriesCommand>();
             services.AddTransient<IGetCategoryCommand, EfGetCategoryCommand>();
             services.AddTransient<IGetCategoriesListCommand, EfGetCategoriesListCommand>();
+
+            //Currencies
+            services.AddTransient<IAddCurrencyCommand, EfAddCurrencyCommand>();
+            services.AddTransient<IDeleteCurrencyCommand, EfDeleteCurrencyCommand>();
+            services.AddTransient<IEditCurrencyCommand, EfEditCurrencyCommand>();
+            services.AddTransient<IGetCurrenciesCommand, EfGetCurrenciesCommand>();
+            services.AddTransient<IGetCurrenciesListCommand, EfGetCurrenciesListCommand>();
+            services.AddTransient<IGetCurrencyCommand, EfGetCurrencyCommand>();
 
             //Directors
             services.AddTransient<IAddDirectorCommand, EfAddDirectorCommand>();

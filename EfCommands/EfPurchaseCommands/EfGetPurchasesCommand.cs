@@ -52,7 +52,6 @@ namespace EfCommands.EfPurchaseCommands
                 TheatreName = p.Repertoire.Show.Theatre.TheatreName,
                 UserName = p.User.FirstName + " " + p.User.LastName,
                 CreatedAt = p.CreatedAt,
-             //   Price = p.Repertoire.Prices.TicketPrice
                 GetPriceBasicDtos = p.Sector.Prices.Select(tp => new GetPriceBasicDto
                 {
                     Price = tp.TicketPrice,
