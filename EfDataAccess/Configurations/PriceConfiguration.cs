@@ -14,9 +14,15 @@ namespace EfDataAccess.Configurations
 
             builder.HasKey(price => new { price.RepertoireId, price.SectorId });
 
+
             builder.Property(p => p.TicketPrice)
                .IsRequired();
 
+
+            builder.HasOne(p => p.Currency)
+                .WithMany(p => p.Prices)
+                .HasForeignKey(p => p.CurrencyId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

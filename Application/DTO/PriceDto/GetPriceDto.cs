@@ -15,6 +15,10 @@ namespace Application.DTO.PriceDto
 
         public string SectorName { get; set; }
 
+        public int CurrencyId { get; set; }
+
+        public string CurrencyName { get; set; }
+
         public int SeatCapacity { get; set; }
 
         public int RowsTotalNumber { get; set; }

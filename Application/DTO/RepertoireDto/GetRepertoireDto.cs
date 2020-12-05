@@ -26,6 +26,10 @@ namespace Application.DTO.RepertoireDto
 
         public string Category { get; set; }
 
+        public int CurrencyId { get; set; }
+
+        public string CurrencyName { get; set; }
+
         public DateTime ShowDate { get; set; }
 
         public int SoldTicketsNumber { get; set; }

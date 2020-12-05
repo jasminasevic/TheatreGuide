@@ -19,6 +19,8 @@ namespace EfDataAccess
 
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<Currency> Currencies { get; set; }
+
         public DbSet<Director> Directors { get; set; }
 
         public DbSet<Purchase> Purchases { get; set; }
@@ -61,6 +63,7 @@ namespace EfDataAccess
             modelBuilder.ApplyConfiguration(new ActorShowConfiguration());
             modelBuilder.ApplyConfiguration(new AddressConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new CurrencyConfiguration());
             modelBuilder.ApplyConfiguration(new DirectorConfiguration());
             modelBuilder.ApplyConfiguration(new PriceConfiguration());
             modelBuilder.ApplyConfiguration(new PurchaseConfiguration());

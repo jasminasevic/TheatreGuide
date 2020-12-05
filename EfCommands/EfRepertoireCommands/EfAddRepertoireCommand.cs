@@ -43,7 +43,8 @@ namespace EfCommands.EfRepertoireCommands
                 {
                     Repertoire = repertoire,
                     SectorId = price.SectorId,
-                    TicketPrice = price.TicketPrice
+                    TicketPrice = price.TicketPrice,
+                    CurrencyId = price.CurrencyId
                 });
 
             };

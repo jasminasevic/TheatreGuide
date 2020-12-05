@@ -28,12 +28,11 @@ namespace EfCommands.EfPurchaseCommands
                 .ThenInclude(p => p.Scene)
                 .Include(p => p.Sector)
                 .ThenInclude(p => p.Prices)
+                .ThenInclude(p => p.Currency)
                 .Include(p => p.Repertoire)
                 .ThenInclude(p => p.Show)
                 .ThenInclude(p => p.Category)
                 .Include(p => p.User)
-                .Include(p => p.Repertoire)
-                .ThenInclude(p => p.Prices)
                 .Where(p => p.Id == request)
                 .FirstOrDefault();
 
@@ -66,9 +65,10 @@ namespace EfCommands.EfPurchaseCommands
                 UserId = purchase.UserId,
                 UserName = purchase.User.FirstName + " " + purchase.User.LastName,
                 PurchasedAt = purchase.CreatedAt,
-                GetPriceBasicDtos = purchase.Repertoire.Prices.Select(tp => new GetPriceBasicDto
+                GetPriceBasicDtos = purchase.Sector.Prices.Select(tp => new GetPriceBasicDto
                 {
-                    Price = tp.TicketPrice
+                    Price = tp.TicketPrice,
+                    CurrencyName = tp.Currency.CurrencyName
                 })
             };
         }

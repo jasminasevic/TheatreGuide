@@ -7,5 +7,7 @@ namespace Application.DTO.PriceDto
     public class GetPriceBasicDto
     {
         public double Price { get; set; }
+
+        public string CurrencyName { get; set; }
     }
 }

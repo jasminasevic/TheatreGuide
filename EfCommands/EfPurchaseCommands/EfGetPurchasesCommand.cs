@@ -27,7 +27,7 @@ namespace EfCommands.EfPurchaseCommands
                 .ThenInclude(p => p.Theatre)
                 .Include(p => p.Sector)
                 .ThenInclude(p => p.Prices)
-                .ThenInclude(p => p.Repertoire)
+                .ThenInclude(p => p.Currency)
                 .Include(p => p.User)
                 .AsQueryable();
 
@@ -52,9 +52,11 @@ namespace EfCommands.EfPurchaseCommands
                 TheatreName = p.Repertoire.Show.Theatre.TheatreName,
                 UserName = p.User.FirstName + " " + p.User.LastName,
                 CreatedAt = p.CreatedAt,
-                GetPriceBasicDtos = p.Repertoire.Prices.Select(tp => new GetPriceBasicDto
+             //   Price = p.Repertoire.Prices.TicketPrice
+                GetPriceBasicDtos = p.Sector.Prices.Select(tp => new GetPriceBasicDto
                 {
-                    Price = tp.TicketPrice
+                    Price = tp.TicketPrice,
+                    CurrencyName = tp.Currency.CurrencyName
                 })
             });
 

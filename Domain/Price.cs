@@ -16,5 +16,9 @@ namespace Domain
         public Sector Sector { get; set; }
 
         public double TicketPrice { get; set; }
+
+        public int CurrencyId { get; set; }
+
+        public Currency Currency { get; set; }
     }
 }

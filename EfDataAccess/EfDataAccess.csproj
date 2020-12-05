@@ -55,6 +55,8 @@
     <Compile Remove="Migrations\20200702182525_improve show, price and repertoire entities.Designer.cs" />
     <Compile Remove="Migrations\20200702183506_improve show, price and repertoire entities.cs" />
     <Compile Remove="Migrations\20200702183506_improve show, price and repertoire entities.Designer.cs" />
+    <Compile Remove="Migrations\20201205000049_add currency entity.cs" />
+    <Compile Remove="Migrations\20201205000049_add currency entity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

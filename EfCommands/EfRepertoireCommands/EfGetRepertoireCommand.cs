@@ -28,6 +28,8 @@ namespace EfCommands.EfRepertoireCommands
                 .ThenInclude(sc => sc.Scene)
                 .Include(p => p.Prices)
                 .ThenInclude(s => s.Sector)
+                .Include(p => p.Prices)
+                .ThenInclude(c => c.Currency)
                 .Where(r => r.Id == request)
                 .FirstOrDefault();
 
@@ -52,7 +54,9 @@ namespace EfCommands.EfRepertoireCommands
                 {
                     SectorId = p.SectorId,
                     SectorName = p.Sector.SectorName,
-                    Price = p.TicketPrice
+                    Price = p.TicketPrice,
+                    CurrencyId = p.CurrencyId,
+                    CurrencyName = p.Currency.CurrencyName
                 })
             };
         }

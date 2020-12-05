@@ -14,5 +14,7 @@ namespace Application.DTO.PriceDto
         public int SectorId { get; set; }
 
         public double TicketPrice { get; set; }
+
+        public int CurrencyId { get; set; }
     }
 }
