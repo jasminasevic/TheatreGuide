@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.DTO.PurchaseDto;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,5 +18,9 @@ namespace Application.DTO.UserDto
         public int RoleId { get; set; }
 
         public string RoleName { get; set; }
+
+        public IEnumerable<GetDetailedPurchaseDto> GetDetailedPurchaseDtos { get; set; }
+
+        public int ShowFollowing { get; set; }
     }
 }
