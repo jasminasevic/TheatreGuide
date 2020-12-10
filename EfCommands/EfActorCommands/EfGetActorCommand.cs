@@ -1,6 +1,7 @@
 ﻿using Application.Commands.ActorCommands;
 using Application.DTO.ActorDto;
 using Application.DTO.ImageDto;
+using Application.DTO.ShowDto;
 using Application.Exceptions;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,9 @@ namespace EfCommands.EfActorCommands
         {
             var actor = Context.Actors
                 .Include(a => a.ActorImages)
+                .Include(a => a.ActorShows)
+                .ThenInclude(a => a.Show)
+                .ThenInclude(a => a.Category)
                 .Where(a => a.Id == request)
                 .FirstOrDefault();
 
@@ -38,6 +42,12 @@ namespace EfCommands.EfActorCommands
                     Id = i.Id,
                     Alt = i.ActorImageAlt,
                     Path = "uploads/actor-images/" + i.ActorImagePath
+                }),
+                ActorInShow = actor.ActorShows.Select(s => new ShowBaseInfoDto
+                {
+                    Id = s.Show.Id,
+                    Title = s.Show.Title,
+                    CategoryName = s.Show.Category.CategoryName
                 })
             };
         }

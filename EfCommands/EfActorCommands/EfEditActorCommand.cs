@@ -30,29 +30,33 @@ namespace EfCommands.EfActorCommands
             actor.ActorBiography = request.ActorBiography;
             actor.ModifiedAt = DateTime.Now;
 
-            foreach(var image in Context.ActorImages.Where(ai => ai.ActorId == request.Id))
-            {
-                Context.ActorImages.Remove(image);
-            }
-
-            foreach(var actorImage in request.ActorImage)
+            if (request.ActorImage != null)
             {
 
-                var ext = Path.GetExtension(actorImage.FileName);
-                if (!FileUpload.AllowedExtensions.Contains(ext))
+                foreach (var image in Context.ActorImages.Where(ai => ai.ActorId == request.Id))
                 {
-                    throw new Exception("File extension is not ok");
+                    Context.ActorImages.Remove(image);
                 }
-                var newFileName = Guid.NewGuid().ToString() + "_" + actorImage.FileName;
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "actor-images", newFileName);
-                actorImage.CopyTo(new FileStream(filePath, FileMode.Create));
 
-                Context.ActorImages.Add(new Domain.ActorImage
+                foreach (var actorImage in request.ActorImage)
                 {
-                    ActorImageAlt = request.ActorFirstName + " " + request.ActorLastName + " image",
-                    ActorImagePath = newFileName,
-                    ActorId = actor.Id,
-                });
+
+                    var ext = Path.GetExtension(actorImage.FileName);
+                    if (!FileUpload.AllowedExtensions.Contains(ext))
+                    {
+                        throw new Exception("File extension is not ok");
+                    }
+                    var newFileName = Guid.NewGuid().ToString() + "_" + actorImage.FileName;
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "actor-images", newFileName);
+                    actorImage.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                    Context.ActorImages.Add(new Domain.ActorImage
+                    {
+                        ActorImageAlt = request.ActorFirstName + " " + request.ActorLastName + " image",
+                        ActorImagePath = newFileName,
+                        ActorId = actor.Id,
+                    });
+                }
             }
 
             Context.SaveChanges();

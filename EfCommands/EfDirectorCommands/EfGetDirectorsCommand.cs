@@ -61,23 +61,23 @@ namespace EfCommands.EfDirectorCommands
             switch (sortOrder)
             {
                 case "directorFirstName_desc":
-                    directors = directors.OrderByDescending(d => d.DirectorFirstName);
+                    data = data.OrderByDescending(d => d.DirectorFirstName);
                     break;
                 case "directorFirstName_asc":
-                    directors = directors.OrderBy(d => d.DirectorFirstName);
+                    data = data.OrderBy(d => d.DirectorFirstName);
                     break;
                 case "directorLastName_desc":
-                    directors = directors.OrderByDescending(d => d.DirectorLastName);
+                    data = data.OrderByDescending(d => d.DirectorLastName);
                     break;
                 case "directorLastName_asc":
-                    directors = directors.OrderBy(d => d.DirectorLastName);
+                    data = data.OrderBy(d => d.DirectorLastName);
                     break;
                 default:
-                    directors = directors.OrderBy(d => d.DirectorFirstName);
+                    data = data.OrderBy(d => d.DirectorFirstName);
                     break;
             }
 
-            var totalCount = directors.Count();
+            var totalCount = data.Count();
 
             data = data.Skip((request.PageNumber - 1)* request.PerPage).Take(request.PerPage);
             var pagesCount = (int)Math.Ceiling((double)totalCount / request.PerPage);

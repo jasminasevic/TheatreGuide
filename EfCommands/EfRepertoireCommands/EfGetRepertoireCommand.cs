@@ -56,7 +56,9 @@ namespace EfCommands.EfRepertoireCommands
                     SectorName = p.Sector.SectorName,
                     Price = p.TicketPrice,
                     CurrencyId = p.CurrencyId,
-                    CurrencyName = p.Currency.CurrencyName
+                    CurrencyName = p.Currency.CurrencyName,
+                    SeatCapacity = p.Sector.SeatCapacity,
+                    RowsTotalNumber = p.Sector.RowsTotalNumber
                 })
             };
         }

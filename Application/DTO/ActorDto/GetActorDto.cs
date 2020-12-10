@@ -1,4 +1,5 @@
 ﻿using Application.DTO.ImageDto;
+using Application.DTO.ShowDto;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,7 @@ namespace Application.DTO.ActorDto
         public string ActorBiography { get; set; }
 
         public IEnumerable<GetImageDto> ShowImageDto { get; set; }
+
+        public IEnumerable<ShowBaseInfoDto> ActorInShow { get; set; }
     }
 }
