@@ -36,33 +36,36 @@ namespace EfCommands.EfShowCommands
             show.SceneId = request.SceneId;
             show.ModifiedAt = DateTime.Now;
 
-            foreach (var showImage in Context.ShowImages.Where(s => s.ShowId == request.Id))
+            if (request.ShowImages != null)
             {
-                Context.ShowImages.Remove(showImage);
-            }
-
-            foreach(var image in request.ShowImages)
-            {
-                var ext = Path.GetExtension(image.FileName);
-                if (!FileUpload.AllowedExtensions.Contains(ext))
+                foreach (var showImage in Context.ShowImages.Where(s => s.ShowId == request.Id))
                 {
-                    throw new Exception("File extention is not ok");
-                };
+                    Context.ShowImages.Remove(showImage);
+                }
 
-                var newFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(),
-                    "wwwroot", "uploads", "show-images", newFileName);
-
-                image.CopyTo(new FileStream(filePath, FileMode.Create));
-
-                var showImage = new Domain.ShowImage
+                foreach (var image in request.ShowImages)
                 {
-                    ShowImageAlt = request.Title + " image",
-                    ShowImagePath = newFileName,
-                    ShowId = request.Id
-                };
+                    var ext = Path.GetExtension(image.FileName);
+                    if (!FileUpload.AllowedExtensions.Contains(ext))
+                    {
+                        throw new Exception("File extention is not ok");
+                    };
 
-                Context.ShowImages.Add(showImage);
+                    var newFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(),
+                        "wwwroot", "uploads", "show-images", newFileName);
+
+                    image.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                    var showImage = new Domain.ShowImage
+                    {
+                        ShowImageAlt = request.Title + " image",
+                        ShowImagePath = newFileName,
+                        ShowId = request.Id
+                    };
+
+                    Context.ShowImages.Add(showImage);
+                }
             }
 
             foreach(var actorShow in Context.ActorShows.Where(s => s.ShowId == request.Id))

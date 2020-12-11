@@ -2,6 +2,7 @@
 using Application.DTO.ActorDto;
 using Application.DTO.ImageDto;
 using Application.DTO.ShowDto;
+using Application.DTO.TheatreDto;
 using Application.Exceptions;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,10 @@ namespace EfCommands.EfActorCommands
         {
             var actor = Context.Actors
                 .Include(a => a.ActorImages)
+                .Include(a => a.ActorShows)
+                .ThenInclude(a => a.Show)
+                .ThenInclude(a => a.Scene)
+                .ThenInclude(a => a.Theatre)
                 .Include(a => a.ActorShows)
                 .ThenInclude(a => a.Show)
                 .ThenInclude(a => a.Category)
@@ -48,6 +53,11 @@ namespace EfCommands.EfActorCommands
                     Id = s.Show.Id,
                     Title = s.Show.Title,
                     CategoryName = s.Show.Category.CategoryName
+                }),
+                TheatreBasicDtos = actor.ActorShows.Select(t => new TheatreBasicDto
+                {
+                    Id = t.Show.Scene.Theatre.Id,
+                    TheatreName = t.Show.Scene.Theatre.TheatreName
                 })
             };
         }
