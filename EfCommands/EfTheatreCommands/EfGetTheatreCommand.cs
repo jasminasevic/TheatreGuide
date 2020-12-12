@@ -1,5 +1,7 @@
 ﻿using Application.Commands.TheatreCommands;
 using Application.DTO.ImageDto;
+using Application.DTO.SceneDto;
+using Application.DTO.SectorDto;
 using Application.DTO.ShowDto;
 using Application.DTO.TheatreDto;
 using Application.Exceptions;
@@ -25,6 +27,8 @@ namespace EfCommands.EfTheatreCommands
                 .Include(t => t.Address)
                 .Include(t => t.Shows)
                 .ThenInclude(s => s.Category)
+                .Include(s => s.Scenes)
+                .ThenInclude(s => s.Sectors)
                 .Where(t => t.Id == request)
                 .FirstOrDefault();
 
@@ -53,6 +57,18 @@ namespace EfCommands.EfTheatreCommands
                     Id = s.Id,
                     Title = s.Title,
                     CategoryName = s.Category.CategoryName
+                }),
+                GetSceneWithSectorsDtos = theatre.Scenes.Select(s => new GetSceneWithSectorsDto
+                {
+                    Id = s.Id,
+                    SceneName = s.SceneName,
+                    AddSectorDtos = s.Sectors.Select(s => new AddSectorDto
+                    {
+                        Id = s.Id,
+                        SectorName = s.SectorName,
+                        RowsTotalNumber = s.RowsTotalNumber.ToString(),
+                        SeatCapacity = s.SeatCapacity.ToString()
+                    })
                 })
             };
         }

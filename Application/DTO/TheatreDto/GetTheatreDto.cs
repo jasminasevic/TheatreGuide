@@ -1,4 +1,5 @@
 ﻿using Application.DTO.ImageDto;
+using Application.DTO.SceneDto;
 using Application.DTO.ShowDto;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,9 @@ namespace Application.DTO.TheatreDto
 
         public decimal Latitude { get; set; }
 
-        public IEnumerable<ShowBaseInfoDto> ShowBaseInfoDtos  { get; set; }
+        public IEnumerable<GetSceneWithSectorsDto> GetSceneWithSectorsDtos { get; set; }
 
+        public IEnumerable<ShowBaseInfoDto> ShowBaseInfoDtos  { get; set; }
 
     }
 }

@@ -10,8 +10,6 @@ namespace Application.DTO.SectorDto
 
         public string SectorName { get; set; }
 
-    //    public int SceneId { get; set; }
-
         public string SeatCapacity { get; set; }
 
         public string RowsTotalNumber { get; set; }
