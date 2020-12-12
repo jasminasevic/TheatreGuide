@@ -123,6 +123,7 @@ namespace Api
             services.AddTransient<IDeleteSceneCommand, EfDeleteSceneCommand>();
             services.AddTransient<IEditSceneCommand, EfEditSceneCommand>();
             services.AddTransient<IGetSceneCommand, EfGetSceneCommand>();
+            services.AddTransient<IGetSceneWithShowsCommand, EfGetSceneWithShowsCommand>();
             services.AddTransient<IGetScenesCommand, EfGetScenesCommand>();
             services.AddTransient<IGetScenesListCommand, EfGetSceneListCommand>();
             services.AddTransient<IGetScenesTheatreCommand, EfGetScenesTheatreCommand>();

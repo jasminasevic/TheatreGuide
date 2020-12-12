@@ -42,35 +42,33 @@ namespace EfCommands.EfShowCommands
 
             Context.Shows.Add(show);
 
-            if (request.ShowImages != null)
+
+            foreach (var image in request.ShowImages)
             {
-                foreach (var image in request.ShowImages)
+                var ext = Path.GetExtension(image.FileName);
+                if (!FileUpload.AllowedExtensions.Contains(ext))
                 {
-                    var ext = Path.GetExtension(image.FileName);
-                    if (!FileUpload.AllowedExtensions.Contains(ext))
-                    {
-                        throw new Exception("File extention is not ok");
-                    };
+                    throw new Exception("File extention is not ok");
+                };
 
-                    var newFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(),
-                        "wwwroot", "uploads", "show-images", newFileName);
+                var newFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(),
+                    "wwwroot", "uploads", "show-images", newFileName);
 
-                    image.CopyTo(new FileStream(filePath, FileMode.Create));
+                image.CopyTo(new FileStream(filePath, FileMode.Create));
 
-                    var showImage = new Domain.ShowImage
-                    {
-                        ShowImageAlt = request.Title + " image",
-                        ShowImagePath = newFileName,
-                        Show = show
-                    };
+                var showImage = new Domain.ShowImage
+                {
+                    ShowImageAlt = request.Title + " image",
+                    ShowImagePath = newFileName,
+                    Show = show
+                };
 
-                    Context.ShowImages.Add(showImage);
-                }
-
+                Context.ShowImages.Add(showImage);
             }
 
-            foreach(var actor in request.ActorShowDtos)
+
+            foreach (var actor in request.ActorShowDtos)
             {
                 Context.ActorShows.Add(new Domain.ActorShow
                 {

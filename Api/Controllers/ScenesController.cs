@@ -21,6 +21,7 @@ namespace Api.Controllers
 
         protected readonly IAddSceneCommand _addScene;
         protected readonly IGetSceneCommand _getScene;
+        protected readonly IGetSceneWithShowsCommand _getSceneWithShows;
         protected readonly IGetScenesCommand _getScenes;
         protected readonly IDeleteSceneCommand _deleteScene;
         protected readonly IEditSceneCommand _editScene;
@@ -32,8 +33,9 @@ namespace Api.Controllers
             IGetScenesCommand getScenes,
             IDeleteSceneCommand deleteScene,
             IEditSceneCommand editScene,
-            IGetScenesListCommand getScenesList, 
-            IGetScenesTheatreCommand getScenesTheatre)
+            IGetScenesListCommand getScenesList,
+            IGetScenesTheatreCommand getScenesTheatre, 
+            IGetSceneWithShowsCommand getSceneWithShows)
         {
             _addScene = addScene;
             _getScene = getScene;
@@ -42,6 +44,7 @@ namespace Api.Controllers
             _editScene = editScene;
             _getScenesList = getScenesList;
             _getScenesTheatre = getScenesTheatre;
+            _getSceneWithShows = getSceneWithShows;
         }
 
         // GET: api/Scenes
@@ -75,10 +78,15 @@ namespace Api.Controllers
 
         // GET: api/Scenes/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(int id, [FromQuery] SearchQuery query)
         {
             try
             {
+                if(query.Type == "sceneWithShows")
+                {
+                    var sceneWithShows = _getSceneWithShows.Execute(id);
+                    return Ok(sceneWithShows);
+                }
                 var scene = _getScene.Execute(id);
                 return Ok(scene);
             }
