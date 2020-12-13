@@ -59,6 +59,9 @@ namespace EfCommands.EfActorCommands
                     Id = t.Show.Scene.Theatre.Id,
                     TheatreName = t.Show.Scene.Theatre.TheatreName
                 })
+                .GroupBy(t => new { t.Id, t.TheatreName })
+                .Select(g => g.First())
+                .ToList()
             };
         }
     }
