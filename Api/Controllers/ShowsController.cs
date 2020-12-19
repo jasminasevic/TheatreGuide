@@ -23,6 +23,7 @@ namespace Api.Controllers
         protected readonly IGetShowsListCommand _getShowsList;
         protected readonly IGetShowForRepertoireCommand _getShowForRepertoire;
         protected readonly IGetShowWithPricesForRepertoireCommand _getShowWithPricesForRepertoire;
+        protected readonly IGetPopularShowsCommand _getPopularShows;
 
         public ShowsController(IAddShowCommand addShow,
             IGetShowCommand getShow,
@@ -30,8 +31,9 @@ namespace Api.Controllers
             IDeleteShowCommand deleteShow,
             IEditShowCommand editShow,
             IGetShowsListCommand getShowsList,
-            IGetShowForRepertoireCommand getShowForRepertoire, 
-            IGetShowWithPricesForRepertoireCommand getShowWithPricesForRepertoire)
+            IGetShowForRepertoireCommand getShowForRepertoire,
+            IGetShowWithPricesForRepertoireCommand getShowWithPricesForRepertoire, 
+            IGetPopularShowsCommand getPopularShows)
         {
             _addShow = addShow;
             _getShow = getShow;
@@ -41,6 +43,7 @@ namespace Api.Controllers
             _getShowsList = getShowsList;
             _getShowForRepertoire = getShowForRepertoire;
             _getShowWithPricesForRepertoire = getShowWithPricesForRepertoire;
+            _getPopularShows = getPopularShows;
         }
 
         // GET: api/Shows
@@ -49,9 +52,15 @@ namespace Api.Controllers
         {
             try
             {
-                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
+                if (query.SearchQuery == null && query.PageNumber == 0 
+                        && query.PerPage == 0 && query.Type == null)
                 {
                     var shows = _getShowsList.Execute(new SearchQuery());
+                    return Ok(shows);
+                }
+                if(query.Type == "popularShows")
+                {
+                    var shows = _getPopularShows.Execute(new ShowQuery());
                     return Ok(shows);
                 }
                 else
