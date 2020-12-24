@@ -24,6 +24,7 @@ namespace Api.Controllers
         protected readonly IGetShowForRepertoireCommand _getShowForRepertoire;
         protected readonly IGetShowWithPricesForRepertoireCommand _getShowWithPricesForRepertoire;
         protected readonly IGetPopularShowsCommand _getPopularShows;
+        protected readonly IGetPopularShowsFilteredById _getPopularShowsFilteredById;
 
         public ShowsController(IAddShowCommand addShow,
             IGetShowCommand getShow,
@@ -32,8 +33,9 @@ namespace Api.Controllers
             IEditShowCommand editShow,
             IGetShowsListCommand getShowsList,
             IGetShowForRepertoireCommand getShowForRepertoire,
-            IGetShowWithPricesForRepertoireCommand getShowWithPricesForRepertoire, 
-            IGetPopularShowsCommand getPopularShows)
+            IGetShowWithPricesForRepertoireCommand getShowWithPricesForRepertoire,
+            IGetPopularShowsCommand getPopularShows, 
+            IGetPopularShowsFilteredById getPopularShowsFilteredById)
         {
             _addShow = addShow;
             _getShow = getShow;
@@ -44,6 +46,7 @@ namespace Api.Controllers
             _getShowForRepertoire = getShowForRepertoire;
             _getShowWithPricesForRepertoire = getShowWithPricesForRepertoire;
             _getPopularShows = getPopularShows;
+            _getPopularShowsFilteredById = getPopularShowsFilteredById;
         }
 
         // GET: api/Shows
@@ -58,17 +61,18 @@ namespace Api.Controllers
                     var shows = _getShowsList.Execute(new SearchQuery());
                     return Ok(shows);
                 }
-                if(query.Type == "popularShows")
+                if (query.Type == "popularShows" && query.ShowId != null)
+                {
+                    var shows = _getPopularShowsFilteredById.Execute(Convert.ToInt32(query.ShowId));
+                    return Ok(shows);
+                }
+                if (query.Type == "popularShows")
                 {
                     var shows = _getPopularShows.Execute(new ShowQuery());
                     return Ok(shows);
                 }
-                else
-                {
-                    var shows = _getShows.Execute(query);
-                    return Ok(shows);
-                }
-                
+                var allShows = _getShows.Execute(query);
+                return Ok(allShows);
             }
             catch(EntityNotFoundException e)
             {

@@ -27,6 +27,7 @@ namespace EfCommands.EfShowCommands
                 .Include(s => s.Category)
                 .Include(s => s.Director)
                 .Include(s => s.Theatre)
+                .ThenInclude(s => s.Address)
                 .Include(s => s.ActorShows)
                 .ThenInclude(s => s.Actor)
                 .Include(s => s.Scene)
@@ -56,7 +57,9 @@ namespace EfCommands.EfShowCommands
                 TheatreId = show.Theatre.Id,
                 Scene = show.Scene.SceneName,
                 SceneId = show.SceneId,
+                Address = show.Theatre.Address.Location,
                 FollowersNumber = show.ShowFollowers.Count(),
+                
                 ShowImageDtos = show.ShowImages.Select(i => new GetImageDto
                 {
                     Id = i.Id,

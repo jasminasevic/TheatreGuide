@@ -37,6 +37,8 @@ namespace Application.DTO.ShowDto
 
         public int TheatreId { get; set; }
 
+        public string Address { get; set; }
+
         public int Duration { get; set; }
 
         public DateTime PremiereDate{ get; set; }

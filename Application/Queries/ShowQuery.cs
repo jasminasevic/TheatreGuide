@@ -9,5 +9,7 @@ namespace Application.Queries
         public string Title { get; set; }
 
         public string Type { get; set; }
+
+        public string ShowId { get; set; }
     }
 }
