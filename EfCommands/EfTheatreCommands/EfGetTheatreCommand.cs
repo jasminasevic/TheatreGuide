@@ -29,6 +29,8 @@ namespace EfCommands.EfTheatreCommands
                 .ThenInclude(s => s.Category)
                 .Include(s => s.Scenes)
                 .ThenInclude(s => s.Sectors)
+                .Include(t => t.Shows)
+                .ThenInclude(t => t.ShowImages)
                 .Where(t => t.Id == request)
                 .FirstOrDefault();
 
@@ -56,7 +58,13 @@ namespace EfCommands.EfTheatreCommands
                 {
                     Id = s.Id,
                     Title = s.Title,
-                    CategoryName = s.Category.CategoryName
+                    CategoryName = s.Category.CategoryName,
+                    ShowImageDtos = s.ShowImages.Select(si => new GetImageDto
+                    {
+                        Id = si.Id,
+                        Alt = si.ShowImageAlt,
+                        Path = "uploads/show-images/" + si.ShowImagePath
+                    }).Take(1)
                 }),
                 GetSceneWithSectorsDtos = theatre.Scenes.Select(s => new GetSceneWithSectorsDto
                 {

@@ -47,7 +47,7 @@ namespace EfCommands.EfDirectorCommands
                 DirectorFirstName = d.DirectorFirstName,
                 DirectorLastName = d.DirectorLastName,
                 DirectorBiography = d.DirectorBiography,
-                showBaseInfoDtos = d.Shows.Select(s => new ShowBaseInfoDto
+                ShowBaseInfoDtos = d.Shows.Select(s => new ShowBaseInfoDto
                 {
                     Id = s.Id,
                     Title = s.Title,

@@ -142,7 +142,10 @@ namespace Api
             services.AddTransient<IGetShowForRepertoireCommand, EfGetShowForRepertoireCommand>();
             services.AddTransient<IGetShowWithPricesForRepertoireCommand, EfGetShowWithPricesForRepertoireCommand>();
             services.AddTransient<IGetPopularShowsCommand, EfGetPopularShowsCommand>();
-            services.AddTransient<IGetPopularShowsFilteredById, EfGetPopularShowsFilteredById>();
+            services.AddTransient<IGetPopularShowsFilteredByIdCommand, EfGetPopularShowsFilteredByIdCommand>();
+            services.AddTransient<IGetPopularShowsFilteredByTheatreCommand, EfGetPopularShowsFilteredByTheatreCommand>();
+            services.AddTransient<IGetPopularShowsFilteredByActorCommand, EfGetPopularShowsFilteredByActorCommand>();
+            services.AddTransient<IGetPopularShowsFilteredByDirectorCommand, EfGetPopularShowsFilteredByDirectorCommand>();
 
             //Theatres
             services.AddTransient<IAddTheatreCommand, EfAddTheatreCommand>();

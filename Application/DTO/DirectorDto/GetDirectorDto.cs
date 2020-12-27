@@ -1,4 +1,5 @@
 ﻿using Application.DTO.ShowDto;
+using Application.DTO.TheatreDto;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,8 @@ namespace Application.DTO.DirectorDto
 
         public string DirectorBiography { get; set; }
 
-        public IEnumerable<ShowBaseInfoDto> showBaseInfoDtos { get; set; }
+        public IEnumerable<ShowBaseInfoDto> ShowBaseInfoDtos { get; set; }
+
+        public IEnumerable<TheatreBasicDto> TheatreBasicDtos { get; set; }
     }
 }

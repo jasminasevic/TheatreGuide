@@ -24,7 +24,10 @@ namespace Api.Controllers
         protected readonly IGetShowForRepertoireCommand _getShowForRepertoire;
         protected readonly IGetShowWithPricesForRepertoireCommand _getShowWithPricesForRepertoire;
         protected readonly IGetPopularShowsCommand _getPopularShows;
-        protected readonly IGetPopularShowsFilteredById _getPopularShowsFilteredById;
+        protected readonly IGetPopularShowsFilteredByIdCommand _getPopularShowsFilteredById;
+        protected readonly IGetPopularShowsFilteredByTheatreCommand _getPopularShowsFilteredByTheatre;
+        protected readonly IGetPopularShowsFilteredByActorCommand _getPopularShowsFilteredByActor;
+        protected readonly IGetPopularShowsFilteredByDirectorCommand _getPopularShowsFilteredByDirector;
 
         public ShowsController(IAddShowCommand addShow,
             IGetShowCommand getShow,
@@ -34,8 +37,11 @@ namespace Api.Controllers
             IGetShowsListCommand getShowsList,
             IGetShowForRepertoireCommand getShowForRepertoire,
             IGetShowWithPricesForRepertoireCommand getShowWithPricesForRepertoire,
-            IGetPopularShowsCommand getPopularShows, 
-            IGetPopularShowsFilteredById getPopularShowsFilteredById)
+            IGetPopularShowsCommand getPopularShows,
+            IGetPopularShowsFilteredByIdCommand getPopularShowsFilteredById,
+            IGetPopularShowsFilteredByTheatreCommand getPopularShowsFilteredByTheatre,
+            IGetPopularShowsFilteredByActorCommand getPopularShowsFilteredByActor, 
+            IGetPopularShowsFilteredByDirectorCommand getPopularShowsFilteredByDirector)
         {
             _addShow = addShow;
             _getShow = getShow;
@@ -47,6 +53,9 @@ namespace Api.Controllers
             _getShowWithPricesForRepertoire = getShowWithPricesForRepertoire;
             _getPopularShows = getPopularShows;
             _getPopularShowsFilteredById = getPopularShowsFilteredById;
+            _getPopularShowsFilteredByTheatre = getPopularShowsFilteredByTheatre;
+            _getPopularShowsFilteredByActor = getPopularShowsFilteredByActor;
+            _getPopularShowsFilteredByDirector = getPopularShowsFilteredByDirector;
         }
 
         // GET: api/Shows
@@ -64,6 +73,21 @@ namespace Api.Controllers
                 if (query.Type == "popularShows" && query.ShowId != null)
                 {
                     var shows = _getPopularShowsFilteredById.Execute(Convert.ToInt32(query.ShowId));
+                    return Ok(shows);
+                }
+                if (query.Type == "popularShows" && query.TheatreId != null)
+                {
+                    var shows = _getPopularShowsFilteredByTheatre.Execute(Convert.ToInt32(query.TheatreId));
+                    return Ok(shows);
+                }
+                if (query.Type == "popularShows" && query.ActorId != null)
+                {
+                    var shows = _getPopularShowsFilteredByActor.Execute(Convert.ToInt32(query.ActorId));
+                    return Ok(shows);
+                }
+                if (query.Type == "popularShows" && query.DirectorId != null)
+                {
+                    var shows = _getPopularShowsFilteredByDirector.Execute(Convert.ToInt32(query.DirectorId));
                     return Ok(shows);
                 }
                 if (query.Type == "popularShows")

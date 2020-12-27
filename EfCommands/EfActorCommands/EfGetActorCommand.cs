@@ -30,6 +30,9 @@ namespace EfCommands.EfActorCommands
                 .Include(a => a.ActorShows)
                 .ThenInclude(a => a.Show)
                 .ThenInclude(a => a.Category)
+                .Include(a => a.ActorShows)
+                .ThenInclude(a => a.Show)
+                .ThenInclude(a => a.ShowImages)
                 .Where(a => a.Id == request)
                 .FirstOrDefault();
 
@@ -52,7 +55,13 @@ namespace EfCommands.EfActorCommands
                 {
                     Id = s.Show.Id,
                     Title = s.Show.Title,
-                    CategoryName = s.Show.Category.CategoryName
+                    CategoryName = s.Show.Category.CategoryName,
+                    ShowImageDtos = s.Show.ShowImages.Select(i => new GetImageDto 
+                    { 
+                        Id = i.Id,
+                        Alt = i.ShowImageAlt,
+                        Path = "uploads/show-images/" + i.ShowImagePath
+                    }).Take(1)
                 }),
                 TheatreBasicDtos = actor.ActorShows.Select(t => new TheatreBasicDto
                 {

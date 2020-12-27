@@ -11,5 +11,11 @@ namespace Application.Queries
         public string Type { get; set; }
 
         public string ShowId { get; set; }
+
+        public string TheatreId { get; set; }
+
+        public string ActorId { get; set; }
+
+        public string DirectorId { get; set; }
     }
 }

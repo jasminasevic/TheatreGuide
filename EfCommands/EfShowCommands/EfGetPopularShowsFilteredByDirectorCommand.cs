@@ -1,7 +1,6 @@
 ﻿using Application.Commands.ShowCommands;
 using Application.DTO.ImageDto;
 using Application.DTO.ShowDto;
-using Application.Queries;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,9 +10,9 @@ using System.Text;
 
 namespace EfCommands.EfShowCommands
 {
-    public class EfGetPopularShowsFilteredById : EfBaseCommand, IGetPopularShowsFilteredById
+    public class EfGetPopularShowsFilteredByDirectorCommand : EfBaseCommand, IGetPopularShowsFilteredByDirectorCommand
     {
-        public EfGetPopularShowsFilteredById(EfContext context) : base(context)
+        public EfGetPopularShowsFilteredByDirectorCommand(EfContext context) : base(context)
         {
         }
 
@@ -21,12 +20,12 @@ namespace EfCommands.EfShowCommands
         {
             var shows = Context.Shows
                 .Include(s => s.ShowFollowers)
-                .Include(s => s.Theatre)
-                .Include(s => s.ShowFollowers)
+                .Include(s => s.ShowImages)
+                .Include(s => s.Director)
                 .AsQueryable();
 
             if (Convert.ToInt32(request) != 0)
-                shows = shows.Where(s => s.Id != Convert.ToInt32(request));
+                shows = shows.Where(s => s.DirectorId == Convert.ToInt32(request));
 
             var data = shows.Select(s => new GetPopularShowsDto
             {
@@ -38,8 +37,6 @@ namespace EfCommands.EfShowCommands
                     Alt = si.ShowImageAlt,
                     Path = "uploads/show-images/" + si.ShowImagePath
                 }).Take(1),
-                TheatreId = s.TheatreId,
-                TheatreName = s.Theatre.TheatreName,
                 FollowersNumber = s.ShowFollowers.Count()
             });
 
