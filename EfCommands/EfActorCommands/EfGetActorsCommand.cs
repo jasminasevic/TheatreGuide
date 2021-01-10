@@ -35,9 +35,7 @@ namespace EfCommands.EfActorCommands
                 .Contains(request.ActorLastName.ToLower()));
 
             if (request.SearchQuery != null)
-                actors = actors.Where(a => a.ActorFirstName.ToLower()
-                .Contains(request.SearchQuery.ToLower())
-                || a.ActorLastName.ToLower()
+                actors = actors.Where(a => (a.ActorFirstName.ToLower() + ' ' + a.ActorLastName.ToLower())
                 .Contains(request.SearchQuery.ToLower()));
 
             var data = actors.Select(a => new GetActorDto
@@ -50,7 +48,7 @@ namespace EfCommands.EfActorCommands
                 {
                     Id = i.Id,
                     Alt = i.ActorImageAlt,
-                    Path = i.ActorImagePath
+                    Path = "/uploads/actor-images/" + i.ActorImagePath
                 })
             });
 
@@ -59,6 +57,12 @@ namespace EfCommands.EfActorCommands
 
             switch (sortOrder)
             {
+                case "name_desc":
+                    data = data.OrderByDescending(a => a.ActorFirstName);
+                    break;
+                case "name":
+                    data = data.OrderBy(a => a.ActorFirstName);
+                    break;
                 case "actorFirstName_desc":
                     data = data.OrderByDescending(a => a.ActorFirstName);
                     break;

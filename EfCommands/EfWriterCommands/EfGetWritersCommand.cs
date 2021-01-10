@@ -35,11 +35,8 @@ namespace EfCommands.EfWriterCommands
 
             //Filtering logic
             if (!string.IsNullOrEmpty(request.SearchQuery))
-                writers = writers.Where(w => w.WriterFirstName.ToLower()
-                .Contains(request.SearchQuery.ToLower())
-                || w.WriterLastName.ToLower()
+                writers = writers.Where(w => (w.WriterFirstName.ToLower() + ' ' + w.WriterLastName.ToLower())
                 .Contains(request.SearchQuery.ToLower()));
-
 
             var data = writers.Select(w => new GetWriterDto
             {

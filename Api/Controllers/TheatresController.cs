@@ -43,7 +43,7 @@ namespace Api.Controllers
         // GET: api/Theatres
         [HttpGet]
         public IActionResult Get([FromQuery]TheatreQuery query)
-        {
+       {
             try
             {
                 if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)

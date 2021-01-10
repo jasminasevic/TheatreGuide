@@ -23,6 +23,7 @@ namespace EfCommands.EfShowCommands
                 .Include(s => s.ShowFollowers)
                 .Include(s => s.Theatre)
                 .Include(s => s.ShowFollowers)
+                .Include(s => s.ShowImages)
                 .AsQueryable();
 
             var data = shows.Select(s => new GetPopularShowsDto

@@ -35,9 +35,7 @@ namespace EfCommands.EfDirectorCommands
 
             //Filtering logic
             if (!string.IsNullOrEmpty(request.SearchQuery))
-                directors = directors.Where(d => d.DirectorFirstName.ToLower()
-                .Contains(request.SearchQuery.ToLower()) ||
-                d.DirectorLastName.ToLower()
+                directors = directors.Where(d => (d.DirectorFirstName.ToLower() + ' ' + d.DirectorLastName.ToLower())
                 .Contains(request.SearchQuery.ToLower()));
 
 

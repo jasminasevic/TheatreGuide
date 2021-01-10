@@ -35,9 +35,9 @@ namespace EfCommands.EfUserCommands
                 users = Context.Users.Where(u => u.Email.ToLower().Contains(request.Email.ToLower()));
 
             if (request.SearchQuery != null)
-                users = Context.Users.Where(u => u.FirstName.ToLower().Contains(request.SearchQuery.ToLower()) 
-                    || u.LastName.ToLower().Contains(request.SearchQuery.ToLower())
-                    || u.Email.ToLower().Contains(request.SearchQuery.ToLower()));
+                users = Context.Users.Where(u => (u.FirstName.ToLower() + ' ' + u.LastName.ToLower())
+                    .Contains(request.SearchQuery.ToLower())
+                    || (u.Email.ToLower().Contains(request.SearchQuery.ToLower())));
 
             var data = users.Select(u => new GetUserDto
             {

@@ -41,9 +41,7 @@ namespace EfCommands.EfTheatreCommands
                 theatre = theatre.Where(t => t.TheatreName.ToLower()
                 .Contains(request.SearchQuery.ToLower())
                 || t.ContactEmail.ToLower()
-                .Contains(request.SearchQuery.ToLower())
-                || t.Shows.Any(s => s.Title.ToLower()
-                .Contains(request.SearchQuery.ToLower())));
+                .Contains(request.SearchQuery.ToLower()));
 
             var data = theatre.Select(t => new GetTheatreDto
             {
@@ -60,7 +58,7 @@ namespace EfCommands.EfTheatreCommands
                 {
                     Id = i.Id,
                     Alt = i.TheatreImageAlt,
-                    Path = i.TheatreImagePath
+                    Path = "/uploads/theatre-images/" + i.TheatreImagePath
                 }),
                 ShowBaseInfoDtos = t.Shows.Select(s => new ShowBaseInfoDto
                 {
@@ -88,7 +86,7 @@ namespace EfCommands.EfTheatreCommands
                     data = data.OrderBy(t => t.Email);
                     break;
                 default:
-                    data = data.OrderBy(t => t.Email);
+                    data = data.OrderBy(t => t.Name);
                     break;
             };
 
