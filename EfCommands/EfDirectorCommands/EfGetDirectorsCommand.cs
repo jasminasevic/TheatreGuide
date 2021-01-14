@@ -58,6 +58,12 @@ namespace EfCommands.EfDirectorCommands
 
             switch (sortOrder)
             {
+                case "name_desc":
+                    data = data.OrderByDescending(d => d.DirectorFirstName);
+                    break;
+                case "name_asc":
+                    data = data.OrderBy(d => d.DirectorFirstName);
+                    break;
                 case "directorFirstName_desc":
                     data = data.OrderByDescending(d => d.DirectorFirstName);
                     break;

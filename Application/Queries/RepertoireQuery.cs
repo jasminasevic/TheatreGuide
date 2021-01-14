@@ -11,5 +11,7 @@ namespace Application.Queries
         public string TheatreName { get; set; }
 
         public string SceneName { get; set; }
+
+        public string Type { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Application.Commands.RepertoireCommands;
+using Application.DTO.ImageDto;
 using Application.DTO.PriceDto;
 using Application.DTO.RepertoireDto;
 using Application.Exceptions;
@@ -30,6 +31,8 @@ namespace EfCommands.EfRepertoireCommands
                 .ThenInclude(s => s.Sector)
                 .Include(p => p.Prices)
                 .ThenInclude(c => c.Currency)
+                .Include(p => p.Show)
+                .ThenInclude(p => p.ShowImages)
                 .Where(r => r.Id == request)
                 .FirstOrDefault();
 
@@ -59,6 +62,12 @@ namespace EfCommands.EfRepertoireCommands
                     CurrencyName = p.Currency.CurrencyName,
                     SeatCapacity = p.Sector.SeatCapacity,
                     RowsTotalNumber = p.Sector.RowsTotalNumber
+                }),
+                GetImageDtos = repertoire.Show.ShowImages.Select(si => new GetImageDto
+                {
+                    Id = si.Id,
+                    Alt = si.ShowImageAlt,
+                    Path = "/uploads/show-images/" + si.ShowImagePath
                 })
             };
         }

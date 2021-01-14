@@ -109,6 +109,7 @@ namespace Api
             services.AddTransient<IEditRepertoireCommand, EfEditRepertoireCommand>();
             services.AddTransient<IGetRepertoireCommand, EfGetRepertoireCommand>();
             services.AddTransient<IGetRepertoiresCommand, EfGetRepertoiresCommand>();
+            services.AddTransient<IGetUpcomingShowsCommand, EfGetUpcomingShowsCommand>();
 
             //Roles
             services.AddTransient<IAddRoleCommand, EfAddRoleCommand>();

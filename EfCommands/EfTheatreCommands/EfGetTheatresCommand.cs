@@ -39,8 +39,6 @@ namespace EfCommands.EfTheatreCommands
 
             if (request.SearchQuery != null)
                 theatre = theatre.Where(t => t.TheatreName.ToLower()
-                .Contains(request.SearchQuery.ToLower())
-                || t.ContactEmail.ToLower()
                 .Contains(request.SearchQuery.ToLower()));
 
             var data = theatre.Select(t => new GetTheatreDto

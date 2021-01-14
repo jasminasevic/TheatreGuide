@@ -1,4 +1,5 @@
-﻿using Application.DTO.PriceDto;
+﻿using Application.DTO.ImageDto;
+using Application.DTO.PriceDto;
 using Application.DTO.SectorDto;
 using System;
 using System.Collections.Generic;
@@ -39,5 +40,7 @@ namespace Application.DTO.RepertoireDto
         public DateTime PremiereDate { get; set; }
 
         public IEnumerable<GetPriceDto> GetPriceDtos { get; set; }
+
+        public IEnumerable<GetImageDto> GetImageDtos { get; set; }
     }
 }

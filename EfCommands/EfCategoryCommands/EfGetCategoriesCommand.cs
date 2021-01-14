@@ -25,6 +25,10 @@ namespace EfCommands.EfCategoryCommands
                 categories = categories.Where(c => c.CategoryName.ToLower()
                 .Contains(request.CategoryName.ToLower()));
 
+            if(request.SearchQuery != null)
+                categories = categories.Where(c => c.CategoryName.ToLower()
+                .Contains(request.CategoryName.ToLower()));
+
             var data = categories.Select(c => new GetCategoryDto
             {
                 Id = c.Id,

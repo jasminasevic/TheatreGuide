@@ -56,13 +56,14 @@ namespace EfCommands.EfShowCommands
                 ContentAdvisory = s.ContentAdvisory,
                 PremiereDate = s.PremiereDate,
                 Theatre = s.Theatre.TheatreName,
+                TheatreId = s.TheatreId,
                 Scene = s.Scene.SceneName,
                 FollowersNumber = s.ShowFollowers.Count(),
                 ShowImageDtos = s.ShowImages.Select(i => new GetImageDto
                 {
                     Id = i.Id,
                     Alt = i.ShowImageAlt,
-                    Path = i.ShowImagePath
+                    Path = "uploads/show-images/" + i.ShowImagePath
                 }),
                 ActorShowDtos = s.ActorShows.Select(a => new ActorShowDto
                 {
@@ -79,10 +80,10 @@ namespace EfCommands.EfShowCommands
 
             switch (sortOrder)
             {
-                case "title_desc":
+                case "name_desc":
                     data = data.OrderByDescending(s => s.Title);
                     break;
-                case "title_asc":
+                case "name_asc":
                     data = data.OrderBy(s => s.Title);
                     break;
                 case "category_desc":

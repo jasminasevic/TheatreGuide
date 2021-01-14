@@ -22,7 +22,6 @@ namespace EfCommands.EfShowCommands
             var shows = Context.Shows
                 .Include(s => s.ShowFollowers)
                 .Include(s => s.Theatre)
-                .Include(s => s.ShowFollowers)
                 .Include(s => s.ShowImages)
                 .AsQueryable();
 

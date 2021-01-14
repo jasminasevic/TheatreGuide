@@ -20,18 +20,21 @@ namespace Api.Controllers
         protected readonly IGetRepertoiresCommand _getRepertoires;
         protected readonly IDeleteRepertoireCommand _deleteRepertoire;
         protected readonly IEditRepertoireCommand _editRepertoire;
+        protected readonly IGetUpcomingShowsCommand _getUpcomingShows;
 
         public RepertoiresController(IAddRepertoireCommand addRepertoire,
             IGetRepertoireCommand getRepertoire,
             IGetRepertoiresCommand getRepertoires,
-            IDeleteRepertoireCommand deleteRepertoire, 
-            IEditRepertoireCommand editRepertoire)
+            IDeleteRepertoireCommand deleteRepertoire,
+            IEditRepertoireCommand editRepertoire,
+            IGetUpcomingShowsCommand getUpcomingShows)
         {
             _addRepertoire = addRepertoire;
             _getRepertoire = getRepertoire;
             _getRepertoires = getRepertoires;
             _deleteRepertoire = deleteRepertoire;
             _editRepertoire = editRepertoire;
+            _getUpcomingShows = getUpcomingShows;
         }
 
 
@@ -41,6 +44,11 @@ namespace Api.Controllers
         {
             try
             {
+                if (query.Type == "upcomingShows")
+                {
+                    var upcomingShows = _getUpcomingShows.Execute(new RepertoireQuery());
+                    return Ok(upcomingShows);
+                }
                 var repertoires = _getRepertoires.Execute(query);
                 return Ok(repertoires);
             }

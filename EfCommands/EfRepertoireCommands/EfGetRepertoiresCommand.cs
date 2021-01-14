@@ -1,4 +1,5 @@
 ﻿using Application.Commands.RepertoireCommands;
+using Application.DTO.ImageDto;
 using Application.DTO.PriceDto;
 using Application.DTO.RepertoireDto;
 using Application.Queries;
@@ -25,6 +26,8 @@ namespace EfCommands.EfRepertoireCommands
                 .ThenInclude(t => t.Theatre)
                 .Include(s => s.Show)
                 .ThenInclude(s => s.Scene)
+                .Include(s => s.Show)
+                .ThenInclude(s => s.ShowImages)
                 .AsQueryable();
 
             //Filtering logic
@@ -53,16 +56,24 @@ namespace EfCommands.EfRepertoireCommands
                 SceneId = r.Show.SceneId,
                 SceneName = r.Show.Scene.SceneName,
                 ShowDate = r.Date,
+                GetImageDtos = r.Show.ShowImages.Select(si => new GetImageDto
+                {
+                    Id = si.Id,
+                    Alt = si.ShowImageAlt,
+                    Path = "/uploads/show-images/" + si.ShowImagePath
+                }).Take(1)
             });
+
+            data = data.Where(s => s.ShowDate > DateTime.Now);
 
             var sortOrder = request.SortOrder;
 
             switch (sortOrder)
             {
-                case "title_desc":
+                case "name_desc":
                     data = data.OrderByDescending(r => r.ShowName);
                     break;
-                case "title_asc":
+                case "name_asc":
                     data = data.OrderBy(r => r.ShowName);
                     break;
                 case "theatre_desc":
@@ -84,7 +95,7 @@ namespace EfCommands.EfRepertoireCommands
                     data = data.OrderBy(r => r.ShowDate);
                     break;
                 default:
-                    data = data.OrderByDescending(r => r.ShowDate);
+                    data = data.OrderBy(r => r.ShowDate);
                     break;
             }
 
