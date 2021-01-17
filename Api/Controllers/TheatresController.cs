@@ -23,14 +23,15 @@ namespace Api.Controllers
         protected readonly IDeleteTheatreCommand _deleteTheatre;
         protected readonly IEditTheatreCommand _editTheatre;
         protected readonly IGetTheatresListCommand _getTheatresList;
+        protected readonly IGetRecentlyJoinedTheatresCommand _getRecentlyJoinedTheatres;
 
         public TheatresController(IAddTheatreCommand addTheatre,
             IGetTheatresCommand getTheatres,
             IGetTheatreCommand getTheatre,
             IDeleteTheatreCommand deleteTheatre,
             IEditTheatreCommand editTheatre,
-            IGetTheatresListCommand getTheatresList
-            )
+            IGetTheatresListCommand getTheatresList, 
+            IGetRecentlyJoinedTheatresCommand getRecentlyJoinedTheatres)
         {
             _addTheatre = addTheatre;
             _getTheatres = getTheatres;
@@ -38,6 +39,7 @@ namespace Api.Controllers
             _deleteTheatre = deleteTheatre;
             _editTheatre = editTheatre;
             _getTheatresList = getTheatresList;
+            _getRecentlyJoinedTheatres = getRecentlyJoinedTheatres;
         }
 
         // GET: api/Theatres
@@ -46,16 +48,20 @@ namespace Api.Controllers
        {
             try
             {
-                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
+                if (query.SearchQuery == null && query.PageNumber == 0 
+                    && query.PerPage == 0 && query.Type == null)
                 {
                     var theatres = _getTheatresList.Execute(new SearchQuery());
                     return Ok(theatres);
                 }
-                else
+                if(query.Type == "recentlyJoinedTheatres")
                 {
-                    var theatres = _getTheatres.Execute(query);
+                    var theatres = _getRecentlyJoinedTheatres.Execute(new SearchQuery());
                     return Ok(theatres);
                 }
+                var allTheatres = _getTheatres.Execute(query);
+                return Ok(allTheatres);
+                
             }
             catch (Exception e)
             {

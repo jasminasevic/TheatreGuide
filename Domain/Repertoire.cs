@@ -14,6 +14,8 @@ namespace Domain
 
         public DateTime Date { get; set; }
 
+        public bool IsPremiere { get; set; } = false;
+
         public ICollection<Price> Prices { get; set; }
 
         public ICollection<Purchase> Purchases { get; set; }

@@ -56,6 +56,7 @@ namespace EfCommands.EfRepertoireCommands
                 SceneId = r.Show.SceneId,
                 SceneName = r.Show.Scene.SceneName,
                 ShowDate = r.Date,
+                IsPremiere = r.IsPremiere,
                 GetImageDtos = r.Show.ShowImages.Select(si => new GetImageDto
                 {
                     Id = si.Id,

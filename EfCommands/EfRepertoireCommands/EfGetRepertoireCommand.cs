@@ -52,7 +52,9 @@ namespace EfCommands.EfRepertoireCommands
                 SceneId = repertoire.Show.SceneId,
                 SceneName = repertoire.Show.Scene.SceneName,
                 PremiereDate = repertoire.Show.PremiereDate,
+                Duration = repertoire.Show.Duration,
                 Description = repertoire.Show.ShowDescription,
+                IsPremiere = repertoire.IsPremiere,
                 GetPriceDtos = repertoire.Prices.Select(p => new GetPriceDto
                 {
                     SectorId = p.SectorId,

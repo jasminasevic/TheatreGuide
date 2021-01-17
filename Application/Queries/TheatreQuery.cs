@@ -11,5 +11,7 @@ namespace Application.Queries
         public string Email { get; set; }
 
         public string Location { get; set; }
+
+        public string Type { get; set; }
     }
 }

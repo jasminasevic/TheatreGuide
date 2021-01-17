@@ -32,7 +32,8 @@ namespace EfCommands.EfRepertoireCommands
             var repertoire = new Domain.Repertoire
             {
                 ShowId = request.ShowId,
-                Date = showDate
+                Date = showDate,
+                IsPremiere = request.IsPremiere
             };
 
             Context.Repertoires.Add(repertoire);

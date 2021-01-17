@@ -25,6 +25,7 @@ namespace EfCommands.EfRepertoireCommands
             repertoire.ShowId = request.ShowId;
             repertoire.Date = request.ShowDate;
             repertoire.ModifiedAt = DateTime.Now;
+            repertoire.IsPremiere = request.IsPremiere;
 
 
             foreach (var ticketPrice in Context.Prices.Where(s => s.RepertoireId == request.Id))
