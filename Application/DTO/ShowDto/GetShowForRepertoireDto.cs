@@ -11,6 +11,8 @@ namespace Application.DTO.ShowDto
 
         public string Title { get; set; }
 
+        public int TheatreId { get; set; }
+
         public string Theatre { get; set; }
 
         public string Scene { get; set; }

@@ -22,8 +22,7 @@ namespace EfCommands.EfRepertoireCommands
             var upcomingShows = Context.Repertoires
                 .Include(r => r.Show)
                 .ThenInclude(r => r.ShowImages)
-                .Include(r => r.Show)
-                .ThenInclude(r => r.Theatre)
+                .Include(r => r.Theatre)
                 .Include(r => r.Show)
                 .ThenInclude(r => r.ShowFollowers)
                 .AsQueryable();
@@ -38,8 +37,8 @@ namespace EfCommands.EfRepertoireCommands
                     Alt = si.ShowImageAlt,
                     Path = "uploads/show-images/" + si.ShowImagePath
                 }).Take(1),
-                TheatreId = s.Show.TheatreId,
-                TheatreName = s.Show.Theatre.TheatreName,
+                TheatreId = s.TheatreId,
+                TheatreName = s.Theatre.TheatreName,
                 ShowDate = s.Date,
                 FollowersNumber = s.Show.ShowFollowers.Count()
             });

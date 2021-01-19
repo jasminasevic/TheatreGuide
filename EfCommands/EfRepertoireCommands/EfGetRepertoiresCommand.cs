@@ -22,8 +22,7 @@ namespace EfCommands.EfRepertoireCommands
         public PagedResponses<GetRepertoireDto> Execute(RepertoireQuery request)
         {
             var repertoires = Context.Repertoires
-                .Include(s => s.Show)
-                .ThenInclude(t => t.Theatre)
+                .Include(t => t.Theatre)
                 .Include(s => s.Show)
                 .ThenInclude(s => s.Scene)
                 .Include(s => s.Show)
@@ -33,7 +32,7 @@ namespace EfCommands.EfRepertoireCommands
             //Filtering logic
 
             if (request.TheatreName != null)
-                repertoires = repertoires.Where(r => r.Show.Theatre.TheatreName.ToLower()
+                repertoires = repertoires.Where(r => r.Theatre.TheatreName.ToLower()
                 .Contains(request.TheatreName.ToLower()));
 
             if (request.ShowTitle != null)
@@ -41,7 +40,7 @@ namespace EfCommands.EfRepertoireCommands
                 .Contains(request.ShowTitle.ToLower()));
 
             if(request.SearchQuery != null)
-                repertoires = repertoires.Where(r => r.Show.Theatre.TheatreName.ToLower()
+                repertoires = repertoires.Where(r => r.Theatre.TheatreName.ToLower()
                .Contains(request.SearchQuery.ToLower())
                || r.Show.Title.ToLower()
                .Contains(request.SearchQuery.ToLower()));
@@ -51,8 +50,8 @@ namespace EfCommands.EfRepertoireCommands
                 Id = r.Id,
                 ShowId = r.ShowId,
                 ShowName = r.Show.Title,
-                TheatreId = r.Show.TheatreId,
-                TheatreName = r.Show.Theatre.TheatreName,
+                TheatreId = r.TheatreId,
+                TheatreName = r.Theatre.TheatreName,
                 SceneId = r.Show.SceneId,
                 SceneName = r.Show.Scene.SceneName,
                 ShowDate = r.Date,

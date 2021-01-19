@@ -8,7 +8,10 @@ namespace Application.DTO.ShowDto
     public class GetShowWithPriceForRepertoireDto
     {
         public  int Id { get; set; }
+
         public string Title { get; set; }
+
+        public int TheatreId { get; set; }
 
         public string Theatre { get; set; }
 

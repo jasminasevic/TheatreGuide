@@ -27,11 +27,15 @@ namespace EfCommands.EfRepertoireCommands
             if (request.ShowDate == null)
                 throw new Exception("Show Date is required");
 
+            if (request.TheatreId == 0)
+                throw new Exception("Theatre is required");
+
             var showDate = Convert.ToDateTime(request.ShowDate);
             
             var repertoire = new Domain.Repertoire
             {
                 ShowId = request.ShowId,
+                TheatreId = request.TheatreId,
                 Date = showDate,
                 IsPremiere = request.IsPremiere
             };

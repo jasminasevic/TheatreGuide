@@ -36,6 +36,7 @@ namespace EfCommands.EfShowCommands
             {
                 Id = show.Id,
                 Title = show.Title,
+                TheatreId = show.TheatreId,
                 Theatre = show.Theatre.TheatreName,
                 Scene = show.Scene.SceneName,
                 GetSectorDtos = show.Scene.Sectors.Select(s => new GetSectorDto

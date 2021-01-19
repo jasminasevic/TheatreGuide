@@ -11,6 +11,8 @@ namespace Application.DTO.RepertoireDto
 
         public int ShowId { get; set; }
 
+        public int TheatreId { get; set; }
+
         public bool IsPremiere { get; set; }
 
         public DateTime ShowDate { get; set; }

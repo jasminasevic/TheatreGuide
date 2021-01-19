@@ -21,8 +21,7 @@ namespace EfCommands.EfRepertoireCommands
         public GetRepertoireDto Execute(int request)
         {
             var repertoire = Context.Repertoires
-                .Include(s => s.Show)
-                .ThenInclude(s => s.Theatre)
+                .Include(s => s.Theatre)
                 .Include(s => s.Show)
                 .ThenInclude(c => c.Category)
                 .Include(s => s.Show)
@@ -44,8 +43,8 @@ namespace EfCommands.EfRepertoireCommands
                 Id = repertoire.Id,
                 ShowId = repertoire.ShowId,
                 ShowName = repertoire.Show.Title,
-                TheatreId = repertoire.Show.TheatreId,
-                TheatreName = repertoire.Show.Theatre.TheatreName,
+                TheatreId = repertoire.TheatreId,
+                TheatreName = repertoire.Theatre.TheatreName,
                 ShowDate = repertoire.Date,
                 Category = repertoire.Show.Category.CategoryName,
                 CategoryId = repertoire.Show.CategoryId,

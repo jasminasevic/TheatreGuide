@@ -12,6 +12,11 @@ namespace Domain
 
         public Show Show { get; set; }
 
+        public int TheatreId { get; set; }
+
+        public Theatre Theatre { get; set; }
+
+
         public DateTime Date { get; set; }
 
         public bool IsPremiere { get; set; } = false;
