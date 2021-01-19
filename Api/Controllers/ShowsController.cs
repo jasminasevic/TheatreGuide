@@ -28,6 +28,7 @@ namespace Api.Controllers
         protected readonly IGetPopularShowsFilteredByTheatreCommand _getPopularShowsFilteredByTheatre;
         protected readonly IGetPopularShowsFilteredByActorCommand _getPopularShowsFilteredByActor;
         protected readonly IGetPopularShowsFilteredByDirectorCommand _getPopularShowsFilteredByDirector;
+        protected readonly IGetPopularShowsFilteredByIdAndTheatreCommand _getPopularShowsFilteredByIdAndTheatre;
 
         public ShowsController(IAddShowCommand addShow,
             IGetShowCommand getShow,
@@ -40,8 +41,9 @@ namespace Api.Controllers
             IGetPopularShowsCommand getPopularShows,
             IGetPopularShowsFilteredByIdCommand getPopularShowsFilteredById,
             IGetPopularShowsFilteredByTheatreCommand getPopularShowsFilteredByTheatre,
-            IGetPopularShowsFilteredByActorCommand getPopularShowsFilteredByActor, 
-            IGetPopularShowsFilteredByDirectorCommand getPopularShowsFilteredByDirector)
+            IGetPopularShowsFilteredByActorCommand getPopularShowsFilteredByActor,
+            IGetPopularShowsFilteredByDirectorCommand getPopularShowsFilteredByDirector, 
+            IGetPopularShowsFilteredByIdAndTheatreCommand getPopularShowsFilteredByIdAndTheatre)
         {
             _addShow = addShow;
             _getShow = getShow;
@@ -56,6 +58,7 @@ namespace Api.Controllers
             _getPopularShowsFilteredByTheatre = getPopularShowsFilteredByTheatre;
             _getPopularShowsFilteredByActor = getPopularShowsFilteredByActor;
             _getPopularShowsFilteredByDirector = getPopularShowsFilteredByDirector;
+            _getPopularShowsFilteredByIdAndTheatre = getPopularShowsFilteredByIdAndTheatre;
         }
 
         // GET: api/Shows
@@ -93,6 +96,11 @@ namespace Api.Controllers
                 if (query.Type == "popularShows")
                 {
                     var shows = _getPopularShows.Execute(new ShowQuery());
+                    return Ok(shows);
+                }
+                if (query.Type == "popularShowsFilteredByIdAndTheatre")
+                {
+                    var shows = _getPopularShowsFilteredByIdAndTheatre.Execute(query);
                     return Ok(shows);
                 }
                 var allShows = _getShows.Execute(query);

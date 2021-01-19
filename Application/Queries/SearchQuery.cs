@@ -9,5 +9,6 @@ namespace Application.Queries
         public string Keyword { get; set; }
 
         public string Type { get; set; }
+
     }
 }

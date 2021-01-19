@@ -110,6 +110,7 @@ namespace Api
             services.AddTransient<IGetRepertoireCommand, EfGetRepertoireCommand>();
             services.AddTransient<IGetRepertoiresCommand, EfGetRepertoiresCommand>();
             services.AddTransient<IGetUpcomingShowsCommand, EfGetUpcomingShowsCommand>();
+            services.AddTransient<IGetUpcomingPremieresCommand, EfGetUpcomingPremieresCommand>();
 
             //Roles
             services.AddTransient<IAddRoleCommand, EfAddRoleCommand>();
@@ -147,6 +148,7 @@ namespace Api
             services.AddTransient<IGetPopularShowsFilteredByTheatreCommand, EfGetPopularShowsFilteredByTheatreCommand>();
             services.AddTransient<IGetPopularShowsFilteredByActorCommand, EfGetPopularShowsFilteredByActorCommand>();
             services.AddTransient<IGetPopularShowsFilteredByDirectorCommand, EfGetPopularShowsFilteredByDirectorCommand>();
+            services.AddTransient<IGetPopularShowsFilteredByIdAndTheatreCommand, EfGetPopularShowsFilteredByIdAndTheatreCommand>();
 
             //Theatres
             services.AddTransient<IAddTheatreCommand, EfAddTheatreCommand>();
