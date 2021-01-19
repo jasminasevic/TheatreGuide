@@ -1,4 +1,5 @@
 ﻿using Application.DTO.ImageDto;
+using Application.DTO.RepertoireDto;
 using Application.DTO.SceneDto;
 using Application.DTO.ShowDto;
 using System;
@@ -32,6 +33,8 @@ namespace Application.DTO.TheatreDto
         public IEnumerable<GetSceneWithSectorsDto> GetSceneWithSectorsDtos { get; set; }
 
         public IEnumerable<ShowBaseInfoDto> ShowBaseInfoDtos  { get; set; }
+
+        public IEnumerable<GetUpcomingShowsDto> GetUpcomingShowsDtos { get; set; }
 
     }
 }

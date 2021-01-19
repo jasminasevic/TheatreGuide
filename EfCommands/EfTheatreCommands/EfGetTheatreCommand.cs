@@ -1,5 +1,6 @@
 ﻿using Application.Commands.TheatreCommands;
 using Application.DTO.ImageDto;
+using Application.DTO.RepertoireDto;
 using Application.DTO.SceneDto;
 using Application.DTO.SectorDto;
 using Application.DTO.ShowDto;

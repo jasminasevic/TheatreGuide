@@ -2,6 +2,7 @@
 using Application.DTO.ActorDto;
 using Application.DTO.ImageDto;
 using Application.DTO.PriceDto;
+using Application.DTO.RepertoireDto;
 using Application.DTO.SectorDto;
 using Application.DTO.ShowDto;
 using Application.Exceptions;
@@ -33,6 +34,7 @@ namespace EfCommands.EfShowCommands
                 .Include(s => s.Scene)
                 .ThenInclude(s => s.Sectors)
                 .Include(s => s.ShowFollowers)
+                .Include(s => s.Repertoires)
                 .Where(s => s.Id == request)
                 .FirstOrDefault();
 
@@ -59,7 +61,7 @@ namespace EfCommands.EfShowCommands
                 SceneId = show.SceneId,
                 Address = show.Theatre.Address.Location,
                 FollowersNumber = show.ShowFollowers.Count(),
-                
+
                 ShowImageDtos = show.ShowImages.Select(i => new GetImageDto
                 {
                     Id = i.Id,
@@ -74,13 +76,20 @@ namespace EfCommands.EfShowCommands
                     ActorRoleDescription = a.ActorRoleDescription,
                     ActorRoleName = a.ActorRoleName
                 }),
-                GetSectorDtos = show.Scene.Sectors.Select(s => new GetSectorDto 
-                { 
+                GetSectorDtos = show.Scene.Sectors.Select(s => new GetSectorDto
+                {
                     Id = s.Id,
                     SectorName = s.SectorName,
                     RowsTotalNumber = s.RowsTotalNumber,
                     SeatCapacity = s.SeatCapacity
-                })
+                }),
+                GetRepertoireForShowDtos = show.Repertoires.Select(r => new GetRepertoireForShowDto
+                {
+                    Id = r.Id,
+                    ShowDate = r.Date,
+                    IsPremiere = r.IsPremiere
+                }).Where(s => s.ShowDate > DateTime.Now)
+                .OrderBy(s => s.ShowDate)
             };
         }
     }
