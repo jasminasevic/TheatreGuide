@@ -15,6 +15,10 @@ namespace EfCommands.EfPurchaseCommands
         {
         }
 
+        public int Id => 26;
+
+        public string Name => "Delete Purchase Using EF";
+
         public void Execute(int request)
         {
             var purchase = Context.Purchases

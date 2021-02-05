@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Application.Commands.CategoryCommands
 {
-    public interface IGetCategoriesCommand : ICommand<CategoryQuery, PagedResponses<GetCategoryDto>>
+    public interface IGetCategoriesCommand : IQuery<CategoryQuery, PagedResponses<GetCategoryDto>>
     {
     }
 }

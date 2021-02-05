@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Application.Commands.RepertoireCommands
 {
-    public interface IGetRepertoiresCommand : ICommand<RepertoireQuery, PagedResponses<GetRepertoireDto>>
+    public interface IGetRepertoiresCommand : IQuery<RepertoireQuery, PagedResponses<GetRepertoireDto>>
     {
     }
 }

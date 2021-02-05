@@ -13,6 +13,10 @@ namespace EfCommands.EfShowFolloweCommands
         {
         }
 
+        public int Id => 66;
+
+        public string Name => "Delete Show Follower Using EF";
+
         public void Execute(int requestFirst, int requestSecond)
         {
             var follower = Context.Users.Find(requestFirst);

@@ -15,6 +15,10 @@ namespace EfCommands.EfActorCommands
         {
         }
 
+        public int Id => 6;
+
+        public string Name => "Get Actor List Using EF";
+
         public IEnumerable<GetActorBasicDto> Execute(SearchQuery request)
         {
             var actors = Context.Actors

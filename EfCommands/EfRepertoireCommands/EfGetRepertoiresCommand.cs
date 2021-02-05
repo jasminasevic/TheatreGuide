@@ -19,6 +19,10 @@ namespace EfCommands.EfRepertoireCommands
         {
         }
 
+        public int Id => 34;
+
+        public string Name => "Get Repertoire Using EF";
+
         public PagedResponses<GetRepertoireDto> Execute(RepertoireQuery request)
         {
             var repertoires = Context.Repertoires
@@ -93,6 +97,12 @@ namespace EfCommands.EfRepertoireCommands
                     break;
                 case "date_asc":
                     data = data.OrderBy(r => r.ShowDate);
+                    break;
+                case "isPremiere_desc":
+                    data = data.OrderByDescending(r => r.IsPremiere);
+                    break;
+                case "isPremiere_asc":
+                    data = data.OrderBy(r => r.IsPremiere);
                     break;
                 default:
                     data = data.OrderBy(r => r.ShowDate);

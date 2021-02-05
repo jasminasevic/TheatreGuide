@@ -19,6 +19,10 @@ namespace EfCommands.EfPurchaseCommands
         {
         }
 
+        public int Id => 29;
+
+        public string Name => "Get Purchases Using EF";
+
         public PagedResponses<GetPurchaseDto> Execute(PurchaseQuery request)
         {
             var purchase = Context.Purchases

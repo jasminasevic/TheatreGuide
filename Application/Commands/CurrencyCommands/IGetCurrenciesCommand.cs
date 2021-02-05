@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Application.Commands.CurrencyCommands
 {
-    public interface IGetCurrenciesCommand : ICommand<CurrencyQuery, PagedResponses<GetCurrencyDto>>
+    public interface IGetCurrenciesCommand : IQuery<CurrencyQuery, PagedResponses<GetCurrencyDto>>
     {
     }
 }

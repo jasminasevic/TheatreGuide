@@ -18,6 +18,10 @@ namespace EfCommands.EfUserCommands
         {
         }
 
+        public int Id => 78;
+
+        public string Name => "Get Users Using EF";
+
         public PagedResponses<GetUserDto> Execute(UserQuery request)
         {
             var users = Context.Users

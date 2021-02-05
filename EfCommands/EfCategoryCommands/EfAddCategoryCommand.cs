@@ -15,6 +15,10 @@ namespace EfCommands.EfCategoryCommands
         {
         }
 
+        public int Id => 7;
+
+        public string Name => "Add New Category Using EF";
+
         public void Execute(CategoryDto request)
         {
             if (Context.Categories.Any(c => c.CategoryName.ToLower() == request.CategoryName.ToLower()))

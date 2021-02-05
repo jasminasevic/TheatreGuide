@@ -17,6 +17,10 @@ namespace EfCommands.EfSceneCommands
         {
         }
 
+        public int Id => 46;
+
+        public string Name => "Get Scene Using EF";
+
         public GetSceneDto Execute(int request)
         {
             var scene = Context.Scenes

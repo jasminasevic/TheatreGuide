@@ -15,6 +15,10 @@ namespace EfCommands.EfRepertoireCommands
         {
         }
 
+        public int Id => 32;
+
+        public string Name => "Edit Repertoire Using EF";
+
         public void Execute(RepertoireDto request)
         {
             var repertoire = Context.Repertoires.Find(request.Id);

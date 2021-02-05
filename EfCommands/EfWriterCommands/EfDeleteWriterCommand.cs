@@ -13,6 +13,10 @@ namespace EfCommands.EfWriterCommands
         {
         }
 
+        public int Id => 80;
+
+        public string Name => "Delete Writer Using EF";
+
         public void Execute(int request)
         {
             var writer = Context.Writers.Find(request);

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Commands.ShowCommands
 {
-    public interface IGetShowsListCommand : ICommand<SearchQuery, IEnumerable<GetShowBasicDto>>
+    public interface IGetShowsListCommand : IQuery<SearchQuery, IEnumerable<GetShowBasicDto>>
     {
     }
 }

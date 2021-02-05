@@ -17,6 +17,10 @@ namespace EfCommands.EfTheatreCommands
         {
         }
 
+        public int Id => 70;
+
+        public string Name => "Get Recently Joined Theatre Using EF";
+
         public IEnumerable<GetTheatreBaseInfoDto> Execute(SearchQuery request)
         {
             var theatre = Context.Theatres

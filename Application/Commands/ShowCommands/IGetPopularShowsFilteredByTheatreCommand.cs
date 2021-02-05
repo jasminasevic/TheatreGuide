@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.ShowCommands
 {
-    public interface IGetPopularShowsFilteredByTheatreCommand : ICommand<int, IEnumerable<GetPopularShowsDto>> 
+    public interface IGetPopularShowsFilteredByTheatreCommand : IQuery<int, IEnumerable<GetPopularShowsDto>> 
     {
     }
 }

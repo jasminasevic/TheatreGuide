@@ -17,6 +17,10 @@ namespace EfCommands.EfShowCommands
         {
         }
 
+        public int Id => 51;
+
+        public string Name => "Add New Show Using EF";
+
         public void Execute(ShowDto request)
         {
             if (Context.Shows.Any(s => s.Title.ToLower().Contains(request.Title)

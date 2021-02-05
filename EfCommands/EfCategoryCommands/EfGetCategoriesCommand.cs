@@ -16,6 +16,10 @@ namespace EfCommands.EfCategoryCommands
         {
         }
 
+        public int Id => 10;
+
+        public string Name => "Get Categories Using EF";
+
         public PagedResponses<GetCategoryDto> Execute(CategoryQuery request)
         {
             var categories = Context.Categories

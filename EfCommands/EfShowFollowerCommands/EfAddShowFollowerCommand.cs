@@ -15,6 +15,10 @@ namespace EfCommands.EfShowFolloweCommands
         {
         }
 
+        public int Id => 65;
+
+        public string Name => "Add New Show Follower Using EF";
+
         public void Execute(ShowFollowerDto request)
         {
             if (Context.ShowFollowers.Any(sf => sf.UserId == request.UserId

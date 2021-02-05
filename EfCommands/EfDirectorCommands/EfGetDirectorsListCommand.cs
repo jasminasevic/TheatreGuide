@@ -15,6 +15,10 @@ namespace EfCommands.EfDirectorCommands
         {
         }
 
+        public int Id => 24;
+
+        public string Name => "Get Directors List Using EF";
+
         public IEnumerable<GetDirectorBasicDto> Execute(SearchQuery request)
         {
             var directors = Context.Directors

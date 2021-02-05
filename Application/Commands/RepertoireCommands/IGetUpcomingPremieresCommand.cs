@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Application.Commands.RepertoireCommands
 {
-    public interface IGetUpcomingPremieresCommand : ICommand<RepertoireQuery, IEnumerable<GetUpcomingPremieresDto>>
+    public interface IGetUpcomingPremieresCommand : IQuery<RepertoireQuery, IEnumerable<GetUpcomingPremieresDto>>
     {
     }
 }

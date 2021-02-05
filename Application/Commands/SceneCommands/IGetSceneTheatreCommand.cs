@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Commands.SceneCommands
 {
-    public interface IGetScenesTheatreCommand : ICommand<SceneQuery, IEnumerable<GetSceneTheatreDto>>
+    public interface IGetScenesTheatreCommand : IQuery<SceneQuery, IEnumerable<GetSceneTheatreDto>>
     {
     }
 }

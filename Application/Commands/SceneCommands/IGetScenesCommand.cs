@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Application.Commands.SceneCommands
 {
-    public interface IGetScenesCommand : ICommand<SceneQuery, PagedResponses<GetSceneDto>>
+    public interface IGetScenesCommand : IQuery<SceneQuery, PagedResponses<GetSceneDto>>
     {
     }
 }

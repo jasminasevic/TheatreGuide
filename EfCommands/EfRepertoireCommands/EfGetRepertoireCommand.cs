@@ -18,6 +18,10 @@ namespace EfCommands.EfRepertoireCommands
         {
         }
 
+        public int Id => 33;
+
+        public string Name => "Get Repertoire Using EF";
+
         public GetRepertoireDto Execute(int request)
         {
             var repertoire = Context.Repertoires

@@ -15,6 +15,10 @@ namespace EfCommands.EfRepertoireCommands
         {
         }
 
+        public int Id => 30;
+
+        public string Name => "Add New Repertoire Using EF";
+
         public void Execute(RepertoireDto request)
         {
             if (Context.Repertoires.Any(r => r.ShowId == request.ShowId

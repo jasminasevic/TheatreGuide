@@ -15,6 +15,10 @@ namespace EfCommands.EfCategoryCommands
         {
         }
 
+        public int Id => 9;
+
+        public string Name => "Edit Category Using EF";
+
         public void Execute(CategoryDto request)
         {
             var category = Context.Categories.Find(request.Id);

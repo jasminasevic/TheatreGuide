@@ -17,6 +17,11 @@ namespace EfCommands.EfCategoryCommands
         {
         }
 
+        public int Id => 11;
+
+        public string Name => "Get Category List Using EF";
+
+
         public IEnumerable<CategoryBasicDto> Execute(SearchQuery request)
         {
             var categories = Context.Categories

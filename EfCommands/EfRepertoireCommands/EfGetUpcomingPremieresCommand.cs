@@ -17,6 +17,11 @@ namespace EfCommands.EfRepertoireCommands
         {
         }
 
+        public int Id => 35;
+
+        public string Name => "Get Upcoming Premieres Using EF";
+
+
         public IEnumerable<GetUpcomingPremieresDto> Execute(RepertoireQuery request)
         {
             var upcomingPremieres = Context.Repertoires

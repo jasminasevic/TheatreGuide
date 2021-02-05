@@ -17,6 +17,9 @@ namespace EfCommands.EfPurchaseCommands
         {
         }
 
+        public int Id => 28;
+
+        public string Name => "Get Purchase Using EF";
 
         public GetDetailedPurchaseDto Execute(int request)
         {

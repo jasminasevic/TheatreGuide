@@ -19,6 +19,10 @@ namespace EfCommands.EfDirectorCommands
         {
         }
 
+        public int Id => 22;
+
+        public string Name => "Get Director Using EF";
+
         public GetDirectorDto Execute(int request)
         {
             var director = Context.Directors

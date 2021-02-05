@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Commands.SceneCommands
 {
-    public interface IGetSceneWithShowsCommand : ICommand<int, GetSceneWithShowsDto>
+    public interface IGetSceneWithShowsCommand : IQuery<int, GetSceneWithShowsDto>
     {
     }
 }

@@ -15,6 +15,10 @@ namespace EfCommands.EfRoleCommands
         {
         }
 
+        public int Id => 37;
+
+        public string Name => "Add New Role Using EF";
+
         public void Execute(RoleDto request)
         {
             if (Context.Roles.Any(r => r.RoleName == request.RoleName))

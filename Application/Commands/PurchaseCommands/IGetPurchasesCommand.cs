@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Application.Commands.PurchaseCommands
 {
-    public interface IGetPurchasesCommand : ICommand<PurchaseQuery, PagedResponses<GetPurchaseDto>>
+    public interface IGetPurchasesCommand : IQuery<PurchaseQuery, PagedResponses<GetPurchaseDto>>
     {
     }
 }

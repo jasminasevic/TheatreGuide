@@ -13,6 +13,11 @@ namespace EfCommands.EfActorCommands
         {
         }
 
+        public int Id => 2;
+
+        public string Name => "Delete Actor Using EF";
+
+
         public void Execute(int request)
         {
             var actor = Context.Actors.Find(request);

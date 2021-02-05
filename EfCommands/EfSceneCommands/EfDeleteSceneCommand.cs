@@ -13,6 +13,10 @@ namespace EfCommands.EfSceneCommands
         {
         }
 
+        public int Id => 44;
+
+        public string Name => "Delete Scene Using EF";
+
         public void Execute(int request)
         {
             var scene = Context.Scenes.Find(request);

@@ -15,6 +15,10 @@ namespace EfCommands.EfSceneCommands
         {
         }
 
+        public int Id => 43;
+
+        public string Name => "Add New Scene Using EF";
+
         public void Execute(SceneDto request)
         {
             if (Context.Scenes.Any(s => s.SceneName.ToLower() == request.SceneName

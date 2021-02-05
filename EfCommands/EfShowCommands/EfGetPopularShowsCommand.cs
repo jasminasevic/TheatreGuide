@@ -17,6 +17,10 @@ namespace EfCommands.EfShowCommands
         {
         }
 
+        public int Id => 54;
+
+        public string Name => "Get Popular Shows Using EF";
+
         public IEnumerable<GetPopularShowsDto> Execute(ShowQuery request)
         {
             var shows = Context.Shows

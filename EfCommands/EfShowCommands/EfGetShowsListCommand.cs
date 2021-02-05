@@ -17,6 +17,10 @@ namespace EfCommands.EfShowCommands
         {
         }
 
+        public int Id => 63;
+
+        public string Name => "Get Shows List Using EF";
+
         public IEnumerable<GetShowBasicDto> Execute(SearchQuery request)
         {
             var shows = Context.Shows

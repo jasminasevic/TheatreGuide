@@ -16,6 +16,10 @@ namespace EfCommands.EfTheatreCommands
         {
         }
 
+        public int Id => 73;
+
+        public string Name => "Get Theatre List Using EF";
+
         public IEnumerable<TheatreBasicDto> Execute(SearchQuery request)
         {
             var theatres = Context.Theatres

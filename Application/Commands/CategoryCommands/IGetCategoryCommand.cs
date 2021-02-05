@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.CategoryCommands
 {
-    public interface IGetCategoryCommand : ICommand<int, CategoryDto>
+    public interface IGetCategoryCommand : IQuery<int, CategoryDto>
     {
     }
 }

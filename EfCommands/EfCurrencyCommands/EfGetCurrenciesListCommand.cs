@@ -15,6 +15,10 @@ namespace EfCommands.EfCurrencyCommands
         {
         }
 
+        public int Id => 17;
+
+        public string Name => "Get Currencies Using EF";
+
         public IEnumerable<GetCurrencyDto> Execute(SearchQuery request)
         {
             var currencies = Context.Currencies

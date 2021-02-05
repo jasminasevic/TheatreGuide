@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.DirectorCommands
 {
-    public interface IGetDirectorCommand : ICommand<int, GetDirectorDto>
+    public interface IGetDirectorCommand : IQuery<int, GetDirectorDto>
     {
     }
 }

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Application.Commands.WriterCommands
 {
-    public interface IGetWritersCommand : ICommand<WriterQuery, PagedResponses<GetWriterDto>>
+    public interface IGetWritersCommand : IQuery<WriterQuery, PagedResponses<GetWriterDto>>
     {
     }
 }

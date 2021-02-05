@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Commands.CategoryCommands
 {
-    public interface IGetCategoriesListCommand : ICommand<SearchQuery, IEnumerable<CategoryBasicDto>>
+    public interface IGetCategoriesListCommand : IQuery<SearchQuery, IEnumerable<CategoryBasicDto>>
     {
     }
 }

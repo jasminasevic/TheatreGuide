@@ -13,6 +13,10 @@ namespace EfCommands.EfCurrencyCommands
         {
         }
 
+        public int Id => 14;
+
+        public string Name => "Delete Currency Using EF";
+
         public void Execute(int request)
         {
             var currency = Context.Currencies.Find(request);

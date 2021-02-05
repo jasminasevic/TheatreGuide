@@ -18,6 +18,10 @@ namespace EfCommands.EfTheatreCommands
         {
         }
 
+        public int Id => 69;
+
+        public string Name => "Edit Theatre Using EF";
+
         public void Execute(TheatreDto request)
         {
             var theatre = Context.Theatres.Find(request.Id);

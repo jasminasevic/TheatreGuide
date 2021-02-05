@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Commands.RoleCommands
 {
-    public interface IGetRolesListCommand : ICommand<SearchQuery, IEnumerable<GetRoleDto>>
+    public interface IGetRolesListCommand : IQuery<SearchQuery, IEnumerable<GetRoleDto>>
     {
     }
 }

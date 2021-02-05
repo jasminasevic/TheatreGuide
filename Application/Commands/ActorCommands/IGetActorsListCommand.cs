@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Commands.ActorCommands
 {
-    public interface IGetActorsListCommand : ICommand<SearchQuery, IEnumerable<GetActorBasicDto>>
+    public interface IGetActorsListCommand : IQuery<SearchQuery, IEnumerable<GetActorBasicDto>>
     {
     }
 }

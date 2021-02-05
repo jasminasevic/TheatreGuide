@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Application.Commands.TheatreCommands
 {
-    public interface IGetTheatresCommand : ICommand<TheatreQuery, PagedResponses<GetTheatreDto>>
+    public interface IGetTheatresCommand : IQuery<TheatreQuery, PagedResponses<GetTheatreDto>>
     {
     }
 }

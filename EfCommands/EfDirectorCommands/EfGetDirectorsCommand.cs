@@ -18,6 +18,10 @@ namespace EfCommands.EfDirectorCommands
         {
         }
 
+        public int Id => 23;
+
+        public string Name => "Get Directors Using EF";
+
         public PagedResponses<GetDirectorDto> Execute(DirectorQuery request)
         {
             var directors = Context.Directors

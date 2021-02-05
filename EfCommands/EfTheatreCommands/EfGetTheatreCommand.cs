@@ -21,11 +21,16 @@ namespace EfCommands.EfTheatreCommands
         {
         }
 
+        public int Id => 71;
+
+        public string Name => "Get Theatre Using EF";
+
         public GetTheatreDto Execute(int request)
         {
             var theatre = Context.Theatres
                 .Include(t => t.TheatreImages)
                 .Include(t => t.Address)
+                .Include(t => t.Repertoires)
                 .Include(t => t.Shows)
                 .ThenInclude(s => s.Category)
                 .Include(s => s.Scenes)
@@ -78,6 +83,14 @@ namespace EfCommands.EfTheatreCommands
                         RowsTotalNumber = s.RowsTotalNumber.ToString(),
                         SeatCapacity = s.SeatCapacity.ToString()
                     })
+                }),
+                GetRepertoireForTheatreDtos = theatre.Repertoires.Select(s => new GetRepertoireForTheatreDto
+                {
+                    Id = s.Id,
+                    ShowId = s.ShowId,
+                    ShowName = s.Show.Title,
+                    ShowDate = s.Date,
+                    IsPremiere = s.IsPremiere
                 })
             };
         }

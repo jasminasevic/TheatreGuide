@@ -18,6 +18,10 @@ namespace EfCommands.EfSceneCommands
         {
         }
 
+        public int Id => 48;
+
+        public string Name => "Get Scenes Using EF";
+
         public PagedResponses<GetSceneDto> Execute(SceneQuery request)
         {
 

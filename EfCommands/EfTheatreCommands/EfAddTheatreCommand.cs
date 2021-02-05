@@ -17,6 +17,10 @@ namespace EfCommands.EfTheatreCommands
         {
         }
 
+        public int Id => 67;
+
+        public string Name => "Add New Theatre Using EF";
+
         public void Execute(TheatreDto request)
         {
             if (Context.Theatres.Any(t => t.ContactEmail.ToLower()

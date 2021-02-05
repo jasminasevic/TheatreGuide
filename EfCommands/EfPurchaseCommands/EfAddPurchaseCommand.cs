@@ -15,6 +15,10 @@ namespace EfCommands.EfPurchaseCommands
         {
         }
 
+        public int Id => 25;
+
+        public string Name => "Add New Purchase Using EF";
+
         public void Execute(PurchaseDto request)
         {
             if (Context.Purchases.Any(p => p.RepertoireId == request.RepertoireId

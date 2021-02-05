@@ -17,6 +17,11 @@ namespace EfCommands.EfActorCommands
         {
         }
 
+        public int Id => 1;
+
+        public string Name => "Create New Actor using EF";
+
+
         public void Execute(ActorDto request)
         {
             if (Context.Actors.Any(a => a.ActorFirstName.ToLower() == request.ActorFirstName

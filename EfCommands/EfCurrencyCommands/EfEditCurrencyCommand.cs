@@ -15,6 +15,10 @@ namespace EfCommands.EfCurrencyCommands
         {
         }
 
+        public int Id => 15;
+
+        public string Name => "Edit Currency Using EF";
+
         public void Execute(CurrencyDto request)
         {
             var currency = Context.Currencies.Find(request.Id);

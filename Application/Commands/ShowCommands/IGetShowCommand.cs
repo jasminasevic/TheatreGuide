@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.ShowCommands
 {
-    public interface IGetShowCommand : ICommand<int, GetShowDto>
+    public interface IGetShowCommand : IQuery<int, GetShowDto>
     {
     }
 }

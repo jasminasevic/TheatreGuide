@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Commands.TheatreCommands
 {
-    public interface IGetRecentlyJoinedTheatresCommand : ICommand<SearchQuery, IEnumerable<GetTheatreBaseInfoDto>>
+    public interface IGetRecentlyJoinedTheatresCommand : IQuery<SearchQuery, IEnumerable<GetTheatreBaseInfoDto>>
     {
     }
 }

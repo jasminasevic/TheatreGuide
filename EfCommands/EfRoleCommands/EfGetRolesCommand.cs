@@ -17,6 +17,10 @@ namespace EfCommands.EfRoleCommands
         {
         }
 
+        public int Id => 41;
+
+        public string Name => "Get Roles Using EF";
+
         public PagedResponses<GetRoleDto> Execute(RoleQuery request)
         {
             var roles = Context.Roles

@@ -13,6 +13,10 @@ namespace EfCommands.EfRepertoireCommands
         {
         }
 
+        public int Id => 31;
+
+        public string Name => "Delete Repertoire Using EF";
+
         public void Execute(int request)
         {
             var repertoire = Context.Repertoires.Find(request);

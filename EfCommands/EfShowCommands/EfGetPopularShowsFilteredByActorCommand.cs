@@ -18,6 +18,10 @@ namespace EfCommands.EfShowCommands
         {
         }
 
+        public int Id => 55;
+
+        public string Name => "Get Popular Shows Filtered By Actor Using EF";
+
         public IEnumerable<GetActorPopularShowDto> Execute(int request)
         {
             var actorInShow = Context.Actors

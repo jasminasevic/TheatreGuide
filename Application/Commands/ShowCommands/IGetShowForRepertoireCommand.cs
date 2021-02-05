@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.ShowCommands
 {
-    public interface IGetShowForRepertoireCommand : ICommand<int, GetShowForRepertoireDto>
+    public interface IGetShowForRepertoireCommand : IQuery<int, GetShowForRepertoireDto>
     {
     }
 }

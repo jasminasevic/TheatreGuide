@@ -13,6 +13,10 @@ namespace EfCommands.EfTheatreCommands
         {
         }
 
+        public int Id => 68;
+
+        public string Name => "Delete Theatre Using EF";
+
         public void Execute(int request)
         {
             var theatre = Context.Theatres.Find(request);

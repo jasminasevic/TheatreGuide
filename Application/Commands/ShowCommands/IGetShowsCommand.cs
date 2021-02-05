@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Application.Commands.ShowCommands
 {
-    public interface IGetShowsCommand : ICommand<ShowQuery, PagedResponses<GetShowDto>>
+    public interface IGetShowsCommand : IQuery<ShowQuery, PagedResponses<GetShowDto>>
     {
     }
 }

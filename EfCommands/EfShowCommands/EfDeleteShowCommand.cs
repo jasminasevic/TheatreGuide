@@ -14,6 +14,10 @@ namespace EfCommands.EfShowCommands
         {
         }
 
+        public int Id => 52;
+
+        public string Name => "Delete Show Using EF";
+
         public void Execute(int request)
         {
             var show = Context.Shows.Find(request);

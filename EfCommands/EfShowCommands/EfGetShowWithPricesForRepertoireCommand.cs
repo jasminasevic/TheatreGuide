@@ -18,6 +18,10 @@ namespace EfCommands.EfShowCommands
         {
         }
 
+        public int Id => 64;
+
+        public string Name => "Get Shows with Prices for Repertoire Using EF";
+
         public GetShowWithPriceForRepertoireDto Execute(int request)
         {
             var show = Context.Shows

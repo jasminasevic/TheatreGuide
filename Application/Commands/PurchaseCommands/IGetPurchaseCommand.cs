@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.PurchaseCommands
 {
-    public interface IGetPurchaseCommand : ICommand<int, GetDetailedPurchaseDto>
+    public interface IGetPurchaseCommand : IQuery<int, GetDetailedPurchaseDto>
     {
     }
 }

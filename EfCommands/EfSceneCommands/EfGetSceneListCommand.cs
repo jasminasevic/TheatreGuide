@@ -15,6 +15,10 @@ namespace EfCommands.EfSceneCommands
         {
         }
 
+        public int Id => 47;
+
+        public string Name => "Get Scene List Using EF";
+
         public IEnumerable<GetScenesBasicDto> Execute(SearchQuery request)
         {
             var scenes = Context.Scenes

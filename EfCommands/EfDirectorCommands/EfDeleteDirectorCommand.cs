@@ -13,6 +13,10 @@ namespace EfCommands.EfDirectorCommands
         {
         }
 
+        public int Id => 20;
+
+        public string Name => "Delete Director Using EF";
+
         public void Execute(int request)
         {
             var director = Context.Directors.Find(request);

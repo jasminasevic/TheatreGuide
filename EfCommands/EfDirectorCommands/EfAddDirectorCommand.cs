@@ -15,6 +15,10 @@ namespace EfCommands.EfDirectorCommands
         {
         }
 
+        public int Id => 19;
+
+        public string Name => "Add New Director Using EF";
+
         public void Execute(DirectorDto request)
         {
             if (Context.Directors.Any(d => d.DirectorFirstName.ToLower() == request.DirectorFirstName.ToLower()

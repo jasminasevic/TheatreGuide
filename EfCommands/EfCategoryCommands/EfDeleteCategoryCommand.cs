@@ -13,6 +13,10 @@ namespace EfCommands.EfCategoryCommands
         {
         }
 
+        public int Id => 8;
+
+        public string Name => "Delete Category Using EF";
+
         public void Execute(int request)
         {
             var category = Context.Categories.Find(request);

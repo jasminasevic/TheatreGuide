@@ -4,17 +4,17 @@ using System.Text;
 
 namespace Application.Interfaces
 {
-    public interface ICommand<TRequest>
+    public interface ICommand<TRequest> : IUseCase
     {
         void Execute(TRequest request);
     }
 
-    public interface ICommand<TRequest, TResult>
+    public interface IQuery<TSearch, TResult> : IUseCase
     {
-        TResult Execute(TRequest request);
+        TResult Execute(TSearch search); 
     }
 
-    public interface IComm<TFirstRequest, TSecondRequest> 
+    public interface IComm<TFirstRequest, TSecondRequest> : IUseCase
     {
         void Execute(TFirstRequest requestFirst, TSecondRequest requestSecond);
     }

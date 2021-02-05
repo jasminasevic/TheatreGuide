@@ -15,6 +15,11 @@ namespace EfCommands.EfUserCommands
         {
         }
 
+        public int Id => 74;
+
+        public string Name => "Add New User Using EF";
+
+
         public void Execute(UserDto request)
         {
             if (Context.Users.Any(u => u.Email == request.Email))

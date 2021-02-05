@@ -13,6 +13,10 @@ namespace EfCommands.EfUserCommands
         {
         }
 
+        public int Id => 75;
+
+        public string Name => "Delete User Using EF";
+
         public void Execute(int request)
         {
             var user = Context.Users.Find(request);

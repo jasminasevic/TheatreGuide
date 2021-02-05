@@ -15,6 +15,11 @@ namespace EfCommands.EfCategoryCommands
         {
         }
 
+        public int Id => 12;
+
+        public string Name => "Get Category Command Using EF";
+
+
         public CategoryDto Execute(int request)
         {
             var category = Context.Categories

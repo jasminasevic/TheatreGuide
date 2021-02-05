@@ -15,6 +15,10 @@ namespace EfCommands.EfCurrencyCommands
         {
         }
 
+        public int Id => 13;
+
+        public string Name => "Add New Currency Using EF";
+
         public void Execute(CurrencyDto request)
         {
             if (Context.Currencies.Any(c => c.CurrencyName.ToLower() == request.CurrencyName))

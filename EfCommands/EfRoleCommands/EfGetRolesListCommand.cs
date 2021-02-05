@@ -15,6 +15,10 @@ namespace EfCommands.EfRoleCommands
         {
         }
 
+        public int Id => 42;
+
+        public string Name => "Get Roles List Using EF";
+
         public IEnumerable<GetRoleDto> Execute(SearchQuery request)
         {
             var roles = Context.Roles

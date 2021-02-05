@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.CurrencyCommands
 {
-    public interface IGetCurrencyCommand : ICommand<int, GetCurrencyDto>
+    public interface IGetCurrencyCommand : IQuery<int, GetCurrencyDto>
     {
     }
 }

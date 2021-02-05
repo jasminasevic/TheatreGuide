@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.TheatreCommands
 {
-    public interface IGetTheatreCommand : ICommand<int, GetTheatreDto>
+    public interface IGetTheatreCommand : IQuery<int, GetTheatreDto>
     {
     }
 }

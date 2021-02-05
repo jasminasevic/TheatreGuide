@@ -36,5 +36,7 @@ namespace Application.DTO.TheatreDto
 
         public IEnumerable<GetUpcomingShowsDto> GetUpcomingShowsDtos { get; set; }
 
+        public IEnumerable<GetRepertoireForTheatreDto> GetRepertoireForTheatreDtos { get; set; }
+
     }
 }

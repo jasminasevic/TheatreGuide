@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Commands.DirectorCommands
 {
-    public interface IGetDirectorsListCommand : ICommand<SearchQuery, IEnumerable<GetDirectorBasicDto>>
+    public interface IGetDirectorsListCommand : IQuery<SearchQuery, IEnumerable<GetDirectorBasicDto>>
     {
     }
 }

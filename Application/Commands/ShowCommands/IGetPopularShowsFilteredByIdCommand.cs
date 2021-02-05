@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Commands.ShowCommands
 {
-    public interface IGetPopularShowsFilteredByIdCommand : ICommand<int, IEnumerable<GetPopularShowsDto>> 
+    public interface IGetPopularShowsFilteredByIdCommand : IQuery<int, IEnumerable<GetPopularShowsDto>> 
     {
     }
 }

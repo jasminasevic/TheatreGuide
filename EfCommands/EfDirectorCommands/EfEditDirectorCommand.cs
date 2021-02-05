@@ -14,6 +14,10 @@ namespace EfCommands.EfDirectorCommands
         {
         }
 
+        public int Id => 21;
+
+        public string Name => "Edit Director Using EF";
+
         public void Execute(DirectorDto request)
         {
             var director = Context.Directors.Find(request.Id);

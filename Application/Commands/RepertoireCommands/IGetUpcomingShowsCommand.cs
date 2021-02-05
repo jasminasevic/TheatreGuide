@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Commands.RepertoireCommands
 {
-    public interface IGetUpcomingShowsCommand : ICommand<RepertoireQuery, IEnumerable<GetUpcomingShowsDto>>
+    public interface IGetUpcomingShowsCommand : IQuery<RepertoireQuery, IEnumerable<GetUpcomingShowsDto>>
     {
     }
 }

@@ -17,6 +17,11 @@ namespace EfCommands.EfWriterCommands
         {
         }
 
+        public int Id => 82;
+
+        public string Name => "Get Writer Using EF";
+
+
         public GetWriterDto Execute(int request)
         {
             var writer = Context.Writers

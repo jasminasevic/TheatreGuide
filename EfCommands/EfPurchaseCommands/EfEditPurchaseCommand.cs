@@ -14,6 +14,10 @@ namespace EfCommands.EfPurchaseCommands
         {
         }
 
+        public int Id => 27;
+
+        public string Name => "Edit Purchase Using EF";
+
         public void Execute(PurchaseDto request)
         {
             var purchase = Context.Purchases.Find(request.Id);

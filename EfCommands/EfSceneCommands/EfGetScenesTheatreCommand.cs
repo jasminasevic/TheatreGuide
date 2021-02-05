@@ -16,6 +16,10 @@ namespace EfCommands.EfSceneCommands
         {
         }
 
+        public int Id => 49;
+
+        public string Name => "Get Scenes in Theatre Using EF";
+
         public IEnumerable<GetSceneTheatreDto> Execute(SceneQuery request)
         {
             var scenes = Context.Scenes

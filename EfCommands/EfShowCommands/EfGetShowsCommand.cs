@@ -20,6 +20,10 @@ namespace EfCommands.EfShowCommands
         {
         }
 
+        public int Id => 62;
+
+        public string Name => "Get Shows Using EF";
+
         public PagedResponses<GetShowDto> Execute(ShowQuery request)
         {
             var shows = Context.Shows

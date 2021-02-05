@@ -17,6 +17,10 @@ namespace EfCommands.EfShowCommands
         {
         }
 
+        public int Id => 53;
+
+        public string Name => "Edit Show Using EF";
+
         public void Execute(ShowDto request)
         {
             var show = Context.Shows.Find(request.Id);

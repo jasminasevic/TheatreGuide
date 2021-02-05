@@ -15,6 +15,11 @@ namespace EfCommands.EfWriterCommands
         {
         }
 
+        public int Id => 79;
+
+        public string Name => "Add New Writer Using EF";
+
+
         public void Execute(WriterDto request)
         {
             if (Context.Writers.Any(w => w.WriterFirstName.ToLower() == request.WriterFirstName

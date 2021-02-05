@@ -15,6 +15,10 @@ namespace EfCommands.EfSceneCommands
         {
         }
 
+        public int Id => 45;
+
+        public string Name => "Edit Scene Using EF";
+
         public void Execute(SceneDto request)
         {
             var scene = Context.Scenes.Find(request.Id);

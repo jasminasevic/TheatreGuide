@@ -18,6 +18,10 @@ namespace EfCommands.EfActorCommands
         {
         }
 
+        public int Id => 3;
+
+        public string Name => "Edit Actor Using EF";
+
         public void Execute(ActorDto request)
         {
             var actor = Context.Actors.Find(request.Id);

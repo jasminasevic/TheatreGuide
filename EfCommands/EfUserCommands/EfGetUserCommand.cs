@@ -18,6 +18,10 @@ namespace EfCommands.EfUserCommands
         {
         }
 
+        public int Id => 77;
+
+        public string Name => "Get User Using EF";
+
         public GetUserDto Execute(int request)
         {
             var user = Context.Users

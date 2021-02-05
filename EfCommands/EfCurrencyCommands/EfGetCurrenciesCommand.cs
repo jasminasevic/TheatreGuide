@@ -18,6 +18,10 @@ namespace EfCommands.EfCurrencyCommands
         {
         }
 
+        public int Id => 16;
+
+        public string Name => "Get Currencies Using EF";
+
         public PagedResponses<GetCurrencyDto> Execute(CurrencyQuery request)
         {
             var currencies = Context.Currencies

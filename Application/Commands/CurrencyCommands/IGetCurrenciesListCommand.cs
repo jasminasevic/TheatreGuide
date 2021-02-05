@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Application.Commands.CurrencyCommands
 {
-    public interface IGetCurrenciesListCommand : ICommand<SearchQuery, IEnumerable<GetCurrencyDto>>
+    public interface IGetCurrenciesListCommand : IQuery<SearchQuery, IEnumerable<GetCurrencyDto>>
     {
     }
 }
