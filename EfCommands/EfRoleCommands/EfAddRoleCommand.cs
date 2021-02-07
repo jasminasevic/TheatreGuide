@@ -1,6 +1,7 @@
 ﻿using Application.Commands.RoleCommands;
 using Application.DTO.RoleDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,9 @@ namespace EfCommands.EfRoleCommands
         public int Id => 37;
 
         public string Name => "Add New Role Using EF";
+
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
         public void Execute(RoleDto request)
         {

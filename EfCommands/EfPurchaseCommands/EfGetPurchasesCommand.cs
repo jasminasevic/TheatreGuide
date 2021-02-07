@@ -2,6 +2,7 @@
 using Application.DTO.PriceDto;
 using Application.DTO.PurchaseDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using Application.Queries;
 using Application.Responses;
 using EfDataAccess;
@@ -22,6 +23,8 @@ namespace EfCommands.EfPurchaseCommands
         public int Id => 29;
 
         public string Name => "Get Purchases Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public PagedResponses<GetPurchaseDto> Execute(PurchaseQuery request)
         {

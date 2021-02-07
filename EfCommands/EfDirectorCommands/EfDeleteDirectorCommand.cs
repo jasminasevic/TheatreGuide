@@ -1,5 +1,6 @@
 ﻿using Application.Commands.DirectorCommands;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace EfCommands.EfDirectorCommands
         public int Id => 20;
 
         public string Name => "Delete Director Using EF";
+
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
         public void Execute(int request)
         {

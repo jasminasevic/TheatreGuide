@@ -1,6 +1,7 @@
 ﻿using Application.Commands.PurchaseCommands;
 using Application.DTO.PurchaseDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace EfCommands.EfPurchaseCommands
         public int Id => 27;
 
         public string Name => "Edit Purchase Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() {  };
 
         public void Execute(PurchaseDto request)
         {

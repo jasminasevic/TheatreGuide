@@ -1,6 +1,7 @@
 ﻿using Application.Commands.RepertoireCommands;
 using Application.DTO.ImageDto;
 using Application.DTO.RepertoireDto;
+using Application.Interfaces;
 using Application.Queries;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace EfCommands.EfRepertoireCommands
 
         public string Name => "Get Upcoming Premieres Using EF";
 
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<GetUpcomingPremieresDto> Execute(RepertoireQuery request)
         {

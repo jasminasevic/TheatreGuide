@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Core;
 using Application.Commands.ActorCommands;
 using Application.Commands.CategoryCommands;
 using Application.Commands.CurrencyCommands;
@@ -16,6 +17,8 @@ using Application.Commands.ShowFollowerCommands;
 using Application.Commands.TheatreCommands;
 using Application.Commands.UserCommands;
 using Application.Commands.WriterCommands;
+using Application.Core;
+using Application.Interfaces;
 using EfCommands.EfActorCommands;
 using EfCommands.EfCategoryCommands;
 using EfCommands.EfCurrencyCommands;
@@ -172,6 +175,9 @@ namespace Api
             services.AddTransient<IEditWriterCommand, EfEditWriterCommand>();
             services.AddTransient<IGetWritersCommand, EfGetWritersCommand>();
             services.AddTransient<IGetWriterCommand, EfGetWriterCommand>();
+
+            services.AddTransient<IApplicationPerformer, FakeAdminPerformer>();
+            services.AddTransient<UseCaseExecutor>();
 
             services.AddCors();
 

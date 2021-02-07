@@ -1,6 +1,7 @@
 ﻿using Application.Commands.WriterCommands;
 using Application.DTO.ShowDto;
 using Application.DTO.WriterDto;
+using Application.Interfaces;
 using Application.Queries;
 using Application.Responses;
 using EfDataAccess;
@@ -22,6 +23,7 @@ namespace EfCommands.EfWriterCommands
 
         public string Name => "Get Writer Using EF";
 
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public PagedResponses<GetWriterDto> Execute(WriterQuery request)
         {

@@ -1,5 +1,6 @@
 ﻿using Application.Commands.TheatreCommands;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace EfCommands.EfTheatreCommands
         public int Id => 68;
 
         public string Name => "Delete Theatre Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
         public void Execute(int request)
         {

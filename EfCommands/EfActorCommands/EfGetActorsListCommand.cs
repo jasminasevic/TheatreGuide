@@ -1,5 +1,6 @@
 ﻿using Application.Commands.ActorCommands;
 using Application.DTO.ActorDto;
+using Application.Interfaces;
 using Application.Queries;
 using EfDataAccess;
 using System;
@@ -18,6 +19,8 @@ namespace EfCommands.EfActorCommands
         public int Id => 6;
 
         public string Name => "Get Actor List Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<GetActorBasicDto> Execute(SearchQuery request)
         {

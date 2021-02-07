@@ -2,6 +2,7 @@
 using Application.DTO.ShowDto;
 using Application.Exceptions;
 using Application.Helpers;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace EfCommands.EfShowCommands
         public int Id => 53;
 
         public string Name => "Edit Show Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre };
 
         public void Execute(ShowDto request)
         {

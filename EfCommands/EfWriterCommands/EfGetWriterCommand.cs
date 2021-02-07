@@ -2,6 +2,7 @@
 using Application.DTO.ShowDto;
 using Application.DTO.WriterDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +22,7 @@ namespace EfCommands.EfWriterCommands
 
         public string Name => "Get Writer Using EF";
 
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public GetWriterDto Execute(int request)
         {

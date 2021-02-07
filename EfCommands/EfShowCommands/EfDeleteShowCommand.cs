@@ -1,5 +1,6 @@
 ﻿using Application.Commands.ShowCommands;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace EfCommands.EfShowCommands
         public int Id => 52;
 
         public string Name => "Delete Show Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre };
 
         public void Execute(int request)
         {

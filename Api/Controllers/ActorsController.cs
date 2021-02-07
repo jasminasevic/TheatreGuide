@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.ActorCommands;
+using Application.Core;
 using Application.DTO.ActorDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using Application.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,13 +23,17 @@ namespace Api.Controllers
         protected readonly IEditActorCommand _editCommand;
         protected readonly IDeleteActorCommand _deleteActor;
         protected readonly IGetActorsListCommand _getActorsList;
+        protected readonly IApplicationPerformer _appPerformer;
+        protected readonly UseCaseExecutor _executor;
 
         public ActorsController(IAddActorCommand addActor,
             IGetActorsCommand getActors,
             IGetActorCommand getActor,
             IEditActorCommand editCommand,
-            IDeleteActorCommand deleteActor, 
-            IGetActorsListCommand getActorsList)
+            IDeleteActorCommand deleteActor,
+            IGetActorsListCommand getActorsList,
+            IApplicationPerformer appPerformer, 
+            UseCaseExecutor executor)
         {
             _addActor = addActor;
             _getActors = getActors;
@@ -35,6 +41,8 @@ namespace Api.Controllers
             _editCommand = editCommand;
             _deleteActor = deleteActor;
             _getActorsList = getActorsList;
+            _appPerformer = appPerformer;
+            _executor = executor;
         }
 
         // GET: api/Actors
@@ -81,8 +89,11 @@ namespace Api.Controllers
         {
             try
             {
-                _addActor.Execute(dto);
+                //_addActor.Execute(dto);
+                // return Ok();
+                _executor.ExecuteCommand(_addActor, dto);
                 return Ok();
+
             }
             catch(EntityAlreadyExistsException e)
             {

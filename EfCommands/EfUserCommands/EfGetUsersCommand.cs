@@ -1,6 +1,7 @@
 ﻿using Application.Commands.UserCommands;
 using Application.DTO.UserDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using Application.Queries;
 using Application.Responses;
 using EfDataAccess;
@@ -21,6 +22,8 @@ namespace EfCommands.EfUserCommands
         public int Id => 78;
 
         public string Name => "Get Users Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
         public PagedResponses<GetUserDto> Execute(UserQuery request)
         {

@@ -1,5 +1,6 @@
 ﻿using Application.Commands.SceneCommands;
 using Application.DTO.SceneDto;
+using Application.Interfaces;
 using Application.Queries;
 using EfDataAccess;
 using System;
@@ -18,6 +19,8 @@ namespace EfCommands.EfSceneCommands
         public int Id => 47;
 
         public string Name => "Get Scene List Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<GetScenesBasicDto> Execute(SearchQuery request)
         {

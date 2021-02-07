@@ -1,5 +1,6 @@
 ﻿using Application.Commands.ActorCommands;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace EfCommands.EfActorCommands
 
         public string Name => "Delete Actor Using EF";
 
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
         public void Execute(int request)
         {

@@ -1,4 +1,5 @@
 ﻿using Application.Commands.ShowFollowerCommands;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace EfCommands.EfShowFolloweCommands
         public int Id => 66;
 
         public string Name => "Delete Show Follower Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.User };
 
         public void Execute(int requestFirst, int requestSecond)
         {

@@ -1,6 +1,7 @@
 ﻿using Application.Commands.WriterCommands;
 using Application.DTO.WriterDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace EfCommands.EfWriterCommands
 
         public string Name => "Edit Writer Using EF";
 
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre };
 
         public void Execute(WriterDto request)
         {

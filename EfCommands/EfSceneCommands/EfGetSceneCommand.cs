@@ -2,6 +2,7 @@
 using Application.DTO.SceneDto;
 using Application.DTO.SectorDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +21,8 @@ namespace EfCommands.EfSceneCommands
         public int Id => 46;
 
         public string Name => "Get Scene Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public GetSceneDto Execute(int request)
         {

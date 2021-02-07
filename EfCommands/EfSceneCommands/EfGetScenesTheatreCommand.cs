@@ -1,5 +1,6 @@
 ﻿using Application.Commands.SceneCommands;
 using Application.DTO.SceneDto;
+using Application.Interfaces;
 using Application.Queries;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,8 @@ namespace EfCommands.EfSceneCommands
         public int Id => 49;
 
         public string Name => "Get Scenes in Theatre Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<GetSceneTheatreDto> Execute(SceneQuery request)
         {

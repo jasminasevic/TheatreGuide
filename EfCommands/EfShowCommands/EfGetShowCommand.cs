@@ -6,6 +6,7 @@ using Application.DTO.RepertoireDto;
 using Application.DTO.SectorDto;
 using Application.DTO.ShowDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,6 +25,8 @@ namespace EfCommands.EfShowCommands
         public int Id => 60;
 
         public string Name => "Get Show Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public GetShowDto Execute(int request)
         {

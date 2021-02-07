@@ -2,6 +2,7 @@
 using Application.DTO.PriceDto;
 using Application.DTO.PurchaseDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +21,8 @@ namespace EfCommands.EfPurchaseCommands
         public int Id => 28;
 
         public string Name => "Get Purchase Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public GetDetailedPurchaseDto Execute(int request)
         {

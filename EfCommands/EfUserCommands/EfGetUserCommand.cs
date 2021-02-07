@@ -3,6 +3,7 @@ using Application.DTO.PriceDto;
 using Application.DTO.PurchaseDto;
 using Application.DTO.UserDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +22,8 @@ namespace EfCommands.EfUserCommands
         public int Id => 77;
 
         public string Name => "Get User Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.User };
 
         public GetUserDto Execute(int request)
         {

@@ -1,6 +1,7 @@
 ﻿using Application.Commands.UserCommands;
 using Application.DTO.UserDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace EfCommands.EfUserCommands
         public int Id => 76;
 
         public string Name => "Edit User Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.User };
 
         public void Execute(UserDto request)
         {

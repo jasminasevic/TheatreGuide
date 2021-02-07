@@ -1,6 +1,7 @@
 ﻿using Application.Commands.RepertoireCommands;
 using Application.DTO.RepertoireDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace EfCommands.EfRepertoireCommands
         public int Id => 32;
 
         public string Name => "Edit Repertoire Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre };
 
         public void Execute(RepertoireDto request)
         {

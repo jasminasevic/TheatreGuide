@@ -1,5 +1,6 @@
 ﻿using Application.Commands.RoleCommands;
 using Application.DTO.RoleDto;
+using Application.Interfaces;
 using Application.Queries;
 using EfDataAccess;
 using System;
@@ -18,6 +19,9 @@ namespace EfCommands.EfRoleCommands
         public int Id => 42;
 
         public string Name => "Get Roles List Using EF";
+
+        public IEnumerable<Application.Interfaces.Role> Roles =>
+            new List<Application.Interfaces.Role>() { Application.Interfaces.Role.Admin };
 
         public IEnumerable<GetRoleDto> Execute(SearchQuery request)
         {

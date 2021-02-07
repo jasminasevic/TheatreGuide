@@ -9,5 +9,10 @@ namespace Application.Interfaces
         int Id { get; }
 
         string Name { get; }
+
+        public IEnumerable<Role> Roles { get; }
     }
+
+    
 }
+

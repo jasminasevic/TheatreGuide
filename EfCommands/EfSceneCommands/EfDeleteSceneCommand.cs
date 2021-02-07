@@ -1,5 +1,6 @@
 ﻿using Application.Commands.SceneCommands;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace EfCommands.EfSceneCommands
         public int Id => 44;
 
         public string Name => "Delete Scene Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre };
 
         public void Execute(int request)
         {

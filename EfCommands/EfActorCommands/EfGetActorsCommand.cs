@@ -2,6 +2,7 @@
 using Application.DTO.ActorDto;
 using Application.DTO.ImageDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using Application.Queries;
 using Application.Responses;
 using EfDataAccess;
@@ -13,7 +14,7 @@ using System.Text;
 
 namespace EfCommands.EfActorCommands
 {
-    public class EfGetActorsCommand : EfBaseCommand, IGetActorsCommand
+    public class EfGetActorsCommand : EfBaseCommand, IGetActorsCommand, IUseCase
     {
         public EfGetActorsCommand(EfContext context) : base(context)
         {
@@ -22,6 +23,8 @@ namespace EfCommands.EfActorCommands
         public int Id => 5;
 
         public string Name => "Get Actors Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public PagedResponses<GetActorDto> Execute(ActorQuery request)
         {

@@ -1,5 +1,6 @@
 ﻿using Application.Commands.CurrencyCommands;
 using Application.DTO.CurrencyDto;
+using Application.Interfaces;
 using Application.Queries;
 using EfDataAccess;
 using System;
@@ -18,6 +19,8 @@ namespace EfCommands.EfCurrencyCommands
         public int Id => 17;
 
         public string Name => "Get Currencies Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<GetCurrencyDto> Execute(SearchQuery request)
         {

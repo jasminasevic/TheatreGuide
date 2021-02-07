@@ -1,6 +1,7 @@
 ﻿using Application.Commands.TheatreCommands;
 using Application.DTO.ImageDto;
 using Application.DTO.TheatreDto;
+using Application.Interfaces;
 using Application.Queries;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,8 @@ namespace EfCommands.EfTheatreCommands
         public int Id => 70;
 
         public string Name => "Get Recently Joined Theatre Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<GetTheatreBaseInfoDto> Execute(SearchQuery request)
         {

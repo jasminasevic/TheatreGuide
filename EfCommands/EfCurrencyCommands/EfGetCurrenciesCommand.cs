@@ -22,6 +22,8 @@ namespace EfCommands.EfCurrencyCommands
 
         public string Name => "Get Currencies Using EF";
 
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+
         public PagedResponses<GetCurrencyDto> Execute(CurrencyQuery request)
         {
             var currencies = Context.Currencies

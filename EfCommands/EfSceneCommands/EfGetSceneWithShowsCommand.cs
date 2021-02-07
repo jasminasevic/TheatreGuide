@@ -3,6 +3,7 @@ using Application.DTO.SceneDto;
 using Application.DTO.SectorDto;
 using Application.DTO.ShowDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using Application.Queries;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,8 @@ namespace EfCommands.EfSceneCommands
         public int Id => 50;
 
         public string Name => "Get Scenes with Shows Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public GetSceneWithShowsDto Execute(int request)
         {

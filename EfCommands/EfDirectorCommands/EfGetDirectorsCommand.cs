@@ -1,6 +1,7 @@
 ﻿using Application.Commands.DirectorCommands;
 using Application.DTO.DirectorDto;
 using Application.DTO.ShowDto;
+using Application.Interfaces;
 using Application.Queries;
 using Application.Responses;
 using EfDataAccess;
@@ -21,6 +22,8 @@ namespace EfCommands.EfDirectorCommands
         public int Id => 23;
 
         public string Name => "Get Directors Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public PagedResponses<GetDirectorDto> Execute(DirectorQuery request)
         {

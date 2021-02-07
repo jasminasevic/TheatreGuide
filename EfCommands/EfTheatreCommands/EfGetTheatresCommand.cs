@@ -2,6 +2,7 @@
 using Application.DTO.ImageDto;
 using Application.DTO.ShowDto;
 using Application.DTO.TheatreDto;
+using Application.Interfaces;
 using Application.Queries;
 using Application.Responses;
 using EfDataAccess;
@@ -22,6 +23,8 @@ namespace EfCommands.EfTheatreCommands
         public int Id => 72;
 
         public string Name => "Get Theatres Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public PagedResponses<GetTheatreDto> Execute(TheatreQuery request)
         {

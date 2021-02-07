@@ -1,6 +1,7 @@
 ﻿using Application.Commands.ShowCommands;
 using Application.DTO.SectorDto;
 using Application.DTO.ShowDto;
+using Application.Interfaces;
 using Application.Queries;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,8 @@ namespace EfCommands.EfShowCommands
         public int Id => 63;
 
         public string Name => "Get Shows List Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<GetShowBasicDto> Execute(SearchQuery request)
         {

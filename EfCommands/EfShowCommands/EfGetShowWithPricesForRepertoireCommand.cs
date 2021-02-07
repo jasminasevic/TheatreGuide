@@ -3,6 +3,7 @@ using Application.DTO.PriceDto;
 using Application.DTO.SectorDto;
 using Application.DTO.ShowDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +22,8 @@ namespace EfCommands.EfShowCommands
         public int Id => 64;
 
         public string Name => "Get Shows with Prices for Repertoire Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public GetShowWithPriceForRepertoireDto Execute(int request)
         {

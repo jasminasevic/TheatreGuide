@@ -2,6 +2,7 @@
 using Application.DTO.TheatreDto;
 using Application.Exceptions;
 using Application.Helpers;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace EfCommands.EfTheatreCommands
         public int Id => 67;
 
         public string Name => "Add New Theatre Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre };
 
         public void Execute(TheatreDto request)
         {

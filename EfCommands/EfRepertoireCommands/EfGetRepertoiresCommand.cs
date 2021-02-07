@@ -2,6 +2,7 @@
 using Application.DTO.ImageDto;
 using Application.DTO.PriceDto;
 using Application.DTO.RepertoireDto;
+using Application.Interfaces;
 using Application.Queries;
 using Application.Responses;
 using EfDataAccess;
@@ -22,6 +23,8 @@ namespace EfCommands.EfRepertoireCommands
         public int Id => 34;
 
         public string Name => "Get Repertoire Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public PagedResponses<GetRepertoireDto> Execute(RepertoireQuery request)
         {

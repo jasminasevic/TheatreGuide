@@ -1,6 +1,7 @@
 ﻿using Application.Commands.DirectorCommands;
 using Application.DTO.DirectorDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace EfCommands.EfDirectorCommands
         public int Id => 19;
 
         public string Name => "Add New Director Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre };
 
         public void Execute(DirectorDto request)
         {

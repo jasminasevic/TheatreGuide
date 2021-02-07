@@ -2,6 +2,7 @@
 using Application.DTO.ActorDto;
 using Application.Exceptions;
 using Application.Helpers;
+using Application.Interfaces;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +22,8 @@ namespace EfCommands.EfActorCommands
         public int Id => 3;
 
         public string Name => "Edit Actor Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre };
 
         public void Execute(ActorDto request)
         {

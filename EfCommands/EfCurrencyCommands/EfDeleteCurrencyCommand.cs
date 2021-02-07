@@ -1,5 +1,6 @@
 ﻿using Application.Commands.CurrencyCommands;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace EfCommands.EfCurrencyCommands
         public int Id => 14;
 
         public string Name => "Delete Currency Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
         public void Execute(int request)
         {

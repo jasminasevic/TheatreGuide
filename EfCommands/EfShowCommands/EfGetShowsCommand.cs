@@ -3,6 +3,7 @@ using Application.DTO.ActorDto;
 using Application.DTO.ImageDto;
 using Application.DTO.PriceDto;
 using Application.DTO.ShowDto;
+using Application.Interfaces;
 using Application.Queries;
 using Application.Responses;
 using EfDataAccess;
@@ -23,6 +24,8 @@ namespace EfCommands.EfShowCommands
         public int Id => 62;
 
         public string Name => "Get Shows Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public PagedResponses<GetShowDto> Execute(ShowQuery request)
         {

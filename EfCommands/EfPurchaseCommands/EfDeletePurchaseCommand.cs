@@ -1,5 +1,6 @@
 ﻿using Application.Commands.PurchaseCommands;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,6 +19,8 @@ namespace EfCommands.EfPurchaseCommands
         public int Id => 26;
 
         public string Name => "Delete Purchase Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { };
 
         public void Execute(int request)
         {

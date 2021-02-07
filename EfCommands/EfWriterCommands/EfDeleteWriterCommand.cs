@@ -1,5 +1,6 @@
 ﻿using Application.Commands.WriterCommands;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace EfCommands.EfWriterCommands
         public int Id => 80;
 
         public string Name => "Delete Writer Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
         public void Execute(int request)
         {

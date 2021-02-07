@@ -1,5 +1,6 @@
 ﻿using Application.Commands.CategoryCommands;
 using Application.DTO.CategoryDto;
+using Application.Interfaces;
 using Application.Queries;
 using Application.Responses;
 using EfDataAccess;
@@ -19,6 +20,8 @@ namespace EfCommands.EfCategoryCommands
         public int Id => 10;
 
         public string Name => "Get Categories Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public PagedResponses<GetCategoryDto> Execute(CategoryQuery request)
         {

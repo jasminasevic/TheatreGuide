@@ -1,6 +1,7 @@
 ﻿using Application.Commands.ShowCommands;
 using Application.DTO.ImageDto;
 using Application.DTO.ShowDto;
+using Application.Interfaces;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,8 @@ namespace EfCommands.EfShowCommands
         public int Id => 56;
 
         public string Name => "Get Popular Shows Filtered By Director Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<GetPopularShowsDto> Execute(int request)
         {

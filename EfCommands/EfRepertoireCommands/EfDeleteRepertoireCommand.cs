@@ -1,5 +1,6 @@
 ﻿using Application.Commands.RepertoireCommands;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace EfCommands.EfRepertoireCommands
         public int Id => 31;
 
         public string Name => "Delete Repertoire Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre  };
 
         public void Execute(int request)
         {

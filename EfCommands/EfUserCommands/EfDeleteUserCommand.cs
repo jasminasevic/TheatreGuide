@@ -1,5 +1,6 @@
 ﻿using Application.Commands.UserCommands;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace EfCommands.EfUserCommands
         public int Id => 75;
 
         public string Name => "Delete User Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
         public void Execute(int request)
         {

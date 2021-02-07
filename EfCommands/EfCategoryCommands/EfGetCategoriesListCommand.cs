@@ -21,6 +21,7 @@ namespace EfCommands.EfCategoryCommands
 
         public string Name => "Get Category List Using EF";
 
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<CategoryBasicDto> Execute(SearchQuery request)
         {

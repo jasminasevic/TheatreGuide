@@ -1,6 +1,7 @@
 ﻿using Application.Commands.SceneCommands;
 using Application.DTO.SceneDto;
 using Application.DTO.SectorDto;
+using Application.Interfaces;
 using Application.Queries;
 using Application.Responses;
 using EfDataAccess;
@@ -21,6 +22,8 @@ namespace EfCommands.EfSceneCommands
         public int Id => 48;
 
         public string Name => "Get Scenes Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public PagedResponses<GetSceneDto> Execute(SceneQuery request)
         {

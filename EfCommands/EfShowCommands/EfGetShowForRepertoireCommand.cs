@@ -23,6 +23,8 @@ namespace EfCommands.EfShowCommands
 
         public string Name => "Get Show for Repertoire Using EF";
 
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+
         public GetShowForRepertoireDto Execute(int request)
         {
             var show = Context.Shows

@@ -1,6 +1,7 @@
 ﻿using Application.Commands.CategoryCommands;
 using Application.DTO.CategoryDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace EfCommands.EfCategoryCommands
         public int Id => 9;
 
         public string Name => "Edit Category Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
         public void Execute(CategoryDto request)
         {

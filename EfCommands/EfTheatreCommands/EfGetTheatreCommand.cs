@@ -6,6 +6,7 @@ using Application.DTO.SectorDto;
 using Application.DTO.ShowDto;
 using Application.DTO.TheatreDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,6 +25,8 @@ namespace EfCommands.EfTheatreCommands
         public int Id => 71;
 
         public string Name => "Get Theatre Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public GetTheatreDto Execute(int request)
         {

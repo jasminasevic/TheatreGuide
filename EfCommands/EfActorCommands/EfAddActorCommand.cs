@@ -2,6 +2,7 @@
 using Application.DTO.ActorDto;
 using Application.Exceptions;
 using Application.Helpers;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace EfCommands.EfActorCommands
 
         public string Name => "Create New Actor using EF";
 
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
         public void Execute(ActorDto request)
         {

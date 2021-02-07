@@ -19,6 +19,9 @@ namespace EfCommands.EfRoleCommands
 
         public string Name => "Get Role Using EF";
 
+        public IEnumerable<Application.Interfaces.Role> Roles => 
+            new List<Application.Interfaces.Role>() { Application.Interfaces.Role.Admin };
+
         public GetRoleDto Execute(int request)
         {
             var role = Context.Roles

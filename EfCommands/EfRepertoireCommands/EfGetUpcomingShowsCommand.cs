@@ -8,6 +8,7 @@ using Application.Queries;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Application.DTO.ImageDto;
+using Application.Interfaces;
 
 namespace EfCommands.EfRepertoireCommands
 {
@@ -20,6 +21,8 @@ namespace EfCommands.EfRepertoireCommands
         public int Id => 36;
 
         public string Name => "Get Upcoming Shows Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<GetUpcomingShowsDto> Execute(RepertoireQuery request)
         {

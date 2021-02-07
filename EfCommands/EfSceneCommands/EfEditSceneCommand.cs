@@ -1,6 +1,7 @@
 ﻿using Application.Commands.SceneCommands;
 using Application.DTO.SceneDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace EfCommands.EfSceneCommands
         public int Id => 45;
 
         public string Name => "Edit Scene Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre };
 
         public void Execute(SceneDto request)
         {

@@ -1,6 +1,7 @@
 ﻿using Application.Commands.CurrencyCommands;
 using Application.DTO.CurrencyDto;
 using Application.Exceptions;
+using Application.Interfaces;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace EfCommands.EfCurrencyCommands
         public int Id => 13;
 
         public string Name => "Add New Currency Using EF";
+
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
         public void Execute(CurrencyDto request)
         {
