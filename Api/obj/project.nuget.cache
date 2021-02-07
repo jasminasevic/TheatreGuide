@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "+vJ9YbifyKGm0ApWQ2hRn+fEvJ0BZRlTZ+UOmoI41H1I90MD71EFOWcQrB0D13ScDouikUrEuPesvYGBjZ6SGg==",
+  "dgSpecHash": "xYu4YDfrleZuIdutZOewN72K7A7zwqXL8j8L2C8BOB1FBdnSu8nfTzb/MijuqNa9jGwH9iFvSlUUTFOjgq5Ecg==",
   "success": true,
   "projectFilePath": "C:\\Users\\jasmina\\source\\repos\\TheatreGuide\\Api\\Api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\jasmina\\.nuget\\packages\\fluentvalidation\\9.5.0\\fluentvalidation.9.5.0.nupkg.sha512",
     "C:\\Users\\jasmina\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\jasmina\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\jasmina\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "bqZZkzrJsDiWsfdQSlo/Q+rcQiWwVqXM4SFJDFNsSOOy3ndK8MNCVf0n450Mu2mSgl3/QF+NgN6aEf/CMe7J0Q==",
+  "dgSpecHash": "sk4ttmoLTtOKtmLJ86BadeZE5i2tI+009T4yA2+R67ucrliYIEdRyzZExI2A9DRH9132oBipse2QXpqozAHdgw==",
   "success": true,
   "projectFilePath": "C:\\Users\\jasmina\\source\\repos\\TheatreGuide\\Application\\Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\jasmina\\.nuget\\packages\\fluentvalidation\\9.5.0\\fluentvalidation.9.5.0.nupkg.sha512",
     "C:\\Users\\jasmina\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.3\\microsoft.aspnetcore.http.features.3.1.3.nupkg.sha512",
     "C:\\Users\\jasmina\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\jasmina\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

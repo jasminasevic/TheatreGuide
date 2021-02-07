@@ -19,6 +19,7 @@ using Application.Commands.UserCommands;
 using Application.Commands.WriterCommands;
 using Application.Core;
 using Application.Interfaces;
+using Application.Validators.ActorValidators;
 using EfCommands.EfActorCommands;
 using EfCommands.EfCategoryCommands;
 using EfCommands.EfCurrencyCommands;
@@ -179,6 +180,9 @@ namespace Api
             services.AddTransient<IApplicationPerformer, FakeAdminPerformer>();
             services.AddTransient<UseCaseExecutor>();
 
+            //Validators
+            services.AddTransient<ActorValidator>();
+
             services.AddCors();
 
         }
@@ -204,6 +208,8 @@ namespace Api
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseMiddleware<GlobalExceptionHandler>();
 
             app.UseAuthorization();
 

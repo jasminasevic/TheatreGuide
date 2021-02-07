@@ -16,6 +16,28 @@ namespace Application.Core
             this.performer = performer;
         }
 
+        public TResult ExecuteQuery<TSearch, TResult>
+            (IQuery<TSearch, TResult> query, 
+            TSearch search)
+        {
+            Console.WriteLine($"{DateTime.Now}: {performer.Identity} is trying to execute {query.Name}" +
+                $"using data: {JsonConvert.SerializeObject(search)}");
+
+            var performerRole = performer.Role;
+
+            foreach (var role in query.Roles)
+            {
+                if (role == performerRole)
+                {
+                    var result = query.Execute(search);
+                    return result;
+                }
+            }
+
+            throw new UnauthorizedUseCaseException(query, performer);
+        }
+
+
         public void ExecuteCommand<TRequest>(
 			ICommand<TRequest> command, 
 			TRequest request)

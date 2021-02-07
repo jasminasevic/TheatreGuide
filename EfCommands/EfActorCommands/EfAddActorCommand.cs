@@ -3,7 +3,9 @@ using Application.DTO.ActorDto;
 using Application.Exceptions;
 using Application.Helpers;
 using Application.Interfaces;
+using Application.Validators.ActorValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,8 +16,12 @@ namespace EfCommands.EfActorCommands
 {
     public class EfAddActorCommand : EfBaseCommand, IAddActorCommand
     {
-        public EfAddActorCommand(EfContext context) : base(context)
+        private readonly ActorValidator _validator;
+
+        public EfAddActorCommand(EfContext context, ActorValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 1;
@@ -26,6 +32,9 @@ namespace EfCommands.EfActorCommands
 
         public void Execute(ActorDto request)
         {
+            _validator.ValidateAndThrow(request);
+            //If there is an exception it will catch ValidationException in GlobalExceptionHandler
+
             if (Context.Actors.Any(a => a.ActorFirstName.ToLower() == request.ActorFirstName
              && a.ActorLastName.ToLower() == request.ActorLastName.ToLower()))
                 throw new EntityAlreadyExistsException(request.ActorFirstName + " " + request.ActorLastName);

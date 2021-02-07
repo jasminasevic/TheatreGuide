@@ -49,87 +49,47 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery] ActorQuery query)
         {
-            try
+            if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
             {
-                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
-                {
-                    var actors = _getActorsList.Execute(new SearchQuery());
-                    return Ok(actors);
-                }
-                else 
-                {
-                    var actors = _getActors.Execute(query);
-                    return Ok(actors);
-                }
+                var actorList = _executor.ExecuteQuery(_getActorsList, new SearchQuery());
+                return Ok(actorList);
             }
-            catch (EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+
+            var actors = _executor.ExecuteQuery(_getActors, query);
+            return Ok(actors);
         }
 
         // GET: api/Actors/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            try
-            {
-                var actor = _getActor.Execute(id);
-                return Ok(actor);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            var actor = _executor.ExecuteQuery(_getActor, id);
+            return Ok(actor);
         }
 
         // POST: api/Actors
         [HttpPost]
         public IActionResult Post([FromForm] ActorDto dto)
         {
-            try
-            {
-                //_addActor.Execute(dto);
-                // return Ok();
-                _executor.ExecuteCommand(_addActor, dto);
-                return Ok();
-
-            }
-            catch(EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message);
-            }
+            _executor.ExecuteCommand(_addActor, dto);
+            return Ok();
         }
 
         // PUT: api/Actors/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromForm] ActorDto dto)
         {
-            try
-            {
-                dto.Id = id;
-                _editCommand.Execute(dto);
-                return StatusCode(204);
-            }
-            catch (EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            dto.Id = id;
+            _executor.ExecuteCommand(_editCommand, dto);
+            return StatusCode(204);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            try
-            {
-                _deleteActor.Execute(id);
-                return StatusCode(204);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _executor.ExecuteCommand(_deleteActor, id);
+            return StatusCode(204);
         }
     }
 }

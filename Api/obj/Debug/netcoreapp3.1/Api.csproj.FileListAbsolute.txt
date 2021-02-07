@@ -133,3 +133,4 @@ C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.genru
 C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.csproj.CoreCompileInputs.cache
 C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\scopedcss\bundle\Api.styles.css
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\FluentValidation.dll
