@@ -2,7 +2,9 @@
 using Application.DTO.RepertoireDto;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Validators.RepertoireValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,11 @@ namespace EfCommands.EfRepertoireCommands
 {
     public class EfAddRepertoireCommand : EfBaseCommand, IAddRepertoireCommand
     {
-        public EfAddRepertoireCommand(EfContext context) : base(context)
+        protected readonly RepertoireValidator _validator;
+        public EfAddRepertoireCommand(EfContext context, RepertoireValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 30;
@@ -24,18 +29,11 @@ namespace EfCommands.EfRepertoireCommands
 
         public void Execute(RepertoireDto request)
         {
+            _validator.ValidateAndThrow(request);
+
             if (Context.Repertoires.Any(r => r.ShowId == request.ShowId
                  && r.Date == request.ShowDate))
                 throw new EntityAlreadyExistsException(request.ShowId.ToString());
-
-            if (request.ShowId == 0)
-                throw new Exception("Show is required");
-
-            if (request.ShowDate == null)
-                throw new Exception("Show Date is required");
-
-            if (request.TheatreId == 0)
-                throw new Exception("Theatre is required");
 
             var showDate = Convert.ToDateTime(request.ShowDate);
             

@@ -3,7 +3,9 @@ using Application.DTO.TheatreDto;
 using Application.Exceptions;
 using Application.Helpers;
 using Application.Interfaces;
+using Application.Validators.TheatreValidators;
 using EfDataAccess;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,8 +17,11 @@ namespace EfCommands.EfTheatreCommands
 {
     public class EfEditTheatreCommand : EfBaseCommand, IEditTheatreCommand
     {
-        public EfEditTheatreCommand(EfContext context) : base(context)
+        protected readonly TheatreValidator _validator;
+        public EfEditTheatreCommand(EfContext context, TheatreValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 69;
@@ -27,7 +32,13 @@ namespace EfCommands.EfTheatreCommands
 
         public void Execute(TheatreDto request)
         {
+            _validator.ValidateAndThrow(request);
+
             var theatre = Context.Theatres.Find(request.Id);
+
+            if (theatre.ContactEmail != request.Email
+               && Context.Theatres.Any(t => t.ContactEmail == request.Email))
+                throw new EntityAlreadyExistsException(request.Email);
 
             if (theatre == null)
                 throw new EntityNotFoundException(request.Id.ToString());

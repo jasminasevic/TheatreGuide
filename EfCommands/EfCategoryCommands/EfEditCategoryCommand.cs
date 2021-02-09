@@ -2,7 +2,9 @@
 using Application.DTO.CategoryDto;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Validators.CategoryValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,11 @@ namespace EfCommands.EfCategoryCommands
 {
     public class EfEditCategoryCommand : EfBaseCommand, IEditCategoryCommand
     {
-        public EfEditCategoryCommand(EfContext context) : base(context)
+        private readonly CategoryValidator _validator;
+        public EfEditCategoryCommand(EfContext context, CategoryValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 9;
@@ -24,14 +29,12 @@ namespace EfCommands.EfCategoryCommands
 
         public void Execute(CategoryDto request)
         {
+            _validator.ValidateAndThrow(request);
+
             var category = Context.Categories.Find(request.Id);
 
             if (category == null)
                 throw new EntityNotFoundException(request.ToString());
-
-            if (request.CategoryName != category.CategoryName
-                && Context.Categories.Any(c => c.CategoryName == request.CategoryName))
-                throw new EntityAlreadyExistsException(request.ToString());
 
             category.CategoryName = request.CategoryName;
 

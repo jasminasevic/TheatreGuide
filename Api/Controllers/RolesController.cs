@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.RoleCommands;
+using Application.Core;
 using Application.DTO.RoleDto;
 using Application.Exceptions;
 using Application.Queries;
@@ -21,13 +22,15 @@ namespace Api.Controllers
         private readonly IEditRoleCommand _editRole;
         private readonly IDeleteRoleCommand _deleteRole;
         private readonly IGetRolesListCommand _getRolesList;
+        private readonly UseCaseExecutor _executor;
 
         public RolesController(IAddRoleCommand addRole,
             IGetRolesCommand getRoles,
             IGetRoleCommand getRole,
             IEditRoleCommand editRole,
-            IDeleteRoleCommand deleteRole, 
-            IGetRolesListCommand getRolesList)
+            IDeleteRoleCommand deleteRole,
+            IGetRolesListCommand getRolesList, 
+            UseCaseExecutor executor)
         {
             _addRole = addRole;
             _getRoles = getRoles;
@@ -35,91 +38,53 @@ namespace Api.Controllers
             _editRole = editRole;
             _deleteRole = deleteRole;
             _getRolesList = getRolesList;
+            _executor = executor;
         }
 
         // GET: api/Roles
         [HttpGet]
         public IActionResult Get([FromQuery] RoleQuery query)
         {
-            try
+            if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
             {
-                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
-                {
-                    var rolesList = _getRolesList.Execute(new SearchQuery());
-                    return Ok(rolesList);
-                }
-                var roles = _getRoles.Execute(query);
-                return Ok(roles);
+                var rolesList = _executor.ExecuteQuery(_getRolesList, new SearchQuery());
+                return Ok(rolesList);
             }
-            catch (EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            var roles = _executor.ExecuteQuery(_getRoles, query);
+            return Ok(roles);
         }
 
         // GET: api/Roles/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            try
-            {
-                var role = _getRole.Execute(id);
-                return Ok(role);
-            }
-            catch (EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            var role = _executor.ExecuteQuery(_getRole, id);
+            return Ok(role);
         }
 
         // POST: api/Roles
         [HttpPost]
         public IActionResult Post([FromBody] RoleDto dto)
         {
-            try
-            {
-                _addRole.Execute(dto);
-                return StatusCode(200);
-            }
-            catch(EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message);
-            }
+            _executor.ExecuteCommand(_addRole, dto);
+            return StatusCode(200);
         }
 
         // PUT: api/Roles/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] RoleDto dto)
         {
-            try
-            {
-                dto.Id = id;
-                _editRole.Execute(dto);
-                return StatusCode(204);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e);
-            }
-            catch (EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message);
-            }
+            dto.Id = id;
+            _executor.ExecuteCommand(_editRole, dto);
+            return StatusCode(204);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            try
-            {
-                _deleteRole.Execute(id);
-                return StatusCode(204);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _executor.ExecuteCommand(_deleteRole, id);
+            return StatusCode(204);
         }
     }
 }

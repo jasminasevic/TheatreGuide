@@ -20,6 +20,17 @@ using Application.Commands.WriterCommands;
 using Application.Core;
 using Application.Interfaces;
 using Application.Validators.ActorValidators;
+using Application.Validators.CategoryValidators;
+using Application.Validators.CurrencyValidators;
+using Application.Validators.DirectorValidators;
+using Application.Validators.PurchaseValidators;
+using Application.Validators.RepertoireValidators;
+using Application.Validators.RoleValidators;
+using Application.Validators.SceneValidators;
+using Application.Validators.ShowValidators;
+using Application.Validators.TheatreValidators;
+using Application.Validators.UserValidators;
+using Application.Validators.WriterValidators;
 using EfCommands.EfActorCommands;
 using EfCommands.EfCategoryCommands;
 using EfCommands.EfCurrencyCommands;
@@ -182,6 +193,17 @@ namespace Api
 
             //Validators
             services.AddTransient<ActorValidator>();
+            services.AddTransient<CategoryValidator>();
+            services.AddTransient<CurrencyValidator>();
+            services.AddTransient<DirectorValidator>();
+            services.AddTransient<PurchaseValidator>();
+            services.AddTransient<RepertoireValidator>();
+            services.AddTransient<RoleValidator>();
+            services.AddTransient<SceneValidator>();
+            services.AddTransient<ShowValidator>();
+            services.AddTransient<TheatreValidator>();
+            services.AddTransient<UserValidator>();
+            services.AddTransient<WriterValidator>();
 
             services.AddCors();
 

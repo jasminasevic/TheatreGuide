@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.PurchaseCommands;
+using Application.Core;
 using Application.DTO.PurchaseDto;
 using Application.Exceptions;
 using Application.Queries;
@@ -20,18 +21,21 @@ namespace Api.Controllers
         protected readonly IGetPurchasesCommand _getPurchases;
         protected readonly IEditPurchaseCommand _editPurchase;
         protected readonly IDeletePurchaseCommand _deletePurchase;
+        protected readonly UseCaseExecutor _executor;
 
         public PurchasesController(IAddPurchaseCommand addPurchase,
             IGetPurchaseCommand getPurchase,
             IGetPurchasesCommand getPurchases,
-            IEditPurchaseCommand editPurchase, 
-            IDeletePurchaseCommand deletePurchase)
+            IEditPurchaseCommand editPurchase,
+            IDeletePurchaseCommand deletePurchase, 
+            UseCaseExecutor executor)
         {
             _addPurchase = addPurchase;
             _getPurchase = getPurchase;
             _getPurchases = getPurchases;
             _editPurchase = editPurchase;
             _deletePurchase = deletePurchase;
+            _executor = executor;
         }
 
 
@@ -39,76 +43,41 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery] PurchaseQuery query)
         {
-            try
-            {
-                var purchases = _getPurchases.Execute(query);
-                return Ok(purchases);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            var purchases = _executor.ExecuteQuery(_getPurchases, query);
+            return Ok(purchases);
         }
 
         // GET: api/Purchases/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            try
-            {
-                var purchase = _getPurchase.Execute(id);
-                return Ok(purchase);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            var purchase = _executor.ExecuteQuery(_getPurchase, id);
+            return Ok(purchase);
         }
 
         // POST: api/Purchases
         [HttpPost]
-        public IActionResult Post([FromForm] PurchaseDto dto)
+        public IActionResult Post([FromBody] PurchaseDto dto)
         {
-            try
-            {
-                _addPurchase.Execute(dto);
-                return Ok();
-            }
-            catch(EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message);
-            }
+            _executor.ExecuteCommand(_addPurchase, dto);
+            return Ok();
         }
 
         // PUT: api/Purchases/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromForm] PurchaseDto dto)
+        public IActionResult Put(int id, [FromBody] PurchaseDto dto)
         {
-            try
-            {
-                dto.Id = id;
-                _editPurchase.Execute(dto);
-                return StatusCode(204);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            dto.Id = id;
+            _executor.ExecuteCommand(_editPurchase, dto);
+            return StatusCode(204);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            try
-            {
-                _deletePurchase.Execute(id);
-                return StatusCode(204);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _executor.ExecuteCommand(_deletePurchase, id);
+            return StatusCode(204);
         }
     }
 }

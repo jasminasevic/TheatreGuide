@@ -2,7 +2,9 @@
 using Application.DTO.PurchaseDto;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Validators.PurchaseValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,18 +14,24 @@ namespace EfCommands.EfPurchaseCommands
 {
     public class EfAddPurchaseCommand : EfBaseCommand, IAddPurchaseCommand
     {
-        public EfAddPurchaseCommand(EfContext context) : base(context)
+        protected readonly PurchaseValidator _validator;
+
+        public EfAddPurchaseCommand(EfContext context, PurchaseValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 25;
 
         public string Name => "Add New Purchase Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.User, Role.Admin };
 
         public void Execute(PurchaseDto request)
         {
+            _validator.ValidateAndThrow(request);
+
             if (Context.Purchases.Any(p => p.RepertoireId == request.RepertoireId
                  && p.SectorId == request.SectorId
                  && p.RowNumber == request.RowNumber
@@ -61,9 +69,6 @@ namespace EfCommands.EfPurchaseCommands
 
             Context.SaveChanges();
     
-            
-
-            
         }
     }
 }

@@ -63,7 +63,7 @@ namespace EfCommands.EfPurchaseCommands
                 {
                     Price = tp.TicketPrice,
                     CurrencyName = tp.Currency.CurrencyName
-                })
+                }).Take(1)
             });
 
 

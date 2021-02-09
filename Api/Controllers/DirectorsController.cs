@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.DirectorCommands;
+using Application.Core;
 using Application.DTO.DirectorDto;
 using Application.Exceptions;
 using Application.Queries;
@@ -21,13 +22,15 @@ namespace Api.Controllers
         protected readonly IEditDirectorCommand _editDirector;
         protected readonly IDeleteDirectorCommand _deleteDirector;
         protected readonly IGetDirectorsListCommand _getDirectorsList;
+        protected readonly UseCaseExecutor _executor;
 
         public DirectorsController(IAddDirectorCommand addDirector,
             IGetDirectorsCommand getDirectors,
             IGetDirectorCommand getDirector,
             IEditDirectorCommand editDirector,
-            IDeleteDirectorCommand deleteDirector, 
-            IGetDirectorsListCommand getDirectorsList)
+            IDeleteDirectorCommand deleteDirector,
+            IGetDirectorsListCommand getDirectorsList, 
+            UseCaseExecutor executor)
         {
             _addDirector = addDirector;
             _getDirectors = getDirectors;
@@ -35,6 +38,7 @@ namespace Api.Controllers
             _editDirector = editDirector;
             _deleteDirector = deleteDirector;
             _getDirectorsList = getDirectorsList;
+            _executor = executor;
         }
 
 
@@ -42,88 +46,46 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery] DirectorQuery query)
         {
-            try
+            if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
             {
-                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
-                {
-                    var directors = _getDirectorsList.Execute(new SearchQuery());
-                    return Ok(directors);
-                }
-                else
-                {
-                    var directors = _getDirectors.Execute(query);
-                    return Ok(directors);
-                }
+                var directorList = _executor.ExecuteQuery(_getDirectorsList, new SearchQuery());
+                return Ok(directorList);
             }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            var directors = _executor.ExecuteQuery(_getDirectors, query);
+            return Ok(directors);
         }
 
         // GET: api/Directors/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            try
-            {
-                var director = _getDirector.Execute(id);
-                return Ok(director);
-            }
-            catch (EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            var director = _executor.ExecuteQuery(_getDirector, id);
+            return Ok(director);
         }
 
         // POST: api/Directors
         [HttpPost]
         public IActionResult Post([FromBody] DirectorDto dto)
         {
-            try
-            {
-                _addDirector.Execute(dto);
-                return Ok();
-            }
-            catch(EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message);
-            }
+            _executor.ExecuteCommand(_addDirector, dto);
+            return Ok();
         }
 
         // PUT: api/Directors/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] DirectorDto dto)
         {
-            try
-            {
-                dto.Id = id;
-                _editDirector.Execute(dto);
-                return Ok();
-            }
-            catch (EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
-            catch(EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message);
-            }
+            dto.Id = id;
+            _executor.ExecuteCommand(_editDirector, dto);
+            return Ok();
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            try
-            {
-                _deleteDirector.Execute(id);
-                return StatusCode(204);
-            }
-            catch (EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _executor.ExecuteCommand(_deleteDirector, id);
+            return StatusCode(204);
         }
     }
 }

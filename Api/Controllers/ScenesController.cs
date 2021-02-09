@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.SceneCommands;
+using Application.Core;
 using Application.DTO.SceneDto;
 using Application.Exceptions;
 using Application.Queries;
@@ -27,6 +28,7 @@ namespace Api.Controllers
         protected readonly IEditSceneCommand _editScene;
         protected readonly IGetScenesListCommand _getScenesList;
         protected readonly IGetScenesTheatreCommand _getScenesTheatre;
+        protected readonly UseCaseExecutor _executor;
 
         public ScenesController(IAddSceneCommand addScene,
             IGetSceneCommand getScene,
@@ -34,8 +36,9 @@ namespace Api.Controllers
             IDeleteSceneCommand deleteScene,
             IEditSceneCommand editScene,
             IGetScenesListCommand getScenesList,
-            IGetScenesTheatreCommand getScenesTheatre, 
-            IGetSceneWithShowsCommand getSceneWithShows)
+            IGetScenesTheatreCommand getScenesTheatre,
+            IGetSceneWithShowsCommand getSceneWithShows, 
+            UseCaseExecutor executor)
         {
             _addScene = addScene;
             _getScene = getScene;
@@ -45,105 +48,65 @@ namespace Api.Controllers
             _getScenesList = getScenesList;
             _getScenesTheatre = getScenesTheatre;
             _getSceneWithShows = getSceneWithShows;
+            _executor = executor;
         }
 
         // GET: api/Scenes
         [HttpGet]
         public IActionResult Get([FromQuery] SceneQuery query)
        {
-            try
+            if (query.TheatreId != 0)
             {
-                if (query.TheatreId != 0)
-                {
-                    var scenesInTheatre = _getScenesTheatre.Execute(query);
-                    return Ok(scenesInTheatre);
-                }
-                else if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
-                {
-                    var sceneList = _getScenesList.Execute(new SearchQuery());
-                    return Ok(sceneList);
-                }
-                else
-                {
-                    var scenes = _getScenes.Execute(query);
-                    return Ok(scenes);
-                }
-                
+                var scenesInTheatre = _executor.ExecuteQuery(_getScenesTheatre, query);
+                return Ok(scenesInTheatre);
             }
-            catch(EntityNotFoundException e)
+
+            if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
             {
-                return NotFound(e.Message);
+                var sceneList = _executor.ExecuteQuery(_getScenesList, new SearchQuery());
+                return Ok(sceneList);
             }
+
+            var scenes = _executor.ExecuteQuery(_getScenes, query);
+            return Ok(scenes);
         }
 
         // GET: api/Scenes/5
         [HttpGet("{id}")]
         public IActionResult Get(int id, [FromQuery] SearchQuery query)
         {
-            try
+            if (query.Type == "sceneWithShows")
             {
-                if(query.Type == "sceneWithShows")
-                {
-                    var sceneWithShows = _getSceneWithShows.Execute(id);
-                    return Ok(sceneWithShows);
-                }
-                var scene = _getScene.Execute(id);
-                return Ok(scene);
+                var sceneWithShows = _executor.ExecuteQuery(_getSceneWithShows, id);
+                return Ok(sceneWithShows);
             }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            var scene = _executor.ExecuteQuery(_getScene, id);
+            return Ok(scene);
         }
 
         // POST: api/Scenes
         [HttpPost]
         public IActionResult Post([FromForm] SceneDto dto)
         {
-            try
-            {
-                _addScene.Execute(dto);
-                return Ok();
-            }
-            catch(EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message);
-            }
+            _executor.ExecuteCommand(_addScene, dto);
+            return Ok();
         }
 
         // PUT: api/Scenes/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] SceneDto dto)
         {
-            try
-            {
-                dto.Id = id;
-                _editScene.Execute(dto);
-                return StatusCode(204);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
-            catch(EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message);
-            }
+            dto.Id = id;
+            _executor.ExecuteCommand(_editScene, dto);
+            return StatusCode(204);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            try
-            {
-                _deleteScene.Execute(id);
-                return StatusCode(204);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _executor.ExecuteCommand(_deleteScene, id);
+            return StatusCode(204);
         }
     }
 }

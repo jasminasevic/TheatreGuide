@@ -2,7 +2,9 @@
 using Application.DTO.RepertoireDto;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Validators.RepertoireValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,11 @@ namespace EfCommands.EfRepertoireCommands
 {
     public class EfEditRepertoireCommand : EfBaseCommand, IEditRepertoireCommand
     {
-        public EfEditRepertoireCommand(EfContext context) : base(context)
+        protected readonly RepertoireValidator _validator;
+        public EfEditRepertoireCommand(EfContext context, RepertoireValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 32;
@@ -24,6 +29,8 @@ namespace EfCommands.EfRepertoireCommands
 
         public void Execute(RepertoireDto request)
         {
+            _validator.ValidateAndThrow(request);
+
             var repertoire = Context.Repertoires.Find(request.Id);
 
             if (repertoire == null)

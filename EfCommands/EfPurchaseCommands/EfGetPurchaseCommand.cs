@@ -43,7 +43,7 @@ namespace EfCommands.EfPurchaseCommands
                 .FirstOrDefault();
 
             if (purchase == null)
-                throw new EntityNotFoundException(purchase.ToString());
+                throw new EntityNotFoundException(request.ToString());
 
             var priceDetails = Context.Prices.Where(s => s.RepertoireId == purchase.RepertoireId
                 && s.SectorId == purchase.SectorId)
@@ -75,7 +75,7 @@ namespace EfCommands.EfPurchaseCommands
                 {
                     Price = tp.TicketPrice,
                     CurrencyName = tp.Currency.CurrencyName
-                })
+                }).Take(1)
             };
         }
     }

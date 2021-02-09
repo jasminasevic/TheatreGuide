@@ -3,6 +3,7 @@ using Application.DTO.ShowDto;
 using Application.Exceptions;
 using Application.Helpers;
 using Application.Interfaces;
+using Application.Validators.ShowValidators;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,11 @@ namespace EfCommands.EfShowCommands
 {
     public class EfAddShowCommand : EfBaseCommand, IAddShowCommand
     {
-        public EfAddShowCommand(EfContext context) : base(context)
+        protected readonly ShowValidator _validator;
+        public EfAddShowCommand(EfContext context, ShowValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 51;
@@ -26,12 +30,11 @@ namespace EfCommands.EfShowCommands
 
         public void Execute(ShowDto request)
         {
+            _validator.validateAndThrow(request);
+
             if (Context.Shows.Any(s => s.Title.ToLower().Contains(request.Title)
                  && s.TheatreId == request.TheatreId))
                 throw new EntityAlreadyExistsException(request.Title);
-
-            if (request.Title == null)
-                throw new Exception("Title is required");
 
             var show = new Domain.Show
             {

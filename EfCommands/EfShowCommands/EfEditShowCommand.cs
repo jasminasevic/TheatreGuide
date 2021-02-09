@@ -3,6 +3,7 @@ using Application.DTO.ShowDto;
 using Application.Exceptions;
 using Application.Helpers;
 using Application.Interfaces;
+using Application.Validators.ShowValidators;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,11 @@ namespace EfCommands.EfShowCommands
 {
     public class EfEditShowCommand : EfBaseCommand, IEditShowCommand
     {
-        public EfEditShowCommand(EfContext context) : base(context)
+        protected readonly ShowValidator _validator;
+        public EfEditShowCommand(EfContext context, ShowValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 53;
@@ -26,6 +30,8 @@ namespace EfCommands.EfShowCommands
 
         public void Execute(ShowDto request)
         {
+            _validator.validateAndThrow(request);
+
             var show = Context.Shows.Find(request.Id);
 
             if (show == null)

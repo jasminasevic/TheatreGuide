@@ -2,7 +2,9 @@
 using Application.DTO.SceneDto;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Validators.SceneValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,11 @@ namespace EfCommands.EfSceneCommands
 {
     public class EfEditSceneCommand : EfBaseCommand, IEditSceneCommand
     {
-        public EfEditSceneCommand(EfContext context) : base(context)
+        protected readonly SceneValidator _validator;
+        public EfEditSceneCommand(EfContext context, SceneValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 45;
@@ -24,6 +29,8 @@ namespace EfCommands.EfSceneCommands
 
         public void Execute(SceneDto request)
         {
+            _validator.ValidateAndThrow(request);
+
             var scene = Context.Scenes.Find(request.Id);
 
             if (scene == null)

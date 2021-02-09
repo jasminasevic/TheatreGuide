@@ -2,7 +2,9 @@
 using Application.DTO.DirectorDto;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Validators.DirectorValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,11 @@ namespace EfCommands.EfDirectorCommands
 {
     public class EfAddDirectorCommand : EfBaseCommand, IAddDirectorCommand
     {
-        public EfAddDirectorCommand(EfContext context) : base(context)
+        protected readonly DirectorValidator _validator;
+        public EfAddDirectorCommand(EfContext context, DirectorValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 19;
@@ -24,6 +29,8 @@ namespace EfCommands.EfDirectorCommands
 
         public void Execute(DirectorDto request)
         {
+            _validator.ValidateAndThrow(request);
+
             if (Context.Directors.Any(d => d.DirectorFirstName.ToLower() == request.DirectorFirstName.ToLower()
              && d.DirectorLastName.ToLower() == request.DirectorLastName.ToLower()))
                 throw new EntityAlreadyExistsException(request.ToString());

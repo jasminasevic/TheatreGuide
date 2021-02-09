@@ -3,7 +3,9 @@ using Application.DTO.TheatreDto;
 using Application.Exceptions;
 using Application.Helpers;
 using Application.Interfaces;
+using Application.Validators.TheatreValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,8 +16,11 @@ namespace EfCommands.EfTheatreCommands
 {
     public class EfAddTheatreCommand : EfBaseCommand, IAddTheatreCommand
     {
-        public EfAddTheatreCommand(EfContext context) : base(context)
+        protected readonly TheatreValidator _validator;
+        public EfAddTheatreCommand(EfContext context, TheatreValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 67;
@@ -26,12 +31,11 @@ namespace EfCommands.EfTheatreCommands
 
         public void Execute(TheatreDto request)
         {
+            _validator.ValidateAndThrow(request);
+
             if (Context.Theatres.Any(t => t.ContactEmail.ToLower()
              .Contains(request.Email.ToLower())))
                 throw new EntityAlreadyExistsException(request.Email);
-
-            if (request.Name == null)
-                throw new Exception("Theatre name is required.");
 
             var address = new Domain.Address
             {

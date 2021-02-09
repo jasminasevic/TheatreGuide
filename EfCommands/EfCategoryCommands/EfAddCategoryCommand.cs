@@ -2,7 +2,9 @@
 using Application.DTO.CategoryDto;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Validators.CategoryValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,11 @@ namespace EfCommands.EfCategoryCommands
 {
     public class EfAddCategoryCommand : EfBaseCommand, IAddCategoryCommand
     {
-        public EfAddCategoryCommand(EfContext context) : base(context)
+        private readonly CategoryValidator _validator;
+        public EfAddCategoryCommand(EfContext context, CategoryValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 7;
@@ -24,8 +29,8 @@ namespace EfCommands.EfCategoryCommands
 
         public void Execute(CategoryDto request)
         {
-            if (Context.Categories.Any(c => c.CategoryName.ToLower() == request.CategoryName.ToLower()))
-                throw new EntityAlreadyExistsException(request.CategoryName);
+            _validator.ValidateAndThrow(request);
+            //If there is an exception it will catch ValidationException in GlobalExceptionHandler
 
             Context.Categories.Add(new Domain.Category
             {

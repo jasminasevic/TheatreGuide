@@ -2,7 +2,9 @@
 using Application.DTO.CurrencyDto;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Validators.CurrencyValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,11 @@ namespace EfCommands.EfCurrencyCommands
 {
     public class EfAddCurrencyCommand : EfBaseCommand, IAddCurrencyCommand
     {
-        public EfAddCurrencyCommand(EfContext context) : base(context)
+        private readonly CurrencyValidator _validator;
+        public EfAddCurrencyCommand(EfContext context, CurrencyValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 13;
@@ -24,11 +29,7 @@ namespace EfCommands.EfCurrencyCommands
 
         public void Execute(CurrencyDto request)
         {
-            if (Context.Currencies.Any(c => c.CurrencyName.ToLower() == request.CurrencyName))
-                throw new EntityAlreadyExistsException(request.CurrencyName);
-
-            if (request.CurrencyName == null)
-                throw new Exception("Currency is required");
+            _validator.ValidateAndThrow(request);
 
             Context.Currencies.Add(new Domain.Currency
             {

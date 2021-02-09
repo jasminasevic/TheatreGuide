@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.RepertoireCommands;
+using Application.Core;
 using Application.DTO.RepertoireDto;
 using Application.Exceptions;
 using Application.Queries;
@@ -22,14 +23,16 @@ namespace Api.Controllers
         protected readonly IEditRepertoireCommand _editRepertoire;
         protected readonly IGetUpcomingShowsCommand _getUpcomingShows;
         protected readonly IGetUpcomingPremieresCommand _getUpcomingPremieres;
+        protected readonly UseCaseExecutor _executor;
 
         public RepertoiresController(IAddRepertoireCommand addRepertoire,
             IGetRepertoireCommand getRepertoire,
             IGetRepertoiresCommand getRepertoires,
             IDeleteRepertoireCommand deleteRepertoire,
             IEditRepertoireCommand editRepertoire,
-            IGetUpcomingShowsCommand getUpcomingShows, 
-            IGetUpcomingPremieresCommand getUpcomingPremieres)
+            IGetUpcomingShowsCommand getUpcomingShows,
+            IGetUpcomingPremieresCommand getUpcomingPremieres, 
+            UseCaseExecutor executor)
         {
             _addRepertoire = addRepertoire;
             _getRepertoire = getRepertoire;
@@ -38,6 +41,7 @@ namespace Api.Controllers
             _editRepertoire = editRepertoire;
             _getUpcomingShows = getUpcomingShows;
             _getUpcomingPremieres = getUpcomingPremieres;
+            _executor = executor;
         }
 
 
@@ -45,90 +49,51 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery] RepertoireQuery query)
         {
-            try
+            if (query.Type == "upcomingShows")
             {
-                if (query.Type == "upcomingShows")
-                {
-                    var upcomingShows = _getUpcomingShows.Execute(new RepertoireQuery());
-                    return Ok(upcomingShows);
-                }
-                if (query.Type == "upcomingPremieres")
-                {
-                    var upcomingPremieres = _getUpcomingPremieres.Execute(new RepertoireQuery());
-                    return Ok(upcomingPremieres);
-                }
-                var repertoires = _getRepertoires.Execute(query);
-                return Ok(repertoires);
+                var upcomingShows = _executor.ExecuteQuery(_getUpcomingShows, new RepertoireQuery());
+                return Ok(upcomingShows);
             }
-            catch(EntityNotFoundException e)
+            if (query.Type == "upcomingPremieres")
             {
-                return NotFound(e.Message);
+                var upcomingPremieres = _executor.ExecuteQuery(_getUpcomingPremieres, new RepertoireQuery());
+                return Ok(upcomingPremieres);
             }
+            var repertoires = _executor.ExecuteQuery(_getRepertoires, query);
+            return Ok(repertoires);
         }
 
         // GET: api/Repertoires/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            try
-            {
-                var repertoire = _getRepertoire.Execute(id);
-                return Ok(repertoire);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            var repertoire = _executor.ExecuteQuery(_getRepertoire, id);
+            return Ok(repertoire);
         }
 
         // POST: api/Repertoires
         [HttpPost]
         public IActionResult Post([FromForm] RepertoireDto dto)
         {
-            try
-            {
-                _addRepertoire.Execute(dto);
-                return Ok();
-            }
-            catch(EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message); 
-            }
-            catch(Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
+            _executor.ExecuteCommand(_addRepertoire, dto);
+            return Ok();
         }
 
         // PUT: api/Repertoires/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromForm] RepertoireDto dto)
         {
-            try
-            {
-                dto.Id = id;
-                _editRepertoire.Execute(dto);
-                return StatusCode(204);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            dto.Id = id;
+            _executor.ExecuteCommand(_editRepertoire, dto);
+            return StatusCode(204);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            try
-            {
-                _deleteRepertoire.Execute(id);
-                return StatusCode(204);
-            }
-            catch (EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _executor.ExecuteCommand(_deleteRepertoire, id);
+            return StatusCode(204);
         }
     }
 }

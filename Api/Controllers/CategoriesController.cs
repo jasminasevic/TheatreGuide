@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.CategoryCommands;
+using Application.Core;
 using Application.DTO.CategoryDto;
 using Application.Exceptions;
 using Application.Queries;
@@ -22,13 +23,15 @@ namespace Api.Controllers
         protected readonly IEditCategoryCommand _editCategory;
         protected readonly IDeleteCategoryCommand _deleteCategory;
         protected readonly IGetCategoriesListCommand _getCategoriesList;
+        protected readonly UseCaseExecutor _executor;
 
         public CategoriesController(IAddCategoryCommand addCategory,
             IGetCategoriesCommand getCategories,
             IGetCategoryCommand getCategory,
             IEditCategoryCommand editCategory,
-            IDeleteCategoryCommand deleteCategory, 
-            IGetCategoriesListCommand getCategoriesList)
+            IDeleteCategoryCommand deleteCategory,
+            IGetCategoriesListCommand getCategoriesList, 
+            UseCaseExecutor executor)
         {
             _addCategory = addCategory;
             _getCategories = getCategories;
@@ -36,94 +39,54 @@ namespace Api.Controllers
             _editCategory = editCategory;
             _deleteCategory = deleteCategory;
             _getCategoriesList = getCategoriesList;
+            _executor = executor;
         }
 
         // GET: api/Categories
         [HttpGet]
         public IActionResult Get([FromQuery] CategoryQuery query)
         {
-            try
+            if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
             {
-                if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
-                {
-                    var categories = _getCategoriesList.Execute(new SearchQuery());
-                    return Ok(categories);
-                }
-                else { 
-                    var categories = _getCategories.Execute(query);
-                    return Ok(categories);
-                }
+                var categoryList = _executor.ExecuteQuery(_getCategoriesList, new SearchQuery());
+                return Ok(categoryList);
             }
-            catch (EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+
+            var categories = _executor.ExecuteQuery(_getCategories, query);
+            return Ok(categories);
         }
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            try
-            {
-                var category = _getCategory.Execute(id);
-                return Ok(category);
-            }
-            catch (EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            var category = _executor.ExecuteQuery(_getCategory, id);
+            return Ok(category);
         }
 
         // POST: api/Categories
         [HttpPost]
         public IActionResult Post([FromBody] CategoryDto dto)
         {
-            try
-            {
-                _addCategory.Execute(dto);
-                return Ok();
-            }
-            catch (EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message);
-            }
+            _executor.ExecuteCommand(_addCategory, dto);
+            return Ok();
         }
 
         // PUT: api/Categories/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] CategoryDto dto)
         {
-            try
-            {
-                dto.Id = id;
-                _editCategory.Execute(dto);
-                return StatusCode(204);
-            }
-            catch (EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
-            catch(EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message);
-            }
+            dto.Id = id;
+            _executor.ExecuteCommand(_editCategory, dto);
+            return StatusCode(204);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            try
-            {
-                _deleteCategory.Execute(id);
-                return StatusCode(204);
-
-            }
-            catch (EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _executor.ExecuteCommand(_deleteCategory, id);
+            return StatusCode(204);
         }
     }
 }

@@ -52,7 +52,7 @@ namespace Api.Core
                         statusCode = StatusCodes.Status422UnprocessableEntity;
                         response = new
                         {
-                            message = "Failed due to validation errors."
+                            message = "Entity already exists."
                         };
                         break;
 

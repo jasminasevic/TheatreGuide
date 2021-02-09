@@ -2,7 +2,9 @@
 using Application.DTO.DirectorDto;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Validators.DirectorValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,8 +13,11 @@ namespace EfCommands.EfDirectorCommands
 {
     public class EfEditDirectorCommand : EfBaseCommand, IEditDirectorCommand
     {
-        public EfEditDirectorCommand(EfContext context) : base(context)
+        protected readonly DirectorValidator _validator;
+        public EfEditDirectorCommand(EfContext context, DirectorValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 21;
@@ -23,6 +28,8 @@ namespace EfCommands.EfDirectorCommands
 
         public void Execute(DirectorDto request)
         {
+            _validator.ValidateAndThrow(request);
+
             var director = Context.Directors.Find(request.Id);
 
             if (director == null)

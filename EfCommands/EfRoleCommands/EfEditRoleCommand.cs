@@ -1,7 +1,9 @@
 ﻿using Application.Commands.RoleCommands;
 using Application.DTO.RoleDto;
 using Application.Exceptions;
+using Application.Validators.RoleValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +13,11 @@ namespace EfCommands.EfRoleCommands
 {
     public class EfEditRoleCommand : EfBaseCommand, IEditRoleCommand
     {
-        public EfEditRoleCommand(EfContext context) : base(context)
+        protected readonly RoleValidator _validator;
+        public EfEditRoleCommand(EfContext context, RoleValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 39;
@@ -23,14 +28,12 @@ namespace EfCommands.EfRoleCommands
 
         public void Execute(RoleDto request)
         {
+            _validator.ValidateAndThrow(request);
+
             var role = Context.Roles.Find(request.Id);
 
             if (role == null)
                 throw new EntityNotFoundException(request.Id.ToString());
-
-            if (request.RoleName.ToLower() != role.RoleName.ToLower()
-                && Context.Roles.Any(r => r.RoleName.ToLower() == request.RoleName.ToLower()))
-                throw new EntityAlreadyExistsException(request.RoleName);
 
             role.RoleName = request.RoleName;
 

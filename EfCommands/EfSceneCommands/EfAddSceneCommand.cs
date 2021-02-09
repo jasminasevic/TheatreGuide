@@ -2,7 +2,9 @@
 using Application.DTO.SceneDto;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Validators.SceneValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,11 @@ namespace EfCommands.EfSceneCommands
 {
     public class EfAddSceneCommand : EfBaseCommand, IAddSceneCommand
     {
-        public EfAddSceneCommand(EfContext context) : base(context)
+        private readonly SceneValidator _validator;
+        public EfAddSceneCommand(EfContext context, SceneValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 43;
@@ -24,15 +29,11 @@ namespace EfCommands.EfSceneCommands
 
         public void Execute(SceneDto request)
         {
+            _validator.ValidateAndThrow(request);
+
             if (Context.Scenes.Any(s => s.SceneName.ToLower() == request.SceneName
              && s.TheatreId == request.TheatreId))
                 throw new EntityAlreadyExistsException(request.SceneName);
-
-            if (request.SceneName == null)
-                throw new Exception("Scene name must be added");
-
-            if (request.TheatreId == 0)
-                throw new Exception("Theatre must be added");
 
             var scene = new Domain.Scene
             {

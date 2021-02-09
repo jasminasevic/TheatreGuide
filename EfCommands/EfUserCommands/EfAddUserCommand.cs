@@ -2,7 +2,9 @@
 using Application.DTO.UserDto;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Validators.UserValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,11 @@ namespace EfCommands.EfUserCommands
 {
     public class EfAddUserCommand : EfBaseCommand, IAddUserCommand
     {
-        public EfAddUserCommand(EfContext context) : base(context)
+        protected readonly UserValidator _validator;
+        public EfAddUserCommand(EfContext context, UserValidator validator) 
+            : base(context)
         {
+            _validator = validator;
         }
 
         public int Id => 74;
@@ -24,6 +29,8 @@ namespace EfCommands.EfUserCommands
 
         public void Execute(UserDto request)
         {
+            _validator.ValidateAndThrow(request);
+
             if (Context.Users.Any(u => u.Email == request.Email))
                 throw new EntityAlreadyExistsException(request.Email);
 

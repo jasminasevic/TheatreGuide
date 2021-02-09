@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.ShowCommands;
+using Application.Core;
 using Application.DTO.ShowDto;
 using Application.Exceptions;
 using Application.Queries;
@@ -29,7 +30,7 @@ namespace Api.Controllers
         protected readonly IGetPopularShowsFilteredByActorCommand _getPopularShowsFilteredByActor;
         protected readonly IGetPopularShowsFilteredByDirectorCommand _getPopularShowsFilteredByDirector;
         protected readonly IGetPopularShowsFilteredByIdAndTheatreCommand _getPopularShowsFilteredByIdAndTheatre;
-
+        protected readonly UseCaseExecutor _executor;
         public ShowsController(IAddShowCommand addShow,
             IGetShowCommand getShow,
             IGetShowsCommand getShows,
@@ -42,8 +43,9 @@ namespace Api.Controllers
             IGetPopularShowsFilteredByIdCommand getPopularShowsFilteredById,
             IGetPopularShowsFilteredByTheatreCommand getPopularShowsFilteredByTheatre,
             IGetPopularShowsFilteredByActorCommand getPopularShowsFilteredByActor,
-            IGetPopularShowsFilteredByDirectorCommand getPopularShowsFilteredByDirector, 
-            IGetPopularShowsFilteredByIdAndTheatreCommand getPopularShowsFilteredByIdAndTheatre)
+            IGetPopularShowsFilteredByDirectorCommand getPopularShowsFilteredByDirector,
+            IGetPopularShowsFilteredByIdAndTheatreCommand getPopularShowsFilteredByIdAndTheatre, 
+            UseCaseExecutor executor)
         {
             _addShow = addShow;
             _getShow = getShow;
@@ -59,134 +61,100 @@ namespace Api.Controllers
             _getPopularShowsFilteredByActor = getPopularShowsFilteredByActor;
             _getPopularShowsFilteredByDirector = getPopularShowsFilteredByDirector;
             _getPopularShowsFilteredByIdAndTheatre = getPopularShowsFilteredByIdAndTheatre;
+            _executor = executor;
         }
 
         // GET: api/Shows
         [HttpGet]
         public IActionResult Get([FromQuery] ShowQuery query)
         {
-            try
-            {
-                if (query.SearchQuery == null && query.PageNumber == 0 
+            if (query.SearchQuery == null && query.PageNumber == 0
                         && query.PerPage == 0 && query.Type == null)
-                {
-                    var shows = _getShowsList.Execute(new SearchQuery());
-                    return Ok(shows);
-                }
-                if (query.Type == "popularShows" && query.ShowId != null)
-                {
-                    var shows = _getPopularShowsFilteredById.Execute(Convert.ToInt32(query.ShowId));
-                    return Ok(shows);
-                }
-                if (query.Type == "popularShows" && query.TheatreId != null)
-                {
-                    var shows = _getPopularShowsFilteredByTheatre.Execute(Convert.ToInt32(query.TheatreId));
-                    return Ok(shows);
-                }
-                if (query.Type == "popularShows" && query.ActorId != null)
-                {
-                    var shows = _getPopularShowsFilteredByActor.Execute(Convert.ToInt32(query.ActorId));
-                    return Ok(shows);
-                }
-                if (query.Type == "popularShows" && query.DirectorId != null)
-                {
-                    var shows = _getPopularShowsFilteredByDirector.Execute(Convert.ToInt32(query.DirectorId));
-                    return Ok(shows);
-                }
-                if (query.Type == "popularShows")
-                {
-                    var shows = _getPopularShows.Execute(new ShowQuery());
-                    return Ok(shows);
-                }
-                if (query.Type == "popularShowsFilteredByIdAndTheatre")
-                {
-                    var shows = _getPopularShowsFilteredByIdAndTheatre.Execute(query);
-                    return Ok(shows);
-                }
-                var allShows = _getShows.Execute(query);
-                return Ok(allShows);
-            }
-            catch(EntityNotFoundException e)
             {
-                return NotFound(e.Message);
+                var shows = _executor.ExecuteQuery(_getShowsList, new SearchQuery());
+                return Ok(shows);
             }
+            if (query.Type == "popularShows" && query.ShowId != null)
+            {
+                var shows = _executor.ExecuteQuery(_getPopularShowsFilteredById, 
+                    Convert.ToInt32(query.ShowId));
+                return Ok(shows);
+            }
+            if (query.Type == "popularShows" && query.TheatreId != null)
+            {
+                var shows = _executor.ExecuteQuery(_getPopularShowsFilteredByTheatre, 
+                    Convert.ToInt32(query.TheatreId));
+                return Ok(shows);
+            }
+            if (query.Type == "popularShows" && query.ActorId != null)
+            {
+                var shows = _executor.ExecuteQuery(_getPopularShowsFilteredByActor, 
+                    Convert.ToInt32(query.ActorId));
+                return Ok(shows);
+            }
+            if (query.Type == "popularShows" && query.DirectorId != null)
+            {
+                var shows = _executor.ExecuteQuery(_getPopularShowsFilteredByDirector, 
+                    Convert.ToInt32(query.DirectorId));
+                return Ok(shows);
+            }
+            if (query.Type == "popularShows")
+            {
+                var shows = _executor.ExecuteQuery(_getPopularShows, new ShowQuery());
+                return Ok(shows);
+            }
+            if (query.Type == "popularShowsFilteredByIdAndTheatre")
+            {
+                var shows = _executor.ExecuteQuery(_getPopularShowsFilteredByIdAndTheatre, query);
+                return Ok(shows);
+            }
+            var allShows = _executor.ExecuteQuery(_getShows, query);
+            return Ok(allShows);
         }
 
         // GET: api/Shows/5
         [HttpGet("{id}")]
         public IActionResult Get(int id, [FromQuery] ShowQuery query)
         {
-            try
+            if (query.Type == "repertoire")
             {
-                if(query.Type == "repertoire")  
-                {
-                    var showForRepertoire = _getShowForRepertoire.Execute(id);
-                    return Ok(showForRepertoire);
-                }
-
-                if(query.Type == "ticketPrices")
-                {
-                    var showForRepertoire = _getShowWithPricesForRepertoire.Execute(id);
-                    return Ok(showForRepertoire);
-                }
-
-                var show = _getShow.Execute(id);
-                return Ok(show);
+                var showForRepertoire = _executor.ExecuteQuery(_getShowForRepertoire, id);
+                return Ok(showForRepertoire);
             }
-            catch (EntityNotFoundException e)
+
+            if (query.Type == "ticketPrices")
             {
-                return NotFound(e.Message);
+                var showForRepertoire = _executor.ExecuteQuery(_getShowWithPricesForRepertoire, id);
+                return Ok(showForRepertoire);
             }
+
+            var show = _executor.ExecuteQuery(_getShow, id);
+            return Ok(show);
         }
 
         // POST: api/Shows
         [HttpPost]
         public IActionResult Post([FromForm] ShowDto dto)
         {
-            try
-            {
-                _addShow.Execute(dto);
-                return Ok();
-            }
-            catch(EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message);
-            }
-            catch(Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
+            _executor.ExecuteCommand(_addShow, dto);
+            return Ok();
         }
 
         // PUT: api/Shows/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromForm] ShowDto dto)
         {
-            try
-            {
-                dto.Id = id;
-                _editShow.Execute(dto);
-                return StatusCode(204);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            dto.Id = id;
+            _executor.ExecuteCommand(_editShow, dto);
+            return StatusCode(204);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            try
-            {
-                _deleteShow.Execute(id);
-                return StatusCode(204);
-            }
-            catch(EntityNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            _executor.ExecuteCommand(_deleteShow, id);
+            return StatusCode(204);
         }
     }
 }

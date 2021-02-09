@@ -23,7 +23,6 @@ namespace Api.Controllers
         protected readonly IEditActorCommand _editCommand;
         protected readonly IDeleteActorCommand _deleteActor;
         protected readonly IGetActorsListCommand _getActorsList;
-        protected readonly IApplicationPerformer _appPerformer;
         protected readonly UseCaseExecutor _executor;
 
         public ActorsController(IAddActorCommand addActor,
@@ -32,7 +31,6 @@ namespace Api.Controllers
             IEditActorCommand editCommand,
             IDeleteActorCommand deleteActor,
             IGetActorsListCommand getActorsList,
-            IApplicationPerformer appPerformer, 
             UseCaseExecutor executor)
         {
             _addActor = addActor;
@@ -41,7 +39,6 @@ namespace Api.Controllers
             _editCommand = editCommand;
             _deleteActor = deleteActor;
             _getActorsList = getActorsList;
-            _appPerformer = appPerformer;
             _executor = executor;
         }
 
