@@ -24,7 +24,7 @@ namespace EfCommands.EfDirectorCommands
 
         public string Name => "Get Director Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
         public GetDirectorDto Execute(int request)
         {

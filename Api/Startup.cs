@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Api.Core;
 using Application.Commands.ActorCommands;
@@ -45,6 +46,7 @@ using EfCommands.EfTheatreCommands;
 using EfCommands.EfUserCommands;
 using EfCommands.EfWriterCommands;
 using EfDataAccess;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -56,7 +58,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
+using Newtonsoft.Json;
 
 namespace Api
 {
@@ -188,9 +192,6 @@ namespace Api
             services.AddTransient<IGetWritersCommand, EfGetWritersCommand>();
             services.AddTransient<IGetWriterCommand, EfGetWriterCommand>();
 
-            services.AddTransient<IApplicationPerformer, FakeAdminPerformer>();
-            services.AddTransient<UseCaseExecutor>();
-
             //Validators
             services.AddTransient<ActorValidator>();
             services.AddTransient<CategoryValidator>();
@@ -204,6 +205,64 @@ namespace Api
             services.AddTransient<TheatreValidator>();
             services.AddTransient<UserValidator>();
             services.AddTransient<WriterValidator>();
+
+            //Use cases and Token
+            services.AddHttpContextAccessor();
+
+            services.AddTransient<IApplicationPerformer>(x =>
+            {
+                var accessor = x.GetService<IHttpContextAccessor>();
+                //izvuci token
+                //pozicionirati se na payload
+                //izvuci ActorData claim
+                //Deserijalizovati actorData string u c# objekat
+
+                var user = accessor.HttpContext.User;
+
+                if (user.FindFirst("PerformerData") == null)
+                {
+                    return new AnonymusPerformer();
+                }
+
+                var performerString = user.FindFirst("PerformerData").Value;
+
+                var performer = JsonConvert.DeserializeObject<JwtPerformer>(performerString);
+
+                return performer;
+
+            });
+
+
+            services.AddTransient<UseCaseExecutor>();
+         //   services.AddTransient<IUseCaseLogger>();
+            services.AddTransient<JwtManager>();
+
+
+
+            //Authentication
+            services.AddAuthentication(options =>
+            {
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(cfg =>
+            {
+                cfg.RequireHttpsMetadata = false;
+                cfg.SaveToken = true;
+                cfg.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidIssuer = "asp_api",
+                    ValidateIssuer = true,
+                    ValidAudience = "Any",
+                    ValidateAudience = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ThisIsMyVerySecretKey")),
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
+
 
             services.AddCors();
 
@@ -233,6 +292,7 @@ namespace Api
 
             app.UseMiddleware<GlobalExceptionHandler>();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

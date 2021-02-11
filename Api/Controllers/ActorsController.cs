@@ -8,6 +8,7 @@ using Application.DTO.ActorDto;
 using Application.Exceptions;
 using Application.Interfaces;
 using Application.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,6 +45,7 @@ namespace Api.Controllers
 
         // GET: api/Actors
         [HttpGet]
+        [Authorize]
         public IActionResult Get([FromQuery] ActorQuery query)
         {
             if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
@@ -58,6 +60,7 @@ namespace Api.Controllers
 
         // GET: api/Actors/5
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult Get(int id)
         {
             var actor = _executor.ExecuteQuery(_getActor, id);

@@ -21,7 +21,7 @@ namespace EfCommands.EfCategoryCommands
 
         public string Name => "Get Categories Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
         public PagedResponses<GetCategoryDto> Execute(CategoryQuery request)
         {

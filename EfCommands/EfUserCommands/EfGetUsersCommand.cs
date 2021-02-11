@@ -23,7 +23,7 @@ namespace EfCommands.EfUserCommands
 
         public string Name => "Get Users Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin };
 
         public PagedResponses<GetUserDto> Execute(UserQuery request)
         {

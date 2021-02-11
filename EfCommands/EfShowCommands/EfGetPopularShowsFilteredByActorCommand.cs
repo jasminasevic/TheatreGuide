@@ -22,7 +22,7 @@ namespace EfCommands.EfShowCommands
 
         public string Name => "Get Popular Shows Filtered By Actor Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<GetActorPopularShowDto> Execute(int request)
         {

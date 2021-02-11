@@ -22,7 +22,7 @@ namespace EfCommands.EfTheatreCommands
 
         public string Name => "Get Recently Joined Theatre Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<GetTheatreBaseInfoDto> Execute(SearchQuery request)
         {

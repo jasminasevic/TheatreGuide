@@ -134,3 +134,10 @@ C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.cspro
 C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\Api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\jasmina\source\repos\TheatreGuide\Api\obj\Debug\netcoreapp3.1\scopedcss\bundle\Api.styles.css
 C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\FluentValidation.dll
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\jasmina\source\repos\TheatreGuide\Api\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll

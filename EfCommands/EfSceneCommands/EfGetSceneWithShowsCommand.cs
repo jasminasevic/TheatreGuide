@@ -24,7 +24,7 @@ namespace EfCommands.EfSceneCommands
 
         public string Name => "Get Scenes with Shows Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
         public GetSceneWithShowsDto Execute(int request)
         {

@@ -20,7 +20,7 @@ namespace EfCommands.EfCategoryCommands
 
         public string Name => "Get Category Command Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
         public CategoryDto Execute(int request)
         {

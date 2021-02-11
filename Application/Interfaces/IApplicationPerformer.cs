@@ -15,6 +15,7 @@ namespace Application.Interfaces
 
     public enum Role
     {
+        Anonymus,
         Admin,
         Theatre,
         User

@@ -24,7 +24,7 @@ namespace EfCommands.EfActorCommands
 
         public string Name => "Get Actor Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
         public GetActorDto Execute(int request)
         {

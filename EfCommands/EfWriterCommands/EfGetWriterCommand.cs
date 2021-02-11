@@ -22,7 +22,7 @@ namespace EfCommands.EfWriterCommands
 
         public string Name => "Get Writer Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
         public GetWriterDto Execute(int request)
         {

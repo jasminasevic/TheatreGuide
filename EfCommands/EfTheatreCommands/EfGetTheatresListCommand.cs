@@ -20,7 +20,7 @@ namespace EfCommands.EfTheatreCommands
 
         public string Name => "Get Theatre List Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<TheatreBasicDto> Execute(SearchQuery request)
         {

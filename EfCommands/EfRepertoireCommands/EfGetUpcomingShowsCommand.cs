@@ -22,7 +22,7 @@ namespace EfCommands.EfRepertoireCommands
 
         public string Name => "Get Upcoming Shows Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
         public IEnumerable<GetUpcomingShowsDto> Execute(RepertoireQuery request)
         {

@@ -10,18 +10,22 @@ namespace Application.Core
     public class UseCaseExecutor
     {
 		private readonly IApplicationPerformer performer;
+        //private readonly IUseCaseLogger logger;
 
-        public UseCaseExecutor(IApplicationPerformer performer)
+        public UseCaseExecutor(IApplicationPerformer performer
+            //, 
+            // IUseCaseLogger logger
+            )
         {
             this.performer = performer;
+           // this.logger = logger;
         }
 
         public TResult ExecuteQuery<TSearch, TResult>
             (IQuery<TSearch, TResult> query, 
             TSearch search)
         {
-            Console.WriteLine($"{DateTime.Now}: {performer.Identity} is trying to execute {query.Name}" +
-                $"using data: {JsonConvert.SerializeObject(search)}");
+         //   logger.Log(query, performer, search);
 
             var performerRole = performer.Role;
 
@@ -42,8 +46,7 @@ namespace Application.Core
 			ICommand<TRequest> command, 
 			TRequest request)
         {
-			Console.WriteLine($"{DateTime.Now}: {performer.Identity} is trying to execute HERE YOU " +
-				$" {command.Name} using data: {JsonConvert.SerializeObject(request)}");
+         //   logger.Log(command, performer, request);
 
             var performerRole = performer.Role;
 

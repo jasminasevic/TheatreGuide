@@ -20,7 +20,7 @@ namespace EfCommands.EfCurrencyCommands
 
         public string Name => "Get Currency Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
         public GetCurrencyDto Execute(int request)
         {
