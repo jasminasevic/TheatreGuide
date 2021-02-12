@@ -14,9 +14,7 @@ namespace Application.Validators.RoleValidators
         {
             RuleFor(x => x.RoleName)
                 .NotEmpty()
-                .WithMessage("Role is required")
-                .Must(x => !context.Roles.Any(role => role.RoleName == x))
-                .WithMessage("Role with this name already exists");
+                .WithMessage("Role is required");
         }
     }
 }

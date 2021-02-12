@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.SceneCommands;
-using Application.Core;
+using Application.UseCase;
 using Application.DTO.SceneDto;
 using Application.Exceptions;
 using Application.Queries;

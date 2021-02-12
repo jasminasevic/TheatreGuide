@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.ShowCommands;
-using Application.Core;
+using Application.UseCase;
 using Application.DTO.ShowDto;
 using Application.Exceptions;
 using Application.Queries;

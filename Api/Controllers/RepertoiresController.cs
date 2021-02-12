@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.RepertoireCommands;
-using Application.Core;
+using Application.UseCase;
 using Application.DTO.RepertoireDto;
 using Application.Exceptions;
 using Application.Queries;

@@ -1,5 +1,5 @@
 ﻿using Application.Commands.CurrencyCommands;
-using Application.Core;
+using Application.UseCase;
 using Application.DTO.CurrencyDto;
 using Application.Exceptions;
 using Application.Queries;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.WriterCommands;
-using Application.Core;
+using Application.UseCase;
 using Application.DTO.WriterDto;
 using Application.Exceptions;
 using Application.Queries;

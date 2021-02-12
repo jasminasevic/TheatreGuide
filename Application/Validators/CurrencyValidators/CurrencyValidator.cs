@@ -14,9 +14,7 @@ namespace Application.Validators.CurrencyValidators
         {
             RuleFor(x => x.CurrencyName)
                 .NotEmpty()
-                .WithMessage("Currency is required")
-                .Must(x => !context.Currencies.Any(currency => currency.CurrencyName == x))
-                .WithMessage("Currency with this name already exists");
+                .WithMessage("Currency is required");
         }
     }
 }

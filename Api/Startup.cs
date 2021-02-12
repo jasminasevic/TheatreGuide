@@ -18,7 +18,7 @@ using Application.Commands.ShowFollowerCommands;
 using Application.Commands.TheatreCommands;
 using Application.Commands.UserCommands;
 using Application.Commands.WriterCommands;
-using Application.Core;
+using Application.UseCase;
 using Application.Interfaces;
 using Application.Validators.ActorValidators;
 using Application.Validators.CategoryValidators;
@@ -61,6 +61,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
+using EfCommands.EfRegistrationCommands;
+using Application.Commands.RegistrationCommands;
+using Application.Validators.RegistrationValidators;
 
 namespace Api
 {
@@ -121,6 +124,9 @@ namespace Api
             services.AddTransient<IEditPurchaseCommand, EfEditPurchaseCommand>();
             services.AddTransient<IGetPurchaseCommand, EfGetPurchaseCommand>();
             services.AddTransient<IGetPurchasesCommand, EfGetPurchasesCommand>();
+
+            //Registration
+            services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
 
             //Repertoires
             services.AddTransient<IAddRepertoireCommand, EfAddRepertoireCommand>();
@@ -198,6 +204,7 @@ namespace Api
             services.AddTransient<CurrencyValidator>();
             services.AddTransient<DirectorValidator>();
             services.AddTransient<PurchaseValidator>();
+            services.AddTransient<RegisterUserValidator>();
             services.AddTransient<RepertoireValidator>();
             services.AddTransient<RoleValidator>();
             services.AddTransient<SceneValidator>();

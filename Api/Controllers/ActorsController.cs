@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.Commands.ActorCommands;
-using Application.Core;
+using Application.UseCase;
 using Application.DTO.ActorDto;
 using Application.Exceptions;
 using Application.Interfaces;
