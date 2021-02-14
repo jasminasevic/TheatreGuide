@@ -10,6 +10,7 @@ using Application.Queries;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers
 {
@@ -59,6 +60,7 @@ namespace Api.Controllers
 
         // POST: api/users
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] UserDto dto)
         {
             _executor.ExecuteCommand(_addUser, dto);
@@ -67,6 +69,7 @@ namespace Api.Controllers
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Put(int id, [FromBody] UserDto dto)
         {
             dto.Id = id;
@@ -76,6 +79,7 @@ namespace Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             _executor.ExecuteCommand(_deleteUser, id);

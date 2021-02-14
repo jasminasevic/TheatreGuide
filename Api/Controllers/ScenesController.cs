@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers
 {
@@ -86,6 +87,7 @@ namespace Api.Controllers
 
         // POST: api/Scenes
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromForm] SceneDto dto)
         {
             _executor.ExecuteCommand(_addScene, dto);
@@ -94,6 +96,7 @@ namespace Api.Controllers
 
         // PUT: api/Scenes/5
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Put(int id, [FromBody] SceneDto dto)
         {
             dto.Id = id;
@@ -103,6 +106,7 @@ namespace Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             _executor.ExecuteCommand(_deleteScene, id);

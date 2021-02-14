@@ -10,6 +10,7 @@ using Application.Queries;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers
 {
@@ -76,6 +77,7 @@ namespace Api.Controllers
 
         // POST: api/Theatres
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromForm] TheatreDto dto)
         {
             _executor.ExecuteCommand(_addTheatre, dto);
@@ -84,6 +86,7 @@ namespace Api.Controllers
 
         // PUT: api/Theatres/5
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Put(int id, [FromForm] TheatreDto dto)
         {
             dto.Id = id;
@@ -93,6 +96,7 @@ namespace Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             _executor.ExecuteCommand(_deleteTheatre, id);

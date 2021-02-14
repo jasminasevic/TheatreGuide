@@ -10,6 +10,7 @@ using Application.Exceptions;
 using Application.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers
 {
@@ -66,6 +67,7 @@ namespace Api.Controllers
 
         // POST: api/Categories
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] CategoryDto dto)
         {
             _executor.ExecuteCommand(_addCategory, dto);
@@ -74,6 +76,7 @@ namespace Api.Controllers
 
         // PUT: api/Categories/5
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Put(int id, [FromBody] CategoryDto dto)
         {
             dto.Id = id;
@@ -83,6 +86,7 @@ namespace Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             _executor.ExecuteCommand(_deleteCategory, id);

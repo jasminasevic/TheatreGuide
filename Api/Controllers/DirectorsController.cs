@@ -9,6 +9,7 @@ using Application.Exceptions;
 using Application.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers
 {
@@ -65,6 +66,7 @@ namespace Api.Controllers
 
         // POST: api/Directors
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] DirectorDto dto)
         {
             _executor.ExecuteCommand(_addDirector, dto);
@@ -73,6 +75,7 @@ namespace Api.Controllers
 
         // PUT: api/Directors/5
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Put(int id, [FromBody] DirectorDto dto)
         {
             dto.Id = id;
@@ -82,6 +85,7 @@ namespace Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             _executor.ExecuteCommand(_deleteDirector, id);

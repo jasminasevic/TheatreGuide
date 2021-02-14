@@ -10,24 +10,24 @@ namespace Application.UseCase
     public class UseCaseExecutor
     {
 		private readonly IApplicationPerformer performer;
-        //private readonly IUseCaseLogger logger;
+        private readonly IUseCaseLogger logger;
 
-        public UseCaseExecutor(IApplicationPerformer performer
-            //, 
-            // IUseCaseLogger logger
-            )
+        public UseCaseExecutor(IApplicationPerformer performer, IUseCaseLogger logger)
         {
             this.performer = performer;
-           // this.logger = logger;
+            this.logger = logger;
         }
 
         public TResult ExecuteQuery<TSearch, TResult>
             (IQuery<TSearch, TResult> query, 
             TSearch search)
         {
-         //   logger.Log(query, performer, search);
-
             var performerRole = performer.Role;
+
+            if(performer.Role != Role.Anonymus)
+            {
+                logger.Log(query, performer, search);
+            }
 
             foreach (var role in query.Roles)
             {
@@ -46,7 +46,7 @@ namespace Application.UseCase
 			ICommand<TRequest> command, 
 			TRequest request)
         {
-         //   logger.Log(command, performer, request);
+            logger.Log(command, performer, request);
 
             var performerRole = performer.Role;
 

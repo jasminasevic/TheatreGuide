@@ -45,7 +45,6 @@ namespace Api.Controllers
 
         // GET: api/Actors
         [HttpGet]
-        [Authorize]
         public IActionResult Get([FromQuery] ActorQuery query)
         {
             if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
@@ -69,6 +68,7 @@ namespace Api.Controllers
 
         // POST: api/Actors
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromForm] ActorDto dto)
         {
             _executor.ExecuteCommand(_addActor, dto);
@@ -77,6 +77,7 @@ namespace Api.Controllers
 
         // PUT: api/Actors/5
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Put(int id, [FromForm] ActorDto dto)
         {
             dto.Id = id;
@@ -86,6 +87,7 @@ namespace Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             _executor.ExecuteCommand(_deleteActor, id);

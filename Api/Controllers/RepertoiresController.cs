@@ -9,6 +9,7 @@ using Application.Exceptions;
 using Application.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers
 {
@@ -73,6 +74,7 @@ namespace Api.Controllers
 
         // POST: api/Repertoires
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromForm] RepertoireDto dto)
         {
             _executor.ExecuteCommand(_addRepertoire, dto);
@@ -81,6 +83,7 @@ namespace Api.Controllers
 
         // PUT: api/Repertoires/5
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Put(int id, [FromForm] RepertoireDto dto)
         {
             dto.Id = id;
@@ -90,6 +93,7 @@ namespace Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             _executor.ExecuteCommand(_deleteRepertoire, id);

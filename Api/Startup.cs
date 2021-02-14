@@ -64,6 +64,9 @@ using Newtonsoft.Json;
 using EfCommands.EfRegistrationCommands;
 using Application.Commands.RegistrationCommands;
 using Application.Validators.RegistrationValidators;
+using EfCommands.Logging;
+using EfCommands.Email;
+using Application.Email;
 
 namespace Api
 {
@@ -117,6 +120,9 @@ namespace Api
             services.AddTransient<IGetDirectorsCommand, EfGetDirectorsCommand>();
             services.AddTransient<IGetDirectorCommand, EfGetDirectorCommand>();
             services.AddTransient<IGetDirectorsListCommand, EfGetDirectorsListCommand>();
+
+            //Email
+            services.AddTransient<IEmailSender, SmtpEmailSender>();
 
             //Purchases
             services.AddTransient<IAddPurchaseCommand, EfAddPurchaseCommand>();
@@ -239,9 +245,8 @@ namespace Api
 
             });
 
-
             services.AddTransient<UseCaseExecutor>();
-         //   services.AddTransient<IUseCaseLogger>();
+            services.AddTransient<IUseCaseLogger, DatabaseUseCaseLogger>();
             services.AddTransient<JwtManager>();
 
 

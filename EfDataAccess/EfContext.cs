@@ -49,6 +49,8 @@ namespace EfDataAccess
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<UseCaseLog> UseCaseLogs { get; set; }
+
         public DbSet<Writer> Writers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

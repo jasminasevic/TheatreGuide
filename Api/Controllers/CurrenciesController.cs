@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers
 {
@@ -43,6 +43,7 @@ namespace Api.Controllers
 
         // GET: api/Currencies
         [HttpGet]
+        [Authorize]
         public IActionResult Get([FromQuery] CurrencyQuery query)
         {
             if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
@@ -56,6 +57,7 @@ namespace Api.Controllers
 
         // GET api/Currencies/5
         [HttpGet("{id}")]
+        [Authorize]
         public IActionResult Get(int id)
         {
             var currency = _executor.ExecuteQuery(_getCurrency, id);
@@ -64,6 +66,7 @@ namespace Api.Controllers
 
         // POST api/Currencies
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromBody] CurrencyDto dto)
         {
             _executor.ExecuteCommand(_addCurrency, dto);
@@ -72,6 +75,7 @@ namespace Api.Controllers
 
         // PUT api/Currencies/5
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Put(int id, [FromBody] CurrencyDto dto)
         {
             dto.Id = id;
@@ -81,6 +85,7 @@ namespace Api.Controllers
 
         // DELETE api/CurrenciesController/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             _executor.ExecuteCommand(_deleteCurrency, id);

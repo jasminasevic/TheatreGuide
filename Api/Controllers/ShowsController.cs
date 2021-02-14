@@ -9,6 +9,7 @@ using Application.Exceptions;
 using Application.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api.Controllers
 {
@@ -134,6 +135,7 @@ namespace Api.Controllers
 
         // POST: api/Shows
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromForm] ShowDto dto)
         {
             _executor.ExecuteCommand(_addShow, dto);
@@ -142,6 +144,7 @@ namespace Api.Controllers
 
         // PUT: api/Shows/5
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Put(int id, [FromForm] ShowDto dto)
         {
             dto.Id = id;
@@ -151,6 +154,7 @@ namespace Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             _executor.ExecuteCommand(_deleteShow, id);

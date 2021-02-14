@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Application.Commands.ShowFollowerCommands;
 using Application.DTO.ShowFollowerDto;
 using Application.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,6 +41,7 @@ namespace Api.Controllers
 
         // POST: api/ShowFollowers
         [HttpPost]
+        [Authorize]
         public IActionResult Post([FromForm] ShowFollowerDto dto)
         {
             try
@@ -61,6 +63,7 @@ namespace Api.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{userId}/{showId}")]
+        [Authorize]
         public IActionResult Delete(int userId, int showId)
         {
             try
