@@ -44,6 +44,7 @@ namespace Api.Controllers
         // GET: api/Currencies
         [HttpGet]
         [Authorize]
+
         public IActionResult Get([FromQuery] CurrencyQuery query)
         {
             if (query.SearchQuery == null && query.PageNumber == 0 && query.PerPage == 0)
@@ -57,7 +58,6 @@ namespace Api.Controllers
 
         // GET api/Currencies/5
         [HttpGet("{id}")]
-        [Authorize]
         public IActionResult Get(int id)
         {
             var currency = _executor.ExecuteQuery(_getCurrency, id);

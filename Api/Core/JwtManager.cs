@@ -49,7 +49,8 @@ namespace Api.Core
                 new Claim(JwtRegisteredClaimNames.Iss, "asp_api", ClaimValueTypes.String, issuer),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64, issuer),
                 new Claim("UserId", performer.Id.ToString(), ClaimValueTypes.String, issuer),
-                new Claim("PerformerData", JsonConvert.SerializeObject(performer), ClaimValueTypes.String, issuer)
+                new Claim("PerformerData", JsonConvert.SerializeObject(performer), ClaimValueTypes.String, issuer),
+                new Claim("RoleId", user.RoleId.ToString())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
@@ -62,7 +63,7 @@ namespace Api.Core
                 audience: "Any",
                 claims: claims,
                 notBefore: now,
-                expires: now.AddSeconds(60),
+                expires: now.AddMinutes(60),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
