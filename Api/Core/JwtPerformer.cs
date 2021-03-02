@@ -12,6 +12,8 @@ namespace Api.Core
 
         public string Identity { get; set; }
 
+        public string FirstName { get; set; }
+
         public Role Role { get; set; }
     }
 }

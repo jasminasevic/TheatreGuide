@@ -59,7 +59,6 @@ namespace Api.Controllers
 
         // GET: api/Actors/5
         [HttpGet("{id}")]
-        [Authorize]
         public IActionResult Get(int id)
         {
             var actor = _executor.ExecuteQuery(_getActor, id);

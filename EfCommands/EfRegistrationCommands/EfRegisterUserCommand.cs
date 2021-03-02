@@ -37,7 +37,7 @@ namespace EfCommands.EfRegistrationCommands
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                Email = request.Email,
+                Email = request.Username,
                 Password = request.Password,
                 RoleId = 3
             });
@@ -46,7 +46,7 @@ namespace EfCommands.EfRegistrationCommands
             {
                 Content = "<h1>Thank you for your registration!</h1>" +
                 "<h2> Please login to proceed.</h2>",
-                SendTo = request.Email,
+                SendTo = request.Username,
                 Subject = "Registration Successful"
             });
 

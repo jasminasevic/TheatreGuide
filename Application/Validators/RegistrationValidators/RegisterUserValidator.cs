@@ -23,7 +23,7 @@ namespace Application.Validators.RegistrationValidators
 				.WithMessage("Password is required")
 				.MinimumLength(6)
 				.WithMessage("Password must have at least 6 characters");
-			RuleFor(x => x.Email)
+			RuleFor(x => x.Username)
 				.NotEmpty()
 				.WithMessage("Email is required")
 				.EmailAddress()

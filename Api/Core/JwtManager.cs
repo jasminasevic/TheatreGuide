@@ -36,7 +36,8 @@ namespace Api.Core
             {
                 Id = user.Id,
                 Role = (Application.Interfaces.Role)user.RoleId,
-                Identity = user.Email
+                Identity = user.Email,
+                FirstName = user.FirstName
             };
 
             // var performer = new FakeAdminPerformer();
