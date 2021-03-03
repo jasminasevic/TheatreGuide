@@ -20,8 +20,22 @@ namespace Domain
 
         public Role Role { get; set; }
 
+        public int? TheatreId { get; set; }
+
+        public Theatre Theatre { get; set; }
+
         public ICollection<ShowFollower> ShowFollowers { get; set; }
 
         public ICollection<Purchase> Purchases { get; set; }
+
+        public StatusType Status { get; set; } = StatusType.Pending;
+
+        public enum StatusType 
+        { 
+            Approved,
+            Declined,
+            Pending
+        }
+
     }
 }

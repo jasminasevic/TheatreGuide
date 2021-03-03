@@ -12,18 +12,7 @@ namespace EfDataAccess.Configurations
         public void Configure(EntityTypeBuilder<Theatre> builder)
         {
             builder.Property(t => t.TheatreName)
-                .IsRequired()
                 .HasMaxLength(100);
-
-            builder.Property(t => t.TheatreDescription)
-                .IsRequired();
-
-            builder.Property(t => t.WorkingHours)
-                .IsRequired();
-
-            builder.Property(t => t.ContactEmail)
-                .IsRequired()
-                .HasMaxLength(40);
 
         }
     }

@@ -39,8 +39,11 @@ namespace EfCommands.EfRegistrationCommands
                 LastName = request.LastName,
                 Email = request.Username,
                 Password = request.Password,
-                RoleId = 3
+                RoleId = 3,
+                Status = Domain.User.StatusType.Approved
             });
+
+            Context.SaveChanges();
 
             _sender.Send(new SendEmailDto
             {
@@ -50,7 +53,7 @@ namespace EfCommands.EfRegistrationCommands
                 Subject = "Registration Successful"
             });
 
-            Context.SaveChanges();
+            
         }
     }
 }

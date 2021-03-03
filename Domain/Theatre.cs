@@ -18,6 +18,8 @@ namespace Domain
 
         public string WorkingHours { get; set; }
 
+        public bool IsVisible { get; set; } = false;
+
         public int AddressId { get; set; }
 
         public Address Address { get; set; }

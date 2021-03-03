@@ -133,6 +133,7 @@ namespace Api
 
             //Registration
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
+            services.AddTransient<IRegisterBusinessUserCommand, EfRegisterBusinessUserCommand>();
 
             //Repertoires
             services.AddTransient<IAddRepertoireCommand, EfAddRepertoireCommand>();
@@ -211,6 +212,7 @@ namespace Api
             services.AddTransient<DirectorValidator>();
             services.AddTransient<PurchaseValidator>();
             services.AddTransient<RegisterUserValidator>();
+            services.AddTransient<RegisterBusinessUserValidator>();
             services.AddTransient<RepertoireValidator>();
             services.AddTransient<RoleValidator>();
             services.AddTransient<SceneValidator>();

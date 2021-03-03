@@ -13,5 +13,14 @@ namespace Application.DTO.RegistrationDto
         public string Username { get; set; }
 
         public string Password { get; set; }
+
+        public StatusType Status { get; set; }
     }
-}
+
+        public enum StatusType
+        {
+            Approved,
+            Declined,
+            Pending
+        }
+    }

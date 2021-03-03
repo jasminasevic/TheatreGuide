@@ -36,6 +36,9 @@ namespace EfDataAccess.Configurations
                 .HasForeignKey(sf => sf.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Property(u => u.Status)
+                .HasConversion<string>();
+
         }
     }
 }
