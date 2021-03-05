@@ -25,7 +25,8 @@ namespace Api.Core
         {
             var user = _context.Users
                 .Include(r => r.Role)
-                .FirstOrDefault(x => x.Email == username && x.Password == password);
+                .FirstOrDefault(x => x.Email == username && x.Password == password 
+                && x.Status == Domain.User.StatusType.Approved);
 
             if (user == null)
             {

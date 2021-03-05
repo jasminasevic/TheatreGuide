@@ -40,7 +40,7 @@ namespace EfCommands.EfTheatreCommands
                 .ThenInclude(s => s.Sectors)
                 .Include(t => t.Shows)
                 .ThenInclude(t => t.ShowImages)
-                .Where(t => t.Id == request)
+                .Where(t => t.Id == request && t.IsVisible == true)
                 .FirstOrDefault();
 
             if (theatre == null)

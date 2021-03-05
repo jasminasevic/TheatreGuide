@@ -29,6 +29,7 @@ namespace EfCommands.EfTheatreCommands
             var theatre = Context.Theatres
                 .Include(t => t.Address)
                 .Include(t => t.TheatreImages)
+                .Where(t => t.IsVisible == true)
                 .AsQueryable();
 
             var data = theatre.Select(t => new GetTheatreBaseInfoDto

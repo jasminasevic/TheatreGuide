@@ -25,6 +25,7 @@ namespace EfCommands.EfTheatreCommands
         public IEnumerable<TheatreBasicDto> Execute(SearchQuery request)
         {
             var theatres = Context.Theatres
+               .Where(t => t.IsVisible == true)
                .AsQueryable();
 
             var data = theatres.Select(t => new TheatreBasicDto

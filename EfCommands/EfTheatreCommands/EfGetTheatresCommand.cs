@@ -33,6 +33,7 @@ namespace EfCommands.EfTheatreCommands
                 .Include(t => t.TheatreImages)
                 .Include(t => t.Shows)
                 .ThenInclude(s => s.Category)
+                .Where(t => t.IsVisible == true)
                 .AsQueryable();
 
             //Filtering logic
