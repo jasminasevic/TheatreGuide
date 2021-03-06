@@ -17,5 +17,16 @@ namespace Application.DTO.UserDto
         public string Password { get; set; }
 
         public int RoleId { get; set; }
+
+        public int? TheatreId { get; set; }
+
+        public string Status { get; set; }
     }
+
+    public enum StatusType 
+        { 
+            Approved,
+            Declined,
+            Pending
+        }
 }

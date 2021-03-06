@@ -45,6 +45,8 @@ namespace EfCommands.EfUserCommands
             user.Email = request.Email;
             user.Password = request.Password;
             user.RoleId = request.RoleId;
+            user.TheatreId = request.TheatreId;
+            user.Status = (Domain.User.StatusType)Enum.Parse(typeof(StatusType), request.Status);
             user.ModifiedAt = DateTime.Now;
 
             Context.SaveChanges();

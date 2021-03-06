@@ -25,6 +25,7 @@ namespace Api.Controllers
         protected readonly IDeleteTheatreCommand _deleteTheatre;
         protected readonly IEditTheatreCommand _editTheatre;
         protected readonly IGetTheatresListCommand _getTheatresList;
+        protected readonly IGetAllTheatresListCommand _getAllTheatresList;
         protected readonly IGetRecentlyJoinedTheatresCommand _getRecentlyJoinedTheatres;
         protected readonly UseCaseExecutor _executor;
 
@@ -34,7 +35,8 @@ namespace Api.Controllers
             IDeleteTheatreCommand deleteTheatre,
             IEditTheatreCommand editTheatre,
             IGetTheatresListCommand getTheatresList,
-            IGetRecentlyJoinedTheatresCommand getRecentlyJoinedTheatres, 
+            IGetRecentlyJoinedTheatresCommand getRecentlyJoinedTheatres,
+            IGetAllTheatresListCommand getAllTheatresList,
             UseCaseExecutor executor)
         {
             _addTheatre = addTheatre;
@@ -44,6 +46,7 @@ namespace Api.Controllers
             _editTheatre = editTheatre;
             _getTheatresList = getTheatresList;
             _getRecentlyJoinedTheatres = getRecentlyJoinedTheatres;
+            _getAllTheatresList = getAllTheatresList;
             _executor = executor;
         }
 
@@ -51,8 +54,12 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery]TheatreQuery query)
        {
-            if (query.SearchQuery == null && query.PageNumber == 0
-                    && query.PerPage == 0 && query.Type == null)
+            if (query.Type == "getAllTheatresList")
+            {
+                var theatres = _executor.ExecuteQuery(_getAllTheatresList, new SearchQuery());
+                return Ok(theatres);
+            }
+            if (query.Type == "getTheatresList")
             {
                 var theatres = _executor.ExecuteQuery(_getTheatresList, new SearchQuery());
                 return Ok(theatres);

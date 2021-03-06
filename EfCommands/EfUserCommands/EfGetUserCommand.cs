@@ -57,8 +57,11 @@ namespace EfCommands.EfUserCommands
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
+                TheatreId = user.TheatreId == null ? null : user.TheatreId,
                 RoleId = user.RoleId,
                 RoleName = user.Role.RoleName,
+                Status = user.Status.ToString(),
+                CreatedAt = user.CreatedAt,
                 GetDetailedPurchaseDtos = user.Purchases.Select(purchase => new GetDetailedPurchaseDto
                 {
                     Id = purchase.Id,

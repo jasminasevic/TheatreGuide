@@ -22,5 +22,14 @@ namespace Application.DTO.UserDto
         public IEnumerable<GetDetailedPurchaseDto> GetDetailedPurchaseDtos { get; set; }
 
         public int ShowFollowing { get; set; }
+
+        public string Status { get; set; }
+
+        public int? TheatreId { get; set; }
+
+        public string? Theatre { get; set; }
+
+        public DateTime CreatedAt { get; set; }
     }
+
 }

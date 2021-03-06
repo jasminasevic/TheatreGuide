@@ -29,6 +29,7 @@ namespace EfCommands.EfUserCommands
         {
             var users = Context.Users
                 .Include(r => r.Role)
+                .Include(t => t.Theatre)
                 .AsQueryable();
 
             //filtering logic
@@ -53,7 +54,10 @@ namespace EfCommands.EfUserCommands
                 LastName = u.LastName,
                 Email = u.Email,
                 RoleId = u.Role.Id,
-                RoleName = u.Role.RoleName
+                RoleName = u.Role.RoleName,
+                Status = u.Status.ToString(),
+                Theatre = u.Theatre.TheatreName,
+                CreatedAt = u.CreatedAt
             });
 
 
@@ -90,8 +94,14 @@ namespace EfCommands.EfUserCommands
                 case "roleName_asc":
                     data = data.OrderBy(u => u.RoleName);
                     break;
+                case "created_at_desc":
+                    data = data.OrderByDescending(u => u.CreatedAt);
+                    break;
+                case "createdAt_asc":
+                    data = data.OrderBy(u => u.CreatedAt);
+                    break;
                 default:
-                    data = data.OrderBy(u => u.FirstName);
+                    data = data.OrderByDescending(u => u.CreatedAt);
                     break;
             }
 
