@@ -25,13 +25,15 @@ namespace Api.Controllers
         protected readonly IGetUserCommand _getUser;
         protected readonly IEditUserCommand _editUser;
         protected readonly IDeleteUserCommand _deleteUser;
+        protected readonly IGetPendingUserRequestsNumberCommand _getUsersFilteredByStatus;
         protected readonly UseCaseExecutor _executor;
 
         public UsersController(IAddUserCommand addUser,
             IGetUsersCommand getUsers,
             IGetUserCommand getUser,
             IEditUserCommand editUser,
-            IDeleteUserCommand deleteUser, 
+            IDeleteUserCommand deleteUser,
+            IGetPendingUserRequestsNumberCommand getUsersFilteredByStatus,
             UseCaseExecutor executor)
         {
             _addUser = addUser;
@@ -39,6 +41,7 @@ namespace Api.Controllers
             _getUser = getUser;
             _editUser = editUser;
             _deleteUser = deleteUser;
+            _getUsersFilteredByStatus = getUsersFilteredByStatus;
             _executor = executor;
         }
 
@@ -46,7 +49,12 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery]UserQuery query)
         {
-            var users = _executor.ExecuteQuery(_getUsers, query);
+            if (query.Type == "usersFilteredByStatus")
+            {
+                var usersFilteredByStatus = _executor.ExecuteQuery(_getUsersFilteredByStatus, query);
+                return Ok(usersFilteredByStatus);
+            }
+                var users = _executor.ExecuteQuery(_getUsers, query);
             return Ok(users);
         }
 

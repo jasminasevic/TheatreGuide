@@ -198,6 +198,7 @@ namespace Api
             services.AddTransient<IEditUserCommand, EfEditUserCommand>();
             services.AddTransient<IGetUsersCommand, EfGetUsersCommand>();
             services.AddTransient<IGetUserCommand, EfGetUserCommand>();
+            services.AddTransient<IGetPendingUserRequestsNumberCommand, EfGetPendingUserRequestsNumberCommand>();
 
             //Writers
             services.AddTransient<IAddWriterCommand, EfAddWriterCommand>();

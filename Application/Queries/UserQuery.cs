@@ -14,6 +14,10 @@ namespace Application.Queries
 
         public string Email { get; set; }
 
+        public Domain.User.StatusType Status { get; set; }
+
+        public string Type { get; set; }
 
     }
+
 }
