@@ -31,6 +31,7 @@ namespace Api.Controllers
         protected readonly IGetPopularShowsFilteredByActorCommand _getPopularShowsFilteredByActor;
         protected readonly IGetPopularShowsFilteredByDirectorCommand _getPopularShowsFilteredByDirector;
         protected readonly IGetPopularShowsFilteredByIdAndTheatreCommand _getPopularShowsFilteredByIdAndTheatre;
+        protected readonly IGetShowsFilteredByTheatreCommand _getShowsFilteredByTheatre;
         protected readonly UseCaseExecutor _executor;
         public ShowsController(IAddShowCommand addShow,
             IGetShowCommand getShow,
@@ -45,7 +46,8 @@ namespace Api.Controllers
             IGetPopularShowsFilteredByTheatreCommand getPopularShowsFilteredByTheatre,
             IGetPopularShowsFilteredByActorCommand getPopularShowsFilteredByActor,
             IGetPopularShowsFilteredByDirectorCommand getPopularShowsFilteredByDirector,
-            IGetPopularShowsFilteredByIdAndTheatreCommand getPopularShowsFilteredByIdAndTheatre, 
+            IGetPopularShowsFilteredByIdAndTheatreCommand getPopularShowsFilteredByIdAndTheatre,
+            IGetShowsFilteredByTheatreCommand getShowsFilteredByTheatre,
             UseCaseExecutor executor)
         {
             _addShow = addShow;
@@ -62,6 +64,7 @@ namespace Api.Controllers
             _getPopularShowsFilteredByActor = getPopularShowsFilteredByActor;
             _getPopularShowsFilteredByDirector = getPopularShowsFilteredByDirector;
             _getPopularShowsFilteredByIdAndTheatre = getPopularShowsFilteredByIdAndTheatre;
+            _getShowsFilteredByTheatre = getShowsFilteredByTheatre;
             _executor = executor;
         }
 
@@ -107,6 +110,11 @@ namespace Api.Controllers
             if (query.Type == "popularShowsFilteredByIdAndTheatre")
             {
                 var shows = _executor.ExecuteQuery(_getPopularShowsFilteredByIdAndTheatre, query);
+                return Ok(shows);
+            }
+            if(query.Type == "showsFilteredByTheatre")
+            {
+                var shows = _executor.ExecuteQuery(_getShowsFilteredByTheatre, query);
                 return Ok(shows);
             }
             var allShows = _executor.ExecuteQuery(_getShows, query);

@@ -18,7 +18,7 @@ namespace EfCommands.EfUserCommands
 
         public int Id => 87;
 
-        public string Name => "Get Pending Users Requests Number Command Using EF";
+        public string Name => "Get Pending Users Requests Number Using EF";
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 

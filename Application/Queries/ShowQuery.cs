@@ -17,5 +17,7 @@ namespace Application.Queries
         public string ActorId { get; set; }
 
         public string DirectorId { get; set; }
+
+        public string CategoryId { get; set; }
     }
 }

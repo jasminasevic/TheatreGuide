@@ -38,7 +38,8 @@ namespace Api.Core
                 Id = user.Id,
                 Role = (Application.Interfaces.Role)user.RoleId,
                 Identity = user.Email,
-                FirstName = user.FirstName
+                FirstName = user.FirstName,
+                TheatreId = user.TheatreId
             };
 
             // var performer = new FakeAdminPerformer();
