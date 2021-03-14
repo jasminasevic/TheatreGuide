@@ -1,4 +1,5 @@
 ﻿using Application.DTO.ShowDto;
+using EfDataAccess;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ namespace Application.Validators.ShowValidators
 {
     public class ShowValidator : AbstractValidator<ShowDto>
     {
-        public ShowValidator()
+        public ShowValidator(EfContext context)
         {
             RuleFor(x => x.Title)
                 .NotEmpty()
@@ -43,9 +44,5 @@ namespace Application.Validators.ShowValidators
                 .WithMessage("Scene is required");
         }
 
-        public void validateAndThrow(ShowDto request)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

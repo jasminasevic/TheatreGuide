@@ -5,6 +5,7 @@ using Application.Helpers;
 using Application.Interfaces;
 using Application.Validators.ShowValidators;
 using EfDataAccess;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,7 +31,7 @@ namespace EfCommands.EfShowCommands
 
         public void Execute(ShowDto request)
         {
-            _validator.validateAndThrow(request);
+            _validator.ValidateAndThrow(request);
 
             if (Context.Shows.Any(s => s.Title.ToLower().Contains(request.Title)
                  && s.TheatreId == request.TheatreId))
