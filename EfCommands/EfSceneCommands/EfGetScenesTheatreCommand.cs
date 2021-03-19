@@ -19,7 +19,7 @@ namespace EfCommands.EfSceneCommands
 
         public int Id => 49;
 
-        public string Name => "Get Scenes in Theatre Using EF";
+        public string Name => "Get List of Scenes in Theatre Using EF";
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 

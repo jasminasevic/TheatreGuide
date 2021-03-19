@@ -29,6 +29,7 @@ namespace Api.Controllers
         protected readonly IEditSceneCommand _editScene;
         protected readonly IGetScenesListCommand _getScenesList;
         protected readonly IGetScenesTheatreCommand _getScenesTheatre;
+        protected readonly IGetScenesFilteredByTheatreCommand _getScenesFilteredByTheatre;
         protected readonly UseCaseExecutor _executor;
 
         public ScenesController(IAddSceneCommand addScene,
@@ -38,7 +39,8 @@ namespace Api.Controllers
             IEditSceneCommand editScene,
             IGetScenesListCommand getScenesList,
             IGetScenesTheatreCommand getScenesTheatre,
-            IGetSceneWithShowsCommand getSceneWithShows, 
+            IGetSceneWithShowsCommand getSceneWithShows,
+            IGetScenesFilteredByTheatreCommand getScenesFilteredByTheatre,
             UseCaseExecutor executor)
         {
             _addScene = addScene;
@@ -49,6 +51,7 @@ namespace Api.Controllers
             _getScenesList = getScenesList;
             _getScenesTheatre = getScenesTheatre;
             _getSceneWithShows = getSceneWithShows;
+            _getScenesFilteredByTheatre = getScenesFilteredByTheatre;
             _executor = executor;
         }
 
@@ -56,6 +59,12 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery] SceneQuery query)
        {
+            if (query.Type == "scenesFilteredByTheatre")
+            {
+                var scenesFilteredByTheatre = _executor.ExecuteQuery(_getScenesFilteredByTheatre, query);
+                return Ok(scenesFilteredByTheatre);
+            }
+
             if (query.TheatreId != 0)
             {
                 var scenesInTheatre = _executor.ExecuteQuery(_getScenesTheatre, query);

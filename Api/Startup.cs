@@ -161,6 +161,7 @@ namespace Api
             services.AddTransient<IGetScenesCommand, EfGetScenesCommand>();
             services.AddTransient<IGetScenesListCommand, EfGetSceneListCommand>();
             services.AddTransient<IGetScenesTheatreCommand, EfGetScenesTheatreCommand>();
+            services.AddTransient<IGetScenesFilteredByTheatreCommand, EfGetScenesFilteredByTheatreCommand>();
 
             //ShowFollowers
             services.AddTransient<IAddShowFollowerCommand, EfAddShowFollowerCommand>();

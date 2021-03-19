@@ -32,7 +32,7 @@ namespace EfCommands.EfShowCommands
         public void Execute(ShowDto request)
         {
             _validator.ValidateAndThrow(request);
-
+            
             if (Context.Shows.Any(s => s.Title.ToLower().Contains(request.Title)
                  && s.TheatreId == request.TheatreId))
                 throw new EntityAlreadyExistsException(request.Title);
