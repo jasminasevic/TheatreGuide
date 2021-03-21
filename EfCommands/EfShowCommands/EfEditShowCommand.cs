@@ -35,6 +35,13 @@ namespace EfCommands.EfShowCommands
 
             var show = Context.Shows.Find(request.Id);
 
+            if(request.Title != show.Title)
+            {
+                if (Context.Shows.Any(s => s.Title.ToLower() == request.Title.ToLower()
+                 && s.TheatreId == request.TheatreId))
+                    throw new EntityAlreadyExistsException(request.Title);
+            }
+
             if (show == null)
                 throw new EntityNotFoundException(show.Id.ToString());
 

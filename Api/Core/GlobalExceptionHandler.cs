@@ -50,22 +50,27 @@ namespace Api.Core
 
                     case EntityAlreadyExistsException _:
                         statusCode = StatusCodes.Status422UnprocessableEntity;
+                        var customMessage = ex.Message;
                         response = new
                         {
-                            message = "Entity already exists."
+                            message = customMessage
                         };
                         break;
 
                     case ValidationException validationException:
                         statusCode = StatusCodes.Status422UnprocessableEntity;
+                        
+                        var errors = validationException.Errors.Select(x => new //Anonymous object
+                        {
+                            x.PropertyName,
+                            x.ErrorMessage
+                        });
+                        
+                        var custMsg = errors.Select(x => x.ErrorMessage).FirstOrDefault();
+                        
                         response = new
                         {
-                            message = "Failed due to validation errors.",
-                            errors = validationException.Errors.Select(x => new //Anonymous object
-                            {
-                                x.PropertyName,
-                                x.ErrorMessage
-                            })
+                            message = custMsg
                         };
                         break;
                 }
