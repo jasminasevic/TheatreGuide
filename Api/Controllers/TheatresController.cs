@@ -27,6 +27,7 @@ namespace Api.Controllers
         protected readonly IGetTheatresListCommand _getTheatresList;
         protected readonly IGetAllTheatresListCommand _getAllTheatresList;
         protected readonly IGetRecentlyJoinedTheatresCommand _getRecentlyJoinedTheatres;
+        protected readonly IGetTheatreBaseInfoCommand _getTheatreBaseInfo;
         protected readonly UseCaseExecutor _executor;
 
         public TheatresController(IAddTheatreCommand addTheatre,
@@ -37,6 +38,7 @@ namespace Api.Controllers
             IGetTheatresListCommand getTheatresList,
             IGetRecentlyJoinedTheatresCommand getRecentlyJoinedTheatres,
             IGetAllTheatresListCommand getAllTheatresList,
+            IGetTheatreBaseInfoCommand getTheatreBaseInfo,
             UseCaseExecutor executor)
         {
             _addTheatre = addTheatre;
@@ -47,6 +49,7 @@ namespace Api.Controllers
             _getTheatresList = getTheatresList;
             _getRecentlyJoinedTheatres = getRecentlyJoinedTheatres;
             _getAllTheatresList = getAllTheatresList;
+            _getTheatreBaseInfo = getTheatreBaseInfo;
             _executor = executor;
         }
 
@@ -76,8 +79,13 @@ namespace Api.Controllers
 
         // GET: api/Theatres/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(int id, [FromQuery] TheatreQuery query)
         {
+            if(query.Type == "baseInfo")
+            {
+                var theatreForEdit = _executor.ExecuteQuery(_getTheatreBaseInfo, id);
+                return Ok(theatreForEdit);
+            }
             var theatre = _executor.ExecuteQuery(_getTheatre, id);
             return Ok(theatre);
         }

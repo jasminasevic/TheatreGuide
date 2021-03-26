@@ -48,6 +48,7 @@ namespace EfCommands.EfTheatreCommands
             theatre.TheatreDescription = request.Description;
             theatre.ContactEmail = request.Email;
             theatre.ContactTelephone = request.Telephone;
+            theatre.IsVisible = request.IsVisible;
 
             var locationId = theatre.AddressId;
             var addresses = Context.Addresses.Find(locationId);

@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Application.DTO.ImageDto;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.DTO.TheatreDto
 {
-    public class TheatreDto
+    public class TheatreForEditDto
     {
         public int Id { get; set; }
 
@@ -19,7 +19,7 @@ namespace Application.DTO.TheatreDto
 
         public string Description { get; set; }
 
-        public IEnumerable<IFormFile> TheatreImage { get; set; }
+        public IEnumerable<GetImageDto> ShowImageDtos { get; set; }
 
         public string Location { get; set; }
 
