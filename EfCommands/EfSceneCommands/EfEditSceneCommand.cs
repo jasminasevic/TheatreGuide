@@ -37,10 +37,10 @@ namespace EfCommands.EfSceneCommands
                 throw new EntityNotFoundException(request.Id.ToString());
 
             if (request.SceneName.ToLower() != scene.SceneName
-                && request.TheatreId != scene.TheatreId)
+                && request.TheatreId == scene.TheatreId)
             {
                 if (Context.Scenes.Any(s => s.SceneName.ToLower() == request.SceneName.ToLower()
-                     && s.Theatre.TheatreName.ToLower() == request.SceneName.ToLower()))
+                     && s.TheatreId == request.TheatreId))
                     throw new EntityAlreadyExistsException(request.SceneName);
             }
 
