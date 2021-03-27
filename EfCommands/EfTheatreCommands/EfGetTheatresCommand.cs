@@ -31,10 +31,16 @@ namespace EfCommands.EfTheatreCommands
             var theatre = Context.Theatres
                 .Include(t => t.Address)
                 .Include(t => t.TheatreImages)
-                .Include(t => t.Shows)
-                .ThenInclude(s => s.Category)
-                .Where(t => t.IsVisible == true)
+                //.Include(t => t.Shows)
+                //.ThenInclude(s => s.Category)
+                //.Where(t => t.IsVisible == true)
                 .AsQueryable();
+
+            if(request.Type == "visible")
+            {
+                theatre = theatre.Where(t => t.IsVisible == true)
+                    .AsQueryable();
+            }
 
             //Filtering logic
             if (request.Name != null)
@@ -60,18 +66,20 @@ namespace EfCommands.EfTheatreCommands
                 Location = t.Address.Location,
                 Latitude = t.Address.Latitude,
                 Longitude = t.Address.Longitude,
+                IsVisible = t.IsVisible,
                 ShowImageDtos = t.TheatreImages.Select(i => new GetImageDto
                 {
                     Id = i.Id,
                     Alt = i.TheatreImageAlt,
                     Path = "/uploads/theatre-images/" + i.TheatreImagePath
-                }),
-                ShowBaseInfoDtos = t.Shows.Select(s => new ShowBaseInfoDto
-                {
-                    Id = s.Id,
-                    Title = s.Title,
-                    CategoryName = s.Category.CategoryName
                 })
+                //,
+                //ShowBaseInfoDtos = t.Shows.Select(s => new ShowBaseInfoDto
+                //{
+                //    Id = s.Id,
+                //    Title = s.Title,
+                //    CategoryName = s.Category.CategoryName
+                //})
             });
 
             //Sorting logic
@@ -90,6 +98,12 @@ namespace EfCommands.EfTheatreCommands
                     break;
                 case "email_asc":
                     data = data.OrderBy(t => t.Email);
+                    break;
+                case "isVisible_desc":
+                    data = data.OrderByDescending(t => t.IsVisible);
+                    break;
+                case "isVisible_asc":
+                    data = data.OrderBy(t => t.IsVisible);
                     break;
                 default:
                     data = data.OrderBy(t => t.Name);

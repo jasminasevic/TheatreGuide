@@ -62,7 +62,7 @@ namespace Api.Controllers
                 var theatres = _executor.ExecuteQuery(_getAllTheatresList, new SearchQuery());
                 return Ok(theatres);
             }
-            if (query.Type == "getTheatresList")
+            if (query.Type == "getVisibleTheatresList")
             {
                 var theatres = _executor.ExecuteQuery(_getTheatresList, new SearchQuery());
                 return Ok(theatres);

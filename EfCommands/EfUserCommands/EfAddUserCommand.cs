@@ -34,16 +34,19 @@ namespace EfCommands.EfUserCommands
             if (Context.Users.Any(u => u.Email == request.Email))
                 throw new EntityAlreadyExistsException(request.Email);
 
+
             Context.Users.Add(new Domain.User
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
                 Password = request.Password,
-                RoleId = request.RoleId
+                RoleId = request.RoleId,
+                TheatreId = request.TheatreId
             });
 
             Context.SaveChanges();
+
         }
     }
 }

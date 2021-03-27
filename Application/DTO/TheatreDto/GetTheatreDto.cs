@@ -22,6 +22,8 @@ namespace Application.DTO.TheatreDto
 
         public string Description { get; set; }
 
+        public bool IsVisible { get; set; }
+
         public IEnumerable<GetImageDto> ShowImageDtos { get; set; }
 
         public string Location { get; set; }

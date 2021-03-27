@@ -40,7 +40,7 @@ namespace EfCommands.EfTheatreCommands
                 .ThenInclude(s => s.Sectors)
                 .Include(t => t.Shows)
                 .ThenInclude(t => t.ShowImages)
-                .Where(t => t.Id == request && t.IsVisible == true)
+                .Where(t => t.Id == request)
                 .FirstOrDefault();
 
             if (theatre == null)
@@ -57,6 +57,7 @@ namespace EfCommands.EfTheatreCommands
                 Location = theatre.Address.Location,
                 Latitude = theatre.Address.Latitude,
                 Longitude = theatre.Address.Longitude,
+                IsVisible = theatre.IsVisible,
                 ShowImageDtos = theatre.TheatreImages.Select(ti => new GetImageDto
                 {
                     Id = ti.Id,
