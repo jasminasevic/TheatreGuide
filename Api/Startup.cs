@@ -143,6 +143,7 @@ namespace Api
             services.AddTransient<IGetRepertoiresCommand, EfGetRepertoiresCommand>();
             services.AddTransient<IGetUpcomingShowsCommand, EfGetUpcomingShowsCommand>();
             services.AddTransient<IGetUpcomingPremieresCommand, EfGetUpcomingPremieresCommand>();
+            services.AddTransient<IGetRepertoiresFilteredByTheatreCommand, EfGetRepertoiresFilteredByTheatreCommand>();
 
             //Roles
             services.AddTransient<IAddRoleCommand, EfAddRoleCommand>();

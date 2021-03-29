@@ -1,6 +1,4 @@
 ﻿using Application.Commands.RepertoireCommands;
-using Application.DTO.ImageDto;
-using Application.DTO.PriceDto;
 using Application.DTO.RepertoireDto;
 using Application.Interfaces;
 using Application.Queries;
@@ -14,64 +12,59 @@ using System.Text;
 
 namespace EfCommands.EfRepertoireCommands
 {
-    public class EfGetRepertoiresCommand : EfBaseCommand, IGetRepertoiresCommand
+    public class EfGetRepertoiresFilteredByTheatreCommand : EfBaseCommand, IGetRepertoiresFilteredByTheatreCommand
     {
-        public EfGetRepertoiresCommand(EfContext context) : base(context)
+        public EfGetRepertoiresFilteredByTheatreCommand(EfContext context) : base(context)
         {
         }
 
-        public int Id => 34;
+        public int Id => 91;
 
-        public string Name => "Get Repertoires Using EF";
+        public string Name => "Get Repertoires Filtered By Theatre Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
+        public IEnumerable<Role> Roles => new List<Role> { Role.Theatre };
 
-        public PagedResponses<GetRepertoireDto> Execute(RepertoireQuery request)
+        public PagedResponses<GetRepertoireBaseInfoDto> Execute(RepertoireQuery request)
         {
             var repertoires = Context.Repertoires
                 .Include(t => t.Theatre)
                 .Include(s => s.Show)
                 .ThenInclude(s => s.Scene)
-                .Include(s => s.Show)
-                .ThenInclude(s => s.ShowImages)
+                .Where(s => s.TheatreId == request.TheatreId)
                 .AsQueryable();
 
-            //Filtering logic
+             //Filtering logic
 
-            if (request.TheatreName != null)
-                repertoires = repertoires.Where(r => r.Theatre.TheatreName.ToLower()
-                .Contains(request.TheatreName.ToLower()));
+            if (request.SceneName != null)
+                repertoires = repertoires.Where(r => r.Show.Scene.SceneName.ToLower()
+                .Contains(request.SceneName.ToLower()));
 
             if (request.ShowTitle != null)
                 repertoires = repertoires.Where(r => r.Show.Title.ToLower()
                 .Contains(request.ShowTitle.ToLower()));
 
             if(request.SearchQuery != null)
-                repertoires = repertoires.Where(r => r.Theatre.TheatreName.ToLower()
+                repertoires = repertoires.Where(r => r.Show.Scene.SceneName.ToLower()
                .Contains(request.SearchQuery.ToLower())
                || r.Show.Title.ToLower()
                .Contains(request.SearchQuery.ToLower()));
 
-            var data = repertoires.Select(r => new GetRepertoireDto
+            var data = repertoires.Select(r => new GetRepertoireBaseInfoDto
             {
                 Id = r.Id,
                 ShowId = r.ShowId,
                 ShowName = r.Show.Title,
-                TheatreId = r.TheatreId,
-                TheatreName = r.Theatre.TheatreName,
                 SceneId = r.Show.SceneId,
                 SceneName = r.Show.Scene.SceneName,
                 ShowDate = r.Date,
                 IsPremiere = r.IsPremiere,
-                GetImageDtos = r.Show.ShowImages.Select(si => new GetImageDto
-                {
-                    Id = si.Id,
-                    Alt = si.ShowImageAlt,
-                    Path = "/uploads/show-images/" + si.ShowImagePath
-                }).Take(1)
+                TheatreId = r.TheatreId
             });
 
-            data = data.Where(s => s.ShowDate > DateTime.Now);
+            if (request.PastShows == "no")
+            {
+                data = data.Where(s => s.ShowDate > DateTime.Now);
+            }
 
             var sortOrder = request.SortOrder;
 
@@ -82,12 +75,6 @@ namespace EfCommands.EfRepertoireCommands
                     break;
                 case "name_asc":
                     data = data.OrderBy(r => r.ShowName);
-                    break;
-                case "theatre_desc":
-                    data = data.OrderByDescending(r => r.TheatreName);
-                    break;
-                case "theatre_asc":
-                    data = data.OrderBy(r => r.TheatreName);
                     break;
                 case "show_desc":
                     data = data.OrderByDescending(r => r.ShowName);
@@ -117,14 +104,13 @@ namespace EfCommands.EfRepertoireCommands
             data = data.Skip((request.PageNumber - 1) * request.PerPage).Take(request.PerPage);
             var pagesCount = (int)Math.Ceiling((double)totalCount / request.PerPage);
 
-            return new PagedResponses<GetRepertoireDto>
+            return new PagedResponses<GetRepertoireBaseInfoDto>
             {
                 PageNumber = request.PageNumber,
                 PagesCount = pagesCount,
                 TotalCount = totalCount,
                 Data = data
             };
-
         }
     }
 }

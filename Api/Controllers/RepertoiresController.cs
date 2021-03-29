@@ -24,6 +24,7 @@ namespace Api.Controllers
         protected readonly IEditRepertoireCommand _editRepertoire;
         protected readonly IGetUpcomingShowsCommand _getUpcomingShows;
         protected readonly IGetUpcomingPremieresCommand _getUpcomingPremieres;
+        protected readonly IGetRepertoiresFilteredByTheatreCommand _getRepertoiresFilteredByTheatre;
         protected readonly UseCaseExecutor _executor;
 
         public RepertoiresController(IAddRepertoireCommand addRepertoire,
@@ -32,7 +33,8 @@ namespace Api.Controllers
             IDeleteRepertoireCommand deleteRepertoire,
             IEditRepertoireCommand editRepertoire,
             IGetUpcomingShowsCommand getUpcomingShows,
-            IGetUpcomingPremieresCommand getUpcomingPremieres, 
+            IGetUpcomingPremieresCommand getUpcomingPremieres,
+            IGetRepertoiresFilteredByTheatreCommand getRepertoiresFilteredByTheatre,
             UseCaseExecutor executor)
         {
             _addRepertoire = addRepertoire;
@@ -42,6 +44,7 @@ namespace Api.Controllers
             _editRepertoire = editRepertoire;
             _getUpcomingShows = getUpcomingShows;
             _getUpcomingPremieres = getUpcomingPremieres;
+            _getRepertoiresFilteredByTheatre = getRepertoiresFilteredByTheatre;
             _executor = executor;
         }
 
@@ -59,6 +62,11 @@ namespace Api.Controllers
             {
                 var upcomingPremieres = _executor.ExecuteQuery(_getUpcomingPremieres, new RepertoireQuery());
                 return Ok(upcomingPremieres);
+            }
+            if (query.Type == "repertoiresFilteredByTheatre")
+            {
+                var repertoiresInTheatre = _executor.ExecuteQuery(_getRepertoiresFilteredByTheatre, query);
+                return Ok(repertoiresInTheatre);
             }
             var repertoires = _executor.ExecuteQuery(_getRepertoires, query);
             return Ok(repertoires);
