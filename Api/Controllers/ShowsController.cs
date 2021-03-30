@@ -32,6 +32,7 @@ namespace Api.Controllers
         protected readonly IGetPopularShowsFilteredByDirectorCommand _getPopularShowsFilteredByDirector;
         protected readonly IGetPopularShowsFilteredByIdAndTheatreCommand _getPopularShowsFilteredByIdAndTheatre;
         protected readonly IGetShowsFilteredByTheatreCommand _getShowsFilteredByTheatre;
+        protected readonly IGetShowBaseListFilteredByTheatreCommand _getShowBaseListFilteredByTheatre;
         protected readonly UseCaseExecutor _executor;
         public ShowsController(IAddShowCommand addShow,
             IGetShowCommand getShow,
@@ -48,6 +49,7 @@ namespace Api.Controllers
             IGetPopularShowsFilteredByDirectorCommand getPopularShowsFilteredByDirector,
             IGetPopularShowsFilteredByIdAndTheatreCommand getPopularShowsFilteredByIdAndTheatre,
             IGetShowsFilteredByTheatreCommand getShowsFilteredByTheatre,
+            IGetShowBaseListFilteredByTheatreCommand getShowBaseListFilteredByTheatre,
             UseCaseExecutor executor)
         {
             _addShow = addShow;
@@ -65,6 +67,7 @@ namespace Api.Controllers
             _getPopularShowsFilteredByDirector = getPopularShowsFilteredByDirector;
             _getPopularShowsFilteredByIdAndTheatre = getPopularShowsFilteredByIdAndTheatre;
             _getShowsFilteredByTheatre = getShowsFilteredByTheatre;
+            _getShowBaseListFilteredByTheatre = getShowBaseListFilteredByTheatre;
             _executor = executor;
         }
 
@@ -78,33 +81,38 @@ namespace Api.Controllers
                 var shows = _executor.ExecuteQuery(_getShowsList, new SearchQuery());
                 return Ok(shows);
             }
-            if (query.Type == "popularShows" && query.ShowId != null)
+            if (query.Type == "popularShows")
+            {
+                var shows = _executor.ExecuteQuery(_getPopularShows, new ShowQuery());
+                return Ok(shows);
+            }
+            if (query.Type == "popularShowsFilteredById")
             {
                 var shows = _executor.ExecuteQuery(_getPopularShowsFilteredById, 
                     Convert.ToInt32(query.ShowId));
                 return Ok(shows);
             }
-            if (query.Type == "popularShows" && query.TheatreId != null)
+            if (query.Type == "popularShowsFilteredByTheatre")
             {
                 var shows = _executor.ExecuteQuery(_getPopularShowsFilteredByTheatre, 
                     Convert.ToInt32(query.TheatreId));
                 return Ok(shows);
             }
-            if (query.Type == "popularShows" && query.ActorId != null)
+            if (query.Type == "popularShowsFilteredByActor")
             {
                 var shows = _executor.ExecuteQuery(_getPopularShowsFilteredByActor, 
                     Convert.ToInt32(query.ActorId));
                 return Ok(shows);
             }
-            if (query.Type == "popularShows" && query.DirectorId != null)
+            if (query.Type == "popularShowsFilteredByDirector")
             {
                 var shows = _executor.ExecuteQuery(_getPopularShowsFilteredByDirector, 
                     Convert.ToInt32(query.DirectorId));
                 return Ok(shows);
             }
-            if (query.Type == "popularShows")
+            if (query.Type == "showsFilteredByTheatre")
             {
-                var shows = _executor.ExecuteQuery(_getPopularShows, new ShowQuery());
+                var shows = _executor.ExecuteQuery(_getShowsFilteredByTheatre, query);
                 return Ok(shows);
             }
             if (query.Type == "popularShowsFilteredByIdAndTheatre")
@@ -112,9 +120,9 @@ namespace Api.Controllers
                 var shows = _executor.ExecuteQuery(_getPopularShowsFilteredByIdAndTheatre, query);
                 return Ok(shows);
             }
-            if(query.Type == "showsFilteredByTheatre")
+            if(query.Type == "showsForRepertoireFilteredByTheatre")
             {
-                var shows = _executor.ExecuteQuery(_getShowsFilteredByTheatre, query);
+                var shows = _executor.ExecuteQuery(_getShowBaseListFilteredByTheatre, query);
                 return Ok(shows);
             }
             var allShows = _executor.ExecuteQuery(_getShows, query);

@@ -20,7 +20,7 @@ namespace Application.Validators.RepertoireValidators
 
             RuleFor(x => x.ShowDate)
                 .NotEmpty()
-                .WithMessage("Theatre is required");
+                .WithMessage("Show date and time are required");
         }
     }
 }
