@@ -61,7 +61,7 @@ namespace EfCommands.EfRepertoireCommands
                 TheatreId = r.TheatreId
             });
 
-            if (request.PastShows == "no")
+            if (request.PastShows == "false")
             {
                 data = data.Where(s => s.ShowDate > DateTime.Now);
             }
