@@ -144,6 +144,7 @@ namespace Api
             services.AddTransient<IGetUpcomingShowsCommand, EfGetUpcomingShowsCommand>();
             services.AddTransient<IGetUpcomingPremieresCommand, EfGetUpcomingPremieresCommand>();
             services.AddTransient<IGetRepertoiresFilteredByTheatreCommand, EfGetRepertoiresFilteredByTheatreCommand>();
+            services.AddTransient<IGetRepertoireForEditCommand, EfGetRepertoireForEditCommand>();
 
             //Roles
             services.AddTransient<IAddRoleCommand, EfAddRoleCommand>();

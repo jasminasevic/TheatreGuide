@@ -25,6 +25,7 @@ namespace Api.Controllers
         protected readonly IGetUpcomingShowsCommand _getUpcomingShows;
         protected readonly IGetUpcomingPremieresCommand _getUpcomingPremieres;
         protected readonly IGetRepertoiresFilteredByTheatreCommand _getRepertoiresFilteredByTheatre;
+        protected readonly IGetRepertoireForEditCommand _getRepertoireForEdit; 
         protected readonly UseCaseExecutor _executor;
 
         public RepertoiresController(IAddRepertoireCommand addRepertoire,
@@ -35,6 +36,7 @@ namespace Api.Controllers
             IGetUpcomingShowsCommand getUpcomingShows,
             IGetUpcomingPremieresCommand getUpcomingPremieres,
             IGetRepertoiresFilteredByTheatreCommand getRepertoiresFilteredByTheatre,
+            IGetRepertoireForEditCommand getRepertoireForEdit, 
             UseCaseExecutor executor)
         {
             _addRepertoire = addRepertoire;
@@ -45,6 +47,7 @@ namespace Api.Controllers
             _getUpcomingShows = getUpcomingShows;
             _getUpcomingPremieres = getUpcomingPremieres;
             _getRepertoiresFilteredByTheatre = getRepertoiresFilteredByTheatre;
+            _getRepertoireForEdit = getRepertoireForEdit;
             _executor = executor;
         }
 
@@ -74,8 +77,13 @@ namespace Api.Controllers
 
         // GET: api/Repertoires/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(int id, [FromQuery] RepertoireQuery query)
         {
+            if(query.Type == "repertoireForEdit")
+            {
+                var repertoireForEdit = _executor.ExecuteQuery(_getRepertoireForEdit, id);
+                return Ok(repertoireForEdit);
+            }
             var repertoire = _executor.ExecuteQuery(_getRepertoire, id);
             return Ok(repertoire);
         }

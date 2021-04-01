@@ -33,7 +33,7 @@ namespace EfCommands.EfRepertoireCommands
 
             if (Context.Repertoires.Any(r => r.ShowId == request.ShowId
                  && r.Date == request.ShowDate))
-                throw new EntityAlreadyExistsException(request.ShowId.ToString());
+                throw new EntityAlreadyExistsException("Selected repertoire");
 
             var showDate = Convert.ToDateTime(request.ShowDate);
             
