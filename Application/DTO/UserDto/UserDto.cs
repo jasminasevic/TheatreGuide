@@ -20,6 +20,8 @@ namespace Application.DTO.UserDto
 
         public int? TheatreId { get; set; }
 
+        public string TheatreName { get; set; }
+
         public string Status { get; set; }
     }
 

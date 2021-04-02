@@ -29,7 +29,7 @@ namespace EfCommands.EfUserCommands
 
         public string Name => "Edit User Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.User, Role.Theatre };
 
         public void Execute(UserDto request)
         {
@@ -48,7 +48,10 @@ namespace EfCommands.EfUserCommands
             user.FirstName = request.FirstName;
             user.LastName = request.LastName;
             user.Email = request.Email;
-            user.Password = request.Password;
+            if (request.Password != null)
+            {
+                user.Password = request.Password;
+            }
             user.RoleId = request.RoleId;
             user.TheatreId = request.TheatreId;
             user.Status = (Domain.User.StatusType)Enum.Parse(typeof(StatusType), request.Status);

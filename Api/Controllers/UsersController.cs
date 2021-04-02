@@ -26,6 +26,7 @@ namespace Api.Controllers
         protected readonly IEditUserCommand _editUser;
         protected readonly IDeleteUserCommand _deleteUser;
         protected readonly IGetPendingUserRequestsNumberCommand _getUsersFilteredByStatus;
+        protected readonly IGetUserFilteredByTheatreCommand _getUserFilteredByTheatre;
         protected readonly UseCaseExecutor _executor;
 
         public UsersController(IAddUserCommand addUser,
@@ -34,6 +35,7 @@ namespace Api.Controllers
             IEditUserCommand editUser,
             IDeleteUserCommand deleteUser,
             IGetPendingUserRequestsNumberCommand getUsersFilteredByStatus,
+            IGetUserFilteredByTheatreCommand getUserFilteredByTheatre,
             UseCaseExecutor executor)
         {
             _addUser = addUser;
@@ -42,6 +44,7 @@ namespace Api.Controllers
             _editUser = editUser;
             _deleteUser = deleteUser;
             _getUsersFilteredByStatus = getUsersFilteredByStatus;
+            _getUserFilteredByTheatre = getUserFilteredByTheatre;
             _executor = executor;
         }
 
@@ -54,14 +57,19 @@ namespace Api.Controllers
                 var usersFilteredByStatus = _executor.ExecuteQuery(_getUsersFilteredByStatus, query);
                 return Ok(usersFilteredByStatus);
             }
-                var users = _executor.ExecuteQuery(_getUsers, query);
+            var users = _executor.ExecuteQuery(_getUsers, query);
             return Ok(users);
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(int id, [FromQuery] UserQuery query)
         {
+            if(query.Type == "userFilteredByTheatre")
+            {
+                var userFilteredByTheatre = _executor.ExecuteQuery(_getUserFilteredByTheatre, id);
+                return Ok(userFilteredByTheatre);
+            } 
             var user = _executor.ExecuteQuery(_getUser, id);
             return Ok(user);
         }
