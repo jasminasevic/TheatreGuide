@@ -130,6 +130,7 @@ namespace Api
             services.AddTransient<IEditPurchaseCommand, EfEditPurchaseCommand>();
             services.AddTransient<IGetPurchaseCommand, EfGetPurchaseCommand>();
             services.AddTransient<IGetPurchasesCommand, EfGetPurchasesCommand>();
+            services.AddTransient<IGetPurchasesFilteredByTheatreCommand, EfGetPurchasesFilteredByTheatreCommand>();
 
             //Registration
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
@@ -145,6 +146,7 @@ namespace Api
             services.AddTransient<IGetUpcomingPremieresCommand, EfGetUpcomingPremieresCommand>();
             services.AddTransient<IGetRepertoiresFilteredByTheatreCommand, EfGetRepertoiresFilteredByTheatreCommand>();
             services.AddTransient<IGetRepertoireForEditCommand, EfGetRepertoireForEditCommand>();
+            services.AddTransient<IGetRepertoiresFilteredByTheatreCommand, EfGetRepertoiresFilteredByTheatreCommand>();
 
             //Roles
             services.AddTransient<IAddRoleCommand, EfAddRoleCommand>();

@@ -23,13 +23,15 @@ namespace Api.Controllers
         protected readonly IGetPurchasesCommand _getPurchases;
         protected readonly IEditPurchaseCommand _editPurchase;
         protected readonly IDeletePurchaseCommand _deletePurchase;
+        protected readonly IGetPurchasesFilteredByTheatreCommand _getPurchasesFilteredByTheatre;
         protected readonly UseCaseExecutor _executor;
 
         public PurchasesController(IAddPurchaseCommand addPurchase,
             IGetPurchaseCommand getPurchase,
             IGetPurchasesCommand getPurchases,
             IEditPurchaseCommand editPurchase,
-            IDeletePurchaseCommand deletePurchase, 
+            IDeletePurchaseCommand deletePurchase,
+            IGetPurchasesFilteredByTheatreCommand getPurchasesFilteredByTheatre,
             UseCaseExecutor executor)
         {
             _addPurchase = addPurchase;
@@ -37,6 +39,7 @@ namespace Api.Controllers
             _getPurchases = getPurchases;
             _editPurchase = editPurchase;
             _deletePurchase = deletePurchase;
+            _getPurchasesFilteredByTheatre = getPurchasesFilteredByTheatre;
             _executor = executor;
         }
 
@@ -45,6 +48,11 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery] PurchaseQuery query)
         {
+            if(query.Type == "purchasesFilteredByTheatre")
+            {
+                var purchasesFilteredByTheatre = _executor.ExecuteQuery(_getPurchasesFilteredByTheatre, query);
+                return Ok(purchasesFilteredByTheatre);
+            }
             var purchases = _executor.ExecuteQuery(_getPurchases, query);
             return Ok(purchases);
         }
