@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Commands.UserCommands
 {
-    public interface IGetUserFilteredByTheatreCommand : IQuery<int, UserDto>
+    public interface IGetUserFilteredByIdCommand : IQuery<int, UserDto>
     {
     }
 }

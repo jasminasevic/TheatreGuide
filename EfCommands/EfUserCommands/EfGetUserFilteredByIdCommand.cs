@@ -11,9 +11,9 @@ using System.Text;
 
 namespace EfCommands.EfUserCommands
 {
-    public class EfGetUserFilteredByTheatreCommand : EfBaseCommand, IGetUserFilteredByTheatreCommand
+    public class EfGetUserFilteredByIdCommand : EfBaseCommand, IGetUserFilteredByIdCommand
     {
-        public EfGetUserFilteredByTheatreCommand(EfContext context) : base(context)
+        public EfGetUserFilteredByIdCommand(EfContext context) : base(context)
         {
         }
 
@@ -21,7 +21,7 @@ namespace EfCommands.EfUserCommands
 
         public string Name => "Get User Filtered By Theatre Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role> { Role.Theatre };
+        public IEnumerable<Role> Roles => new List<Role> { Role.Theatre, Role.User };
 
         public UserDto Execute(int request)
         {
@@ -39,7 +39,7 @@ namespace EfCommands.EfUserCommands
                 LastName = user.LastName,
                 Email = user.Email,
                 TheatreId = user.TheatreId == null ? null : user.TheatreId,
-                TheatreName = user.Theatre.TheatreName == null ? null : user.Theatre.TheatreName,
+                TheatreName = user.Theatre == null ? "" : user.Theatre.TheatreName,
                 Password = user.Password,
                 RoleId = user.RoleId,
                 Status = user.Status.ToString()
