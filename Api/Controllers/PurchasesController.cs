@@ -24,6 +24,7 @@ namespace Api.Controllers
         protected readonly IEditPurchaseCommand _editPurchase;
         protected readonly IDeletePurchaseCommand _deletePurchase;
         protected readonly IGetPurchasesFilteredByTheatreCommand _getPurchasesFilteredByTheatre;
+        protected readonly IGetCountedPurchasesFilteredByTheatreCommand _getCountedPurchasesFilteredByTheatre;
         protected readonly UseCaseExecutor _executor;
 
         public PurchasesController(IAddPurchaseCommand addPurchase,
@@ -32,6 +33,7 @@ namespace Api.Controllers
             IEditPurchaseCommand editPurchase,
             IDeletePurchaseCommand deletePurchase,
             IGetPurchasesFilteredByTheatreCommand getPurchasesFilteredByTheatre,
+            IGetCountedPurchasesFilteredByTheatreCommand getCountedPurchasesFilteredByTheatre,
             UseCaseExecutor executor)
         {
             _addPurchase = addPurchase;
@@ -40,6 +42,7 @@ namespace Api.Controllers
             _editPurchase = editPurchase;
             _deletePurchase = deletePurchase;
             _getPurchasesFilteredByTheatre = getPurchasesFilteredByTheatre;
+            _getCountedPurchasesFilteredByTheatre = getCountedPurchasesFilteredByTheatre;
             _executor = executor;
         }
 
@@ -48,6 +51,11 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery] PurchaseQuery query)
         {
+            if(query.Type == "purchasesNumberFilteredByTheatre")
+            {
+                var purchasesNumber = _executor.ExecuteQuery(_getCountedPurchasesFilteredByTheatre, query);
+                return Ok(purchasesNumber);
+            }
             if(query.Type == "purchasesFilteredByTheatre")
             {
                 var purchasesFilteredByTheatre = _executor.ExecuteQuery(_getPurchasesFilteredByTheatre, query);
