@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Application.Commands.ShowFollowerCommands;
 using Application.DTO.ShowFollowerDto;
 using Application.Exceptions;
+using Application.Queries;
+using Application.UseCase;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,19 +19,30 @@ namespace Api.Controllers
     {
         protected readonly IAddShowFollowerCommand _addShowFollower;
         protected readonly IDeleteShowFollowerCommand _deleteShowFollower;
+        protected readonly IGetCountedShowFollowersFilteredByTheatreCommand _getCountedShowFollowersFilteredByTheatre;
+        protected readonly UseCaseExecutor _executor;
 
-        public ShowFollowersController(IAddShowFollowerCommand addShowFollower, 
-            IDeleteShowFollowerCommand deleteShowFollower)
+        public ShowFollowersController(IAddShowFollowerCommand addShowFollower,
+            IDeleteShowFollowerCommand deleteShowFollower, 
+            IGetCountedShowFollowersFilteredByTheatreCommand getCountedShowFollowersFilteredByTheatre, 
+            UseCaseExecutor executor)
         {
             _addShowFollower = addShowFollower;
             _deleteShowFollower = deleteShowFollower;
+            _getCountedShowFollowersFilteredByTheatre = getCountedShowFollowersFilteredByTheatre;
+            _executor = executor;
         }
 
         // GET: api/ShowFollowers
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromQuery] ShowFollowerQuery query)
         {
-            return new string[] { "value1", "value2" };
+            if(query.Type == "showFollowersFilteredByTheatre")
+            {
+                var followersNumber = _executor.ExecuteQuery(_getCountedShowFollowersFilteredByTheatre, query);
+                return Ok(followersNumber);
+            }
+            return NotFound();
         }
 
         // GET: api/ShowFollowers/5
@@ -44,15 +57,8 @@ namespace Api.Controllers
         [Authorize]
         public IActionResult Post([FromForm] ShowFollowerDto dto)
         {
-            try
-            {
-                _addShowFollower.Execute(dto);
-                return StatusCode(204);
-            }
-            catch(EntityAlreadyExistsException e)
-            {
-                return StatusCode(422, e.Message);
-            }
+            _executor.ExecuteCommand(_addShowFollower, dto);
+            return StatusCode(204);
         }
 
         // PUT: api/ShowFollowers/5

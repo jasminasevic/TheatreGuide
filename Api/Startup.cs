@@ -67,6 +67,7 @@ using Application.Validators.RegistrationValidators;
 using EfCommands.Logging;
 using EfCommands.Email;
 using Application.Email;
+using EfCommands.EfShowFollowerCommands;
 
 namespace Api
 {
@@ -170,6 +171,7 @@ namespace Api
             //ShowFollowers
             services.AddTransient<IAddShowFollowerCommand, EfAddShowFollowerCommand>();
             services.AddTransient<IDeleteShowFollowerCommand, EfDeleteShowFollowerCommand>();
+            services.AddTransient<IGetCountedShowFollowersFilteredByTheatreCommand, EfGetCountedShowFollowersFilteredByTheatreCommand>();
 
             //Shows
             services.AddTransient<IAddShowCommand, EfAddShowCommand>();
