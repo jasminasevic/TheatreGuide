@@ -133,6 +133,7 @@ namespace Api
             services.AddTransient<IGetPurchasesCommand, EfGetPurchasesCommand>();
             services.AddTransient<IGetPurchasesFilteredByTheatreCommand, EfGetPurchasesFilteredByTheatreCommand>();
             services.AddTransient<IGetCountedPurchasesFilteredByTheatreCommand, EfGetCountedPurchasesFilteredByTheatreCommand>();
+            services.AddTransient<IGetRecentPurchasesFilteredByTheatreCommand, EfGetRecentPurchasesFilteredByTheatreCommand>();
 
             //Registration
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();

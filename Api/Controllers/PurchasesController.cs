@@ -25,6 +25,7 @@ namespace Api.Controllers
         protected readonly IDeletePurchaseCommand _deletePurchase;
         protected readonly IGetPurchasesFilteredByTheatreCommand _getPurchasesFilteredByTheatre;
         protected readonly IGetCountedPurchasesFilteredByTheatreCommand _getCountedPurchasesFilteredByTheatre;
+        protected readonly IGetRecentPurchasesFilteredByTheatreCommand _getRecentPurchasesFilteredByTheatre;
         protected readonly UseCaseExecutor _executor;
 
         public PurchasesController(IAddPurchaseCommand addPurchase,
@@ -34,6 +35,7 @@ namespace Api.Controllers
             IDeletePurchaseCommand deletePurchase,
             IGetPurchasesFilteredByTheatreCommand getPurchasesFilteredByTheatre,
             IGetCountedPurchasesFilteredByTheatreCommand getCountedPurchasesFilteredByTheatre,
+            IGetRecentPurchasesFilteredByTheatreCommand getRecentPurchasesFilteredByTheatre,
             UseCaseExecutor executor)
         {
             _addPurchase = addPurchase;
@@ -43,6 +45,7 @@ namespace Api.Controllers
             _deletePurchase = deletePurchase;
             _getPurchasesFilteredByTheatre = getPurchasesFilteredByTheatre;
             _getCountedPurchasesFilteredByTheatre = getCountedPurchasesFilteredByTheatre;
+            _getRecentPurchasesFilteredByTheatre = getRecentPurchasesFilteredByTheatre;
             _executor = executor;
         }
 
@@ -56,7 +59,12 @@ namespace Api.Controllers
                 var purchasesNumber = _executor.ExecuteQuery(_getCountedPurchasesFilteredByTheatre, query);
                 return Ok(purchasesNumber);
             }
-            if(query.Type == "purchasesFilteredByTheatre")
+            if (query.Type == "recentPurchasesFilteredByTheatre")
+            {
+                var recentPurchases = _executor.ExecuteQuery(_getRecentPurchasesFilteredByTheatre, query);
+                return Ok(recentPurchases);
+            }
+            if (query.Type == "purchasesFilteredByTheatre")
             {
                 var purchasesFilteredByTheatre = _executor.ExecuteQuery(_getPurchasesFilteredByTheatre, query);
                 return Ok(purchasesFilteredByTheatre);
