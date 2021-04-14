@@ -68,6 +68,8 @@ using EfCommands.Logging;
 using EfCommands.Email;
 using Application.Email;
 using EfCommands.EfShowFollowerCommands;
+using Application.Commands.SectorCommands;
+using EfCommands.EfSectorCommands;
 
 namespace Api
 {
@@ -169,6 +171,9 @@ namespace Api
             services.AddTransient<IGetScenesListCommand, EfGetSceneListCommand>();
             services.AddTransient<IGetScenesTheatreCommand, EfGetScenesTheatreCommand>();
             services.AddTransient<IGetScenesFilteredByTheatreCommand, EfGetScenesFilteredByTheatreCommand>();
+
+            //Sectors
+            services.AddTransient<IGetSectorWithUnavailableSeatsCommand, EfGetSectorWithUnavailableSeatsCommand>();
 
             //ShowFollowers
             services.AddTransient<IAddShowFollowerCommand, EfAddShowFollowerCommand>();
