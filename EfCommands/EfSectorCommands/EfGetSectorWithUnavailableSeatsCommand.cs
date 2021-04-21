@@ -47,10 +47,7 @@ namespace EfCommands.EfSectorCommands
                 SectorName = sectors.SectorName,
                 UnavailableSeatsDto = unavailableSeats.Select(us => new UnavailableSeatsDto
                 {
-                    RepertoireId = us.RepertoireId,
-                    SectorId = us.SectorId,
-                    RowNumber = us.RowNumber,
-                    SeatNumber = us.SeatNumber
+                    SeatRowDetails = us.SectorId.ToString() + ',' + us.RowNumber.ToString() + ',' + us.SeatNumber.ToString()
                 })
             };
 
