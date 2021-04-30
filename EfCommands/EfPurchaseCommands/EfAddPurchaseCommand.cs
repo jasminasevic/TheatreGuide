@@ -5,6 +5,7 @@ using Application.Interfaces;
 using Application.Validators.PurchaseValidators;
 using EfDataAccess;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,45 +29,51 @@ namespace EfCommands.EfPurchaseCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.User, Role.Admin };
 
-        public void Execute(PurchaseDto request)
+        public void Execute(AddPurchaseDto request)
         {
             _validator.ValidateAndThrow(request);
 
-            if (Context.Purchases.Any(p => p.RepertoireId == request.RepertoireId
-                 && p.SectorId == request.SectorId
-                 && p.RowNumber == request.RowNumber
-                 && p.SeatNumber == request.SeatNumber))
-                throw new EntityAlreadyExistsException(request.RowNumber.ToString() 
-                    + " " + request.SeatNumber.ToString());
+            foreach (var seat in request.AddSeatDtos)
+            {
 
-            var sectorSoldTickets = Context.SectorSoldTickets
-                .Where(st => st.SectorId == request.SectorId
-                    && st.RepertoireId == request.RepertoireId)
-                .FirstOrDefault();
+                if (Context.Purchases.Any(p => p.RepertoireId == request.RepertoireId
+                     && p.SectorId == seat.SectorId
+                     && p.RowNumber == seat.RowNumber
+                     && p.SeatNumber == seat.SeatNumber))
+                    throw new EntityAlreadyExistsException(seat.RowNumber.ToString()
+                        + " " + seat.SeatNumber.ToString());
 
-            if (sectorSoldTickets != null)
-                sectorSoldTickets.NumberOfSoldTickets += 1;
+                //var sectorSoldTickets = Context.SectorSoldTickets.AsNoTracking()
+                //    .FirstOrDefault(st => st.SectorId == seat.SectorId
+                //        && st.RepertoireId == request.RepertoireId);
 
-            if (sectorSoldTickets == null)
-                Context.SectorSoldTickets.Add(new Domain.SectorSoldTickets
+                //if (sectorSoldTickets != null)
+                //    sectorSoldTickets.NumberOfSoldTickets += 1;
+
+                //if (sectorSoldTickets == null)
+                //    Context.SectorSoldTickets.Add(new Domain.SectorSoldTickets
+                //    {
+                //        RepertoireId = request.RepertoireId,
+                //        SectorId = seat.SectorId,
+                //        NumberOfSoldTickets = +1
+                //    });
+
+                //Context.SaveChangesAsync();
+                //Context.Entry(sectorSoldTickets).State = EntityState.Detached;
+
+                var purchase = new Domain.Purchase
                 {
                     RepertoireId = request.RepertoireId,
-                    SectorId = request.SectorId,
-                    NumberOfSoldTickets = +1
-                });
-                    
-            var purchase = new Domain.Purchase
-            {
-                RepertoireId = request.RepertoireId,
-                SectorId = request.SectorId,
-                UserId = request.UserId,
-                RowNumber = request.RowNumber,
-                SeatNumber = request.SeatNumber,
-                Entrance = request.Entrance
-            };
+                    UserId = request.UserId,
+                    SectorId = seat.SectorId,
+                    RowNumber = seat.RowNumber,
+                    SeatNumber = seat.SeatNumber,
+                    Entrance = seat.Entrance
+                };
 
-            Context.Purchases.Add(purchase);
+                Context.Purchases.Add(purchase);
 
+            }
             Context.SaveChanges();
     
         }

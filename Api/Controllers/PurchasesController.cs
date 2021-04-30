@@ -83,7 +83,7 @@ namespace Api.Controllers
 
         // POST: api/Purchases
         [HttpPost]
-        public IActionResult Post([FromBody] PurchaseDto dto)
+        public IActionResult Post([FromBody] AddPurchaseDto dto)
         {
             _executor.ExecuteCommand(_addPurchase, dto);
             return Ok();

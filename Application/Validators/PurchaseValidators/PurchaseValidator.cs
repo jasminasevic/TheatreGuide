@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Application.Validators.PurchaseValidators
 {
-    public class PurchaseValidator : AbstractValidator<PurchaseDto>
+    public class PurchaseValidator : AbstractValidator<AddPurchaseDto>
     {
         public PurchaseValidator()
         {
@@ -14,21 +14,13 @@ namespace Application.Validators.PurchaseValidators
                 .NotEmpty()
                 .WithMessage("Repertoire is required");
 
-            RuleFor(x => x.RowNumber)
-                .NotEmpty()
-                .WithMessage("Row is required");
-
-            RuleFor(x => x.SeatNumber)
-                .NotEmpty()
-                .WithMessage("Seat number is required");
-
             RuleFor(x => x.UserId)
                 .NotEmpty()
                 .WithMessage("User is required");
 
-            RuleFor(x => x.SectorId)
+            RuleFor(x => x.AddSeatDtos)
                 .NotEmpty()
-                .WithMessage("Sector is required");
+                .WithMessage("Seat details are required");
         }
 
     }

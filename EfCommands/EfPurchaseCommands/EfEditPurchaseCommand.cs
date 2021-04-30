@@ -28,7 +28,7 @@ namespace EfCommands.EfPurchaseCommands
 
         public void Execute(PurchaseDto request)
         {
-            _validator.ValidateAndThrow(request);
+          //  _validator.ValidateAndThrow(request);
 
             var purchase = Context.Purchases.Find(request.Id);
 
