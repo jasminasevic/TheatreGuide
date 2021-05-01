@@ -33,6 +33,7 @@ namespace Api.Controllers
         protected readonly IGetPopularShowsFilteredByIdAndTheatreCommand _getPopularShowsFilteredByIdAndTheatre;
         protected readonly IGetShowsFilteredByTheatreCommand _getShowsFilteredByTheatre;
         protected readonly IGetShowBaseListFilteredByTheatreCommand _getShowBaseListFilteredByTheatre;
+        protected readonly IGetShowsFollowersFilteredByUserIdCommand _getShowsFollowersFilteredByUserIdCommand;
         protected readonly UseCaseExecutor _executor;
         public ShowsController(IAddShowCommand addShow,
             IGetShowCommand getShow,
@@ -50,6 +51,7 @@ namespace Api.Controllers
             IGetPopularShowsFilteredByIdAndTheatreCommand getPopularShowsFilteredByIdAndTheatre,
             IGetShowsFilteredByTheatreCommand getShowsFilteredByTheatre,
             IGetShowBaseListFilteredByTheatreCommand getShowBaseListFilteredByTheatre,
+            IGetShowsFollowersFilteredByUserIdCommand getShowsFollowersFilteredByUserIdCommand,
             UseCaseExecutor executor)
         {
             _addShow = addShow;
@@ -68,6 +70,7 @@ namespace Api.Controllers
             _getPopularShowsFilteredByIdAndTheatre = getPopularShowsFilteredByIdAndTheatre;
             _getShowsFilteredByTheatre = getShowsFilteredByTheatre;
             _getShowBaseListFilteredByTheatre = getShowBaseListFilteredByTheatre;
+            _getShowsFollowersFilteredByUserIdCommand = getShowsFollowersFilteredByUserIdCommand;
             _executor = executor;
         }
 
@@ -125,6 +128,11 @@ namespace Api.Controllers
                 var shows = _executor.ExecuteQuery(_getShowBaseListFilteredByTheatre, query);
                 return Ok(shows);
             }
+            if (query.Type == "followersFilteredByUserId")
+            {
+                var followersFilteredByUserId = _executor.ExecuteQuery(_getShowsFollowersFilteredByUserIdCommand, query);
+                return Ok(followersFilteredByUserId);
+            }
             var allShows = _executor.ExecuteQuery(_getShows, query);
             return Ok(allShows);
         }
@@ -144,7 +152,6 @@ namespace Api.Controllers
                 var showForRepertoire = _executor.ExecuteQuery(_getShowWithPricesForRepertoire, id);
                 return Ok(showForRepertoire);
             }
-
             var show = _executor.ExecuteQuery(_getShow, id);
             return Ok(show);
         }

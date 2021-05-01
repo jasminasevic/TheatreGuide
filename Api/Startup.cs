@@ -197,6 +197,7 @@ namespace Api
             services.AddTransient<IGetPopularShowsFilteredByIdAndTheatreCommand, EfGetPopularShowsFilteredByIdAndTheatreCommand>();
             services.AddTransient<IGetShowsFilteredByTheatreCommand, EfGetShowsFilteredByTheatreCommand>();
             services.AddTransient<IGetShowBaseListFilteredByTheatreCommand, EfGetShowBaseListFilteredByTheatreCommand>();
+            services.AddTransient<IGetShowsFollowersFilteredByUserIdCommand, EfGetShowsFollowersFilteredByUserIdCommand>();
 
             //Theatres
             services.AddTransient<IAddTheatreCommand, EfAddTheatreCommand>();

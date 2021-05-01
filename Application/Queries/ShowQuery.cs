@@ -19,5 +19,7 @@ namespace Application.Queries
         public string DirectorId { get; set; }
 
         public string CategoryId { get; set; }
+
+        public string UserId { get; set; }
     }
 }
