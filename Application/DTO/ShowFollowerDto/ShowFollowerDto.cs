@@ -6,8 +6,8 @@ namespace Application.DTO.ShowFollowerDto
 {
     public class ShowFollowerDto
     {
-        public int ShowId { get; set; }
+        public string ShowId { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

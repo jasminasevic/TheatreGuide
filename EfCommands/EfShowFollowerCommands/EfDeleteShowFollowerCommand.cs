@@ -1,5 +1,6 @@
 ﻿using Application.Commands.ShowFollowerCommands;
 using Application.Interfaces;
+using Application.Queries;
 using EfDataAccess;
 using System;
 using System.Collections.Generic;
@@ -20,17 +21,15 @@ namespace EfCommands.EfShowFolloweCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.User };
 
-        public void Execute(int requestFirst, int requestSecond)
+        public void Execute(ShowFollowerQuery query)
         {
-            var follower = Context.Users.Find(requestFirst);
-
-            var show = Context.ShowFollowers.Where(s => s.ShowId == requestSecond)
+            var follower = Context.ShowFollowers
+                .Where(s => s.UserId.ToString() == query.UserId && s.ShowId.ToString() == query.ShowId)
                 .FirstOrDefault();
 
-            follower.ShowFollowers.Remove(show);
+            Context.ShowFollowers.Remove(follower);
 
             Context.SaveChanges();
-            
         }
     }
 

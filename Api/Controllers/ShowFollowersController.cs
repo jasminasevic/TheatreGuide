@@ -62,20 +62,13 @@ namespace Api.Controllers
         {
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{userId}/{showId}")]
+        // DELETE: api/ShowFollowers
+        [HttpDelete]
         [Authorize]
-        public IActionResult Delete(int userId, int showId)
+        public IActionResult Delete([FromQuery] ShowFollowerQuery query)
         {
-            try
-            {
-                _deleteShowFollower.Execute(userId, showId);
-                return StatusCode(204);
-            }
-            catch(Exception e)
-            {
-                return StatusCode(500, e.Message);
-            }
+            _executor.ExecuteCommand(_deleteShowFollower, query);
+            return StatusCode(204);
         }
     }
 }

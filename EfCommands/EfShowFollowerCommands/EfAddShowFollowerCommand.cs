@@ -24,14 +24,14 @@ namespace EfCommands.EfShowFolloweCommands
 
         public void Execute(ShowFollowerDto request)
         {
-            if (Context.ShowFollowers.Any(sf => sf.UserId == request.UserId
-                 && sf.ShowId == request.ShowId))
+            if (Context.ShowFollowers.Any(sf => sf.UserId == Convert.ToInt32(request.UserId)
+                 && sf.ShowId == Convert.ToInt32(request.ShowId)))
                 throw new EntityAlreadyExistsException(request.ShowId.ToString());
 
             Context.ShowFollowers.Add(new Domain.ShowFollower
             {
-                ShowId = request.ShowId,
-                UserId = request.UserId
+                ShowId = Convert.ToInt32(request.ShowId),
+                UserId = Convert.ToInt32(request.UserId)
             });
 
             Context.SaveChanges();
