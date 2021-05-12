@@ -134,6 +134,7 @@ namespace Api
             services.AddTransient<IGetPurchaseCommand, EfGetPurchaseCommand>();
             services.AddTransient<IGetPurchasesCommand, EfGetPurchasesCommand>();
             services.AddTransient<IGetPurchasesFilteredByTheatreCommand, EfGetPurchasesFilteredByTheatreCommand>();
+            services.AddTransient<IGetPurchasesFilteredByUserCommand, EfGetPurchasesFilteredByUserCommand>();
             services.AddTransient<IGetCountedPurchasesFilteredByTheatreCommand, EfGetCountedPurchasesFilteredByTheatreCommand>();
             services.AddTransient<IGetRecentPurchasesFilteredByTheatreCommand, EfGetRecentPurchasesFilteredByTheatreCommand>();
 
@@ -175,11 +176,12 @@ namespace Api
             //Sectors
             services.AddTransient<IGetSectorWithUnavailableSeatsCommand, EfGetSectorWithUnavailableSeatsCommand>();
 
-            //ShowFollowers
+            //ShowsFollowers
             services.AddTransient<IAddShowFollowerCommand, EfAddShowFollowerCommand>();
             services.AddTransient<IDeleteShowFollowerCommand, EfDeleteShowFollowerCommand>();
             services.AddTransient<IGetCountedShowFollowersFilteredByTheatreCommand, EfGetCountedShowFollowersFilteredByTheatreCommand>();
-
+            services.AddTransient<IGetFollowedShowsFilteredByUserCommand, EfGetFollowedShowsFilteredByUserCommand>();
+            
             //Shows
             services.AddTransient<IAddShowCommand, EfAddShowCommand>();
             services.AddTransient<IDeleteShowCommand, EfDeleteShowCommand>();

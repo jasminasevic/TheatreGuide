@@ -26,6 +26,7 @@ namespace Api.Controllers
         protected readonly IGetPurchasesFilteredByTheatreCommand _getPurchasesFilteredByTheatre;
         protected readonly IGetCountedPurchasesFilteredByTheatreCommand _getCountedPurchasesFilteredByTheatre;
         protected readonly IGetRecentPurchasesFilteredByTheatreCommand _getRecentPurchasesFilteredByTheatre;
+        protected readonly IGetPurchasesFilteredByUserCommand _getPurchasesFilteredByUser; 
         protected readonly UseCaseExecutor _executor;
 
         public PurchasesController(IAddPurchaseCommand addPurchase,
@@ -36,6 +37,7 @@ namespace Api.Controllers
             IGetPurchasesFilteredByTheatreCommand getPurchasesFilteredByTheatre,
             IGetCountedPurchasesFilteredByTheatreCommand getCountedPurchasesFilteredByTheatre,
             IGetRecentPurchasesFilteredByTheatreCommand getRecentPurchasesFilteredByTheatre,
+            IGetPurchasesFilteredByUserCommand getPurchasesFilteredByUser,
             UseCaseExecutor executor)
         {
             _addPurchase = addPurchase;
@@ -46,6 +48,7 @@ namespace Api.Controllers
             _getPurchasesFilteredByTheatre = getPurchasesFilteredByTheatre;
             _getCountedPurchasesFilteredByTheatre = getCountedPurchasesFilteredByTheatre;
             _getRecentPurchasesFilteredByTheatre = getRecentPurchasesFilteredByTheatre;
+            _getPurchasesFilteredByUser = getPurchasesFilteredByUser;
             _executor = executor;
         }
 
@@ -68,6 +71,11 @@ namespace Api.Controllers
             {
                 var purchasesFilteredByTheatre = _executor.ExecuteQuery(_getPurchasesFilteredByTheatre, query);
                 return Ok(purchasesFilteredByTheatre);
+            }
+            if (query.Type == "purchasesFilteredByUser")
+            {
+                var purchasesFilteredByUser = _executor.ExecuteQuery(_getPurchasesFilteredByUser, query);
+                return Ok(purchasesFilteredByUser);
             }
             var purchases = _executor.ExecuteQuery(_getPurchases, query);
             return Ok(purchases);

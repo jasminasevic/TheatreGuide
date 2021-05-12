@@ -10,6 +10,7 @@ using Application.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Application.Commands.ShowFollowerCommands;
 
 namespace Api.Controllers
 {
@@ -34,6 +35,7 @@ namespace Api.Controllers
         protected readonly IGetShowsFilteredByTheatreCommand _getShowsFilteredByTheatre;
         protected readonly IGetShowBaseListFilteredByTheatreCommand _getShowBaseListFilteredByTheatre;
         protected readonly IGetShowsFollowersFilteredByUserIdCommand _getShowsFollowersFilteredByUserIdCommand;
+        protected readonly IGetFollowedShowsFilteredByUserCommand _getFollowedShowsFilteredByUserCommand; 
         protected readonly UseCaseExecutor _executor;
         public ShowsController(IAddShowCommand addShow,
             IGetShowCommand getShow,
@@ -52,6 +54,7 @@ namespace Api.Controllers
             IGetShowsFilteredByTheatreCommand getShowsFilteredByTheatre,
             IGetShowBaseListFilteredByTheatreCommand getShowBaseListFilteredByTheatre,
             IGetShowsFollowersFilteredByUserIdCommand getShowsFollowersFilteredByUserIdCommand,
+            IGetFollowedShowsFilteredByUserCommand getFollowedShowsFilteredByUserCommand,
             UseCaseExecutor executor)
         {
             _addShow = addShow;
@@ -71,6 +74,7 @@ namespace Api.Controllers
             _getShowsFilteredByTheatre = getShowsFilteredByTheatre;
             _getShowBaseListFilteredByTheatre = getShowBaseListFilteredByTheatre;
             _getShowsFollowersFilteredByUserIdCommand = getShowsFollowersFilteredByUserIdCommand;
+            _getFollowedShowsFilteredByUserCommand = getFollowedShowsFilteredByUserCommand;
             _executor = executor;
         }
 
@@ -127,6 +131,11 @@ namespace Api.Controllers
             {
                 var shows = _executor.ExecuteQuery(_getShowBaseListFilteredByTheatre, query);
                 return Ok(shows);
+            }
+            if (query.Type == "followedShowsFilteredByUserId")
+            {
+                var followedShowsFilteredByUserId = _executor.ExecuteQuery(_getFollowedShowsFilteredByUserCommand, query);
+                return Ok(followedShowsFilteredByUserId);
             }
             if (query.Type == "followersFilteredByUserId")
             {
