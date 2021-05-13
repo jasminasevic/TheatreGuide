@@ -70,6 +70,8 @@ using Application.Email;
 using EfCommands.EfShowFollowerCommands;
 using Application.Commands.SectorCommands;
 using EfCommands.EfSectorCommands;
+using EfCommands.EfContactUsComands;
+using Application.Commands.ContactUsCommands;
 
 namespace Api
 {
@@ -126,6 +128,7 @@ namespace Api
 
             //Email
             services.AddTransient<IEmailSender, SmtpEmailSender>();
+            services.AddTransient<IAddContactUsMessageCommand, EfAddContactUsMessageCommand>();
 
             //Purchases
             services.AddTransient<IAddPurchaseCommand, EfAddPurchaseCommand>();
