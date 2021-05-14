@@ -28,6 +28,7 @@ namespace Api.Controllers
         protected readonly IGetAllTheatresListCommand _getAllTheatresList;
         protected readonly IGetRecentlyJoinedTheatresCommand _getRecentlyJoinedTheatres;
         protected readonly IGetTheatreBaseInfoCommand _getTheatreBaseInfo;
+        protected readonly IGetCountedApprovedTheatresCommand _getCountedApprovedTheatres;
         protected readonly UseCaseExecutor _executor;
 
         public TheatresController(IAddTheatreCommand addTheatre,
@@ -39,6 +40,7 @@ namespace Api.Controllers
             IGetRecentlyJoinedTheatresCommand getRecentlyJoinedTheatres,
             IGetAllTheatresListCommand getAllTheatresList,
             IGetTheatreBaseInfoCommand getTheatreBaseInfo,
+            IGetCountedApprovedTheatresCommand getCountedApprovedTheatres,
             UseCaseExecutor executor)
         {
             _addTheatre = addTheatre;
@@ -50,6 +52,7 @@ namespace Api.Controllers
             _getRecentlyJoinedTheatres = getRecentlyJoinedTheatres;
             _getAllTheatresList = getAllTheatresList;
             _getTheatreBaseInfo = getTheatreBaseInfo;
+            _getCountedApprovedTheatres = getCountedApprovedTheatres;
             _executor = executor;
         }
 
@@ -71,6 +74,11 @@ namespace Api.Controllers
             {
                 var theatres = _executor.ExecuteQuery(_getRecentlyJoinedTheatres, new SearchQuery());
                 return Ok(theatres);
+            }
+            if (query.Type == "getCountedApprovedTheatres")
+            {
+                var approvedTheatres = _executor.ExecuteQuery(_getCountedApprovedTheatres, new TheatreQuery());
+                return Ok(approvedTheatres);
             }
             var allTheatres = _executor.ExecuteQuery(_getTheatres, query);
             return Ok(allTheatres);

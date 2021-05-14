@@ -216,6 +216,7 @@ namespace Api
             services.AddTransient<IGetAllTheatresListCommand, EfGetAllTheatresListCommand>();
             services.AddTransient<IGetRecentlyJoinedTheatresCommand, EfGetRecentlyJoinedTheatresCommand>();
             services.AddTransient<IGetUserFilteredByIdCommand, EfGetUserFilteredByIdCommand>();
+            services.AddTransient<IGetCountedApprovedTheatresCommand, EfGetCountedApprovedTheatresCommand>();
 
             //Users
             services.AddTransient<IAddUserCommand, EfAddUserCommand>();
