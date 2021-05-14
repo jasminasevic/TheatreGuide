@@ -24,6 +24,7 @@ namespace Api.Controllers
         protected readonly IEditPurchaseCommand _editPurchase;
         protected readonly IDeletePurchaseCommand _deletePurchase;
         protected readonly IGetPurchasesFilteredByTheatreCommand _getPurchasesFilteredByTheatre;
+        protected readonly IGetCountedPurchasesCommand _getCountedPurchases;
         protected readonly IGetCountedPurchasesFilteredByTheatreCommand _getCountedPurchasesFilteredByTheatre;
         protected readonly IGetRecentPurchasesFilteredByTheatreCommand _getRecentPurchasesFilteredByTheatre;
         protected readonly IGetPurchasesFilteredByUserCommand _getPurchasesFilteredByUser; 
@@ -35,6 +36,7 @@ namespace Api.Controllers
             IEditPurchaseCommand editPurchase,
             IDeletePurchaseCommand deletePurchase,
             IGetPurchasesFilteredByTheatreCommand getPurchasesFilteredByTheatre,
+            IGetCountedPurchasesCommand getCountedPurchases,
             IGetCountedPurchasesFilteredByTheatreCommand getCountedPurchasesFilteredByTheatre,
             IGetRecentPurchasesFilteredByTheatreCommand getRecentPurchasesFilteredByTheatre,
             IGetPurchasesFilteredByUserCommand getPurchasesFilteredByUser,
@@ -46,6 +48,7 @@ namespace Api.Controllers
             _editPurchase = editPurchase;
             _deletePurchase = deletePurchase;
             _getPurchasesFilteredByTheatre = getPurchasesFilteredByTheatre;
+            _getCountedPurchases = getCountedPurchases;
             _getCountedPurchasesFilteredByTheatre = getCountedPurchasesFilteredByTheatre;
             _getRecentPurchasesFilteredByTheatre = getRecentPurchasesFilteredByTheatre;
             _getPurchasesFilteredByUser = getPurchasesFilteredByUser;
@@ -57,7 +60,12 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery] PurchaseQuery query)
         {
-            if(query.Type == "purchasesNumberFilteredByTheatre")
+            if (query.Type == "totalPurchasesNumber")
+            {
+                var totalPurchasesNumber = _executor.ExecuteQuery(_getCountedPurchases, new PurchaseQuery());
+                return Ok(totalPurchasesNumber);
+            }
+            if (query.Type == "purchasesNumberFilteredByTheatre")
             {
                 var purchasesNumber = _executor.ExecuteQuery(_getCountedPurchasesFilteredByTheatre, query);
                 return Ok(purchasesNumber);
