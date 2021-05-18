@@ -72,6 +72,7 @@ using Application.Commands.SectorCommands;
 using EfCommands.EfSectorCommands;
 using EfCommands.EfContactUsComands;
 using Application.Commands.ContactUsCommands;
+using Application.Commands.LoggingCommands;
 
 namespace Api
 {
@@ -129,6 +130,9 @@ namespace Api
             //Email
             services.AddTransient<IEmailSender, SmtpEmailSender>();
             services.AddTransient<IAddContactUsMessageCommand, EfAddContactUsMessageCommand>();
+
+            //Loggings
+            services.AddTransient<IGetLoggingsCommand, EfGetLoggingsCommand>();
 
             //Purchases
             services.AddTransient<IAddPurchaseCommand, EfAddPurchaseCommand>();

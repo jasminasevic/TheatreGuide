@@ -95,7 +95,8 @@ namespace EfCommands.EfTheatreCommands
                     ShowName = s.Show.Title,
                     ShowDate = s.Date,
                     IsPremiere = s.IsPremiere
-                })
+                }).Where(s => s.ShowDate > DateTime.Now)
+                .OrderBy(s => s.ShowDate)
             };
         }
     }

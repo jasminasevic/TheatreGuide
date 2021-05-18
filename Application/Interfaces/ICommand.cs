@@ -14,10 +14,5 @@ namespace Application.Interfaces
         TResult Execute(TSearch search); 
     }
 
-    public interface IComm<TFirstRequest, TSecondRequest>
-    {
-        void Execute(TFirstRequest requestFirst, TSecondRequest requestSecond);
-    }
-
 }
 
