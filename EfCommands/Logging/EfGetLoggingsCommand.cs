@@ -21,7 +21,7 @@ namespace EfCommands.Logging
 
         public string Name => "Get Loggings Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role> { Role.Admin, Role.Anonymus };
+        public IEnumerable<Role> Roles => new List<Role> { Role.Admin };
 
         public PagedResponses<GetLoggingDto> Execute(LoggingQuery query)
         {
