@@ -40,7 +40,6 @@ namespace EfCommands.EfUserCommands
                 Email = user.Email,
                 TheatreId = user.TheatreId == null ? null : user.TheatreId,
                 TheatreName = user.Theatre == null ? "" : user.Theatre.TheatreName,
-                Password = user.Password,
                 RoleId = user.RoleId,
                 Status = user.Status.ToString()
             };

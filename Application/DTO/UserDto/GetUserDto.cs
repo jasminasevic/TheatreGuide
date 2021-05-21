@@ -27,7 +27,7 @@ namespace Application.DTO.UserDto
 
         public int? TheatreId { get; set; }
 
-        public string? Theatre { get; set; }
+        public string Theatre { get; set; }
 
         public DateTime CreatedAt { get; set; }
     }

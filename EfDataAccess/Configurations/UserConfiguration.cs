@@ -28,8 +28,7 @@ namespace EfDataAccess.Configurations
                 .IsUnique();
 
             builder.Property(u => u.Password)
-                .IsRequired()
-                .HasMaxLength(40);
+                .IsRequired();
 
             builder.HasMany(u => u.ShowFollowers)
                 .WithOne(sf => sf.User)

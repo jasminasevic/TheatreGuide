@@ -61,29 +61,29 @@ namespace EfCommands.EfUserCommands
                 RoleId = user.RoleId,
                 RoleName = user.Role.RoleName,
                 Status = user.Status.ToString(),
-                CreatedAt = user.CreatedAt,
-                GetDetailedPurchaseDtos = user.Purchases.Select(purchase => new GetDetailedPurchaseDto
-                {
-                    Id = purchase.Id,
-                    ShowId = purchase.Repertoire.ShowId,
-                    ShowName = purchase.Repertoire.Show.Title,
-                    Date = purchase.Repertoire.Date,
-                    TheatreId = purchase.Repertoire.Show.TheatreId,
-                    TheatreName = purchase.Repertoire.Show.Theatre.TheatreName,
-                    SceneId = purchase.Repertoire.Show.SceneId,
-                    SceneName = purchase.Sector.Scene.SceneName,
-                    SectorName = purchase.Sector.SectorName,
-                    RowNumber = purchase.RowNumber,
-                    SeatNumber = purchase.SeatNumber,
-                    Entrance = purchase.Entrance,
-                    PurchasedAt = purchase.CreatedAt,
-                    GetPriceBasicDtos = purchase.Sector.Prices.Select(tp => new GetPriceBasicDto
-                    {
-                        Price = tp.TicketPrice,
-                        CurrencyName = tp.Currency.CurrencyName
-                    })
-                }),
-                ShowFollowing = user.ShowFollowers.Count()
+                CreatedAt = user.CreatedAt
+                //GetDetailedPurchaseDtos = user.Purchases.Select(purchase => new GetDetailedPurchaseDto
+                //{
+                //    Id = purchase.Id,
+                //    ShowId = purchase.Repertoire.ShowId,
+                //    ShowName = purchase.Repertoire.Show.Title,
+                //    Date = purchase.Repertoire.Date,
+                //    TheatreId = purchase.Repertoire.Show.TheatreId,
+                //    TheatreName = purchase.Repertoire.Show.Theatre.TheatreName,
+                //    SceneId = purchase.Repertoire.Show.SceneId,
+                //    SceneName = purchase.Sector.Scene.SceneName,
+                //    SectorName = purchase.Sector.SectorName,
+                //    RowNumber = purchase.RowNumber,
+                //    SeatNumber = purchase.SeatNumber,
+                //    Entrance = purchase.Entrance,
+                //    PurchasedAt = purchase.CreatedAt,
+                //    GetPriceBasicDtos = purchase.Sector.Prices.Select(tp => new GetPriceBasicDto
+                //    {
+                //        Price = tp.TicketPrice,
+                //        CurrencyName = tp.Currency.CurrencyName
+                //    })
+                //}),
+                //ShowFollowing = user.ShowFollowers.Count()
             };
         }
     }

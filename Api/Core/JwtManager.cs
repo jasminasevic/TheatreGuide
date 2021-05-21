@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,17 +22,19 @@ namespace Api.Core
             _context = context;
         }
 
-        public string MakeToken(string username, string password)
+        public string MakeToken(string username, string passwordText)
         {
             var user = _context.Users
                 .Include(r => r.Role)
-                .FirstOrDefault(x => x.Email == username && x.Password == password 
+                .FirstOrDefault(x => x.Email == username
                 && x.Status == Domain.User.StatusType.Approved);
 
-            if (user == null)
-            {
+            if (user == null || user.PasswordKey == null)
                 return null;
-            }
+
+            if (!MatchPasswordHash(passwordText, user.Password, user.PasswordKey))
+                return null;
+
 
             var performer = new JwtPerformer
             {
@@ -70,6 +73,23 @@ namespace Api.Core
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private bool MatchPasswordHash(string passwordText, byte[] password, byte[] passwordKey)
+        {
+            using (var hmac = new HMACSHA512(passwordKey))
+            {
+                var passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(passwordText));
+
+                for(int i = 0; i < passwordHash.Length; i++)
+                {
+                    if(passwordHash[i] != password[i])
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
         }
     }
 }
