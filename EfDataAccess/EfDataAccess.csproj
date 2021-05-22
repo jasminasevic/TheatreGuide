@@ -59,6 +59,8 @@
     <Compile Remove="Migrations\20201205000049_add currency entity.Designer.cs" />
     <Compile Remove="Migrations\20210520201505_Update user for password encryption.cs" />
     <Compile Remove="Migrations\20210520201505_Update user for password encryption.Designer.cs" />
+    <Compile Remove="Migrations\20210522192426_Remove address entity, add location details to theatre entity.cs" />
+    <Compile Remove="Migrations\20210522192426_Remove address entity, add location details to theatre entity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

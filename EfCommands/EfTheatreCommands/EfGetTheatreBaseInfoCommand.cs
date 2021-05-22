@@ -28,7 +28,6 @@ namespace EfCommands.EfTheatreCommands
         {
             var theatre = Context.Theatres
                 .Include(t => t.TheatreImages)
-                .Include(t => t.Address)
                 .Where(t => t.Id == request)
                 .FirstOrDefault();
 
@@ -43,9 +42,9 @@ namespace EfCommands.EfTheatreCommands
                 Email = theatre.ContactEmail,
                 Telephone = theatre.ContactTelephone,
                 WorkingHours = theatre.WorkingHours,
-                Location = theatre.Address.Location,
-                Latitude = theatre.Address.Latitude,
-                Longitude = theatre.Address.Longitude,
+                Location = theatre.Location,
+                Latitude = theatre.Latitude,
+                Longitude = theatre.Longitude,
                 ShowImageDtos = theatre.TheatreImages.Select(ti => new GetImageDto
                 {
                     Id = ti.Id,

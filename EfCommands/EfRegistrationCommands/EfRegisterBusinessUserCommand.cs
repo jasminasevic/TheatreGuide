@@ -36,19 +36,12 @@ namespace EfCommands.EfRegistrationCommands
         {
             _validator.ValidateAndThrow(request);
 
-            var address = new Domain.Address
-            {
-                Location = request.Location,
-                Longitude = request.Longitude,
-                Latitude = request.Latitude
-            };
-
-            Context.Addresses.Add(address);
-
             var theatre = new Domain.Theatre
             {
                 TheatreName = request.Theatre,
-                Address = address
+                Location = request.Location,
+                Longitude = request.Longitude,
+                Latitude = request.Latitude
             };
 
             Context.Theatres.Add(theatre);

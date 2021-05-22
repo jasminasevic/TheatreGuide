@@ -1,4 +1,6 @@
-﻿using Application.Interfaces;
+﻿using Application.DTO.RegistrationDto;
+using Application.DTO.UserDto;
+using Application.Interfaces;
 using EfDataAccess;
 using Newtonsoft.Json;
 using System;
@@ -15,6 +17,7 @@ namespace EfCommands.Logging
 
         public void Log(IUseCase useCase, IApplicationPerformer performer, object UseCaseData)
         {
+
             Context.UseCaseLogs.Add(new Domain.UseCaseLog
             {
                 Date = DateTime.Now,

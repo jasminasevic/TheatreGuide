@@ -29,7 +29,6 @@ namespace EfCommands.EfTheatreCommands
         public PagedResponses<GetTheatreDto> Execute(TheatreQuery request)
         {
             var theatre = Context.Theatres
-                .Include(t => t.Address)
                 .Include(t => t.TheatreImages)
                 //.Include(t => t.Shows)
                 //.ThenInclude(s => s.Category)
@@ -63,9 +62,9 @@ namespace EfCommands.EfTheatreCommands
                 Email = t.ContactEmail,
                 WorkingHours = t.WorkingHours,
                 Telephone = t.ContactTelephone,
-                Location = t.Address.Location,
-                Latitude = t.Address.Latitude,
-                Longitude = t.Address.Longitude,
+                Location = t.Location,
+                Latitude = t.Latitude,
+                Longitude = t.Longitude,
                 IsVisible = t.IsVisible,
                 ShowImageDtos = t.TheatreImages.Select(i => new GetImageDto
                 {
@@ -73,13 +72,6 @@ namespace EfCommands.EfTheatreCommands
                     Alt = i.TheatreImageAlt,
                     Path = "/uploads/theatre-images/" + i.TheatreImagePath
                 })
-                //,
-                //ShowBaseInfoDtos = t.Shows.Select(s => new ShowBaseInfoDto
-                //{
-                //    Id = s.Id,
-                //    Title = s.Title,
-                //    CategoryName = s.Category.CategoryName
-                //})
             });
 
             //Sorting logic

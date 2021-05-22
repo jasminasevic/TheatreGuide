@@ -27,7 +27,6 @@ namespace EfCommands.EfTheatreCommands
         public IEnumerable<GetTheatreBaseInfoDto> Execute(SearchQuery request)
         {
             var theatre = Context.Theatres
-                .Include(t => t.Address)
                 .Include(t => t.TheatreImages)
                 .Where(t => t.IsVisible == true)
                 .AsQueryable();
@@ -36,7 +35,7 @@ namespace EfCommands.EfTheatreCommands
             {
                 Id = t.Id,
                 Name = t.TheatreName,
-                Location = t.Address.Location,
+                Location = t.Location,
                 ShowImageDtos = t.TheatreImages.Select(i => new GetImageDto
                 {
                     Id = i.Id,

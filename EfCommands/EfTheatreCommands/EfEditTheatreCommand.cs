@@ -49,13 +49,9 @@ namespace EfCommands.EfTheatreCommands
             theatre.ContactEmail = request.Email;
             theatre.ContactTelephone = request.Telephone;
             theatre.IsVisible = request.IsVisible;
-
-            var locationId = theatre.AddressId;
-            var addresses = Context.Addresses.Find(locationId);
-
-            addresses.Location = request.Location;
-            addresses.Latitude = request.Latitude;
-            addresses.Longitude = request.Longitude;
+            theatre.Location = request.Location;
+            theatre.Latitude = request.Latitude;
+            theatre.Longitude = request.Longitude;
 
             if (request.TheatreImage != null)
             {

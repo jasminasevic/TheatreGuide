@@ -20,9 +20,11 @@ namespace Domain
 
         public bool IsVisible { get; set; } = false;
 
-        public int AddressId { get; set; }
+        public string Location { get; set; }
 
-        public Address Address { get; set; }
+        public decimal Longitude { get; set; }
+
+        public decimal Latitude { get; set; }
 
         public ICollection<Scene> Scenes { get; set; }
 

@@ -26,10 +26,6 @@ namespace Application.Validators.UserValidators
                 .EmailAddress()
                 .WithMessage("Wrong email format");
 
-            //RuleFor(x => x.Password)
-            //    .NotEmpty()
-            //    .WithMessage("Password is required");
-
             RuleFor(x => x.RoleId)
                 .NotEmpty()
                 .WithMessage("Role is required");

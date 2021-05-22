@@ -37,15 +37,6 @@ namespace EfCommands.EfTheatreCommands
              .Contains(request.Email.ToLower())))
                 throw new EntityAlreadyExistsException(request.Email);
 
-            var address = new Domain.Address
-            {
-                Location = request.Location,
-                Longitude = request.Longitude,
-                Latitude = request.Latitude
-            };
-
-            Context.Addresses.Add(address);
-
             var theatre = new Domain.Theatre
             {
                 TheatreName = request.Name,
@@ -53,7 +44,9 @@ namespace EfCommands.EfTheatreCommands
                 ContactTelephone = request.Telephone,
                 WorkingHours = request.WorkingHours,
                 TheatreDescription = request.Description,
-                Address = address
+                Location = request.Location,
+                Longitude = request.Longitude,
+                Latitude = request.Latitude
             };
 
             Context.Theatres.Add(theatre);

@@ -1,4 +1,5 @@
-﻿using Application.Exceptions;
+﻿using Application.DTO.UserDto;
+using Application.Exceptions;
 using Application.Interfaces;
 using Newtonsoft.Json;
 using System;
