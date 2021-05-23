@@ -31,8 +31,6 @@ namespace EfCommands.EfRepertoireCommands
             var repertoires = Context.Repertoires
                 .Include(t => t.Theatre)
                 .Include(s => s.Show)
-                .ThenInclude(s => s.Scene)
-                .Include(s => s.Show)
                 .ThenInclude(s => s.ShowImages)
                 .AsQueryable();
 
@@ -45,6 +43,10 @@ namespace EfCommands.EfRepertoireCommands
             if (request.ShowTitle != null)
                 repertoires = repertoires.Where(r => r.Show.Title.ToLower()
                 .Contains(request.ShowTitle.ToLower()));
+
+            if (request.Location != null)
+                repertoires = repertoires.Where(r => r.Theatre.Location.ToLower()
+                 .Contains(request.Location.ToLower()));
 
             if(request.SearchQuery != null)
                 repertoires = repertoires.Where(r => r.Theatre.TheatreName.ToLower()
@@ -59,8 +61,6 @@ namespace EfCommands.EfRepertoireCommands
                 ShowName = r.Show.Title,
                 TheatreId = r.TheatreId,
                 TheatreName = r.Theatre.TheatreName,
-                SceneId = r.Show.SceneId,
-                SceneName = r.Show.Scene.SceneName,
                 ShowDate = r.Date,
                 IsPremiere = r.IsPremiere,
                 GetImageDtos = r.Show.ShowImages.Select(si => new GetImageDto
@@ -72,6 +72,15 @@ namespace EfCommands.EfRepertoireCommands
             });
 
             data = data.Where(s => s.ShowDate > DateTime.Now);
+
+            string dateString = request.ShowDate;
+
+            if (dateString != null)
+            {
+                DateTime dateTime = DateTime.Parse(dateString);
+                DateTime convertedDate = dateTime;
+                data = data.Where(s => s.ShowDate.Date == convertedDate.Date);
+            }
 
             var sortOrder = request.SortOrder;
 

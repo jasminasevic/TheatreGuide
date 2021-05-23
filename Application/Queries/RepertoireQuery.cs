@@ -14,6 +14,10 @@ namespace Application.Queries
 
         public string SceneName { get; set; }
 
+        public string Location { get; set; }
+
+        public string ShowDate { get; set; }
+
         public string Type { get; set; }
 
         public string PastShows { get; set; }
