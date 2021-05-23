@@ -46,12 +46,12 @@ namespace EfCommands.EfRepertoireCommands
 
             if (request.Location != null)
                 repertoires = repertoires.Where(r => r.Theatre.Location.ToLower()
+                 .Contains(request.Location.ToLower()) 
+                 || r.Theatre.TheatreName.ToLower()
                  .Contains(request.Location.ToLower()));
 
             if(request.SearchQuery != null)
-                repertoires = repertoires.Where(r => r.Theatre.TheatreName.ToLower()
-               .Contains(request.SearchQuery.ToLower())
-               || r.Show.Title.ToLower()
+                repertoires = repertoires.Where(r => r.Show.Title.ToLower()
                .Contains(request.SearchQuery.ToLower()));
 
             var data = repertoires.Select(r => new GetRepertoireDto
