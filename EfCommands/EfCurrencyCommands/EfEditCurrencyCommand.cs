@@ -27,6 +27,8 @@ namespace EfCommands.EfCurrencyCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
+        public bool ContainsSensitiveData => false;
+
         public void Execute(CurrencyDto request)
         {
             _validator.ValidateAndThrow(request);

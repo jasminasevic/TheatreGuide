@@ -23,6 +23,8 @@ namespace EfCommands.EfUserCommands
 
         public IEnumerable<Role> Roles => new List<Role> { Role.Theatre, Role.User };
 
+        public bool ContainsSensitiveData => false;
+
         public UserDto Execute(int request)
         {
             var user = Context.Users

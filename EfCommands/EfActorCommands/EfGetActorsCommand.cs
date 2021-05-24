@@ -26,6 +26,8 @@ namespace EfCommands.EfActorCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
+        public bool ContainsSensitiveData => false;
+
         public PagedResponses<GetActorDto> Execute(ActorQuery request)
         {
             var actors = Context.Actors

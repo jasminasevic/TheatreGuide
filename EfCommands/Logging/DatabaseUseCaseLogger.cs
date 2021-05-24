@@ -2,6 +2,7 @@
 using Application.DTO.UserDto;
 using Application.Interfaces;
 using EfDataAccess;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,18 @@ namespace EfCommands.Logging
 
         public void Log(IUseCase useCase, IApplicationPerformer performer, object UseCaseData)
         {
+            if (useCase.ContainsSensitiveData)
+            {
+                Context.UseCaseLogs.Add(new Domain.UseCaseLog
+                {
+                    Date = DateTime.Now,
+                    UseCaseName = useCase.Name,
+                    Performer = performer.Identity
+                });
+
+                Context.SaveChanges();
+                return;
+            }
 
             Context.UseCaseLogs.Add(new Domain.UseCaseLog
             {

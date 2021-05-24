@@ -23,6 +23,8 @@ namespace EfCommands.EfRoleCommands
         public IEnumerable<Application.Interfaces.Role> Roles =>
             new List<Application.Interfaces.Role>() { Application.Interfaces.Role.Admin };
 
+        public bool ContainsSensitiveData => false;
+
         public IEnumerable<GetRoleDto> Execute(SearchQuery request)
         {
             var roles = Context.Roles

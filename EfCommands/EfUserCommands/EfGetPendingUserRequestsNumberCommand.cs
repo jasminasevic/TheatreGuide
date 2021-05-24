@@ -22,6 +22,8 @@ namespace EfCommands.EfUserCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
+        public bool ContainsSensitiveData => false;
+
         public int Execute(UserQuery search)
         {
             var filteredUsers = Context.Users

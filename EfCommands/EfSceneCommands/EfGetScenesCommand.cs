@@ -25,6 +25,8 @@ namespace EfCommands.EfSceneCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
+        public bool ContainsSensitiveData => false;
+
         public PagedResponses<GetSceneDto> Execute(SceneQuery request)
         {
 

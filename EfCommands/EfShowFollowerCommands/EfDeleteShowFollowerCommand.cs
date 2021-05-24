@@ -21,6 +21,8 @@ namespace EfCommands.EfShowFolloweCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.User };
 
+        public bool ContainsSensitiveData => false;
+
         public void Execute(ShowFollowerQuery query)
         {
             var follower = Context.ShowFollowers

@@ -22,6 +22,8 @@ namespace EfCommands.EfPurchaseCommands
 
         public IEnumerable<Role> Roles => new List<Role> { Role.Admin };
 
+        public bool ContainsSensitiveData => false;
+
         public int Execute(PurchaseQuery search)
         {
             var purchases = Context.Purchases

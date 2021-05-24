@@ -30,6 +30,8 @@ namespace EfCommands.EfRegistrationCommands
 
         public IEnumerable<Role> Roles => new List<Role> { Role.Anonymus };
 
+        public bool ContainsSensitiveData => true;
+
         public void Execute(RegisterUserDto request)
         {
             _validator.ValidateAndThrow(request);

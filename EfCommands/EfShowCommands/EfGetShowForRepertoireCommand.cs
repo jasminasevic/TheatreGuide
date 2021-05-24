@@ -25,6 +25,8 @@ namespace EfCommands.EfShowCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
+        public bool ContainsSensitiveData => false;
+
         public GetShowForRepertoireDto Execute(int request)
         {
             var show = Context.Shows

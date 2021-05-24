@@ -23,6 +23,9 @@ namespace EfCommands.EfShowFollowerCommands
 
         public IEnumerable<Role> Roles => new List<Role> { Role.Theatre };
 
+        public bool ContainsSensitiveData => false;
+
+
         public int Execute(ShowFollowerQuery query)
         {
             var showFollowers = Context.ShowFollowers

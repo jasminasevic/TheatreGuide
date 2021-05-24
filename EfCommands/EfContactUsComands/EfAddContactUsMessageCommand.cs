@@ -23,6 +23,8 @@ namespace EfCommands.EfContactUsComands
 
         public IEnumerable<Role> Roles => new List<Role> { Role.Admin, Role.Anonymus, Role.Theatre, Role.User };
 
+        public bool ContainsSensitiveData => false;
+
         public void Execute(SendEmailDto request)
         {
             _sender.Send(new SendEmailDto

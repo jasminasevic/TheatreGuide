@@ -29,6 +29,8 @@ namespace EfCommands.EfShowCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre };
 
+        public bool ContainsSensitiveData => false;
+
         public void Execute(ShowDto request)
         {
             _validator.ValidateAndThrow(request);

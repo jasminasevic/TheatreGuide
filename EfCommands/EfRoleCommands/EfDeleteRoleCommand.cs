@@ -18,7 +18,9 @@ namespace EfCommands.EfRoleCommands
 
         public string Name => "Delete Role Using EF";
 
-        public IEnumerable<Application.Interfaces.Role> Roles => new List<Application.Interfaces.Role>() { };
+        public IEnumerable<Application.Interfaces.Role> Roles => new List<Application.Interfaces.Role>() { Application.Interfaces.Role.Admin };
+
+        public bool ContainsSensitiveData => false;
 
         public void Execute(int request)
         {

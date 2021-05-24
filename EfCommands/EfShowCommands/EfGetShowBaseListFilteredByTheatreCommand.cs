@@ -24,6 +24,8 @@ namespace EfCommands.EfShowCommands
 
         public IEnumerable<Role> Roles => new List<Role> { Role.Theatre };
 
+        public bool ContainsSensitiveData => false;
+
         public IEnumerable<GetShowBaseListingDto> Execute(ShowQuery query)
         {
             var shows = Context.Shows

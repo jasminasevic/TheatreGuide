@@ -23,6 +23,8 @@ namespace EfCommands.EfPurchaseCommands
 
         public IEnumerable<Role> Roles => new List<Role> { Role.Theatre };
 
+        public bool ContainsSensitiveData => false;
+
         public IEnumerable<GetPurchaseBaseInfoDto> Execute(PurchaseQuery query)
         {
             var recentPurchases = Context.Purchases

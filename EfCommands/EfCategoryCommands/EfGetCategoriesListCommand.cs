@@ -23,6 +23,8 @@ namespace EfCommands.EfCategoryCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
+        public bool ContainsSensitiveData => false;
+
         public IEnumerable<CategoryBasicDto> Execute(SearchQuery request)
         {
             var categories = Context.Categories

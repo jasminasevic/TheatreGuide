@@ -24,6 +24,8 @@ namespace EfCommands.EfPurchaseCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre, Role.User };
 
+        public bool ContainsSensitiveData => false;
+
         public GetDetailedPurchaseDto Execute(int request)
         {
             var purchase = Context.Purchases

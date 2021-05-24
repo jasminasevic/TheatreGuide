@@ -1,6 +1,5 @@
 ﻿using Application.Commands.RepertoireCommands;
 using Application.DTO.ImageDto;
-using Application.DTO.PriceDto;
 using Application.DTO.RepertoireDto;
 using Application.Interfaces;
 using Application.Queries;
@@ -26,6 +25,8 @@ namespace EfCommands.EfRepertoireCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
+        public bool ContainsSensitiveData => false;
+
         public PagedResponses<GetRepertoireDto> Execute(RepertoireQuery request)
         {
             var repertoires = Context.Repertoires
@@ -46,11 +47,11 @@ namespace EfCommands.EfRepertoireCommands
 
             if (request.Location != null)
                 repertoires = repertoires.Where(r => r.Theatre.Location.ToLower()
-                 .Contains(request.Location.ToLower()) 
+                 .Contains(request.Location.ToLower())
                  || r.Theatre.TheatreName.ToLower()
                  .Contains(request.Location.ToLower()));
 
-            if(request.SearchQuery != null)
+            if (request.SearchQuery != null)
                 repertoires = repertoires.Where(r => r.Show.Title.ToLower()
                .Contains(request.SearchQuery.ToLower()));
 

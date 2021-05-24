@@ -26,6 +26,8 @@ namespace EfCommands.EfPurchaseCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { };
 
+        public bool ContainsSensitiveData => false;
+
         public void Execute(PurchaseDto request)
         {
           //  _validator.ValidateAndThrow(request);

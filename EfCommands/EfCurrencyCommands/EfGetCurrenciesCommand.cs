@@ -24,6 +24,8 @@ namespace EfCommands.EfCurrencyCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin, Role.Theatre, Role.User };
 
+        public bool ContainsSensitiveData => false;
+
         public PagedResponses<GetCurrencyDto> Execute(CurrencyQuery request)
         {
             var currencies = Context.Currencies

@@ -24,6 +24,8 @@ namespace EfCommands.EfRepertoireCommands
 
         public IEnumerable<Role> Roles => new List<Role> { Role.Theatre };
 
+        public bool ContainsSensitiveData => false;
+
         public PagedResponses<GetRepertoireBaseInfoDto> Execute(RepertoireQuery request)
         {
             var repertoires = Context.Repertoires

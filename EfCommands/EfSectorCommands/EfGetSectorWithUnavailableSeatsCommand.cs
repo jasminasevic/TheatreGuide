@@ -25,6 +25,8 @@ namespace EfCommands.EfSectorCommands
 
         public IEnumerable<Role> Roles => new List<Role> { Role.Theatre, Role.User };
 
+        public bool ContainsSensitiveData => false;
+
         public GetSectorWithUnavailableSeatsDto Execute(SectorQuery query)
         {
             var sectors = Context.Sectors

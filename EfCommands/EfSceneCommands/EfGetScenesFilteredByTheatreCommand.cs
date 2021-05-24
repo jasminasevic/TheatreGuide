@@ -24,6 +24,8 @@ namespace EfCommands.EfSceneCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Theatre };
 
+        public bool ContainsSensitiveData => false;
+
         public PagedResponses<GetScenesBasicDto> Execute(SceneQuery request)
         {
             var scenes = Context.Scenes

@@ -25,6 +25,8 @@ namespace EfCommands.EfUserCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Anonymus, Role.Admin };
 
+        public bool ContainsSensitiveData => false;
+
         public PagedResponses<GetUserDto> Execute(UserQuery request)
         {
             var users = Context.Users

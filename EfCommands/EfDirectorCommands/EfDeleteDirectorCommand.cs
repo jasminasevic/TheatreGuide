@@ -21,6 +21,8 @@ namespace EfCommands.EfDirectorCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
+        public bool ContainsSensitiveData => false;
+
         public void Execute(int request)
         {
             var director = Context.Directors.Find(request);

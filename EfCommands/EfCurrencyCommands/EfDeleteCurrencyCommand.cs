@@ -20,6 +20,8 @@ namespace EfCommands.EfCurrencyCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
+        public bool ContainsSensitiveData => false;
+
         public void Execute(int request)
         {
             var currency = Context.Currencies.Find(request);

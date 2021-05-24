@@ -27,6 +27,8 @@ namespace EfCommands.EfRepertoireCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Admin, Role.Theatre };
 
+        public bool ContainsSensitiveData => false;
+
         public void Execute(RepertoireDto request)
         {
             _validator.ValidateAndThrow(request);

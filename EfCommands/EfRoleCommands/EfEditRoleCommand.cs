@@ -26,6 +26,8 @@ namespace EfCommands.EfRoleCommands
 
         public IEnumerable<Application.Interfaces.Role> Roles => new List<Application.Interfaces.Role>() { };
 
+        public bool ContainsSensitiveData => false;
+
         public void Execute(RoleDto request)
         {
             _validator.ValidateAndThrow(request);

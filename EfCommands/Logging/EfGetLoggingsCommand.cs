@@ -23,6 +23,8 @@ namespace EfCommands.Logging
 
         public IEnumerable<Role> Roles => new List<Role> { Role.Admin };
 
+        public bool ContainsSensitiveData => false;
+
         public PagedResponses<GetLoggingDto> Execute(LoggingQuery query)
         {
             var loggings = Context.UseCaseLogs

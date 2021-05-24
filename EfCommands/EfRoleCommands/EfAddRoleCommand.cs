@@ -28,6 +28,8 @@ namespace EfCommands.EfRoleCommands
 
         public IEnumerable<Role> Roles => new List<Role>() { Role.Admin };
 
+        public bool ContainsSensitiveData => false;
+
         public void Execute(RoleDto request)
         {
             _validator.ValidateAndThrow(request);

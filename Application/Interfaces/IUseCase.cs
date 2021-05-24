@@ -11,6 +11,8 @@ namespace Application.Interfaces
         string Name { get; }
 
         public IEnumerable<Role> Roles { get; }
+
+        bool ContainsSensitiveData { get; }
     }
 
     

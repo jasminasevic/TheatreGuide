@@ -22,6 +22,8 @@ namespace EfCommands.EfTheatreCommands
 
         public IEnumerable<Role> Roles => new List<Role> { Role.Admin };
 
+        public bool ContainsSensitiveData => false;
+
         public int Execute(TheatreQuery search)
         {
             var approvedTheatres = Context.Users
