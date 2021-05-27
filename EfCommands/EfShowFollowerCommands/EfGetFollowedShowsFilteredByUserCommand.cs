@@ -24,7 +24,7 @@ namespace EfCommands.EfShowFollowerCommands
 
         public string Name => "Get Followed Shows Filtered by User Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role> { Role.User };
+        public IEnumerable<Role> Roles => new List<Role> { Role.User, Role.Theatre };
 
         public bool ContainsSensitiveData => false;
 

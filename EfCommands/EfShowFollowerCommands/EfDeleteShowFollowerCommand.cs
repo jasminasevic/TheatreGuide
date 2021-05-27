@@ -19,7 +19,7 @@ namespace EfCommands.EfShowFolloweCommands
 
         public string Name => "Delete Show Follower Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.User };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.User, Role.Theatre };
 
         public bool ContainsSensitiveData => false;
 

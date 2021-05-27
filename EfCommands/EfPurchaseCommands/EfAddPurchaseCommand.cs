@@ -27,7 +27,7 @@ namespace EfCommands.EfPurchaseCommands
 
         public string Name => "Add New Purchase Using EF";
 
-        public IEnumerable<Role> Roles => new List<Role>() { Role.User, Role.Admin };
+        public IEnumerable<Role> Roles => new List<Role>() { Role.User, Role.Admin, Role.Theatre };
 
         public bool ContainsSensitiveData => false;
 
