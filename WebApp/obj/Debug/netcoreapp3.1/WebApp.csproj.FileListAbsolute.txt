@@ -1,7 +1,6 @@
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\bin\Debug\netcoreapp3.1\WebApp.exe
-C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.csprojAssemblyReference.cache
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.RazorAssemblyInfo.cache
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.RazorAssemblyInfo.cs
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.AssemblyInfoInputs.cache
@@ -66,3 +65,4 @@ C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.csproj.CoreCompileInputs.cache
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.genruntimeconfig.cache
 C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\scopedcss\bundle\WebApp.styles.css
+C:\Users\jasmina\source\repos\TheatreGuide\WebApp\obj\Debug\netcoreapp3.1\WebApp.csproj.AssemblyReference.cache

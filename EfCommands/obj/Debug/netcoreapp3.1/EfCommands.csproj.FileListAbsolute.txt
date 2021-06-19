@@ -2,7 +2,6 @@ C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\bin\Debug\netcoreapp3.1\Ef
 C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\bin\Debug\netcoreapp3.1\EfCommands.dll
 C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\obj\Debug\netcoreapp3.1\EfCommands.AssemblyInfoInputs.cache
 C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\obj\Debug\netcoreapp3.1\EfCommands.AssemblyInfo.cs
-C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\obj\Debug\netcoreapp3.1\EfCommands.csprojAssemblyReference.cache
 C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\bin\Debug\netcoreapp3.1\EfCommands.runtimeconfig.json
 C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\bin\Debug\netcoreapp3.1\EfCommands.runtimeconfig.dev.json
 C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\bin\Debug\netcoreapp3.1\EfCommands.pdb
@@ -17,3 +16,4 @@ C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\bin\Debug\netcoreapp3.1\Do
 C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\obj\Debug\netcoreapp3.1\EfCommands.csproj.CopyComplete
 C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\obj\Debug\netcoreapp3.1\EfCommands.csproj.CoreCompileInputs.cache
 C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\obj\Debug\netcoreapp3.1\EfCommands.genruntimeconfig.cache
+C:\Users\jasmina\source\repos\TheatreGuide\EfCommands\obj\Debug\netcoreapp3.1\EfCommands.csproj.AssemblyReference.cache

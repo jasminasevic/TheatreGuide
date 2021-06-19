@@ -53,7 +53,11 @@ namespace EfDataAccess
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //local connection string
             optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-5JPRF7N\SQLEXPRESS;Initial Catalog=TheatreGuide;Integrated Security=True");
+            //azure connection string
+            //optionsBuilder.UseSqlServer(@"Server=tcp:theatre-guide.database.windows.net,1433;Initial Catalog=theatre-guide;Persist Security Info=False;User ID=theatre-guide;Password=diplomskiRad!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

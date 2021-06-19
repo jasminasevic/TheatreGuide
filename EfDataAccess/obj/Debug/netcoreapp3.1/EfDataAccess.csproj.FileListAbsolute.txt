@@ -1,6 +1,5 @@
 C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\bin\Debug\netcoreapp3.1\EfDataAccess.deps.json
 C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\bin\Debug\netcoreapp3.1\EfDataAccess.dll
-C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\EfDataAccess.csprojAssemblyReference.cache
 C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\EfDataAccess.AssemblyInfoInputs.cache
 C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\EfDataAccess.AssemblyInfo.cs
 C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\bin\Debug\netcoreapp3.1\EfDataAccess.runtimeconfig.json
@@ -13,3 +12,4 @@ C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\
 C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\EfDataAccess.pdb
 C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\EfDataAccess.csproj.CoreCompileInputs.cache
 C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\EfDataAccess.genruntimeconfig.cache
+C:\Users\jasmina\source\repos\TheatreGuide\EfDataAccess\obj\Debug\netcoreapp3.1\EfDataAccess.csproj.AssemblyReference.cache

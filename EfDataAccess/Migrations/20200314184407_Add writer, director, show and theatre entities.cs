@@ -98,7 +98,7 @@ namespace EfDataAccess.Migrations
                     IsActive = table.Column<bool>(nullable: false),
                     Title = table.Column<string>(maxLength: 70, nullable: false),
                     ShowDescription = table.Column<int>(nullable: false),
-                    PremiereDate = table.Column<int>(nullable: false),
+                    PremiereDate = table.Column<DateTime>(nullable: false),
                     Duration = table.Column<int>(nullable: false),
                     ContentAdvisory = table.Column<bool>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),

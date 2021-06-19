@@ -330,11 +330,13 @@ namespace Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
             app.UseFileServer();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseHsts();
+            app.UseHttpsRedirection();
 
             app.UseMiddleware<GlobalExceptionHandler>();
 

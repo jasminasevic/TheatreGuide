@@ -36,11 +36,9 @@ namespace EfCommands.EfTheatreCommands
                 .Include(t => t.TheatreImages)
                 .Include(t => t.Repertoires)
                 .Include(t => t.Shows)
-                .ThenInclude(s => s.Category)
+                .ThenInclude(t => t.ShowImages)
                 .Include(s => s.Scenes)
                 .ThenInclude(s => s.Sectors)
-                .Include(t => t.Shows)
-                .ThenInclude(t => t.ShowImages)
                 .Where(t => t.Id == request)
                 .FirstOrDefault();
 
@@ -69,7 +67,6 @@ namespace EfCommands.EfTheatreCommands
                 {
                     Id = s.Id,
                     Title = s.Title,
-                    CategoryName = s.Category.CategoryName,
                     ShowImageDtos = s.ShowImages.Select(si => new GetImageDto
                     {
                         Id = si.Id,
